@@ -29,8 +29,8 @@ class WordUpdatePage extends WordBasePage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int  $theWrdId       The ID of the word.
-   * @param bool $theRedirectUrl The URL to redirect the user agent.
+   * @param int         $theWrdId       The ID of the word.
+   * @param string|null $theRedirectUrl If set the URL to redirect the user agent.
    *
    * @return string
    */

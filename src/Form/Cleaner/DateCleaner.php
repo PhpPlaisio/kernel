@@ -41,11 +41,11 @@ class DateCleaner implements Cleaner
   /**
    * Object constructor.
    *
-   * @param string $theFormat                The expected date format. See
-   *                                         [DateTime::createFromFormat](http://php.net/manual/datetime.createfromformat.php)
-   *                                         for the formatting options.
-   * @param string $theSeparator             The separator (a single character) in the expected format.
-   * @param string $theAlternativeSeparators Alternative separators (each character is an alternative separator).
+   * @param string      $theFormat                The expected date format. See
+   *                                              [DateTime::createFromFormat](http://php.net/manual/datetime.createfromformat.php)
+   *                                              for the formatting options.
+   * @param string|null $theSeparator             The separator (a single character) in the expected format.
+   * @param string|null $theAlternativeSeparators Alternative separators (each character is an alternative separator).
    */
   public function __construct($theFormat, $theSeparator = null, $theAlternativeSeparators = null)
   {

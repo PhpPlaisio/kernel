@@ -101,10 +101,15 @@ class CoreFieldSet extends FieldSet
   /**
    * Creates a form control and adds this form control to this fieldset.
    *
-   * @param string $theType          The type of the form control.
-   * @param string $theName          The name of the form control.
-   * @param int    $theWrdId         The wrd_id of the legend of the form control.
-   * @param bool   $theMandatoryFlag If set the form control is mandatory.
+   * @param string          $theType          The type of the form control.
+   * @param string          $theName          The name of the form control.
+   * @param int|string|null $theWrdId         Depending on the type:
+   *                                          <ul>
+   *                                          <li>int:    The wrd_id of the legend of the form control.
+   *                                          <li>string: The legend of the form control.
+   *                                          <li>null:   The form control has no legend.
+   *                                          </ul>
+   * @param bool            $theMandatoryFlag If set the form control is mandatory.
    *
    * @return CheckBoxesControl|ComplexControl|RadiosControl|SelectControl|SimpleControl|SpanControl
    */

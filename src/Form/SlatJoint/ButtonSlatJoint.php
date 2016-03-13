@@ -44,6 +44,7 @@ class ButtonSlatJoint extends SlatJoint
    */
   public function getHtmlColumnFilter()
   {
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

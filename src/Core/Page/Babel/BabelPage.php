@@ -47,9 +47,7 @@ abstract class BabelPage extends CorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the selected language for the languages the user is authorized.
-   *
-   * @return int The ID of the selected language.
+   * Sets the target language. If the user is authorized for multiple languages a form is shown.
    */
   public function selectLanguage()
   {

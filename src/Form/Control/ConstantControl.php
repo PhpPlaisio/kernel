@@ -23,7 +23,7 @@ class ConstantControl extends SimpleControl
   /**
    * A constant control must never be shown in a table.
    *
-   * @return string An empty string.
+   * @return null
    */
   public function getHtmlTableCell()
   {

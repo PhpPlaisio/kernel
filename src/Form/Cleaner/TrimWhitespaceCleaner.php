@@ -20,7 +20,7 @@ class TrimWhitespaceCleaner implements Cleaner
   /**
    * Returns the singleton instance of this class.
    *
-   * @return PruneWhitespaceCleaner
+   * @return TrimWhitespaceCleaner
    */
   public static function get()
   {
@@ -35,7 +35,7 @@ class TrimWhitespaceCleaner implements Cleaner
    *
    * @param string $theValue The submitted value.
    *
-   * @return string
+   * @return string|null
    */
   public function clean($theValue)
   {

@@ -148,6 +148,8 @@ abstract class CorePage extends Page
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Echos the actual page content.
+   *
+   * @return void
    */
   abstract protected function echoTabContent();
 

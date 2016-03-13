@@ -43,7 +43,9 @@ class TableColumnControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns null;
+   * Returns null.
+   *
+   * @return null
    */
   public function getSubmittedValue()
   {
@@ -62,6 +64,11 @@ class TableColumnControl extends Control
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the data for to be used by the table column for generating the table cell.
+   *
+   * @param array $theRow
+   */
   public function setValue($theRow)
   {
     $this->myRow = $theRow;

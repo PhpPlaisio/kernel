@@ -198,6 +198,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the ID of the domain (a.k.a. company) of the requestor.
+   *
+   * @return int
    */
   public function getCmpId()
   {
@@ -272,7 +274,9 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the ID of the "original" page.
    *
+   * @return int
    */
   public function getPagIdOrg()
   {
@@ -292,16 +296,9 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the source file with the class for handling the page request.
-   */
-  public function getPageFile()
-  {
-    return $this->myPageInfo['pag_file'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns page group title.
+   *
+   * @return string
    */
   public function getPageGroupTitle()
   {
@@ -312,7 +309,7 @@ abstract class Abc
   /**
    * Returns info of the requested page.
    *
-   * @return array
+   * @return array<string,string|int>
    */
   public function getPageInfo()
   {
@@ -321,7 +318,7 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns page title.
+   * Returns the page title.
    *
    * @return string
    */
@@ -762,26 +759,12 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Logs the executed executed database queries.
-   */
-  private function requestLogQuery()
-  {
-    $queries = Abc::$DL->getQueryLog();
-
-    foreach($queries as $query)
-    {
-      Abc::$DL->requestLogInsertQuery($this->myRqlId, $query['query'], $query['time']);
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Logs the (by the client) sent cookies in to the database.
    *
    * Usage on this method on production environments is disguised.
    *
-   * @param array  $theCookies  must be $_COOKIES
-   * @param string $theVariable must not be used, intended for use by recursive calls only.
+   * @param array       $theCookies  must be $_COOKIES
+   * @param string|null $theVariable must not be used, intended for use by recursive calls only.
    */
   private function requestLogCookie($theCookies, $theVariable = null)
   {
@@ -810,8 +793,8 @@ abstract class Abc
    *
    * Usage on this method on production environments is not recommended.
    *
-   * @param array  $thePost     Must be $_POST (except for recursive calls).
-   * @param string $theVariable Must not be used (except for recursive calls).
+   * @param array       $thePost     Must be $_POST (except for recursive calls).
+   * @param string|null $theVariable Must not be used (except for recursive calls).
    */
   private function requestLogPost($thePost, $theVariable = null)
   {
@@ -831,6 +814,20 @@ abstract class Abc
           Abc::$DL->RequestLogInsertPost($this->myRqlId, $variable, $value);
         }
       }
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Logs the executed executed database queries.
+   */
+  private function requestLogQuery()
+  {
+    $queries = Abc::$DL->getQueryLog();
+
+    foreach ($queries as $query)
+    {
+      Abc::$DL->requestLogInsertQuery($this->myRqlId, $query['query'], $query['time']);
     }
   }
 

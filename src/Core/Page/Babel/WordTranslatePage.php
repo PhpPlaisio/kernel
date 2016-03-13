@@ -68,9 +68,9 @@ class WordTranslatePage extends BabelPage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int    $theWrdId       The ID of the word to be translated.
-   * @param int    $theLanId       The ID of the target language.
-   * @param string $theRedirectUrl The URL to redirect the user agent after the word has been translated.
+   * @param int         $theWrdId       The ID of the word to be translated.
+   * @param int         $theLanId       The ID of the target language.
+   * @param string|null $theRedirectUrl If set the URL to redirect the user agent after the word has been translated.
    *
    * @return string
    */

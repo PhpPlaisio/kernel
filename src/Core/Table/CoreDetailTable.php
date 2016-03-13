@@ -15,7 +15,7 @@ class CoreDetailTable extends DetailTable
   /**
    * If set to false table actions of this table are not shown.
    *
-   * @var array
+   * @var bool
    */
   protected $myShowTableActions = true;
 

@@ -6,7 +6,6 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
-use SetBased\Abc\Form\SlatJoint\HiddenSlatJoint;
 use SetBased\Abc\Form\SlatJoint\InvisibleSlatJoint;
 use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;

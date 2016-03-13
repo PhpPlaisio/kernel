@@ -110,12 +110,10 @@ class RawForm extends HtmlElement implements CompoundControl
    * Adds a compound validator to list of compound validators for this form.
    *
    * @param CompoundValidator $theValidator
-   *
-   * @return CompoundValidator
    */
   public function addValidator($theValidator)
   {
-    return $this->myFieldSets->addValidator($theValidator);
+    $this->myFieldSets->addValidator($theValidator);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -227,6 +225,8 @@ class RawForm extends HtmlElement implements CompoundControl
    * loadSubmittedValues has been invoked. The values returned are the values set with {@link setValues},
    * {@link mergeValues}, and {@link SimpleControl.setValue}. These values might not be white listed.
    * After {@link loadSubmittedValues} has been invoked use getValues.
+   *
+   * @return array
    */
   public function getSetValues()
   {

@@ -1,7 +1,6 @@
 {
   "name": "setbased/abc",
   "description": "SetBased ABC Framework",
-  "type": "project",
   "keyword": [
     "Framework"
   ],
@@ -14,7 +13,8 @@
   },
   "require": {
     "php": ">=5.4.0",
-    "ircmaxell/password-compat": ">=1.0.3"
+    "ircmaxell/password-compat": ">=1.0.3",
+    "setbased/php-stratum": "*"
   },
   "autoload": {
     "psr-4": {
