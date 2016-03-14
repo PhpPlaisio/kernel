@@ -68,7 +68,7 @@ abstract class SimpleControl extends Control
   /**
    * The value of this form control.
    *
-   * @var string|bool
+   * @var string
    */
   protected $myValue;
 

@@ -14,6 +14,14 @@ class CheckboxControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The value of this form control.
+   *
+   * @var bool
+   */
+  protected $myValue;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the HTML code for this form control.
    *
    * @return string

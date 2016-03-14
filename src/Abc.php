@@ -75,6 +75,8 @@ abstract class Abc
 
   /**
    * Information about the requested page.
+   *
+   * @var array<string,string|int>
    */
   private $myPageInfo;
 
@@ -110,12 +112,12 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * De-obfuscate an obfuscated database ID.
+   * De-obfuscates an obfuscated database ID.
    *
    * @param string $theCode  The obfuscated database ID.
    * @param string $theLabel An alias for the column holding the ID's.
    *
-   * @return string
+   * @return int
    */
   public static function deObfuscate($theCode, $theLabel)
   {
@@ -309,7 +311,7 @@ abstract class Abc
   /**
    * Returns info of the requested page.
    *
-   * @return array<string,string|int>
+   * @return array<string,string>
    */
   public function getPageInfo()
   {
@@ -442,7 +444,7 @@ abstract class Abc
       if (isset($uri) && $uri!=$_SERVER['REQUEST_URI'])
       {
         // The preferred URI differs from the requested URI. Redirect the user agent to the preferred URL.
-        Abc::$DL->rollback();
+        self::$DL->rollback();
         Http::redirect($uri, Http::HTTP_MOVED_PERMANENTLY);
       }
       else
@@ -475,7 +477,7 @@ abstract class Abc
     $this->updateSession();
     $this->requestLog();
 
-    Abc::$DL->commit();
+    self::$DL->commit();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -509,7 +511,7 @@ abstract class Abc
   protected function handleException($theException)
   {
     $this->logException($theException);
-    Abc::$DL->rollback();
+    self::$DL->rollback();
     // Set the HTTP status to 500 (Internal Server Error).
     Http::error(Http::HTTP_INTERNAL_SERVER_ERROR);
   }
@@ -523,7 +525,7 @@ abstract class Abc
   protected function handleInvalidUrlException($theException)
   {
     $this->logException($theException);
-    Abc::$DL->rollback();
+    self::$DL->rollback();
     // Set the HTTP status to 404 (Not Found).
     Http::error(Http::HTTP_NOT_FOUND);
   }
@@ -539,7 +541,7 @@ abstract class Abc
     if ($this->isAnonymous())
     {
       // The user is not logged on and most likely the user has requested a page for which the user must be logged on.
-      Abc::$DL->rollback();
+      self::$DL->rollback();
       // Redirect the user agent to the login page. After the user has successfully logged on the user agent will be
       // redirected to currently requested URL.
 
@@ -549,7 +551,7 @@ abstract class Abc
     {
       // The user is logged on and the user has requested an URL for which the user has no authorization.
       $this->logException($theException);
-      Abc::$DL->rollback();
+      self::$DL->rollback();
       // Set the HTTP status to 404 (Not Found).
       Http::error(Http::HTTP_NOT_FOUND);
     }
@@ -602,11 +604,11 @@ abstract class Abc
       $pag_alias = null;
     }
 
-    $this->myPageInfo = Abc::$DL->authGetPageInfo($this->mySessionInfo['cmp_id'],
-                                                  $pag_id,
-                                                  $this->mySessionInfo['pro_id'],
-                                                  $this->mySessionInfo['lan_id'],
-                                                  $pag_alias);
+    $this->myPageInfo = self::$DL->authGetPageInfo($this->mySessionInfo['cmp_id'],
+                                                   $pag_id,
+                                                   $this->mySessionInfo['pro_id'],
+                                                   $this->mySessionInfo['lan_id'],
+                                                   $pag_alias);
     if (!$this->myPageInfo)
     {
       if (isset($pag_id))
@@ -632,7 +634,7 @@ abstract class Abc
   private function getSession()
   {
     $cookie              = isset($_COOKIE['ses_session_token']) ? $_COOKIE['ses_session_token'] : null;
-    $this->mySessionInfo = Abc::$DL->sessionGetSession($this->myDomain, $cookie);
+    $this->mySessionInfo = self::$DL->sessionGetSession($this->myDomain, $cookie);
 
     if (isset($_SERVER['HTTPS']))
     {
@@ -737,7 +739,7 @@ abstract class Abc
    */
   private function requestLog()
   {
-    $this->myRqlId = Abc::$DL->requestLogInsertRequest(
+    $this->myRqlId = self::$DL->requestLogInsertRequest(
       $this->mySessionInfo['ses_id'],
       $this->mySessionInfo['cmp_id'],
       $this->mySessionInfo['usr_id'],
@@ -781,7 +783,7 @@ abstract class Abc
         }
         else
         {
-          Abc::$DL->RequestLogInsertCookie($this->myRqlId, $variable, $value);
+          self::$DL->RequestLogInsertCookie($this->myRqlId, $variable, $value);
         }
       }
     }
@@ -811,7 +813,7 @@ abstract class Abc
         }
         else
         {
-          Abc::$DL->RequestLogInsertPost($this->myRqlId, $variable, $value);
+          self::$DL->RequestLogInsertPost($this->myRqlId, $variable, $value);
         }
       }
     }
@@ -823,11 +825,11 @@ abstract class Abc
    */
   private function requestLogQuery()
   {
-    $queries = Abc::$DL->getQueryLog();
+    $queries = self::$DL->getQueryLog();
 
     foreach ($queries as $query)
     {
-      Abc::$DL->requestLogInsertQuery($this->myRqlId, $query['query'], $query['time']);
+      self::$DL->requestLogInsertQuery($this->myRqlId, $query['query'], $query['time']);
     }
   }
 
