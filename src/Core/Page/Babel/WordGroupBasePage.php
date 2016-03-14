@@ -4,6 +4,7 @@ namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
+use SetBased\Abc\Error\LogicException;
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -50,8 +51,7 @@ abstract class WordGroupBasePage extends BabelPage
   {
     $this->createForm();
     $this->setValues();
-    $method = $this->myForm->execute();
-    if ($method) $this->$method();
+    $this->executeForm();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -87,6 +87,28 @@ abstract class WordGroupBasePage extends BabelPage
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Executes the form shown on this page.
+   */
+  private function executeForm()
+  {
+    $method = $this->myForm->execute();
+    switch ($method)
+    {
+      case null;
+        // Nothing to do.
+        break;
+
+      case  'handleForm':
+        $this->handleForm();
+        break;
+
+      default:
+        throw new LogicException("Unknown form method '%s'.", $method);
+    };
   }
 
   //--------------------------------------------------------------------------------------------------------------------

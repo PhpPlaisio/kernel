@@ -19,8 +19,8 @@ class RoleUpdatePage extends RoleBasePage
   {
     parent::__construct();
 
-    $this->myActCmpId    = self::getCgiVar('cmp', 'cmp');
-    $this->myRolId       = self::getCgiVar('rol', 'rol');
+    $this->myActCmpId    = self::getCgiId('cmp', 'cmp');
+    $this->myRolId       = self::getCgiId('rol', 'rol');
     $this->myDetails     = Abc::$DL->companyRoleGetDetails($this->myActCmpId, $this->myRolId);
     $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }

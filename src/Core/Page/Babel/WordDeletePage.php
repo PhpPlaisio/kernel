@@ -20,7 +20,7 @@ class WordDeletePage extends BabelPage
   {
     parent::__construct();
 
-    $this->myWrdId = self::getCgiVar('wrd', 'wrd');
+    $this->myWrdId = self::getCgiId('wrd', 'wrd');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -76,7 +76,7 @@ abstract class Abc
   /**
    * Information about the requested page.
    *
-   * @var array<string,string|int>
+   * @var array
    */
   private $myPageInfo;
 
@@ -180,7 +180,7 @@ abstract class Abc
    */
   public function checkPageInfo()
   {
-    if ($this->myPageInfo) return true;
+    if (!empty($this->myPageInfo)) return true;
 
     return false;
   }
@@ -311,7 +311,7 @@ abstract class Abc
   /**
    * Returns info of the requested page.
    *
-   * @return array<string,string>
+   * @return array
    */
   public function getPageInfo()
   {

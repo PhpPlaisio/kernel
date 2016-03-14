@@ -218,6 +218,26 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the value of an obfuscated database ID.
+   *
+   * @param string $theVarName The name of the CGI variable.
+   * @param string $theLabel   An alias for the column holding database ID and must corresponds with label that was
+   *                           used to obfuscate the database ID.
+   *
+   * @return int
+   */
+  public static function getCgiId($theVarName, $theLabel)
+  {
+    if (isset($_GET[$theVarName]))
+    {
+      return Abc::deObfuscate($_GET[$theVarName], $theLabel);
+    }
+
+    return null;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Return the value of a CGI variable holding an URL.
    *
    * This method will protect against unvalidated redirects, see
@@ -248,33 +268,23 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the value of a CGI variable. If the CGI variable is an obfuscated database ID the value will be
-   * de-obfuscated.
+   * Returns the value of a CGI variable.
    *
    * For retrieving a CGI variable with a relative URL use {@link getCgiUrl}.
    *
    * @param string $theVarName The name of the CGI variable.
-   * @param string $theLabel   Must only be used if the CGI variable is an obfuscated database ID. An alias for the
-   *                           column holding database ID and must corresponds with label that was used to obfuscate the
-   *                           database ID.
    *
-   * @return string|int
+   * @return string
    */
-  public static function getCgiVar($theVarName, $theLabel = null)
+  public static function getCgiVar($theVarName)
   {
     if (isset($_GET[$theVarName]))
     {
-      if (isset($theLabel))
-      {
-        return Abc::deObfuscate($_GET[$theVarName], $theLabel);
-      }
-
       return urlencode($_GET[$theVarName]);
     }
 
     return null;
   }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Using RequiresJS calls a function in the same namespace as the PHP class (where backslashes will be translated to

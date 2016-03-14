@@ -19,7 +19,7 @@ class WordUpdatePage extends WordBasePage
   {
     parent::__construct();
 
-    $this->myWrdId       = self::getCgiVar('wrd', 'wrd');
+    $this->myWrdId       = self::getCgiId('wrd', 'wrd');
     $this->myDetails     = Abc::$DL->wordGetDetails($this->myWrdId, $this->myActLanId);
     $this->myWdgId       = $this->myDetails['wdg_id'];
     $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;

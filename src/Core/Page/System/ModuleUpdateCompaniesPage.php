@@ -52,7 +52,7 @@ class ModuleUpdateCompaniesPage extends CorePage
   {
     parent::__construct();
 
-    $this->myModId = self::getCgiVar('mdl', 'mdl');
+    $this->myModId = self::getCgiId('mdl', 'mdl');
 
     $this->myDetails = Abc::$DL->systemModuleGetDetails($this->myModId, $this->myLanId);
 

@@ -19,7 +19,7 @@ class WordInsertPage extends WordBasePage
   {
     parent::__construct();
 
-    $this->myWdgId       = self::getCgiVar('wdg', 'wdg');
+    $this->myWdgId       = self::getCgiId('wdg', 'wdg');
     $this->myButtonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
 

@@ -35,7 +35,7 @@ class TabDetailsPage extends CorePage
   {
     parent::__construct();
 
-    $this->myTabId = self::getCgiVar('ptb', 'ptb');
+    $this->myTabId = self::getCgiId('ptb', 'ptb');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

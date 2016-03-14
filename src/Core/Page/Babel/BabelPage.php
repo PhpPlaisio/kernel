@@ -41,7 +41,7 @@ abstract class BabelPage extends CorePage
 
     $this->myRefLanId = C::LAN_ID_BABEL_REFERENCE;
 
-    $this->myActLanId = self::getCgiVar('act_lan', 'lan');
+    $this->myActLanId = self::getCgiId('act_lan', 'lan');
     if (!$this->myActLanId) $this->myActLanId = $this->myLanId;
   }
 

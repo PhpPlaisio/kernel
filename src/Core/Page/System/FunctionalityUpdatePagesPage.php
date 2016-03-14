@@ -45,7 +45,7 @@ class FunctionalityUpdatePagesPage extends CorePage
   {
     parent::__construct();
 
-    $this->myFunId = self::getCgiVar('fun', 'fun');
+    $this->myFunId = self::getCgiId('fun', 'fun');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

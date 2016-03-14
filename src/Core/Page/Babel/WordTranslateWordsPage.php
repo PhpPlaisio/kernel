@@ -48,7 +48,7 @@ class WordTranslateWordsPage extends BabelPage
   {
     parent::__construct();
 
-    $this->myWdgId = self::getCgiVar('wdg', 'wdg');
+    $this->myWdgId = self::getCgiId('wdg', 'wdg');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

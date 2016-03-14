@@ -52,7 +52,7 @@ class WordTranslatePage extends BabelPage
   {
     parent::__construct();
 
-    $this->myWrdId = self::getCgiVar('wrd', 'wrd');
+    $this->myWrdId = self::getCgiId('wrd', 'wrd');
 
     $this->myRedirectUrl = self::getCgiUrl('redirect');
 
