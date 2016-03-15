@@ -24,10 +24,10 @@ class SystemModuleInsertCompoundValidator implements CompoundValidator
     if (!isset($values['mdl_name']) && !$values['wrd_id'])
     {
       $control = $theControl->getFormControlByName('wrd_id');
-      $control->setErrorMessage("Verplicht veld");
+      $control->setErrorMessage('Mandatory field');
 
       $control = $theControl->getFormControlByName('mdl_name');
-      $control->setErrorMessage("Verplicht veld");
+      $control->setErrorMessage('Mandatory field');
 
       $ret = false;
     }

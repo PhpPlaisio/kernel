@@ -85,8 +85,6 @@ class LoginPage extends Page
 
     $this->showPageHeader();
 
-    // $this->echoMainMenu();
-    // Show the actual content of the page.
     echo '<div id="container">';
     echo $contents;
     echo '</div>';

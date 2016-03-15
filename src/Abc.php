@@ -613,7 +613,7 @@ abstract class Abc
     {
       if (isset($pag_id))
       {
-        throw new NotAuthorizedException("User %d is not authorized for page ID=%d.",
+        throw new NotAuthorizedException('User %d is not authorized for page ID=%d.',
                                          $this->mySessionInfo['usr_id'],
                                          $pag_id);
       }
@@ -675,9 +675,9 @@ abstract class Abc
    */
   private function logException($theException)
   {
-    list($usec, $sec) = explode(" ", microtime());
-    $file_name = DIR_ERROR."/error-".($sec + $usec).".log";
-    $fp        = fopen($file_name, "a");
+    list($usec, $sec) = explode(' ', microtime());
+    $file_name = DIR_ERROR.'/error-'.($sec + $usec).'.log';
+    $fp        = fopen($file_name, 'a');
 
     $message = '';
     $e       = $theException;
@@ -692,7 +692,7 @@ abstract class Abc
       $e = $e->getPrevious();
       if ($e)
       {
-        $message .= "This exception has been caused by the following exception:";
+        $message .= 'This exception has been caused by the following exception:';
         $message .= "\n";
       }
     }

@@ -30,7 +30,7 @@ class DateValidator implements Validator
     if ($value===null || $value===false || $value==='') return true;
 
     // Objects and arrays are not valid dates.
-    if (!is_scalar($value)) throw new LogicException("%s is not a valid date.", gettype($value));
+    if (!is_scalar($value)) throw new LogicException('%s is not a valid date.', gettype($value));
 
     // We assume that DateCleaner did a good job and date is in YYYY-MM-DD format.
     $parts = explode('-', $value);

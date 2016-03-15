@@ -237,9 +237,6 @@ abstract class CorePage extends Page
     $menu_items  = Abc::$DL->authGetMenu($this->myCmpId, $this->myProId, $this->myLanId);
     $page_mnu_id = Abc::getInstance()->getMnuId();
 
-    // $logo_html = $this->myConfig->getValue( MMM_CFG_ID_RELATIONS_LOGO );
-    // if ($logo_html) echo $logo_html;
-
     echo '<ul>';
 
     $last_group = 0;
@@ -258,8 +255,8 @@ abstract class CorePage extends Page
 
       $class .= "'";
 
-      if ($mnu_link) echo "<li $class><a href='$mnu_link'>", Html::txt2html($menu_item['mnu_text']), "</a></li>";
-      else           echo "<li $class><a>", Html::txt2html($menu_item['mnu_text']), "</a></li>";
+      if ($mnu_link) echo "<li $class><a href='$mnu_link'>", Html::txt2html($menu_item['mnu_text']), '</a></li>';
+      else           echo "<li $class><a>", Html::txt2html($menu_item['mnu_text']), '</a></li>';
 
       $last_group = $menu_item['mnu_group'];
     }
