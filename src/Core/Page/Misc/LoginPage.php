@@ -304,7 +304,7 @@ class LoginPage extends Page
     echo '<head>';
     echo '<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>';
 
-    // echo "<title>".SET_Html::Txt2Html( Babel::getWord( C::WRD_ID_USER_LOGIN, $this->myLanId ) )."</title>";
+    // echo "<title>".SET_Html::txt2Html( Babel::getWord( C::WRD_ID_USER_LOGIN, $this->myLanId ) )."</title>";
     foreach ($this->myCssSources as $css_source)
     {
       echo '<link rel="stylesheet" media="screen" type="text/css" href="', $css_source, '"/>';

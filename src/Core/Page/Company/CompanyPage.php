@@ -74,7 +74,7 @@ abstract class CompanyPage extends CorePage
     echo '<div id="info">';
 
     echo '<div id="info0">';
-    echo Html::txt2html($this->myCompanyDetails['cmp_abbr']);
+    echo Html::txt2Html($this->myCompanyDetails['cmp_abbr']);
     echo '<br/>';
     echo '<br/>';
     echo '</div>';

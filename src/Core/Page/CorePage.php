@@ -167,11 +167,11 @@ abstract class CorePage extends Page
       if (isset($tab['url']))
       {
         $class = ($tab['pag_id']==$pag_id_org) ? $class = "class='selected'" : '';
-        echo '<li><a href="', $tab['url'], '" ', $class, '>', Html::txt2html($tab['tab_name']), '</a></li>';
+        echo '<li><a href="', $tab['url'], '" ', $class, '>', Html::txt2Html($tab['tab_name']), '</a></li>';
       }
       else
       {
-        if ($this->myShowDisabledTabs) echo '<li><a class="disabled">', Html::txt2html($tab['tab_name']), '</a></li>';
+        if ($this->myShowDisabledTabs) echo '<li><a class="disabled">', Html::txt2Html($tab['tab_name']), '</a></li>';
       }
 
       if ($tab['pag_id']==$pag_id_org && $tab['url']) $this->myShowTabContent = true;
@@ -256,8 +256,8 @@ abstract class CorePage extends Page
 
       $class .= "'";
 
-      if ($mnu_link) echo "<li $class><a href='$mnu_link'>", Html::txt2html($menu_item['mnu_text']), "</a></li>";
-      else           echo "<li $class><a>", Html::txt2html($menu_item['mnu_text']), "</a></li>";
+      if ($mnu_link) echo "<li $class><a href='$mnu_link'>", Html::txt2Html($menu_item['mnu_text']), "</a></li>";
+      else           echo "<li $class><a>", Html::txt2Html($menu_item['mnu_text']), "</a></li>";
 
       $last_group = $menu_item['mnu_group'];
     }

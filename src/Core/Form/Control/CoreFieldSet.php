@@ -181,7 +181,7 @@ class CoreFieldSet extends FieldSet
       {
         $ret .= '<tr>';
         $ret .= '<th>';
-        $ret .= Html::txt2html($control->GetAttribute('_abc_label'));
+        $ret .= Html::txt2Html($control->GetAttribute('_abc_label'));
         if ($control->getAttribute('_set_mandatory')) $ret .= '<span class="mandatory">*</span>';
         $ret .= '</th>';
 
@@ -198,7 +198,7 @@ class CoreFieldSet extends FieldSet
           {
             if ($first) $first = false;
             else        $ret .= '<br/>';
-            $ret .= Html::txt2html($err);
+            $ret .= Html::txt2Html($err);
           }
           $ret .= '</td>';
         }

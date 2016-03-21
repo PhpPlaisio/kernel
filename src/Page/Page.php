@@ -599,7 +599,7 @@ abstract class Page
     $this->echoMetaTags();
 
     // Echo the title of the XHTML document.
-    echo '<title>', Html::txt2html(Abc::getInstance()->getPageTitle()), '</title>';
+    echo '<title>', Html::txt2Html(Abc::getInstance()->getPageTitle()), '</title>';
 
     // Echo style sheets (if any).
     $this->echoCascadingStyleSheets();
