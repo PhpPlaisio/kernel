@@ -23,6 +23,13 @@ class SpecificPageUpdatePage extends CompanyPage
   protected $myForm;
 
   /**
+   * The ID of the target page.
+   *
+   * @var int
+   */
+  private $myTargetPagId;
+
+  /**
    * The details om the company specific page.
    *
    * @var array

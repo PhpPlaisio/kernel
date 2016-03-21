@@ -25,11 +25,25 @@ class PageUpdateFunctionalitiesPage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The details of the target page.
+   *
+   * @var array
+   */
+  private $myDetails;
+
+  /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  private $myForm;
+
+  /**
+   * The ID of the target page.
+   *
+   * @var int
+   */
+  private $myTargetPagId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

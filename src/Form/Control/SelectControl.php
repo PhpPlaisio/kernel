@@ -155,7 +155,7 @@ class SelectControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the obfuscator for the names (most likely the names are databases ID's) of the radio buttons.
+   * Sets the obfuscator for the names (most likely the names are databases IDs) of the radio buttons.
    *
    * @param Obfuscator $theObfuscator The obfuscator for the radio buttons.
    */

@@ -12,6 +12,14 @@ use SetBased\Abc\C;
 class CompanyUpdatePage extends CompanyBasePage
 {
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * The details of the target company.
+   * 
+   * @var array
+   */
+  private $myDetails;
+
+  //--------------------------------------------------------------------------------------------------------------------
   public function __construct()
   {
     parent::__construct();

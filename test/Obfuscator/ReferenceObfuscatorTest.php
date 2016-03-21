@@ -7,7 +7,7 @@ class ReferenceObfuscatorTest extends PHPUnit_Framework_TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test all database ID's are encoded en decoded correctly.
+   * Test all database IDs are encoded en decoded correctly.
    *
    * Remove the leading underscore to enable this test. Takes about 7.85 hours on a Intel i5-3570K @ 3.40GHz processor
    * with PHP 5.4.16.
@@ -72,7 +72,7 @@ class ReferenceObfuscatorTest extends PHPUnit_Framework_TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test some random chosen databases ID's are encoded en decoded correctly.
+   * Test some random chosen databases IDs are encoded en decoded correctly.
    */
   public function testObfuscateDeObfuscate1()
   {

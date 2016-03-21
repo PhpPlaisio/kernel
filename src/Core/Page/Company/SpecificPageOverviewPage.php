@@ -20,13 +20,21 @@ class SpecificPageOverviewPage extends CompanyPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The details of the company specific pages.
+   * 
+   * @var array[]
+   */
+  private $myPages;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    */
   public function __construct()
   {
     parent::__construct();
 
-    $this->myDetails = Abc::$DL->companySpecificPageGetAll($this->myActCmpId, $this->myLanId);
+    $this->myPages = Abc::$DL->companySpecificPageGetAll($this->myActCmpId, $this->myLanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -77,7 +85,7 @@ class SpecificPageOverviewPage extends CompanyPage
     // Add column with link to delete Company specific page.
     $table->addColumn(new SpecificPageDeleteIconTableColumn($this->myActCmpId));
 
-    echo $table->getHtmlTable($this->myDetails);
+    echo $table->getHtmlTable($this->myPages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

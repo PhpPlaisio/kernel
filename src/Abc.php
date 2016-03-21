@@ -115,7 +115,7 @@ abstract class Abc
    * De-obfuscates an obfuscated database ID.
    *
    * @param string $theCode  The obfuscated database ID.
-   * @param string $theLabel An alias for the column holding the ID's.
+   * @param string $theLabel An alias for the column holding the IDs.
    *
    * @return int
    */
@@ -137,9 +137,9 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns an Obfuscator for obfuscating and de-obfuscating database ID's.
+   * Returns an Obfuscator for obfuscating and de-obfuscating database IDs.
    *
-   * @param string $theLabel An alias for the column holding the ID's.
+   * @param string $theLabel An alias for the column holding the IDs.
    *
    * @return Obfuscator
    */
@@ -153,7 +153,7 @@ abstract class Abc
    * Obfuscates a database ID.
    *
    * @param int    $theId    The database ID.
-   * @param string $theLabel An alias for the column holding the ID's.
+   * @param string $theLabel An alias for the column holding the IDs.
    *
    * @return string
    */

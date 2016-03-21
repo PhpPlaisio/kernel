@@ -13,6 +13,14 @@ class WordGroupDetailsIconTableColumn extends DetailsIconTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The ID of the target language.
+   * 
+   * @var int
+   */
+  private $myActLanId;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    *
    * @param int $theTargetTargetLanId The ID of the target language.

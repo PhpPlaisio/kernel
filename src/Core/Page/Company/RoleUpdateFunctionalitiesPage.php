@@ -20,6 +20,13 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The details of the role.
+   * 
+   * @var array
+   */
+  private $myDetails;
+
+  /**
    * The form shown on this page.
    *
    * @var CoreForm

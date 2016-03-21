@@ -14,6 +14,14 @@ class SpecificPageUpdateIconTableColumn extends UpdateIconTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The ID of the target company.
+   * 
+   * @var int
+   */
+  private $myTargetCmpId;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    *
    * @param int $theTargetCmpId The ID of the target company.

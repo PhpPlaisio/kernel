@@ -8,6 +8,7 @@ use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
 use SetBased\Abc\Form\SlatJoint\TextSlatJoint;
+use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
@@ -17,6 +18,14 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
  */
 class BabelWordTranslateSlatControlFactory extends SlatControlFactory
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * The obfuscator for word IDs.
+   * 
+   * @var Obfuscator
+   */
+  private $myWrdIdObfuscator;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.

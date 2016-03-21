@@ -13,6 +13,14 @@ class PageUpdatePage extends PageBasePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The details of the target page.
+   * 
+   * @var array
+   */
+  private $myDetails;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    */
   public function __construct()
@@ -21,7 +29,6 @@ class PageUpdatePage extends PageBasePage
 
     $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
     $this->myDetails     = Abc::$DL->systemPageGetDetails($this->myTargetPagId, $this->myLanId);
-    $this->myMode        = 'modify';
     $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 

@@ -8,6 +8,7 @@ use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
 use SetBased\Abc\Form\SlatJoint\InvisibleSlatJoint;
 use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
+use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
@@ -17,6 +18,14 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
  */
 class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactory
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * The obfuscator for role IDs.
+   * 
+   * @var Obfuscator
+   */
+  private $myRolIdObfuscator;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.

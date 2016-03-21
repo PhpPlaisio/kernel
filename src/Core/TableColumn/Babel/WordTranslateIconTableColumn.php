@@ -13,6 +13,14 @@ class WordTranslateIconTableColumn extends IconTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The ID of the target language.
+   * 
+   * @var int
+   */
+  private $myActLanId;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    *
    * @param int $theTargetTargetLanId The ID of the target language.

@@ -13,6 +13,21 @@ class MenuUpdatePage extends MenuBasePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The details of the menu entry.
+   * 
+   * @var array
+   */
+  private $myDetails;
+
+  /**
+   * The ID of the menu entry.
+   * 
+   * @var int
+   */
+  private $myMnuId;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    */
   public function __construct()

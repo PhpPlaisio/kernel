@@ -4,7 +4,7 @@ namespace SetBased\Abc\Obfuscator;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * An implementation of Obfuscator that does not obfuscate database ID's.
+ * An implementation of Obfuscator that does not obfuscate database IDs.
  */
 class IdentityObfuscator implements Obfuscator
 {

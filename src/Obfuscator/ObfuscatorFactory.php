@@ -14,7 +14,7 @@ interface ObfuscatorFactory
    * De-obfuscated database ID.
    *
    * @param string $theCode  The obfuscated database ID.
-   * @param string $theLabel The alias for the column with the database ID's.
+   * @param string $theLabel The alias for the column with the database IDs.
    *
    * @return int The (de-obfuscated) database ID.
    */
@@ -25,7 +25,7 @@ interface ObfuscatorFactory
    * Obfuscates a database ID.
    *
    * @param int    $theId    The database ID.
-   * @param string $theLabel The alias for the column with the database ID's.
+   * @param string $theLabel The alias for the column with the database IDs.
    *
    * @return string The obfuscated database ID.
    */
@@ -33,9 +33,9 @@ interface ObfuscatorFactory
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns an Obfuscator for obfuscating and de-obfuscating database ID's.
+   * Returns an Obfuscator for obfuscating and de-obfuscating database IDs.
    *
-   * @param string $theLabel An alias for the column with the database ID's.
+   * @param string $theLabel An alias for the column with the database IDs.
    *
    * @return Obfuscator
    */

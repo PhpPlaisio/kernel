@@ -7,6 +7,7 @@ use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
 use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
+use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -15,6 +16,14 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
  */
 class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * The obfuscator for module IDs.
+   * 
+   * @var Obfuscator
+   */
+  private $myMdlIdObfuscator;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.

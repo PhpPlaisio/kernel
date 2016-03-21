@@ -13,6 +13,21 @@ class TabUpdatePage extends TabBasePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The details of the page group.
+   * 
+   * @var array
+   */
+  private $myDetails;
+
+  /**
+   * The ID of the page group.
+   * 
+   * @var int
+   */
+  private $myPtbId;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    */
   public function __construct()

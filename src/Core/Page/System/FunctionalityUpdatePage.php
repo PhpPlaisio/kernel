@@ -13,6 +13,21 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The details of the functionality.
+   * 
+   * @var array
+   */
+  private $myDetails;
+
+  /**
+   * The ID of the functionality.
+   * 
+   * @var int
+   */
+  private $myFunId;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    */
   public function __construct()

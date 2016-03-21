@@ -10,6 +10,14 @@ class TableColumnSlatJoint extends SlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The table column of this slat joint.
+   * 
+   * @var TableColumn
+   */
+  private $myTableColumn;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Object constructor.
    *
    * @param TableColumn $theTableColumn

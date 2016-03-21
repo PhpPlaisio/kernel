@@ -23,6 +23,13 @@ class CompanyDetailsPage extends CompanyPage
    */
   protected $myActCmpId;
 
+  /**
+   * The details of the target company.
+   *
+   * @var array
+   */
+  private $myDetails;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.

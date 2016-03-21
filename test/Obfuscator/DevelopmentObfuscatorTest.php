@@ -48,7 +48,7 @@ class DevelopmentObfuscatorTest extends PHPUnit_Framework_TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test some random chosen databases ID's are encoded en decoded correctly.
+   * Test some random chosen databases IDs are encoded en decoded correctly.
    */
   public function testObfuscateDeObfuscate1()
   {

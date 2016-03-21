@@ -17,7 +17,7 @@ class Html
   public static $ourEncoding = 'UTF-8';
 
   /**
-   * Counter for generating unique element ID's.
+   * Counter for generating unique element IDs.
    *
    * @var int
    */
