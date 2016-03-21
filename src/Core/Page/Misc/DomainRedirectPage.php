@@ -35,7 +35,7 @@ class DomainRedirectPage extends Page
   /**
    * {@inheritdoc}
    */
-  public function __construct($theAbc)
+  public function __construct()
   {
     parent::__construct();
 

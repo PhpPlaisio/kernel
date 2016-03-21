@@ -92,7 +92,7 @@ class FunctionalityUpdatePagesPage extends CorePage
     $field_set = $this->myForm->createFieldSet();
 
     // Create factory.
-    $factory = new SystemFunctionalityUpdatePagesSlatControlFactory($this->myLanId);
+    $factory = new SystemFunctionalityUpdatePagesSlatControlFactory();
     $factory->enableFilter();
 
     // Add submit button.

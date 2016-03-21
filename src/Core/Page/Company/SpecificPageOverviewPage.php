@@ -59,7 +59,7 @@ class SpecificPageOverviewPage extends CompanyPage
    */
   protected function echoTabContent()
   {
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     $table->addTableAction('default', new SpecificPageInsertTableAction($this->myActCmpId));
 

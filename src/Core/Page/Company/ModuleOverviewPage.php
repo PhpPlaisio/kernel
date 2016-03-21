@@ -39,7 +39,7 @@ class ModuleOverviewPage extends CompanyPage
   {
     $modules = Abc::$DL->companyModuleGetAllEnabled($this->myActCmpId, $this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Add table action for modifying the enabled modules of the target company.
     $table->addTableAction('default', new ModuleUpdateTableAction($this->myActCmpId));

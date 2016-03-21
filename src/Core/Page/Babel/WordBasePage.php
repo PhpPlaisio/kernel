@@ -83,7 +83,6 @@ abstract class WordBasePage extends BabelPage
   private function createForm()
   {
     $ref_language = Abc::$DL->LanguageGetName($this->myRefLanId, $this->myRefLanId);
-    // $act_language = \SetBased\Rank\Abc::$DL->LanguageGetName( $this->myActLanId, $this->myRefLanId );
 
     $this->myForm = new CoreForm();
 
@@ -124,7 +123,7 @@ abstract class WordBasePage extends BabelPage
   {
     $group = Abc::$DL->wordGroupGetDetails($this->myWdgId);
 
-    $table = new CoreDetailTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreDetailTable();
 
     // Add row for the ID of the word group.
     NumericTableRow::addRow($table, 'ID', $group['wdg_id'], '%d');

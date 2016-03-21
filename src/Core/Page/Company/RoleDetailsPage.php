@@ -76,7 +76,7 @@ class RoleDetailsPage extends CompanyPage
   {
     $functionalities = Abc::$DL->companyRoleGetFunctionalities($this->myActCmpId, $this->myRolId, $this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Add table action for modifying the granted functionalities.
     $table->addTableAction('default', new RoleUpdateFunctionalitiesTableAction($this->myActCmpId, $this->myRolId));
@@ -111,7 +111,7 @@ class RoleDetailsPage extends CompanyPage
   {
     $pages = Abc::$DL->companyRoleGetPages($this->myActCmpId, $this->myRolId, $this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Show page ID.
     $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
@@ -127,7 +127,7 @@ class RoleDetailsPage extends CompanyPage
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
     // Show modifying the page.
-    $table->addColumn(new PageDetailsIconTableColumn($this->myLanId));
+    $table->addColumn(new PageDetailsIconTableColumn());
 
     echo $table->getHtmlTable($pages);
   }

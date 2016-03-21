@@ -92,7 +92,7 @@ class WordGroupDetailsPage extends BabelPage
    */
   private function showWordGroupInfo()
   {
-    $table = new CoreDetailTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreDetailTable();
 
     // Add row for the ID of the word group.
     NumericTableRow::addRow($table, 'ID', $this->myDetails['wdg_id'], '%d');
@@ -118,7 +118,7 @@ class WordGroupDetailsPage extends BabelPage
     $ref_language = Abc::$DL->languageGetName($this->myRefLanId, $this->myRefLanId);
     $act_language = Abc::$DL->LanguageGetName($this->myActLanId, $this->myRefLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Add action for inserting a new word to the word group.
     $table->addTableAction('default', new WordInsertTableAction($this->myWdgId));
@@ -164,7 +164,7 @@ class WordGroupDetailsPage extends BabelPage
     // Show link to delete the word.
     if (Abc::$DL->authGetPageAuth($this->myCmpId, $this->myProId, C::PAG_ID_BABEL_WORD_DELETE))
     {
-      $table->addColumn(new WordDeleteIconTableColumn($this->myActLanId));
+      $table->addColumn(new WordDeleteIconTableColumn());
     }
 
     // Generate the HTML code for the table.

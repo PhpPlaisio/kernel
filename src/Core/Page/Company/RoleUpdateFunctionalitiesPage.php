@@ -97,7 +97,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     $field_set = $this->myForm->createFieldSet();
 
     // Create factory.
-    $factory = new CompanyRoleUpdateFunctionalitiesSlatControlFactory($this->myLanId);
+    $factory = new CompanyRoleUpdateFunctionalitiesSlatControlFactory();
     $factory->enableFilter();
 
     // Add submit button.

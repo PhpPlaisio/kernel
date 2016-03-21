@@ -65,7 +65,6 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function createFormControl($theType, $theName)
   {
-    $control = null;
     switch ($theType)
     {
       case 'text':

@@ -96,7 +96,7 @@ class TabDetailsPage extends CorePage
   {
     $pages = Abc::$DL->systemTabGetMasterPages($this->myTabId, $this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Show page ID.
     $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
@@ -112,7 +112,7 @@ class TabDetailsPage extends CorePage
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
     // Show viewing the details the page.
-    $table->addColumn(new PageDetailsIconTableColumn($this->myLanId));
+    $table->addColumn(new PageDetailsIconTableColumn());
 
     echo $table->getHtmlTable($pages);
   }

@@ -37,7 +37,7 @@ class TabOverviewPage extends CorePage
   {
     $tabs = Abc::$DL->systemTabGetAll($this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Add table action for creating a new page tab.
     $table->addTableAction('default', new TabInsertTableAction());

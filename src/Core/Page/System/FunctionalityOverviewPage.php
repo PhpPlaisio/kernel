@@ -37,7 +37,7 @@ class FunctionalityOverviewPage extends CorePage
   {
     $functionalities = Abc::$DL->systemFunctionalityGetAll($this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityInsertTableAction());
 
     // Show the ID of the module.

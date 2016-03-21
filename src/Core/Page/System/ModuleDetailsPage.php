@@ -134,7 +134,7 @@ class ModuleDetailsPage extends CorePage
   {
     $functions = Abc::$DL->systemModuleGetFunctions($this->myMdlId, $this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Show function ID.
     $table->addColumn(new NumericTableColumn('ID', 'fun_id'));

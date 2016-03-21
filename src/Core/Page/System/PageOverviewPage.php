@@ -37,7 +37,7 @@ class PageOverviewPage extends CorePage
   {
     $pages = Abc::$DL->SystemPageGetAll($this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
     $table->addTableAction('default', new PageInsertTableAction());
 
     // Show page ID.
@@ -63,10 +63,10 @@ class PageOverviewPage extends CorePage
     $table->addColumn(new TextTableColumn('Page Tab', 'ptb_label'));
 
     // Show modifying the page.
-    $table->addColumn(new PageDetailsIconTableColumn($this->myLanId));
+    $table->addColumn(new PageDetailsIconTableColumn());
 
     // Add column with link to the details of the page.
-    $table->addColumn(new PageUpdateIconTableColumn($this->myLanId));
+    $table->addColumn(new PageUpdateIconTableColumn());
 
     echo $table->getHtmlTable($pages);
   }

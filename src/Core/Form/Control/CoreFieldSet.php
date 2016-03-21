@@ -141,7 +141,7 @@ class CoreFieldSet extends FieldSet
 
     if ($theMandatoryFlag)
     {
-      $ret->addValidator(new MandatoryValidator(0, 0));
+      $ret->addValidator(new MandatoryValidator(0));
       $ret->setFakeAttribute('_set_mandatory', true);
     }
 

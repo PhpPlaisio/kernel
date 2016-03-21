@@ -109,7 +109,7 @@ class FunctionalityDetailsPage extends CorePage
   {
     $pages = Abc::$DL->systemFunctionalityGetPages($this->myFunId, $this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->myFunId));
 
     // Show page ID.
@@ -126,7 +126,7 @@ class FunctionalityDetailsPage extends CorePage
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
     // Show modifying the page.
-    $table->addColumn(new PageDetailsIconTableColumn($this->myLanId));
+    $table->addColumn(new PageDetailsIconTableColumn());
 
     echo $table->getHtmlTable($pages);
   }
@@ -139,7 +139,7 @@ class FunctionalityDetailsPage extends CorePage
   {
     $roles = Abc::$DL->systemFunctionalityGetRoles($this->myFunId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Add table action for granting and revoking this functionality to/from roles.
     $table->addTableAction('default', new FunctionalityUpdateRolesTableAction($this->myFunId));

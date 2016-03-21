@@ -36,7 +36,7 @@ class MenuOverviewPage extends CorePage
   {
     $pages = Abc::$DL->systemMenuGetAllEntries($this->myLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     $table->addTableAction('default', new MenuInsertTableAction());
 

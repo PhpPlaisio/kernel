@@ -103,7 +103,7 @@ class ModuleUpdateCompaniesPage extends CorePage
     $field_set = $this->myForm->createFieldSet();
 
     // Create factory.
-    $factory = new SystemModuleUpdateCompaniesSlatControlFactory($this->myLanId);
+    $factory = new SystemModuleUpdateCompaniesSlatControlFactory();
     $factory->enableFilter();
 
     // Add submit button.

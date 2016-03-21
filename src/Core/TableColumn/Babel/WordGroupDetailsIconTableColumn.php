@@ -23,13 +23,13 @@ class WordGroupDetailsIconTableColumn extends DetailsIconTableColumn
   /**
    * Object constructor.
    *
-   * @param int $theTargetTargetLanId The ID of the target language.
+   * @param int $theTargetLanId The ID of the target language.
    */
-  public function __construct($theTargetTargetLanId)
+  public function __construct($theTargetLanId)
   {
     parent::__construct();
 
-    $this->myActLanId = $theTargetTargetLanId;
+    $this->myActLanId = $theTargetLanId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

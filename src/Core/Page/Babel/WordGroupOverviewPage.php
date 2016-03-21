@@ -55,7 +55,7 @@ class WordGroupOverviewPage extends BabelPage
   {
     $groups = Abc::$DL->wordGroupGetAll($this->myActLanId);
 
-    $table = new CoreOverviewTable($this->myCmpId, $this->myUsrId);
+    $table = new CoreOverviewTable();
 
     // Table action for inserting a new word group.
     $table->addTableAction('default', new WordGroupInsertTableAction());
@@ -80,7 +80,7 @@ class WordGroupOverviewPage extends BabelPage
     $table->addColumn(new WordGroupDetailsIconTableColumn($this->myActLanId));
 
     // Add link to the modify the word group.
-    $table->addColumn(new WordGroupUpdateIconTableColumn($this->myActLanId));
+    $table->addColumn(new WordGroupUpdateIconTableColumn());
 
     echo $table->getHtmlTable($groups);
   }
