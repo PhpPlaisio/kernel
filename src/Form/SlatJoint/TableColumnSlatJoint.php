@@ -2,7 +2,6 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\SlatJoint;
 
-use SetBased\Abc\Form\Control\ButtonControl;
 use SetBased\Abc\Form\Control\TableColumnControl;
 use SetBased\Abc\Table\TableColumn\TableColumn;
 
@@ -27,7 +26,7 @@ class TableColumnSlatJoint extends SlatJoint
    *
    * @param string $theName The local name of the button form control.
    *
-   * @return ButtonControl
+   * @return TableColumnControl
    */
   public function createCell($theName)
   {
@@ -38,6 +37,9 @@ class TableColumnSlatJoint extends SlatJoint
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * {@inheritdoc}
+   */
   public function getColSpan()
   {
     return $this->myTableColumn->getColSpan();
@@ -45,9 +47,7 @@ class TableColumnSlatJoint extends SlatJoint
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns HTML code for col element for this slat joint.
-   *
-   * @return string
+   * {@inheritdoc}
    */
   public function getHtmlColumn()
   {
@@ -56,9 +56,7 @@ class TableColumnSlatJoint extends SlatJoint
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns HTML code (including opening and closing th tags) for the table filter cell.
-   *
-   * @return string
+   * {@inheritdoc}
    */
   public function getHtmlColumnFilter()
   {
@@ -66,6 +64,9 @@ class TableColumnSlatJoint extends SlatJoint
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * {@inheritdoc}
+   */
   public function getHtmlColumnHeader()
   {
     return $this->myTableColumn->getHtmlColumnHeader();

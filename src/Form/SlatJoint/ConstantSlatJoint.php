@@ -60,7 +60,7 @@ class ConstantSlatJoint extends SlatJoint
   /**
    * A constant control must never be shown in a table. Hence header must never be shown too.
    *
-   * @return string Empty string
+   * @return null
    */
   public function getHtmlColumnHeader()
   {

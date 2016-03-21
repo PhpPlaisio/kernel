@@ -20,7 +20,7 @@ class UrlCleaner implements Cleaner
   /**
    * Returns the singleton instance of this class.
    *
-   * @return PruneWhitespaceCleaner
+   * @return UrlCleaner
    */
   public static function get()
   {
@@ -35,7 +35,7 @@ class UrlCleaner implements Cleaner
    *
    * @param string $theValue The submitted URL.
    *
-   * @return string
+   * @return string|null
    */
   public function clean($theValue)
   {

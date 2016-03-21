@@ -19,7 +19,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
   {
     parent::__construct();
 
-    $this->myWdgId       = self::getCgiVar('wdg', 'wdg');
+    $this->myWdgId       = self::getCgiId('wdg', 'wdg');
     $this->myDetails     = Abc::$DL->WordGroupGetDetails($this->myWdgId);
     $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }

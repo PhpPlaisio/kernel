@@ -21,7 +21,7 @@ class WordGroupOverviewPage extends BabelPage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theTargetLanId
+   * @param int|null $theTargetLanId
    *
    * @return string
    */

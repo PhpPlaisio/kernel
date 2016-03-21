@@ -36,9 +36,10 @@ class DateTimeTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText The header text of this table column.
-   * @param string $theFieldName  The field name of the data row used for generating this table column.
-   * @param string $theFormat     The format specifier for formatting the content of this table column.
+   * @param string      $theHeaderText The header text of this table column.
+   * @param string      $theFieldName  The field name of the data row used for generating this table column.
+   * @param string|null $theFormat     The format specifier for formatting the content of this table column. If null
+   *                                   the default format is used.
    */
   public function __construct($theHeaderText, $theFieldName, $theFormat = null)
   {

@@ -37,7 +37,7 @@ class PruneWhitespaceCleaner implements Cleaner
    *
    * @param string $theValue The submitted value.
    *
-   * @return string
+   * @return string|null
    */
   public function clean($theValue)
   {

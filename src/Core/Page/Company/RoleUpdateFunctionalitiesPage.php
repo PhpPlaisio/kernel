@@ -41,7 +41,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->myRolId = self::getCgiVar('rol', 'rol');
+    $this->myRolId = self::getCgiId('rol', 'rol');
 
     $this->myDetails = Abc::$DL->companyRoleGetDetails($this->myActCmpId, $this->myRolId);
   }

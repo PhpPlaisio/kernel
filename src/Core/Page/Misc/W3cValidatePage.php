@@ -168,7 +168,7 @@ class W3cValidatePage extends Page
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 0);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible;)');
     curl_setopt($ch, CURLOPT_URL, $this->myValidatorUrl.'check');
     curl_setopt($ch, CURLOPT_POST, true);
 
@@ -193,6 +193,7 @@ class W3cValidatePage extends Page
       # PHP 5.4.
       $file = $this->myPathName.";type=text/html";
     }
+    $post                  = [];
     $post['uploaded_file'] = $file;
     $post['ss']            = '1';
 
@@ -209,7 +210,7 @@ class W3cValidatePage extends Page
     $body        = substr($response, $header_size);
 
     $body = preg_replace("/(href=|src=|@import\\s)(['\"])([^#:'\"]*)(['\"]|(?:(?:%20|\\s|\\+)[^'\"]*))/",
-                         "$1$2".$this->myValidatorUrl."$3$4",
+                         '$1$2'.$this->myValidatorUrl.'$3$4',
                          $body);
 
     echo $body;

@@ -34,7 +34,8 @@ class DateTableRow
    * @param DetailTable $theTable  The (detail) table.
    * @param string      $theHeader The row header text.
    * @param string      $theValue  The date in YYYY-MM-DD format.
-   * @param string      $theFormat The formatting string (see DateTime::format).
+   * @param string|null $theFormat The format specifier for formatting the content of this table column. If null
+   *                               the default format is used.
    */
   public static function addRow($theTable, $theHeader, $theValue, $theFormat = null)
   {

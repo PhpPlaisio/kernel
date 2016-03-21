@@ -33,7 +33,7 @@ abstract class BlobDownloadPage extends Page
 
     ob_clean();
     flush();
-    session_cache_limiter("");
+    session_cache_limiter('');
 
     switch ($this->myDispositionType)
     {

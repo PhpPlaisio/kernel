@@ -13,6 +13,8 @@ interface Formatter
    * Returns the human readable value of a machine value.
    *
    * @param mixed $theValue The machine value.
+   *
+   * @return mixed
    */
   public function format($theValue);
 }

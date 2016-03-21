@@ -39,7 +39,7 @@ abstract class CompanyPage extends CorePage
   {
     parent::__construct();
 
-    $this->myActCmpId = self::getCgiVar('cmp', 'cmp');
+    $this->myActCmpId = self::getCgiId('cmp', 'cmp');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

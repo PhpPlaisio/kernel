@@ -61,12 +61,14 @@ abstract class SimpleControl extends Control
    * <li> 'post' The label will be appended after the HML code of this form control.
    * </ul>
    *
-   * @var 'pre'|'post'|null
+   * @var string|null
    */
   protected $myLabelPosition;
 
   /**
-   * @var string The value of this form control.
+   * The value of this form control.
+   *
+   * @var string
    */
   protected $myValue;
 

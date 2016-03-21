@@ -19,7 +19,7 @@ class MenuUpdatePage extends MenuBasePage
   {
     parent::__construct();
 
-    $this->myMnuId       = self::getCgiVar('mnu', 'mnu');
+    $this->myMnuId       = self::getCgiId('mnu', 'mnu');
     $this->myDetails     = Abc::$DL->systemMenuGetDetails($this->myMnuId, $this->myLanId);
     $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }

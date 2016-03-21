@@ -252,7 +252,7 @@ class HtmlElement
    * * Any value that evaluates to false will set the attribute to 'no'.
    * * Null will unset the attribute.
    *
-   * @param string $theValue The attribute value.
+   * @param mixed $theValue The attribute value.
    */
   public function setAttrTranslate($theValue)
   {
@@ -265,7 +265,7 @@ class HtmlElement
    * included in the generated HTML code.
    *
    * @param string $theName  The name of the fake attribute.
-   * @param string $theValue The value of the fake attribute.
+   * @param mixed  $theValue The value of the fake attribute.
    */
   public function setFakeAttribute($theName, $theValue)
   {

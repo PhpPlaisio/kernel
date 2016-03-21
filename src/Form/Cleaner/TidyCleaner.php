@@ -22,7 +22,7 @@ class TidyCleaner implements Cleaner
   /**
    * Returns the singleton instance of this class.
    *
-   * @return PruneWhitespaceCleaner
+   * @return TidyCleaner
    */
   public static function get()
   {
@@ -37,7 +37,7 @@ class TidyCleaner implements Cleaner
    *
    * @param string $theValue The submitted HTML snippet.
    *
-   * @return string
+   * @return string|null
    */
   public function clean($theValue)
   {

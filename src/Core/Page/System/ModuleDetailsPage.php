@@ -45,7 +45,7 @@ class ModuleDetailsPage extends CorePage
   {
     parent::__construct();
 
-    $this->myMdlId = self::getCgiVar('mdl', 'mdl');
+    $this->myMdlId = self::getCgiId('mdl', 'mdl');
 
     $this->myDetails = Abc::$DL->systemModuleGetDetails($this->myMdlId, $this->myLanId);
 

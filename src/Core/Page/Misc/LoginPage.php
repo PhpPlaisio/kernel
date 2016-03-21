@@ -54,7 +54,7 @@ class LoginPage extends Page
   /**
    * Returns the relative URL for this page.
    *
-   * @param string $theUri A URI to which the user agent must be redirected after a successful login.
+   * @param string|null $theUri A URI to which the user agent must be redirected after a successful login.
    *
    * @return string
    */
@@ -85,8 +85,6 @@ class LoginPage extends Page
 
     $this->showPageHeader();
 
-    // $this->echoMainMenu();
-    // Show the actual content of the page.
     echo '<div id="container">';
     echo $contents;
     echo '</div>';

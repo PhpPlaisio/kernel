@@ -19,7 +19,7 @@ class TabUpdatePage extends TabBasePage
   {
     parent::__construct();
 
-    $this->myPtbId       = self::getCgiVar('ptb', 'ptb');
+    $this->myPtbId       = self::getCgiId('ptb', 'ptb');
     $this->myDetails     = Abc::$DL->systemTabGetDetails($this->myPtbId, $this->myLanId);
     $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }

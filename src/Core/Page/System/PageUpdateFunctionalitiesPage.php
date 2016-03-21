@@ -39,7 +39,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
   {
     parent::__construct();
 
-    $this->myTargetPagId = self::getCgiVar('tar_pag', 'pag');
+    $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
     $this->myDetails     = Abc::$DL->systemPageGetDetails($this->myTargetPagId, $this->myLanId);
   }
 

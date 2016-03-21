@@ -52,7 +52,7 @@ class FunctionalityUpdateRolesPage extends CorePage
   {
     parent::__construct();
 
-    $this->myFunId = self::getCgiVar('fun', 'fun');
+    $this->myFunId = self::getCgiId('fun', 'fun');
 
     $this->myDetails = Abc::$DL->systemFunctionalityGetDetails($this->myFunId, $this->myLanId);
 

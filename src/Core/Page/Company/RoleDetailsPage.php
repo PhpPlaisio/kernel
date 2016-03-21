@@ -34,7 +34,7 @@ class RoleDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->myRolId = self::getCgiVar('rol', 'rol');
+    $this->myRolId = self::getCgiId('rol', 'rol');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

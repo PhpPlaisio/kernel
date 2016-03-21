@@ -8,7 +8,6 @@ use SetBased\Abc\Core\Form\Validator\MandatoryValidator;
 use SetBased\Abc\Form\Control\CheckBoxesControl;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HtmlControl;
 use SetBased\Abc\Form\Control\RadiosControl;
 use SetBased\Abc\Form\Control\SelectControl;
@@ -49,9 +48,14 @@ class CoreForm extends Form
   /**
    * Adds a form control to the visible fieldset of this form control.
    *
-   * @param Control $theControl       The from control
-   * @param bool    $theWrdId         The wrd_id of the legend of the form control.
-   * @param bool    $theMandatoryFlag If set the form control is mandatory.
+   * @param Control         $theControl       The from control
+   * @param int|string|null $theWrdId         Depending on the type:
+   *                                          <ul>
+   *                                          <li>int:    The wrd_id of the legend of the form control.
+   *                                          <li>string: The legend of the form control.
+   *                                          <li>null:   The form control has no legend.
+   *                                          </ul>
+   * @param bool            $theMandatoryFlag If set the form control is mandatory.
    *
    * @return ComplexControl|SpanControl|ComplexControl|SimpleControl|SelectControl|CheckBoxesControl|RadiosControl
    */
@@ -78,7 +82,7 @@ class CoreForm extends Form
    *
    * @param int|string $theWrdId  Depending on the type:
    *                              <ul>
-   *                              <li>int: The ID of the word of the button text.
+   *                              <li>int:    The ID of the word of the button text.
    *                              <li>string: The text of the button.
    *                              </ul>
    * @param string     $theMethod The name of method for handling the form submit.
@@ -99,10 +103,15 @@ class CoreForm extends Form
   /**
    * Creates a form control.
    *
-   * @param string $theType          The type of the form control.
-   * @param string $theName          The name of the form control.
-   * @param int    $theWrdId         The wrd_id of the legend of the form control.
-   * @param bool   $theMandatoryFlag If set the form control is mandatory.
+   * @param string          $theType          The type of the form control.
+   * @param string          $theName          The name of the form control.
+   * @param int|string|null $theWrdId         Depending on the type:
+   *                                          <ul>
+   *                                          <li>int:    The wrd_id of the legend of the form control.
+   *                                          <li>string: The legend of the form control.
+   *                                          <li>null:   The form control has no legend.
+   *                                          </ul>
+   * @param bool            $theMandatoryFlag If set the form control is mandatory.
    *
    * @return CheckBoxesControl|ComplexControl|RadiosControl|SelectControl|SimpleControl|SpanControl|HtmlControl
    */
@@ -128,7 +137,7 @@ class CoreForm extends Form
   /**
    * Returns the visible fieldset of this form.
    *
-   * @return FieldSet|CoreFieldSet
+   * @return CoreFieldSet
    */
   public function getVisibleFieldSet()
   {

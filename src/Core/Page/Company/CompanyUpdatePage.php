@@ -16,7 +16,7 @@ class CompanyUpdatePage extends CompanyBasePage
   {
     parent::__construct();
 
-    $this->myActCmpId    = self::getCgiVar('cmp', 'cmp');
+    $this->myActCmpId    = self::getCgiId('cmp', 'cmp');
     $this->myDetails     = Abc::$DL->companyGetDetails($this->myActCmpId);
     $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }

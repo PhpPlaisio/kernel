@@ -37,7 +37,7 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     parent::__construct();
 
-    $this->myTargetPagId = self::getCgiVar('tar_pag', 'pag');
+    $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
 
     $this->myTargetPageDetails = Abc::$DL->companySpecificPageGetDetails($this->myActCmpId,
                                                                          $this->myTargetPagId,

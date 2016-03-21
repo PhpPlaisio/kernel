@@ -1,36 +1,22 @@
 {
   "name": "setbased/abc",
   "description": "SetBased ABC Framework",
-  "type": "project",
   "keyword": [
     "Framework"
   ],
-  "authors": [
-    {
-      "name": "Paul Water",
-      "email": "p.r.water@setbased.nl",
-      "homepage": "http://www.setbased.nl",
-      "role": "Architect"
-    }
-  ],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packagist.setbased.nl/"
-    }
-  ],
+  "type": "library",
+  "license": "MIT",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require-dev": {
     "gajus/dindent": "2.*",
     "phing/phing": "*",
-    "phpunit/phpunit": "*",
-    "setbased/phing-extensions": "1.*",
-    "setbased/php-coding-standards": "*"
+    "phpunit/phpunit": "*"
   },
   "require": {
     "php": ">=5.4.0",
-    "ircmaxell/password-compat": "1.0.3"
+    "ircmaxell/password-compat": ">=1.0.3",
+    "setbased/php-stratum": "*"
   },
   "autoload": {
     "psr-4": {

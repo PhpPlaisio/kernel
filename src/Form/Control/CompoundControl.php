@@ -56,7 +56,7 @@ interface CompoundControl
   /**
    * Returns the submitted value of this form control.
    *
-   * @returns array
+   * @return array
    */
   public function getSubmittedValue();
 

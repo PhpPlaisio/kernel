@@ -41,15 +41,13 @@ abstract class BabelPage extends CorePage
 
     $this->myRefLanId = C::LAN_ID_BABEL_REFERENCE;
 
-    $this->myActLanId = self::getCgiVar('act_lan', 'lan');
+    $this->myActLanId = self::getCgiId('act_lan', 'lan');
     if (!$this->myActLanId) $this->myActLanId = $this->myLanId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the selected language for the languages the user is authorized.
-   *
-   * @return int The ID of the selected language.
+   * Sets the target language. If the user is authorized for multiple languages a form is shown.
    */
   public function selectLanguage()
   {

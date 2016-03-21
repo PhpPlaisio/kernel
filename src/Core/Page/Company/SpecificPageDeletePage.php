@@ -21,9 +21,9 @@ class SpecificPageDeletePage extends Page
   {
     parent::__construct();
 
-    $this->myTargetCmpId = self::getCgiVar('cmp', 'cmp');
+    $this->myTargetCmpId = self::getCgiId('cmp', 'cmp');
 
-    $this->myTargetPagId = self::getCgiVar('tar_pag', 'pag');
+    $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

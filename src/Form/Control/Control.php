@@ -17,7 +17,7 @@ abstract class Control extends HtmlElement
   /**
    * The list of error messages associated with this form control.
    *
-   * @var string[]
+   * @var string[]|null
    */
   protected $myErrorMessages;
 
@@ -133,7 +133,7 @@ abstract class Control extends HtmlElement
    *
    * @param bool $theRecursiveFlag
    *
-   * @return null|string
+   * @return string[]|null
    */
   public function getErrorMessages(/** @noinspection PhpUnusedParameterInspection */
     $theRecursiveFlag = false)
@@ -145,7 +145,7 @@ abstract class Control extends HtmlElement
   /**
    * Returns the HTML code for this form control in a table cell.
    *
-   * @return string
+   * @return string|null
    */
   public function getHtmlTableCell()
   {
@@ -262,6 +262,8 @@ abstract class Control extends HtmlElement
    * @param array $theSubmittedValue The submitted values.
    * @param array $theWhiteListValue The white listed values.
    * @param array $theChangedInputs  The form controls which values are changed by the form submit.
+   *
+   * @return void
    */
   abstract protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs);
 

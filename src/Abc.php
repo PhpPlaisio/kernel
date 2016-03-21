@@ -75,6 +75,8 @@ abstract class Abc
 
   /**
    * Information about the requested page.
+   *
+   * @var array
    */
   private $myPageInfo;
 
@@ -110,12 +112,12 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * De-obfuscate an obfuscated database ID.
+   * De-obfuscates an obfuscated database ID.
    *
    * @param string $theCode  The obfuscated database ID.
    * @param string $theLabel An alias for the column holding the ID's.
    *
-   * @return string
+   * @return int
    */
   public static function deObfuscate($theCode, $theLabel)
   {
@@ -178,7 +180,7 @@ abstract class Abc
    */
   public function checkPageInfo()
   {
-    if ($this->myPageInfo) return true;
+    if (!empty($this->myPageInfo)) return true;
 
     return false;
   }
@@ -198,6 +200,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the ID of the domain (a.k.a. company) of the requestor.
+   *
+   * @return int
    */
   public function getCmpId()
   {
@@ -272,7 +276,9 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the ID of the "original" page.
    *
+   * @return int
    */
   public function getPagIdOrg()
   {
@@ -292,16 +298,9 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the source file with the class for handling the page request.
-   */
-  public function getPageFile()
-  {
-    return $this->myPageInfo['pag_file'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns page group title.
+   *
+   * @return string
    */
   public function getPageGroupTitle()
   {
@@ -321,7 +320,7 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns page title.
+   * Returns the page title.
    *
    * @return string
    */
@@ -445,7 +444,7 @@ abstract class Abc
       if (isset($uri) && $uri!=$_SERVER['REQUEST_URI'])
       {
         // The preferred URI differs from the requested URI. Redirect the user agent to the preferred URL.
-        Abc::$DL->rollback();
+        self::$DL->rollback();
         Http::redirect($uri, Http::HTTP_MOVED_PERMANENTLY);
       }
       else
@@ -478,7 +477,7 @@ abstract class Abc
     $this->updateSession();
     $this->requestLog();
 
-    Abc::$DL->commit();
+    self::$DL->commit();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -512,7 +511,7 @@ abstract class Abc
   protected function handleException($theException)
   {
     $this->logException($theException);
-    Abc::$DL->rollback();
+    self::$DL->rollback();
     // Set the HTTP status to 500 (Internal Server Error).
     Http::error(Http::HTTP_INTERNAL_SERVER_ERROR);
   }
@@ -526,7 +525,7 @@ abstract class Abc
   protected function handleInvalidUrlException($theException)
   {
     $this->logException($theException);
-    Abc::$DL->rollback();
+    self::$DL->rollback();
     // Set the HTTP status to 404 (Not Found).
     Http::error(Http::HTTP_NOT_FOUND);
   }
@@ -542,7 +541,7 @@ abstract class Abc
     if ($this->isAnonymous())
     {
       // The user is not logged on and most likely the user has requested a page for which the user must be logged on.
-      Abc::$DL->rollback();
+      self::$DL->rollback();
       // Redirect the user agent to the login page. After the user has successfully logged on the user agent will be
       // redirected to currently requested URL.
 
@@ -552,7 +551,7 @@ abstract class Abc
     {
       // The user is logged on and the user has requested an URL for which the user has no authorization.
       $this->logException($theException);
-      Abc::$DL->rollback();
+      self::$DL->rollback();
       // Set the HTTP status to 404 (Not Found).
       Http::error(Http::HTTP_NOT_FOUND);
     }
@@ -605,16 +604,16 @@ abstract class Abc
       $pag_alias = null;
     }
 
-    $this->myPageInfo = Abc::$DL->authGetPageInfo($this->mySessionInfo['cmp_id'],
-                                                  $pag_id,
-                                                  $this->mySessionInfo['pro_id'],
-                                                  $this->mySessionInfo['lan_id'],
-                                                  $pag_alias);
+    $this->myPageInfo = self::$DL->authGetPageInfo($this->mySessionInfo['cmp_id'],
+                                                   $pag_id,
+                                                   $this->mySessionInfo['pro_id'],
+                                                   $this->mySessionInfo['lan_id'],
+                                                   $pag_alias);
     if (!$this->myPageInfo)
     {
       if (isset($pag_id))
       {
-        throw new NotAuthorizedException("User %d is not authorized for page ID=%d.",
+        throw new NotAuthorizedException('User %d is not authorized for page ID=%d.',
                                          $this->mySessionInfo['usr_id'],
                                          $pag_id);
       }
@@ -635,7 +634,7 @@ abstract class Abc
   private function getSession()
   {
     $cookie              = isset($_COOKIE['ses_session_token']) ? $_COOKIE['ses_session_token'] : null;
-    $this->mySessionInfo = Abc::$DL->sessionGetSession($this->myDomain, $cookie);
+    $this->mySessionInfo = self::$DL->sessionGetSession($this->myDomain, $cookie);
 
     if (isset($_SERVER['HTTPS']))
     {
@@ -676,9 +675,9 @@ abstract class Abc
    */
   private function logException($theException)
   {
-    list($usec, $sec) = explode(" ", microtime());
-    $file_name = DIR_ERROR."/error-".($sec + $usec).".log";
-    $fp        = fopen($file_name, "a");
+    list($usec, $sec) = explode(' ', microtime());
+    $file_name = DIR_ERROR.'/error-'.($sec + $usec).'.log';
+    $fp        = fopen($file_name, 'a');
 
     $message = '';
     $e       = $theException;
@@ -693,7 +692,7 @@ abstract class Abc
       $e = $e->getPrevious();
       if ($e)
       {
-        $message .= "This exception has been caused by the following exception:";
+        $message .= 'This exception has been caused by the following exception:';
         $message .= "\n";
       }
     }
@@ -740,7 +739,7 @@ abstract class Abc
    */
   private function requestLog()
   {
-    $this->myRqlId = Abc::$DL->requestLogInsertRequest(
+    $this->myRqlId = self::$DL->requestLogInsertRequest(
       $this->mySessionInfo['ses_id'],
       $this->mySessionInfo['cmp_id'],
       $this->mySessionInfo['usr_id'],
@@ -762,26 +761,12 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Logs the executed executed database queries.
-   */
-  private function requestLogQuery()
-  {
-    $queries = Abc::$DL->getQueryLog();
-
-    foreach($queries as $query)
-    {
-      Abc::$DL->requestLogInsertQuery($this->myRqlId, $query['query'], $query['time']);
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Logs the (by the client) sent cookies in to the database.
    *
    * Usage on this method on production environments is disguised.
    *
-   * @param array  $theCookies  must be $_COOKIES
-   * @param string $theVariable must not be used, intended for use by recursive calls only.
+   * @param array       $theCookies  must be $_COOKIES
+   * @param string|null $theVariable must not be used, intended for use by recursive calls only.
    */
   private function requestLogCookie($theCookies, $theVariable = null)
   {
@@ -798,7 +783,7 @@ abstract class Abc
         }
         else
         {
-          Abc::$DL->RequestLogInsertCookie($this->myRqlId, $variable, $value);
+          self::$DL->RequestLogInsertCookie($this->myRqlId, $variable, $value);
         }
       }
     }
@@ -810,8 +795,8 @@ abstract class Abc
    *
    * Usage on this method on production environments is not recommended.
    *
-   * @param array  $thePost     Must be $_POST (except for recursive calls).
-   * @param string $theVariable Must not be used (except for recursive calls).
+   * @param array       $thePost     Must be $_POST (except for recursive calls).
+   * @param string|null $theVariable Must not be used (except for recursive calls).
    */
   private function requestLogPost($thePost, $theVariable = null)
   {
@@ -828,9 +813,23 @@ abstract class Abc
         }
         else
         {
-          Abc::$DL->RequestLogInsertPost($this->myRqlId, $variable, $value);
+          self::$DL->RequestLogInsertPost($this->myRqlId, $variable, $value);
         }
       }
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Logs the executed executed database queries.
+   */
+  private function requestLogQuery()
+  {
+    $queries = self::$DL->getQueryLog();
+
+    foreach ($queries as $query)
+    {
+      self::$DL->requestLogInsertQuery($this->myRqlId, $query['query'], $query['time']);
     }
   }
 

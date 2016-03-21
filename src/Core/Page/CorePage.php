@@ -148,6 +148,8 @@ abstract class CorePage extends Page
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Echos the actual page content.
+   *
+   * @return void
    */
   abstract protected function echoTabContent();
 
@@ -234,9 +236,6 @@ abstract class CorePage extends Page
   {
     $menu_items  = Abc::$DL->authGetMenu($this->myCmpId, $this->myProId, $this->myLanId);
     $page_mnu_id = Abc::getInstance()->getMnuId();
-
-    // $logo_html = $this->myConfig->getValue( MMM_CFG_ID_RELATIONS_LOGO );
-    // if ($logo_html) echo $logo_html;
 
     echo '<ul>';
 
