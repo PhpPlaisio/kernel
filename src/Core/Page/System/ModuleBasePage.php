@@ -42,7 +42,7 @@ abstract class ModuleBasePage extends CorePage
    *
    * @return null
    */
-  abstract protected function dataBaseAction();
+  abstract protected function databaseAction();
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

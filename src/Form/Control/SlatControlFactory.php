@@ -61,7 +61,7 @@ abstract class SlatControlFactory
    *                                         the same name as the slat joint. Use '' for an empty name (should only be
    *                                         used if the created form control is a complex form control).
    *
-   * @return ComplexControl|SimpleControl|SelectControl|CheckBoxesControl|RadiosControl
+   * @return ComplexControl|SimpleControl|SelectControl|CheckboxesControl|RadiosControl
    */
   public function createFormControl($theParentControl, $theSlatJointName, $theControlName = null)
   {

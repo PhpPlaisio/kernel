@@ -111,7 +111,7 @@ class CoreFieldSet extends FieldSet
    *                                          </ul>
    * @param bool            $theMandatoryFlag If set the form control is mandatory.
    *
-   * @return CheckBoxesControl|ComplexControl|RadiosControl|SelectControl|SimpleControl|SpanControl
+   * @return CheckboxesControl|ComplexControl|RadiosControl|SelectControl|SimpleControl|SpanControl
    */
   public function createFormControl($theType, $theName, $theWrdId = null, $theMandatoryFlag = false)
   {
@@ -186,7 +186,7 @@ class CoreFieldSet extends FieldSet
       {
         $ret .= '<tr>';
         $ret .= '<th>';
-        $ret .= Html::txt2Html($control->GetAttribute('_abc_label'));
+        $ret .= Html::txt2Html($control->getAttribute('_abc_label'));
         if ($control->getAttribute('_set_mandatory')) $ret .= '<span class="mandatory">*</span>';
         $ret .= '</th>';
 

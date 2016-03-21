@@ -113,7 +113,7 @@ abstract class FunctionalityBasePage extends CorePage
    */
   private function handleForm()
   {
-    $this->databaseAction();
+    $this->dataBaseAction();
 
     Http::redirect(FunctionalityOverviewPage::getUrl());
   }

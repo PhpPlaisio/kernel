@@ -395,7 +395,7 @@ abstract class SimpleControl extends Control
    */
   public function setLabelText($theText)
   {
-    $this->myLabel = HTML::txt2Html($theText);
+    $this->myLabel = Html::txt2Html($theText);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

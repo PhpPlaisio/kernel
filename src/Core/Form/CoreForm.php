@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Form;
 use SetBased\Abc\Babel;
 use SetBased\Abc\Core\Form\Control\CoreFieldSet;
 use SetBased\Abc\Core\Form\Validator\MandatoryValidator;
-use SetBased\Abc\Form\Control\CheckBoxesControl;
+use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\HtmlControl;
@@ -57,7 +57,7 @@ class CoreForm extends Form
    *                                          </ul>
    * @param bool            $theMandatoryFlag If set the form control is mandatory.
    *
-   * @return ComplexControl|SpanControl|ComplexControl|SimpleControl|SelectControl|CheckBoxesControl|RadiosControl
+   * @return ComplexControl|SpanControl|ComplexControl|SimpleControl|SelectControl|CheckboxesControl|RadiosControl
    */
   public function addFormControl($theControl, $theWrdId = null, $theMandatoryFlag = false)
   {
@@ -70,7 +70,7 @@ class CoreForm extends Form
 
     if ($theMandatoryFlag)
     {
-      $theControl->AddValidator(new MandatoryValidator(0));
+      $theControl->addValidator(new MandatoryValidator(0));
     }
 
     return $theControl;
@@ -113,7 +113,7 @@ class CoreForm extends Form
    *                                          </ul>
    * @param bool            $theMandatoryFlag If set the form control is mandatory.
    *
-   * @return CheckBoxesControl|ComplexControl|RadiosControl|SelectControl|SimpleControl|SpanControl|HtmlControl
+   * @return CheckboxesControl|ComplexControl|RadiosControl|SelectControl|SimpleControl|SpanControl|HtmlControl
    */
   public function createFormControl($theType, $theName, $theWrdId = null, $theMandatoryFlag = false)
   {

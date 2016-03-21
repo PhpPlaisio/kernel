@@ -58,7 +58,7 @@ class DivControl extends Control
    */
   public function setInnerText($theText)
   {
-    $this->myInnerHtml = HTML::txt2Html($theText);
+    $this->myInnerHtml = Html::txt2Html($theText);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

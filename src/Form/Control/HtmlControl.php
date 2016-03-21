@@ -59,7 +59,7 @@ class HtmlControl extends Control
    */
   public function setInnerText($theText)
   {
-    $this->myHtml = HTML::txt2Html($theText);
+    $this->myHtml = Html::txt2Html($theText);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

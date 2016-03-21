@@ -128,7 +128,7 @@ class FunctionalityUpdateRolesPage extends CorePage
   /**
    * Handles the form submit, i.e. add or removes pages to the functionality.
    */
-  private function dataBaseAction()
+  private function databaseAction()
   {
     $changes = $this->myForm->getChangedControls();
     $values  = $this->myForm->getValues();

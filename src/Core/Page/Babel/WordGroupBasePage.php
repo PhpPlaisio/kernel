@@ -117,7 +117,7 @@ abstract class WordGroupBasePage extends BabelPage
    */
   private function handleForm()
   {
-    $this->dataBaseAction();
+    $this->databaseAction();
 
     Http::redirect(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
   }

@@ -34,7 +34,7 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('pag_enabled', $table_column);
 
-    $this->myPagIdObfuscator = abc::getObfuscator('pag');
+    $this->myPagIdObfuscator = Abc::getObfuscator('pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
