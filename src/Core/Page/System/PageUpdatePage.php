@@ -58,7 +58,7 @@ class PageUpdatePage extends PageBasePage
     $values  = $this->myForm->getValues();
 
     // Return immediately if no changes are submitted.
-    if (!$changes) return;
+    if (empty($changes)) return;
 
     if ($values['pag_title'])
     {

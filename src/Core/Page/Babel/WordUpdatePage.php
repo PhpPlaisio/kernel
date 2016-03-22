@@ -61,7 +61,7 @@ class WordUpdatePage extends WordBasePage
     $changes = $this->myForm->getChangedControls();
 
     // Return immediately when no form controls are changed.
-    if (!$changes) return;
+    if (empty($changes)) return;
 
     Abc::$DL->wordUpdateDetails($this->myWrdId,
                                 $values['wdg_id'],

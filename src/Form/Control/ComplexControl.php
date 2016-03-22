@@ -359,7 +359,7 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function isValid()
   {
-    return (!$this->myInvalidControls && !$this->myErrorMessages);
+    return (empty($this->myInvalidControls) && empty($this->myErrorMessages));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

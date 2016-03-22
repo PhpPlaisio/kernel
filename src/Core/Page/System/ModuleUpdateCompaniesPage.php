@@ -134,7 +134,7 @@ class ModuleUpdateCompaniesPage extends CorePage
     $values  = $this->myForm->getValues();
 
     // Return immediately if no changes are submitted.
-    if (!$changes) return;
+    if (empty($changes)) return;
 
     foreach ($changes['data'] as $cmp_id => $dummy)
     {

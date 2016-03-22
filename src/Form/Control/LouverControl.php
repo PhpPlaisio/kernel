@@ -54,7 +54,7 @@ class LouverControl extends ComplexControl
    */
   public function generate()
   {
-    if ($this->myTemplateData)
+    if (!empty($this->myTemplateData))
     {
       $this->setAttrData('slat-name', $this->mySubmitName);
 
@@ -113,7 +113,7 @@ class LouverControl extends ComplexControl
   {
     $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
 
-    if ($this->myTemplateData)
+    if (!empty($this->myTemplateData))
     {
       $children         = $this->myControls;
       $this->myControls = [];

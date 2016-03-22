@@ -147,7 +147,7 @@ class WordTranslatePage extends BabelPage
     $changes = $this->myForm->getChangedControls();
 
     // Return immediately when no form controls are changed.
-    if (!$changes) return;
+    if (empty($changes)) return;
 
     Abc::$DL->wordTranslateWord($this->myUsrId, $this->myWrdId, $this->myActLanId, $values['wdt_text']);
   }

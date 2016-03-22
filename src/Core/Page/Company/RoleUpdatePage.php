@@ -61,7 +61,7 @@ class RoleUpdatePage extends RoleBasePage
     $values  = $this->myForm->getValues();
 
     // Return immediately if no changes are submitted.
-    if (!$changes) return;
+    if (empty($changes)) return;
 
     Abc::$DL->companyRoleUpdate($this->myActCmpId, $this->myRolId, $values['rol_name'], $values['rol_weight']);
   }

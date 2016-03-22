@@ -55,7 +55,7 @@ class CompanyUpdatePage extends CompanyBasePage
     $values  = $this->myForm->getValues();
 
     // Return immediately if no changes are submitted.
-    if (!$changes) return;
+    if (empty($changes)) return;
 
     Abc::$DL->companyUpdate($this->myActCmpId, $values['cmp_abbr'], $values['cmp_label']);
   }

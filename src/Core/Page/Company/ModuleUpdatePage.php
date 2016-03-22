@@ -99,7 +99,7 @@ class ModuleUpdatePage extends CompanyPage
     $changes = $this->myForm->getChangedControls();
 
     // If no changes are submitted return immediately.
-    if (!$changes) return;
+    if (empty($changes)) return;
 
     foreach ($changes['data'] as $mdl_id => $dummy)
     {

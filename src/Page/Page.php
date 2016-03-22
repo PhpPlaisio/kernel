@@ -574,7 +574,7 @@ abstract class Page
    */
   protected function echoMetaTagKeywords()
   {
-    if ($this->myKeywords)
+    if (!empty($this->myKeywords))
     {
       echo '<meta name="keywords"', Html::generateAttribute('content', implode(',', $this->myKeywords)), '/>';
     }
@@ -629,7 +629,7 @@ abstract class Page
       $js = 'require([],function(){'.$this->myJavaScript.'});';
       echo '<script type="text/javascript">/*<![CDATA[*/set_based_abc_inline_js='.json_encode($js).'/*]]>*/</script>';
     }
-    if ($this->myJsTrailerAttributes)
+    if (!empty($this->myJsTrailerAttributes))
     {
       echo Html::generateElement('script', $this->myJsTrailerAttributes);
     }

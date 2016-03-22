@@ -65,7 +65,7 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
     $values  = $this->myForm->getValues();
 
     // Return immediately if no changes are submitted.
-    if (!$changes) return;
+    if (empty($changes)) return;
 
     if ($values['fun_name'])
     {
