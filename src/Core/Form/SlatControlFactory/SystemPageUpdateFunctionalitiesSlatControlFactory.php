@@ -3,8 +3,10 @@
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
+use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
+use SetBased\Abc\Form\Control\TableColumnControl;
 use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
 use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
 use SetBased\Abc\Obfuscator\Obfuscator;
@@ -64,18 +66,23 @@ class SystemPageUpdateFunctionalitiesSlatControlFactory extends SlatControlFacto
     $row = $theLouverControl->addFormControl(new SlatControl($theData['fun_id']));
     $row->setObfuscator($this->myFunIdObfuscator);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'mdl_id');
     $control->setValue($theData);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'mdl_name');
     $control->setValue($theData);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'fun_id');
     $control->setValue($theData);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'fun_name');
     $control->setValue($theData);
 
+    /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'fun_checked');
     $control->setValue($theData['fun_checked']);
   }

@@ -3,8 +3,10 @@
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
+use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
+use SetBased\Abc\Form\Control\TableColumnControl;
 use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
 use SetBased\Abc\Form\SlatJoint\InvisibleSlatJoint;
 use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
@@ -68,21 +70,27 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
     $row = $theLouverControl->addFormControl(new SlatControl($theData['rol_id']));
     $row->setObfuscator($this->myRolIdObfuscator);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_id');
     $control->setValue($theData['cmp_id']);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_id_column');
     $control->setValue($theData);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_abbr');
     $control->setValue($theData);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'rol_id');
     $control->setValue($theData);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'rol_name');
     $control->setValue($theData);
 
+    /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'rol_enabled');
     $control->setValue($theData['rol_enabled']);
   }

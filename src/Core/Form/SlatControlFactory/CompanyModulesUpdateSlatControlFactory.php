@@ -3,8 +3,10 @@
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
+use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
+use SetBased\Abc\Form\Control\TableColumnControl;
 use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
 use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
 use SetBased\Abc\Obfuscator\Obfuscator;
@@ -51,9 +53,11 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
     $row = $theLouverControl->addFormControl(new SlatControl($theData['mdl_id']));
     $row->setObfuscator($this->myMdlIdObfuscator);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'mdl_name');
     $control->setValue($theData);
 
+    /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'mdl_enabled');
     $control->setValue($theData['mdl_enabled']);
   }

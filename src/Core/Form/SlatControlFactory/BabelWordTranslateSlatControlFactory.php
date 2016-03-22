@@ -6,6 +6,8 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
+use SetBased\Abc\Form\Control\TableColumnControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
 use SetBased\Abc\Form\SlatJoint\TextSlatJoint;
 use SetBased\Abc\Obfuscator\Obfuscator;
@@ -63,12 +65,15 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $row = $theLouverControl->addFormControl(new SlatControl($theData['wrd_id']));
     $row->setObfuscator($this->myWrdIdObfuscator);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'wrd_id');
     $control->setValue($theData);
 
+    /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'ref_wdt_text');
     $control->setValue($theData);
 
+    /** @var TextControl $control */
     $control = $this->createFormControl($row, 'act_wdt_text');
     $control->setValue($theData['act_wdt_text']);
     $control->setAttrSize(C::LEN_WDT_TEXT);
