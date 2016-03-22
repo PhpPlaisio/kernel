@@ -248,6 +248,7 @@ abstract class Page
    *                                     exception will be thrown.
    *
    * @return string
+   *
    * @throws InvalidUrlException
    */
   public static function getCgiUrl($theVarName, $theForceRelativeFlag = true)
@@ -285,6 +286,7 @@ abstract class Page
 
     return null;
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Using RequiresJS calls a function in the same namespace as the PHP class (where backslashes will be translated to

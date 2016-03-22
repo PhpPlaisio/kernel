@@ -7,7 +7,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
 use SetBased\Abc\Core\Page\CorePage;
-use SetBased\Abc\Error\LogicException;
+
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ abstract class ModuleBasePage extends CorePage
     $method = $this->myForm->execute();
     switch ($method)
     {
-      if (empty($changes)) return;'handleForm':
+      case  'handleForm':
         $this->handleForm();
         break;
 

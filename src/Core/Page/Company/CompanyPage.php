@@ -152,7 +152,7 @@ abstract class CompanyPage extends CorePage
     $method = $form->execute();
     switch ($method)
     {
-      if (empty($changes)) return;'handleCompanyForm':
+      case  'handleForm':
         $this->handleCompanyForm($form);
         break;
 

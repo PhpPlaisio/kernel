@@ -11,7 +11,7 @@ use SetBased\Abc\Core\Form\SlatControlFactory\SystemPageUpdateFunctionalitiesSla
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
-use SetBased\Abc\Error\LogicException;
+
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Helper\Http;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
@@ -159,7 +159,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
     $method = $this->myForm->execute();
     switch ($method)
     {
-      if (empty($changes)) return;'handleForm':
+      case  'handleForm':
         $this->handleForm();
         break;
 

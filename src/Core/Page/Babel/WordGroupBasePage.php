@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Error\LogicException;
+
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------

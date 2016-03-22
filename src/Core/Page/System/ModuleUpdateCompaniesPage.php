@@ -10,7 +10,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\SystemModuleUpdateCompaniesSlatControlFactory;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Error\LogicException;
+
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Helper\Http;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
@@ -161,7 +161,7 @@ class ModuleUpdateCompaniesPage extends CorePage
     $method = $this->myForm->execute();
     switch ($method)
     {
-      if (empty($changes)) return;'handleForm':
+      case  'handleForm':
         $this->handleForm();
         break;
 

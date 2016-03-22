@@ -6,7 +6,7 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Error\LogicException;
+
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ class WordTranslatePage extends BabelPage
 
     $this->myDetails = Abc::$DL->WordGetDetails($this->myWrdId, $this->myActLanId);
 
-    if (!$this->myRedirectUrl)
+    if (!isset($this->myRedirectUrl))
     {
       $this->myRedirectUrl = WordGroupDetailsPage::getUrl($this->myDetails['wdg_id'], $this->myActLanId);
     }
