@@ -380,7 +380,7 @@ abstract class SimpleControl extends Control
    * <li> null No label will be generated for this form control.
    * </ul>
    *
-   * @param 'pre'|'post'|null $thePosition
+   * @param string|null $thePosition
    */
   public function setLabelPosition($thePosition)
   {

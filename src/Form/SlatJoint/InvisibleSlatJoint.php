@@ -42,7 +42,7 @@ class InvisibleSlatJoint extends SlatJoint
    */
   public function getHtmlColumn()
   {
-    return null;
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ class InvisibleSlatJoint extends SlatJoint
    */
   public function getHtmlColumnFilter()
   {
-    return null;
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ class InvisibleSlatJoint extends SlatJoint
    */
   public function getHtmlColumnHeader()
   {
-    return null;
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

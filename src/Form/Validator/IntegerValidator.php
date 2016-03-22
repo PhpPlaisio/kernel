@@ -21,7 +21,7 @@ class IntegerValidator implements Validator
   /**
    * The lower bound of the range of valid (integer) values.
    *
-   * @var int|null
+   * @var int
    */
   private $myMinValue;
 

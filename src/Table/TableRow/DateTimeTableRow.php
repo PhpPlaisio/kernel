@@ -26,7 +26,7 @@ class DateTimeTableRow
    * @param DetailTable $theTable  The (detail) table.
    * @param string      $theHeader The row header text.
    * @param string      $theValue  The datetime in Y-m-d H:i:s format.
-   * @param string      $theFormat The format specifier for formatting the content of this table column. If null
+   * @param string|null $theFormat The format specifier for formatting the content of this table column. If null
    *                               the default format is used.
    */
   public static function addRow($theTable, $theHeader, $theValue, $theFormat = null)

@@ -42,7 +42,7 @@ class ConstantSlatJoint extends SlatJoint
    */
   public function getHtmlColumn()
   {
-    return null;
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,18 +53,18 @@ class ConstantSlatJoint extends SlatJoint
    */
   public function getHtmlColumnFilter()
   {
-    return null;
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * A constant control must never be shown in a table. Hence header must never be shown too.
    *
-   * @return null
+   * @return string Empty string
    */
   public function getHtmlColumnHeader()
   {
-    return null;
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

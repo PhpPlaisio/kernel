@@ -145,7 +145,7 @@ abstract class Control extends HtmlElement
   /**
    * Returns the HTML code for this form control in a table cell.
    *
-   * @return string|null
+   * @return string
    */
   public function getHtmlTableCell()
   {
