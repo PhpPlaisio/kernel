@@ -64,7 +64,6 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $row->setObfuscator($this->myWrdIdObfuscator);
 
     $control = $this->createFormControl($row, 'wrd_id');
-    print_r($control);
     $control->setValue($theData);
 
     $control = $this->createFormControl($row, 'ref_wdt_text');

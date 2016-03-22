@@ -51,17 +51,19 @@ class BoolIconTableColumn extends TableColumn
   {
     $attributes = ['class' => 'bool'];
 
-    switch ($theData[$this->myFieldName])
+    switch (true)
     {
-      case '1':
-        $attributes['data-value'] = 1;
+      case $theData[$this->myFieldName] === 1:
+      case $theData[$this->myFieldName] === '1':
+      $attributes['data-value'] = 1;
         $html                     = '<img src="'.ICON_SMALL_TRUE.'" alt="1"/>';
         break;
 
-      case '':
-      case '0':
-      case null:
-      case false:
+      case $theData[$this->myFieldName] === 0:
+      case $theData[$this->myFieldName] === '0':
+      case $theData[$this->myFieldName] === '':
+      case $theData[$this->myFieldName] === null:
+      case $theData[$this->myFieldName] === false:
         $attributes['data-value'] = 0;
         $html                     = ($this->myShowFalse) ? '<img src="'.ICON_SMALL_FALSE.'" alt="0"/>' : '';
         break;

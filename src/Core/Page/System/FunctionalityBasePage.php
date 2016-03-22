@@ -94,16 +94,12 @@ abstract class FunctionalityBasePage extends CorePage
     $method = $this->myForm->execute();
     switch ($method)
     {
-      case null;
-        // Nothing to do.
-        break;
-
-      case  'handleForm':
+      case 'handleForm':
         $this->handleForm();
         break;
 
       default:
-        throw new LogicException("Unknown form method '%s'.", $method);
+        $this->myForm->defaultHandler($method);
     };
   }
 

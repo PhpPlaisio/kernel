@@ -41,7 +41,7 @@ class CoreForm extends Form
     $this->myAttributes['class']        = 'input_table';
     $this->myAttributes['autocomplete'] = false;
 
-    $this->myVisibleFieldSet = parent::addFieldSet(new CoreFieldSet(''));
+    $this->myVisibleFieldSet = $this->addFieldSet(new CoreFieldSet(''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

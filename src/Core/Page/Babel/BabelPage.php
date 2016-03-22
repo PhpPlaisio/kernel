@@ -42,7 +42,7 @@ abstract class BabelPage extends CorePage
     $this->myRefLanId = C::LAN_ID_BABEL_REFERENCE;
 
     $this->myActLanId = self::getCgiId('act_lan', 'lan');
-    if (!$this->myActLanId) $this->myActLanId = $this->myLanId;
+    if (!isset($this->myActLanId)) $this->myActLanId = $this->myLanId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -65,16 +65,12 @@ abstract class BabelPage extends CorePage
     $method = $form->execute();
     switch ($method)
     {
-      case null:
-        // Nothing to do;
-        break;
-
-      case  'handleSelectLanguage':
+      case 'handleSelectLanguage':
         $this->handleSelectLanguage($form);
         break;
 
       default:
-        throw new LogicException("Unknown form method '%s'.", $method);
+        $form->defaultHandler($method);
     };
   }
 

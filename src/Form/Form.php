@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form;
 
 use SetBased\Abc\Abc;
+use SetBased\Abc\Error\LogicException;
 use SetBased\Abc\Error\RuntimeException;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\FieldSet;
@@ -16,13 +17,6 @@ use SetBased\Abc\Form\Control\FieldSet;
 class Form extends RawForm
 {
   //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * The handler for echoing this this form.
-   *
-   * @var string
-   */
-  protected $myEchoHandler;
-
   /**
    * If set the generated form has protection against CSRF.
    *
@@ -144,6 +138,25 @@ class Form extends RawForm
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The default form handler. It only handles method 'handleEchoForm'. Otherwise an exception is thrown.
+   *
+   * @param string $theMethod The name of the method for handling the form state.
+   */
+  public function defaultHandler($theMethod)
+  {
+    switch ($theMethod)
+    {
+      case 'handleEchoForm':
+        $this->handleEchoForm();
+        break;
+
+      default:
+        throw new LogicException("Unknown form method '%s'.", $theMethod);
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Executes this form. Executes means:
    * <ul>
    * <li> If the form is submitted the submitted values are validated:
@@ -186,8 +199,7 @@ class Form extends RawForm
       $valid = $this->validate();
       if (!$valid)
       {
-        if (isset($this->myEchoHandler)) $method = $this->myEchoHandler;
-        else                             echo $this->generate();
+        $method = 'handleEchoForm';
       }
       else
       {
@@ -196,8 +208,7 @@ class Form extends RawForm
     }
     else
     {
-      if (isset($this->myEchoHandler)) $method = $this->myEchoHandler;
-      else                             echo $this->generate();
+      $method = 'handleEchoForm';
     }
 
     return $method;
@@ -229,13 +240,13 @@ class Form extends RawForm
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the handler for echo the HTML code of this form. If not set form will generated and echoed.
+   * Generates and echos this form.
    *
-   * @param string $theMethod The method for echoing the form.
+   * This is the default method for generating and echoing a form.
    */
-  public function setEchoHandler($theMethod)
+  protected function handleEchoForm()
   {
-    $this->myEchoHandler = $theMethod;
+    echo $this->generate();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
