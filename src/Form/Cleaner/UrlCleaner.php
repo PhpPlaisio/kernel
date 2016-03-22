@@ -3,6 +3,9 @@
 namespace SetBased\Abc\Form\Cleaner;
 
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Helper\Html;
+use SetBased\Abc\Helper\Url;
+
 /**
  * Cleaner for normalizing URLs.
  */
@@ -56,66 +59,7 @@ class UrlCleaner implements Cleaner
       return $value;
     }
 
-    // Recompose the parts of the URL is a normalized URL.
-    if (!isset($parts['scheme']) && !isset($parts['host']) && isset($parts['path']))
-    {
-      $i = strpos($parts['path'], '/');
-      if ($i===false)
-      {
-        $parts['host'] = $parts['path'];
-        unset($parts['path']);
-      }
-      else
-      {
-        $parts['host'] = substr($parts['path'], 0, $i);
-        $parts['path'] = substr($parts['path'], $i);
-      }
-    }
-
-    if (empty($parts['scheme']))
-    {
-      // The default scheme is 'http'.
-      $parts['scheme'] = 'http';
-    }
-    else
-    {
-      // The schema must be in lowercase.
-      $parts['scheme'] = strtolower($parts['scheme']);
-    }
-
-    // We assume that all URLs must have a path except for 'mailto'.
-    if (!isset($parts['path']) && $parts['scheme']!='mailto')
-    {
-      $parts['path'] = '/';
-    }
-
-    // Recompose the URL starting with the scheme.
-    if ($parts['scheme']=='mailto')
-    {
-      $url = 'mailto:';
-    }
-    else
-    {
-      $url = $parts['scheme'];
-      $url .= '://';
-    }
-
-    if (isset($parts['pass']) && isset($parts['user']))
-    {
-      $url .= $parts['user'].':'.$parts['pass'].'@';
-    }
-    elseif (isset($parts['user']))
-    {
-      $url .= $parts['user'].'@';
-    }
-
-    if (isset($parts['host'])) $url .= $parts['host'];
-    if (isset($parts['port'])) $url .= ':'.$parts['port'];
-    if (isset($parts['path'])) $url .= $parts['path'];
-    if (isset($parts['query'])) $url .= '?'.$parts['query'];
-    if (isset($parts['fragment'])) $url .= '#'.$parts['fragment'];
-
-    return $url;
+    return Url::unParseUrl($parts);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
