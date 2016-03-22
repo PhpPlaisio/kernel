@@ -841,7 +841,8 @@ abstract class Abc
   {
     if (!empty($_SERVER['HTTP_X_FORWARDED_HOST']))
     {
-      $hostname = (end(explode(',', $_SERVER['HTTP_X_FORWARDED_HOST'])));
+      $list     = explode(',', $_SERVER['HTTP_X_FORWARDED_HOST']);
+      $hostname = (end($list));
     }
     elseif (!empty($_SERVER['HTTP_HOST']))
     {
