@@ -569,8 +569,6 @@ abstract class Abc
 
     $urlParts = explode('/', $uri);
 
-    // if ($urlParts[count($urlParts) - 1] == '') array_pop($urlParts);
-
     $urlPartsCount = count($urlParts);
     if ($urlPartsCount % 2!=0) $urlPartsCount++;
     for ($i = 0; $i<$urlPartsCount; $i += 2)

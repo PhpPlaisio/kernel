@@ -68,10 +68,13 @@ abstract class FunctionalityBasePage extends CorePage
 
     $this->myForm = new CoreForm();
 
+    // Input for module.
     $control = $this->myForm->createFormControl('select', 'mdl_id', 'Module', true);
     $control->setOptions($modules, 'mdl_id', 'mdl_name');
     $control->setEmptyOption(' ');
 
+    // Input for functionality name.
+    // @todo Make control for reusing a word or create a new word. 
     $control = $this->myForm->createFormControl('select', 'wrd_id', 'Name');
     $control->setOptions($words, 'wrd_id', 'wrd_text');
     $control->setEmptyOption(' ');
@@ -81,8 +84,6 @@ abstract class FunctionalityBasePage extends CorePage
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
-
-    // $this->myForm->addFormValidator( new SystemFunctionalityInsertFormValidator() );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

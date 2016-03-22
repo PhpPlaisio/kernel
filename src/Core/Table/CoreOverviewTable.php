@@ -37,9 +37,6 @@ class CoreOverviewTable extends OverviewTable
     $this->myFilter = true;
 
     $this->myTablesActionGroups['default'] = [];
-
-    // Always add an icon for exporting the data to CSV.
-    //$this->addTableAction( 'default', new ExportCsvTableAction() );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

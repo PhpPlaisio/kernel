@@ -255,8 +255,8 @@ abstract class CorePage extends Page
 
       $class .= "'";
 
-      if ($mnu_link) echo "<li $class><a href='$mnu_link'>", Html::txt2Html($menu_item['mnu_text']), "</a></li>";
-      else           echo "<li $class><a>", Html::txt2Html($menu_item['mnu_text']), "</a></li>";
+      if ($mnu_link) echo "<li $class><a href='$mnu_link'>", Html::txt2Html($menu_item['mnu_text']), '</a></li>';
+      else           echo "<li $class><a>", Html::txt2Html($menu_item['mnu_text']), '</a></li>';
 
       $last_group = $menu_item['mnu_group'];
     }

@@ -33,9 +33,6 @@ class CoreDetailTable extends DetailTable
   public function __construct()
   {
     $this->myTablesActionGroups['default'] = [];
-
-    // Always add an icon for exporting the data to CSV.
-    // $this->addTableAction( 'default', new ExportCsvTableAction() );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

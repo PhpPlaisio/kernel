@@ -85,6 +85,7 @@ class PushMeControl extends SimpleControl
     if (isset($theSubmittedValue[$submit_name]) && $theSubmittedValue[$submit_name]===$this->myValue)
     {
       // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
+      // So, skip the following code.
       // $theChangedInputs[$this->myName] = $this;
 
       $theWhiteListValue[$this->myName] = $this->myValue;

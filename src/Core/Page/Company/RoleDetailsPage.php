@@ -6,7 +6,9 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
+use SetBased\Abc\Core\TableAction\Company\CompanyUpdateTableAction;
 use SetBased\Abc\Core\TableAction\Company\RoleUpdateFunctionalitiesTableAction;
+use SetBased\Abc\Core\TableColumn\Company\RoleUpdateIconTableColumn;
 use SetBased\Abc\Core\TableColumn\System\FunctionalityDetailsIconTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
@@ -142,8 +144,7 @@ class RoleDetailsPage extends CompanyPage
 
     $table = new CoreDetailTable();
 
-    // Add table action for update the Company details.
-    // $table->addTableAction('default',new CompanyUpdateTableAction( $this->myRlsId));
+    // @todo Add table action for update the company details.
 
     // Add row for role ID.
     NumericTableRow::addRow($table, 'ID', $details['rol_id'], '%d');

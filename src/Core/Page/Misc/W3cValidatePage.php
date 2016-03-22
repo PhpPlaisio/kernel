@@ -115,7 +115,7 @@ class W3cValidatePage extends Page
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 0);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible;)');
     curl_setopt($ch, CURLOPT_URL, $this->myValidatorUrl.'check');
     curl_setopt($ch, CURLOPT_POST, true);
 
@@ -127,8 +127,9 @@ class W3cValidatePage extends Page
     else
     {
       # PHP 5.4.
-      $file = $this->myPathName.";type=text/html";
+      $file = $this->myPathName.';type=text/html';
     }
+    $post                  = [];
     $post['uploaded_file'] = $file;
     curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -142,7 +143,7 @@ class W3cValidatePage extends Page
 
     if (strpos($response, 'X-W3C-Validator-Status: Valid')>0)
     {
-      echo "xhtml: OK";
+      echo 'xhtml: OK';
 
       // The HTML is valid. Remove the temporary file.
       unlink($this->myPathName);
@@ -155,7 +156,7 @@ class W3cValidatePage extends Page
     }
     else
     {
-      echo "xhtml: Error";
+      echo 'xhtml: Error';
     }
   }
 
@@ -191,7 +192,7 @@ class W3cValidatePage extends Page
     else
     {
       # PHP 5.4.
-      $file = $this->myPathName.";type=text/html";
+      $file = $this->myPathName.';type=text/html';
     }
     $post                  = [];
     $post['uploaded_file'] = $file;

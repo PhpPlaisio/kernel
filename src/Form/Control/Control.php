@@ -80,7 +80,7 @@ abstract class Control extends HtmlElement
     }
     else
     {
-      // We consider int(0), float(0), string(0) "", string(3) "0.0" as non empty names.
+      // We consider int(0), float(0), string(3) "0.0" as non empty names.
       $this->myName = (string)$theName;
     }
   }
