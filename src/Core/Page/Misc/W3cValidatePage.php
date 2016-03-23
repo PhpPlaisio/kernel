@@ -207,12 +207,12 @@ class W3cValidatePage extends Page
 
     if (class_exists('\\CURLFile'))
     {
-      # PHP 5.5 and higher.
+      // PHP 5.5 and higher.
       $file = new \CURLFile($this->myPathName, 'text/html', $this->myPathName);
     }
     else
     {
-      # PHP 5.4.
+      // PHP 5.4.
       $file = $this->myPathName.';type=text/html';
     }
     $post                  = [];
