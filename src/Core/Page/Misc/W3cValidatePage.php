@@ -98,7 +98,7 @@ class W3cValidatePage extends Page
       throw new NotAuthorizedException("Filename '%s' is not a basename.", $this->myFilename);
     }
 
-    $prefix = 'w3c_validator_'.Abc::obfuscate($this->myUsrId, 'usr');
+    $prefix = 'w3c_validator_'.Abc::obfuscate($this->myUsrId, 'usr').'_';
     if (strncmp($this->myFilename, $prefix, strlen($prefix))!==0)
     {
       throw new NotAuthorizedException("Filename '%s' is not a file for W3C validation owned by the current user.",
