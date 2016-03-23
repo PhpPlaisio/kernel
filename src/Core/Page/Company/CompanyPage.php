@@ -104,7 +104,7 @@ abstract class CompanyPage extends CorePage
   {
     if ($this->myActCmpId || $thePagId==C::PAG_ID_COMPANY_OVERVIEW)
     {
-      return CompanyPage::getChildUrl($thePagId, $this->myActCmpId);
+      return self::getChildUrl($thePagId, $this->myActCmpId);
     }
 
     return null;
@@ -122,7 +122,7 @@ abstract class CompanyPage extends CorePage
 
     $values           = $theForm->getValues();
     $this->myActCmpId = Abc::$DL->companyGetCmpIdByCmpAbbr($values['cmp_abbr']);
-    if ($this->myActCmpId) Http::redirect(CompanyPage::getChildUrl($abc->getPagId(), $this->myActCmpId));
+    if ($this->myActCmpId) Http::redirect(self::getChildUrl($abc->getPagId(), $this->myActCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
