@@ -3,8 +3,10 @@
 namespace SetBased\Abc\Core\Page\Misc;
 
 use Gajus\Dindent\Indenter;
+use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Error\FallenException;
+use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Page\Page;
 
@@ -52,7 +54,6 @@ class W3cValidatePage extends Page
    */
   private $myValidatorUrl = 'https://validator.setbased.nl/w3c-validator/';
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
@@ -61,7 +62,7 @@ class W3cValidatePage extends Page
   {
     parent::__construct();
 
-    $this->myFilename = basename(self::getCgiVar('file'));
+    $this->myFilename = self::getCgiVar('file');
     $this->myMode     = self::getCgiVar('mode');
 
     $this->myPathName = DIR_TMP.'/'.$this->myFilename;
@@ -83,6 +84,26 @@ class W3cValidatePage extends Page
     $url .= self::putCgiVar('file', $theFileName);
 
     return $url;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Validates that the requested file is a file for W3C validation and is owned by the current user.
+   */
+  public function checkAuthorization()
+  {
+    // Assert that the filename is a basename (and does not contain crafted (sub-)directories).
+    if (basename($this->myFilename)!==$this->myFilename)
+    {
+      throw new NotAuthorizedException("Filename '%s' is not a basename.", $this->myFilename);
+    }
+
+    $prefix = 'w3c_validator_'.Abc::obfuscate($this->myUsrId, 'usr');
+    if (strncmp($this->myFilename, $prefix, strlen($prefix))!==0)
+    {
+      throw new NotAuthorizedException("Filename '%s' is not a file for W3C validation owned by the current user.",
+                                       $this->myFilename);
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -645,7 +645,8 @@ abstract class Page
    */
   protected function enableW3cValidator()
   {
-    $w3c_file            = uniqid('w3c_validator_').'.xhtml';
+    $prefix              = 'w3c_validator_'.Abc::obfuscate($this->myUsrId, 'usr');
+    $w3c_file            = uniqid($prefix).'.xhtml';
     $this->myW3cValidate = true;
     $this->myW3cPathName = DIR_TMP.'/'.$w3c_file;
     $url                 = W3cValidatePage::getUrl($w3c_file);
