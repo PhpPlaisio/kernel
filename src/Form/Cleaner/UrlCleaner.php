@@ -58,7 +58,7 @@ class UrlCleaner implements Cleaner
       return $value;
     }
 
-    return Url::unParseUrl($parts);
+    return Url::unParseUrl($parts, 'http');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
