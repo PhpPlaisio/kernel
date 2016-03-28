@@ -9,12 +9,12 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require-dev": {
-    "gajus/dindent": "2.*",
     "phing/phing": "*",
     "phpunit/phpunit": "*"
   },
   "require": {
     "php": ">=5.4.0",
+    "gajus/dindent": "2.*",
     "ircmaxell/password-compat": ">=1.0.3",
     "setbased/php-stratum": "*"
   },
