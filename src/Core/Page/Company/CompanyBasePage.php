@@ -5,7 +5,6 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
-
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
 
@@ -73,14 +72,14 @@ abstract class CompanyBasePage extends CorePage
     $this->myForm = new CoreForm();
 
     // Create form control for company name.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'cmp_abbr', 'CompanyPage Abbreviation');
+    $input = new TextControl('cmp_abbr');
     $input->setAttrMaxLength(C::LEN_CMP_ABBR);
+    $this->myForm->addFormControl($input, 'CompanyPage Abbreviation');
 
     // Create form control for comment.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'cmp_label', 'Label');
+    $input = new TextControl('cmp_label');
     $input->setAttrMaxLength(C::LEN_CMP_LABEL);
+    $this->myForm->addFormControl($input, 'Label');
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

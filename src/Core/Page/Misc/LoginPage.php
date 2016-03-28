@@ -5,7 +5,6 @@ namespace SetBased\Abc\Core\Page\Misc;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-
 use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\PasswordControl;
 use SetBased\Abc\Form\Control\SpanControl;
@@ -121,29 +120,35 @@ class LoginPage extends Page
 
     $this->myForm = new CoreForm('', false);
 
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'usr_name', 'Naam', true);
+    // Input for user name.
+    $input = new TextControl('usr_name');
     $input->setAttrMaxLength(C::LEN_USR_NAME);
+    $this->myForm->addFormControl($input, 'Naam', true);
 
-    /** @var PasswordControl $input */
-    $input = $this->myForm->createFormControl('password', 'usr_password', 'Wachtwoord', true);
+    // Input for password.
+    $input = new PasswordControl('usr_password');
     $input->setAttrSize(C::LEN_USR_NAME);
     $input->setAttrMaxLength(C::LEN_PASSWORD);
+    $this->myForm->addFormControl($input, 'Wachtwoord', true);
 
     if ($abc->getDomain())
     {
-      /** @var SpanControl $input */
-      $input = $this->myForm->createFormControl('span', 'dummy', 'Company');
+      // Show domain.
+      $input = new SpanControl('dummy');
       $input->setInnerText(strtolower($abc->getDomain()));
+      $this->myForm->addFormControl($input, 'Company');
 
-      /** @var ConstantControl $input */
-      $input = $this->myForm->createFormControl('constant', 'cmp_abbr');
+      // Constant for domain.
+      $input = new ConstantControl('cmp_abbr');
       $input->setValue($abc->getDomain());
+      $this->myForm->addFormControl($input);
     }
     else
     {
-      $input = $this->myForm->createFormControl('text', 'cmp_abbr', 'Company', true);
+      // Input for domain.
+      $input = new TextControl('cmp_abbr');
       $input->setAttrMaxLength(C::LEN_CMP_ABBR);
+      $this->myForm->addFormControl($input, 'Company', true);
     }
 
     $this->myForm->addSubmitButton(C::WRD_ID_BUTTON_LOGIN, 'handleForm');

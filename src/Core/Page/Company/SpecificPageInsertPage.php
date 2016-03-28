@@ -5,8 +5,8 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-
 use SetBased\Abc\Form\Control\SelectControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -70,12 +70,16 @@ class SpecificPageInsertPage extends CompanyPage
 
     $this->myForm = new CoreForm();
 
-    /** @var SelectControl $control */
-    $control = $this->myForm->createFormControl('select', 'prt_pag_id', 'Parent Class');
-    $control->setOptions($pages, 'pag_id', 'pag_class');
-    $control->setOptionsObfuscator(Abc::getObfuscator('pag'));
+    // Input for parent class.
+    $input = new SelectControl('prt_pag_id');
+    $input->setOptions($pages, 'pag_id', 'pag_class');
+    $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
+    $this->myForm->addFormControl($input, 'Parent Class');
 
-    $this->myForm->createFormControl('text', 'pag_class_child', 'Child Class');
+    // Input for company specific page.
+    $input = new TextControl('pag_class_child');
+    $input->setAttrMax(C::LEN_PAG_CLASS);
+    $this->myForm->addFormControl($input, 'Child Class');
 
     // Create a submit button.
     $this->myForm->addSubmitButton(C::WRD_ID_BUTTON_INSERT, 'handleForm');

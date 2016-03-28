@@ -5,15 +5,12 @@ namespace SetBased\Abc\Core\Form;
 use SetBased\Abc\Babel;
 use SetBased\Abc\Core\Form\Control\CoreFieldSet;
 use SetBased\Abc\Core\Form\Validator\MandatoryValidator;
-use SetBased\Abc\Form\Control\CheckboxesControl;
-use SetBased\Abc\Form\Control\ComplexControl;
+use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Form\Control\HtmlControl;
-use SetBased\Abc\Form\Control\RadiosControl;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\SimpleControl;
-use SetBased\Abc\Form\Control\SpanControl;
+use SetBased\Abc\Form\Control\HiddenControl;
+use SetBased\Abc\Form\Control\InvisibleControl;
 use SetBased\Abc\Form\Control\SubmitControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -46,7 +43,7 @@ class CoreForm extends Form
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adds a form control to the visible fieldset of this form control.
+   * Adds a form control to thi form.
    *
    * @param Control         $theControl       The from control
    * @param int|string|null $theWrdId         Depending on the type:
@@ -55,25 +52,44 @@ class CoreForm extends Form
    *                                          <li>string: The legend of the form control.
    *                                          <li>null:   The form control has no legend.
    *                                          </ul>
-   * @param bool            $theMandatoryFlag If set the form control is mandatory.
-   *
-   * @return ComplexControl|SpanControl|ComplexControl|SimpleControl|SelectControl|CheckboxesControl|RadiosControl
+   * @param bool            $theMandatoryFlag If true the form control is mandatory.
    */
   public function addFormControl($theControl, $theWrdId = null, $theMandatoryFlag = false)
   {
-    $this->myVisibleFieldSet->addFormControl($theControl);
+    if ($theControl instanceof HiddenControl ||
+      $theControl instanceof ConstantControl ||
+      $theControl instanceof InvisibleControl
+    )
+    {
+      $this->myHiddenFieldSet->addFormControl($theControl);
+    }
+    else
+    {
+      $this->myVisibleFieldSet->addFormControl($theControl);
+
+      if ($theControl instanceof TextControl)
+      {
+        $theControl->setAttrSize(80);
+      }
+    }
 
     if ($theWrdId)
     {
-      $theControl->setFakeAttribute('_abc_label', Babel::getWord($theWrdId));
+      if (is_int($theWrdId))
+      {
+        $theControl->setFakeAttribute('_abc_label', Babel::getWord($theWrdId));
+      }
+      else
+      {
+        $theControl->setFakeAttribute('_abc_label', $theWrdId);
+      }
     }
 
     if ($theMandatoryFlag)
     {
       $theControl->addValidator(new MandatoryValidator(0));
+      $theControl->setFakeAttribute('_set_mandatory', true);
     }
-
-    return $theControl;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

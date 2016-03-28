@@ -103,24 +103,24 @@ class SpecificPageUpdatePage extends CompanyPage
     $this->myForm = new CoreForm();
 
     // Show the ID of the page.
-    /** @var HtmlControl $control */
-    $control = $this->myForm->createFormControl('html', 'pag_id', 'ID');
-    $control->setHtml($this->myTargetPageDetails['pag_id']);
+    $input = new HtmlControl('pag_id');
+    $input->setHtml($this->myTargetPageDetails['pag_id']);
+    $this->myForm->addFormControl($input, 'ID');
 
     // Show the title of the page.
-    /** @var HtmlControl $control */
-    $control = $this->myForm->createFormControl('html', 'pag_title', 'Title');
-    $control->setHtml($this->myTargetPageDetails['pag_title']);
+    $input = new HtmlControl('pag_title');
+    $input->setHtml($this->myTargetPageDetails['pag_title']);
+    $this->myForm->addFormControl($input, 'Title');
 
     // Show the parent class name of the page.
-    /** @var HtmlControl $control */
-    $control = $this->myForm->createFormControl('html', 'pag_class_parent', 'Parent Class');
-    $control->setHtml($this->myTargetPageDetails['pag_class_parent']);
+    $input = new HtmlControl('pag_class_parent');
+    $input->setHtml($this->myTargetPageDetails['pag_class_parent']);
+    $this->myForm->addFormControl($input, 'Parent Class');
 
     // Create text control for the child class name.
-    /** @var TextControl $control */
-    $control = $this->myForm->createFormControl('text', 'pag_class_child', 'Child Class');
-    $control->setValue($this->myTargetPageDetails['pag_class_child']);
+    $input = new TextControl('pag_class_child');
+    $input->setValue($this->myTargetPageDetails['pag_class_child']);
+    $this->myForm->addFormControl($input, 'Child Class');
 
     // Create a submit button.
     $this->myForm->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm');

@@ -6,7 +6,6 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-
 use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
@@ -108,38 +107,38 @@ class WordTranslatePage extends BabelPage
     $this->myForm = new CoreForm();
 
     // Show word group name.
-    /** @var SpanControl $input */
-    $input = $this->myForm->createFormControl('span', 'word_group', 'Word Group');
+    $input = new SpanControl('word_group');
     $input->setInnerText($this->myDetails['wdg_name']);
+    $this->myForm->addFormControl($input, 'Word Group');
 
     // Show word group ID
-    /** @var SpanControl $input */
-    $input = $this->myForm->createFormControl('span', 'wrd_id', 'ID');
+    $input = new SpanControl('wrd_id');
     $input->setInnerText($this->myDetails['wdg_id']);
+    $this->myForm->addFormControl($input, 'ID Group');
 
     // Show label
-    /** @var SpanControl $input */
-    $input = $this->myForm->createFormControl('span', 'label', 'Label');
+    $input = new SpanControl('label');
     $input->setInnerText($this->myDetails['wrd_label']);
+    $this->myForm->addFormControl($input, 'Label');
 
     // Show comment.
-    /** @var SpanControl $input */
-    $input = $this->myForm->createFormControl('span', 'comment', 'Comment');
+    $input = new SpanControl('comment');
     $input->setInnerText($this->myDetails['wrd_comment']);
+    $this->myForm->addFormControl($input, 'Comment');
 
     // Show data
     // @todo Show data.
 
     // Show word in reference language.
-    /** @var SpanControl $input */
-    $input = $this->myForm->createFormControl('span', 'ref_language', $ref_language);
+    $input = new SpanControl('ref_language');
     $input->setInnerText(Babel::getWord($this->myWrdId /*, $this->myRefLanId*/)); // @todo show word in ref lan.
+    $this->myForm->addFormControl($input, $ref_language);
 
     // Create form control for the actual word.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'wdt_text', $act_language, true);
+    $input = new TextControl('wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
     $input->setValue($this->myDetails['wdt_text']);
+    $this->myForm->addFormControl($input, $act_language, true);
 
     // Create a submit button.
     $this->myForm->addSubmitButton(C::WRD_ID_BUTTON_TRANSLATE, 'handleForm');

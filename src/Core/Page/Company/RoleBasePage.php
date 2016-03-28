@@ -4,7 +4,6 @@ namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
 
@@ -72,14 +71,14 @@ abstract class RoleBasePage extends CompanyPage
     $this->myForm = new CoreForm();
 
     // Create form control for Company name.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'rol_name', 'Role');
+    $input = new TextControl('rol_name');
     $input->setAttrMaxLength(C::LEN_ROL_NAME);
+    $this->myForm->addFormControl($input, 'Role');
 
     // Create form control for comment.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'rol_weight', 'Weight');
+    $input = new TextControl('rol_weight');
     $input->setAttrMaxLength(C::LEN_ROL_WEIGHT);
+    $this->myForm->addFormControl($input, 'Weight');    
     // XXX numeric
 
     // Create a submit button.

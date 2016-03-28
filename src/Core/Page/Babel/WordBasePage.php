@@ -90,34 +90,34 @@ abstract class WordBasePage extends BabelPage
     $this->myForm = new CoreForm();
 
     // Create from control for word group name.
-    /** @var SelectControl $input */
     $word_groups = Abc::$DL->wordGroupGetAll($this->myRefLanId);
-    $input       = $this->myForm->createFormControl('select', 'wdg_id', 'Word Group', true);
+    $input       = new SelectControl('wdg_id');
     $input->setOptions($word_groups, 'wdg_id', 'wdg_name');
     $input->setValue($this->myWdgId);
+    $this->myForm->addFormControl($input, 'Word Group', true);
 
     // Create form control for ID.
     if ($this->myWrdId)
     {
-      /** @var SpanControl $input */
-      $input = $this->myForm->createFormControl('span', 'wrd_id', 'ID');
+      $input = new SpanControl('wrd_id');
       $input->setInnerText($this->myWrdId);
+      $this->myForm->addFormControl($input, 'ID');
     }
 
     // Create form control for label.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'wrd_label', 'Label');
+    $input = new TextControl('wrd_label');
     $input->setAttrMaxLength(C::LEN_WRD_LABEL);
+    $this->myForm->addFormControl($input, 'Label');
 
     // Input for the actual word.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'wdt_text', Html::txt2Html($ref_language), true);
+    $input = new TextControl('wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
+    $this->myForm->addFormControl($input, Html::txt2Html($ref_language), true);
 
     // Create form control for comment.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'wrd_comment', 'Remark');
+    $input = new TextControl('wrd_comment');
     $input->setAttrMaxLength(C::LEN_WRD_COMMENT);
+    $this->myForm->addFormControl($input, 'Remark');
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

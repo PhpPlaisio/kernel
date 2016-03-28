@@ -75,63 +75,69 @@ abstract class PageBasePage extends CorePage
 
     // Create select box for (known) page titles.
     $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->myLanId);
-
-    /** @var SelectControl $input */
-    $input = $this->myForm->createFormControl('select', 'wrd_id', 'Title');
+    $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setEmptyOption(true);
     $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
+    $this->myForm->addFormControl($input, 'Title');
 
     // Create text box for (new) page title.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'pag_title', 'Title');
+    $input = new TextControl('pag_title');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-
+    $this->myForm->addFormControl($input, 'Title');
     /** @todo Add validator: either wrd_id is not empty or pag_title is not empty */
 
+
     // Create form control for page tab group.
-    $tabs = Abc::$DL->systemTabGetAll($this->myLanId);
-    /** @var SelectControl $input */
-    $input = $this->myForm->createFormControl('select', 'ptb_id', 'Page Tab');
+    $tabs  = Abc::$DL->systemTabGetAll($this->myLanId);
+    $input = new SelectControl('ptb_id');
     $input->setOptions($tabs, 'ptb_id', 'ptb_label');
     $input->setEmptyOption('ptb');
+    $this->myForm->addFormControl($input, 'Page Tab');
+
 
     // Create form control for original page.
     $pages = Abc::$DL->systemPageGetAllMasters($this->myLanId);
-    /** @var SelectControl $input */
-    $input = $this->myForm->createFormControl('select', 'pag_id_org', 'Original Page');
+    $input = new SelectControl('pag_id_org');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption('');
     $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
+    $this->myForm->addFormControl($input, 'Original Page');
+
 
     // Create form control for menu item with which the page is associated..
     $menus = Abc::$DL->systemMenuGetAllEntries($this->myLanId);
-    /** @var SelectControl $input */
-    $input = $this->myForm->createFormControl('select', 'mnu_id', 'Menu');
+    $input = new SelectControl('mnu_id');
     $input->setOptions($menus, 'mnu_id', 'mnu_name');
     $input->setEmptyOption(true);
     $input->setOptionsObfuscator(Abc::getObfuscator('mnu'));
+    $this->myForm->addFormControl($input, 'Menu');
+
 
     // Create form control for page alias.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'pag_alias', 'Alias');
+    $input = new TextControl('pag_alias');
     $input->setAttrMaxLength(C::LEN_PAG_ALIAS);
+    $this->myForm->addFormControl($input, 'Alias');
+
 
     // Create form control for page class.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'pag_class', 'Class', true);
+    $input = new TextControl('pag_class');
     $input->setAttrMaxLength(C::LEN_PAG_CLASS);
+    $this->myForm->addFormControl($input, 'Class', true);
+
 
     // Create form control for the page label.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'pag_label', 'Label');
+    $input = new TextControl('pag_label');
     $input->setAttrMaxLength(C::LEN_PAG_LABEL);
+    $this->myForm->addFormControl($input, 'Label');
+
 
     // Create form control for the weight of the page (inside a tab group).
     /** @todo validate weight is a number and/or form control or validator for numeric input. */
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'pag_weight', 'Weight');
+    $input = new TextControl('pag_weight');
     $input->setAttrMaxLength(C::LEN_PAG_WEIGHT);
+    $this->myForm->addFormControl($input, 'Weight');
+    
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

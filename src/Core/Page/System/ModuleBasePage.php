@@ -7,7 +7,6 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
 use SetBased\Abc\Core\Page\CorePage;
-
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
@@ -79,16 +78,16 @@ abstract class ModuleBasePage extends CorePage
     {
       // If there are unused modules names (i.e. words in the word group WDG_ID_MODULES that are not used by a
       // module) create a select box with free modules names.
-      /** @var SelectControl $input */
-      $input = $this->myForm->createFormControl('select', 'wrd_id', 'Module Name');
+      $input = new SelectControl('wrd_id');
       $input->setOptions($words, 'wrd_id', 'wrd_text');
       $input->setEmptyOption(' ');
+      $this->myForm->addFormControl($input, 'Module Name');
     }
 
     // Create a text box for (new) module name.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'mdl_name', 'Module Name');
+    $input = new TextControl('mdl_name');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
+    $this->myForm->addFormControl($input, 'Module Name');
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

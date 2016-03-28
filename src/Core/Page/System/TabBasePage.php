@@ -6,7 +6,6 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
-
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
@@ -80,21 +79,22 @@ abstract class TabBasePage extends CorePage
 
     // Create select box for (known) page titles.
     $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->myLanId);
-
-    /** @var SelectControl $input */
-    $input = $this->myForm->createFormControl('select', 'wrd_id', 'Title');
+    $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setEmptyOption(true);
+    $this->myForm->addFormControl($input, 'Title');
 
     // Create text box for (new) page title.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'ptb_title', 'Title');
+    $input = new TextControl('ptb_title');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
+    $this->myForm->addFormControl($input, 'Title');
+
 
     // Create form control for the page label.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'ptb_label', 'Label');
+    $input = new TextControl('ptb_label');
     $input->setAttrMaxLength(C::LEN_PTB_LABEL);
+    $this->myForm->addFormControl($input, 'Label');
+    
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
@@ -112,7 +112,7 @@ abstract class TabBasePage extends CorePage
       case  'handleForm':
         $this->handleForm();
         break;
-      
+
       default:
         $this->myForm->defaultHandler($method);
     };

@@ -4,7 +4,6 @@ namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-
 use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
@@ -75,20 +74,20 @@ abstract class WordGroupBasePage extends BabelPage
     // Show word group ID (update only).
     if ($this->myWdgId)
     {
-      /** @var SpanControl $input */
-      $input = $this->myForm->createFormControl('span', 'wdg_id', 'ID');
+      $input = new SpanControl('wdg_id');
       $input->setInnerText($this->myWdgId);
+      $this->myForm->addFormControl($input, 'ID');
     }
 
     // Input for the name of the word group.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'wdg_name', 'Name', true);
+    $input = new TextControl('wdg_name');
     $input->setAttrMaxLength(C::LEN_WDG_NAME);
+    $this->myForm->addFormControl($input, 'Name', true);
 
     // Input for the label of the word group.
-    /** @var TextControl $input */
-    $input = $this->myForm->createFormControl('text', 'wdg_label', 'Label');
+    $input = new TextControl('wdg_label');
     $input->setAttrMaxLength(C::LEN_WRD_LABEL);
+    $this->myForm->addFormControl($input, 'Label');
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
