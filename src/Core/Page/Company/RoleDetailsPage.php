@@ -6,9 +6,9 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\Company\CompanyUpdateTableAction;
+
 use SetBased\Abc\Core\TableAction\Company\RoleUpdateFunctionalitiesTableAction;
-use SetBased\Abc\Core\TableColumn\Company\RoleUpdateIconTableColumn;
+
 use SetBased\Abc\Core\TableColumn\System\FunctionalityDetailsIconTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
