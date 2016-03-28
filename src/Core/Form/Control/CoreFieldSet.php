@@ -55,11 +55,13 @@ class CoreFieldSet extends FieldSet
   {
     $this->myButtonFormControl = new CoreButtonControl('');
 
+    /** @var SubmitControl $submit */
     $submit = $this->myButtonFormControl->createFormControl('submit', $theSubmitName);
     $submit->setValue($theSubmitButtonText);
 
     if ($theResetButtonText)
     {
+      /** @var SubmitControl $reset */
       $reset = $this->myButtonFormControl->createFormControl('reset', $theResetName);
       $reset->setValue($theResetButtonText);
     }

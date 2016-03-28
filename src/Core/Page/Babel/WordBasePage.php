@@ -7,6 +7,9 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Error\LogicException;
+use SetBased\Abc\Form\Control\SelectControl;
+use SetBased\Abc\Form\Control\SpanControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\Http;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
@@ -87,6 +90,7 @@ abstract class WordBasePage extends BabelPage
     $this->myForm = new CoreForm();
 
     // Create from control for word group name.
+    /** @var SelectControl $input */
     $word_groups = Abc::$DL->wordGroupGetAll($this->myRefLanId);
     $input       = $this->myForm->createFormControl('select', 'wdg_id', 'Word Group', true);
     $input->setOptions($word_groups, 'wdg_id', 'wdg_name');
@@ -95,19 +99,23 @@ abstract class WordBasePage extends BabelPage
     // Create form control for ID.
     if ($this->myWrdId)
     {
+      /** @var SpanControl $input */
       $input = $this->myForm->createFormControl('span', 'wrd_id', 'ID');
       $input->setInnerText($this->myWrdId);
     }
 
     // Create form control for label.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'wrd_label', 'Label');
     $input->setAttrMaxLength(C::LEN_WRD_LABEL);
 
     // Input for the actual word.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'wdt_text', Html::txt2Html($ref_language), true);
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
 
     // Create form control for comment.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'wrd_comment', 'Remark');
     $input->setAttrMaxLength(C::LEN_WRD_COMMENT);
 

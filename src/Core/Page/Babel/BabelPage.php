@@ -7,6 +7,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
 
+use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\Http;
 
@@ -100,6 +101,7 @@ abstract class BabelPage extends CorePage
   {
     $form = new CoreForm('babel', false);
 
+    /** @var SelectControl $input */
     $input = $form->createFormControl('select', 'act_lan_id', C::WRD_ID_LANGUAGE, true);
     $input->setOptions($languages, 'lan_id', 'lan_name');
     $input->setOptionsObfuscator(Abc::getObfuscator('lan'));

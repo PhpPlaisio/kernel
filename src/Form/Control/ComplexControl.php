@@ -177,7 +177,7 @@ class ComplexControl extends Control implements CompoundControl
     {
       if ($control->myName===$name) return $control;
 
-      if (is_a($control, '\\SetBased\\Abc\\Form\\Control\\ComplexControl'))
+      if ($control instanceof ComplexControl)
       {
         $tmp = $control->findFormControlByName($name);
         if ($tmp) return $tmp;
@@ -219,7 +219,7 @@ class ComplexControl extends Control implements CompoundControl
         }
         else
         {
-          if (is_a($control, '\SetBased\Abc\Form\Control\ComplexControl'))
+          if ($control instanceof ComplexControl)
           {
             array_shift($parts);
             $tmp = $control->findFormControlByPath('/'.implode('/', $parts));
@@ -227,7 +227,7 @@ class ComplexControl extends Control implements CompoundControl
           }
         }
       }
-      elseif ($control->myName==='' && is_a($control, '\SetBased\Abc\Form\Control\ComplexControl'))
+      elseif ($control->myName==='' && ($control instanceof ComplexControl))
       {
         $tmp = $control->findFormControlByPath($thePath);
         if ($tmp) return $tmp;

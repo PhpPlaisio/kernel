@@ -7,7 +7,9 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 
 use SetBased\Abc\Form\Control\ConstantControl;
+use SetBased\Abc\Form\Control\PasswordControl;
 use SetBased\Abc\Form\Control\SpanControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\Http;
 use SetBased\Abc\Helper\Password;
@@ -119,9 +121,11 @@ class LoginPage extends Page
 
     $this->myForm = new CoreForm('', false);
 
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'usr_name', 'Naam', true);
     $input->setAttrMaxLength(C::LEN_USR_NAME);
 
+    /** @var PasswordControl $input */
     $input = $this->myForm->createFormControl('password', 'usr_password', 'Wachtwoord', true);
     $input->setAttrSize(C::LEN_USR_NAME);
     $input->setAttrMaxLength(C::LEN_PASSWORD);

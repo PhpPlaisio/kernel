@@ -6,7 +6,8 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
-
+use SetBased\Abc\Form\Control\SelectControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Validator\IntegerValidator;
 use SetBased\Abc\Helper\Http;
 
@@ -69,6 +70,7 @@ abstract class MenuBasePage extends CorePage
     // Create select box for (known) page titles.
     $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_MENU, $this->myLanId);
 
+    /** @var SelectControl $input */
     $input = $this->myForm->createFormControl('select', 'wrd_id', 'Menu Title');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
@@ -76,12 +78,14 @@ abstract class MenuBasePage extends CorePage
 
 
     // Create text box for the title the menu item.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'mnu_title', 'Menu Title');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
 
 
     // Create select box for chose page for menu.
-    $pages   = Abc::$DL->systemPageGetAll($this->myLanId);
+    $pages = Abc::$DL->systemPageGetAll($this->myLanId);
+    /** @var SelectControl $input */
     $input = $this->myForm->createFormControl('select', 'pag_id', 'Page Class', true);
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption(' ');
@@ -89,6 +93,7 @@ abstract class MenuBasePage extends CorePage
 
 
     // Create text form control for input menu level.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'mnu_level', 'Menu Level', true);
     $input->setAttrMaxLength(C::LEN_MNU_LEVEL);
     $input->setValue(1);
@@ -96,18 +101,21 @@ abstract class MenuBasePage extends CorePage
 
 
     // Create text form control for input menu group.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'mnu_group', 'Menu Group', true);
     $input->setAttrMaxLength(C::LEN_MNU_GROUP);
     $input->addValidator(new IntegerValidator(0, 100));
 
 
     // Create text form control for input menu weight.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'mnu_weight', 'Menu Weight', true);
     $input->setAttrMaxLength(C::LEN_MNU_WEIGHT);
     $input->addValidator(new IntegerValidator(0, 999));
 
 
     // Create text box for URL of the menu item.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'mnu_link', 'Menu Link');
     $input->setAttrMaxLength(C::LEN_MNU_LINK);
 
