@@ -6,6 +6,8 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 
+use SetBased\Abc\Form\Control\HtmlControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -101,18 +103,22 @@ class SpecificPageUpdatePage extends CompanyPage
     $this->myForm = new CoreForm();
 
     // Show the ID of the page.
+    /** @var HtmlControl $control */
     $control = $this->myForm->createFormControl('html', 'pag_id', 'ID');
     $control->setHtml($this->myTargetPageDetails['pag_id']);
 
     // Show the title of the page.
+    /** @var HtmlControl $control */
     $control = $this->myForm->createFormControl('html', 'pag_title', 'Title');
     $control->setHtml($this->myTargetPageDetails['pag_title']);
 
     // Show the parent class name of the page.
+    /** @var HtmlControl $control */
     $control = $this->myForm->createFormControl('html', 'pag_class_parent', 'Parent Class');
     $control->setHtml($this->myTargetPageDetails['pag_class_parent']);
 
     // Create text control for the child class name.
+    /** @var TextControl $control */
     $control = $this->myForm->createFormControl('text', 'pag_class_child', 'Child Class');
     $control->setValue($this->myTargetPageDetails['pag_class_child']);
 

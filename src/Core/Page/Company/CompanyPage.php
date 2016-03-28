@@ -7,6 +7,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Error\LogicException;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\Http;
 
@@ -134,6 +135,7 @@ abstract class CompanyPage extends CorePage
     $form = new CoreForm();
 
     // Create input control for Company abbreviation.
+    /** @var TextControl $input */
     $input = $form->createFormControl('text', 'cmp_abbr', 'Company', true);
     $input->setAttrMaxLength(C::LEN_CMP_ABBR);
 

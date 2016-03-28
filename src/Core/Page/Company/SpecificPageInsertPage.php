@@ -6,6 +6,7 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 
+use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -69,6 +70,7 @@ class SpecificPageInsertPage extends CompanyPage
 
     $this->myForm = new CoreForm();
 
+    /** @var SelectControl $control */
     $control = $this->myForm->createFormControl('select', 'prt_pag_id', 'Parent Class');
     $control->setOptions($pages, 'pag_id', 'pag_class');
     $control->setOptionsObfuscator(Abc::getObfuscator('pag'));

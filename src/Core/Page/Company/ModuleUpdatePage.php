@@ -10,6 +10,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\CompanyModulesUpdateSlatControlFactory;
 
 use SetBased\Abc\Form\Control\LouverControl;
+use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -73,6 +74,7 @@ class ModuleUpdatePage extends CompanyPage
 
     // Add submit button.
     $button = new CoreButtonControl('');
+    /** @var SubmitControl $submit */
     $submit = $button->createFormControl('submit', 'submit');
     $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_OK));
     $this->myForm->addSubmitHandler($button, 'handleForm');

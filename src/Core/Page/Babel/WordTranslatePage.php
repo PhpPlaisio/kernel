@@ -7,6 +7,8 @@ use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 
+use SetBased\Abc\Form\Control\SpanControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -106,18 +108,22 @@ class WordTranslatePage extends BabelPage
     $this->myForm = new CoreForm();
 
     // Show word group name.
+    /** @var SpanControl $input */
     $input = $this->myForm->createFormControl('span', 'word_group', 'Word Group');
     $input->setInnerText($this->myDetails['wdg_name']);
 
     // Show word group ID
+    /** @var SpanControl $input */
     $input = $this->myForm->createFormControl('span', 'wrd_id', 'ID');
     $input->setInnerText($this->myDetails['wdg_id']);
 
     // Show label
+    /** @var SpanControl $input */
     $input = $this->myForm->createFormControl('span', 'label', 'Label');
     $input->setInnerText($this->myDetails['wrd_label']);
 
     // Show comment.
+    /** @var SpanControl $input */
     $input = $this->myForm->createFormControl('span', 'comment', 'Comment');
     $input->setInnerText($this->myDetails['wrd_comment']);
 
@@ -125,10 +131,12 @@ class WordTranslatePage extends BabelPage
     // @todo Show data.
 
     // Show word in reference language.
+    /** @var SpanControl $input */
     $input = $this->myForm->createFormControl('span', 'ref_language', $ref_language);
     $input->setInnerText(Babel::getWord($this->myWrdId /*, $this->myRefLanId*/)); // @todo show word in ref lan.
 
     // Create form control for the actual word.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'wdt_text', $act_language, true);
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
     $input->setValue($this->myDetails['wdt_text']);

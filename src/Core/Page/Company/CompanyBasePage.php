@@ -6,6 +6,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
 
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Http;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -72,10 +73,12 @@ abstract class CompanyBasePage extends CorePage
     $this->myForm = new CoreForm();
 
     // Create form control for company name.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'cmp_abbr', 'CompanyPage Abbreviation');
     $input->setAttrMaxLength(C::LEN_CMP_ABBR);
 
     // Create form control for comment.
+    /** @var TextControl $input */
     $input = $this->myForm->createFormControl('text', 'cmp_label', 'Label');
     $input->setAttrMaxLength(C::LEN_CMP_LABEL);
 

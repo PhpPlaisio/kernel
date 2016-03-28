@@ -113,7 +113,7 @@ class CoreForm extends Form
    *                                          </ul>
    * @param bool            $theMandatoryFlag If set the form control is mandatory.
    *
-   * @return CheckboxesControl|ComplexControl|RadiosControl|SelectControl|SimpleControl|SpanControl|HtmlControl
+   * @return Control
    */
   public function createFormControl($theType, $theName, $theWrdId = null, $theMandatoryFlag = false)
   {
