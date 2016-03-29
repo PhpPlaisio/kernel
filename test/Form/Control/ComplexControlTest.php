@@ -1,7 +1,10 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\ComplexControl;
+use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SimpleControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
@@ -31,19 +34,18 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $form = $this->setForm1();
 
     // Find form control by name. Must return object.
-    $control = $form->findFormControlByName('street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->findFormControlByName('street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     // Find form control by name what does not exist. Must return null.
-    $control = $form->findFormControlByName('not_exists');
-    $this->assertEquals(null, $control);
+    $input = $form->findFormControlByName('not_exists');
+    $this->assertEquals(null, $input);
 
-    $control = $form->findFormControlByName('/no_path/not_exists');
-    $this->assertEquals(null, $control);
+    $input = $form->findFormControlByName('/no_path/not_exists');
+    $this->assertEquals(null, $input);
 
-    $control = $form->findFormControlByName('/vacation/not_exists');
-    $this->assertEquals(null, $control);
-
+    $input = $form->findFormControlByName('/vacation/not_exists');
+    $this->assertEquals(null, $input);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -55,34 +57,34 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $form = $this->setForm1();
 
     // Find form control by path. Must return object.
-    $control = $form->findFormControlByPath('/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->findFormControlByPath('/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->findFormControlByPath('/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->findFormControlByPath('/post/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->findFormControlByPath('/post/zip-code');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->findFormControlByPath('/post/zip-code');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->findFormControlByPath('/vacation/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->findFormControlByPath('/vacation/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->findFormControlByPath('/vacation/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->findFormControlByPath('/vacation/post/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->findFormControlByPath('/vacation/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->findFormControlByPath('/vacation/post/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
 
     // Find form control by path what does not exist. Must return null.
-    $control = $form->findFormControlByPath('/not_exists');
-    $this->assertEquals(null, $control);
+    $input = $form->findFormControlByPath('/not_exists');
+    $this->assertEquals(null, $input);
 
-    $control = $form->findFormControlByPath('/no_path/not_exists');
-    $this->assertEquals(null, $control);
+    $input = $form->findFormControlByPath('/no_path/not_exists');
+    $this->assertEquals(null, $input);
 
-    $control = $form->findFormControlByPath('/vacation/not_exists');
-    $this->assertEquals(null, $control);
+    $input = $form->findFormControlByPath('/vacation/not_exists');
+    $this->assertEquals(null, $input);
 
   }
 
@@ -95,12 +97,12 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $form = $this->setForm1();
 
     // Get form control by name. Must return object.
-    $control = $form->getFormControlByName('vacation');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->getFormControlByName('vacation');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $control->getFormControlByName('city2');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
-    $this->assertEquals('city2', $control->getLocalName());
+    $input = $input->getFormControlByName('city2');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    $this->assertEquals('city2', $input->getLocalName());
   }
 
 
@@ -113,20 +115,20 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $form = $this->setForm1();
 
     // Get form control by path. Must return object.
-    $control = $form->getFormControlByPath('/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->getFormControlByPath('/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->getFormControlByPath('/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->getFormControlByPath('/post/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->getFormControlByPath('/vacation/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->getFormControlByPath('/vacation/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->getFormControlByPath('/vacation/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->getFormControlByPath('/vacation/post/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-    $control = $form->getFormControlByPath('/vacation/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $control);
+    $input = $form->getFormControlByPath('/vacation/post/street');
+    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -261,12 +263,12 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
       $this->assertEquals($name, $complex_control->getLocalName());
 
       // Find control by name.
-      $control = $complex_control->findFormControlByName($name);
+      $input = $complex_control->findFormControlByName($name);
 
       // Test for control.
-      $this->assertNotEmpty($control);
-      $this->assertEquals($this->myOriginControl, $control);
-      $this->assertEquals($name, $control->getLocalName());
+      $this->assertNotEmpty($input);
+      $this->assertEquals($this->myOriginControl, $input);
+      $this->assertEquals($name, $input->getLocalName());
     }
   }
 
@@ -277,19 +279,22 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   public function testValidate()
   {
     $form = new RawForm();
-
-    $field_set = $form->createFieldSet('fieldset');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
     // Create mandatory control.
-    $control = $field_set->createFormControl('checkbox', 'input_1');
-    $control->addValidator(new MandatoryValidator());
+    $input = new CheckboxControl('input_1');
+    $input->addValidator(new MandatoryValidator());
+    $fieldset->addFormControl($input);
 
     // Create optional control.
-    $field_set->createFormControl('checkbox', 'input_2');
+    $input = new CheckboxControl('input_2');
+    $fieldset->addFormControl($input);
 
     // Create mandatory control.
-    $control = $field_set->createFormControl('checkbox', 'input_3');
-    $control->addValidator(new MandatoryValidator());
+    $input = new CheckboxControl('input_3');
+    $input->addValidator(new MandatoryValidator());
+    $fieldset->addFormControl($input);
 
     // Simulate a post without any values.
     $form->loadSubmittedValues();
@@ -327,35 +332,83 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   private function setForm1()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $complex  = $fieldset->createFormControl('complex', '');
-    $complex->createFormControl('text', 'street');
-    $complex->createFormControl('text', 'city');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $complex = new ComplexControl('');
+    $fieldset->addFormControl($complex);
 
-    $complex = $fieldset->createFormControl('complex', 'post');
-    $complex->createFormControl('text', 'street');
-    $complex->createFormControl('text', 'city');
+    $input = new TextControl('street');
+    $complex->addFormControl($input);
 
-    $complex = $fieldset->createFormControl('complex', 'post');
-    $complex->createFormControl('text', 'zip-code');
-    $complex->createFormControl('text', 'state');
+    $input = new TextControl('city');
+    $complex->addFormControl($input);
 
-    $complex = $fieldset->createFormControl('complex', 'post');
-    $complex->createFormControl('text', 'zip-code');
-    $complex->createFormControl('text', 'state');
 
-    $fieldset = $form->createFieldSet('fieldset', 'vacation');
-    $complex  = $fieldset->createFormControl('complex', '');
-    $complex->createFormControl('text', 'street');
-    $complex->createFormControl('text', 'city');
+    $complex = new ComplexControl('post');
+    $fieldset->addFormControl($complex);
 
-    $complex = $fieldset->createFormControl('complex', 'post');
-    $complex->createFormControl('text', 'street');
-    $complex->createFormControl('text', 'city');
+    $input = new TextControl('street');
+    $complex->addFormControl($input);
 
-    $complex2 = $complex->createFormControl('complex', '');
-    $complex2->createFormControl('text', 'street2');
-    $complex2->createFormControl('text', 'city2');
+    $input = new TextControl('city');
+    $complex->addFormControl($input);
+
+
+    $complex = new ComplexControl('post');
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl('code');
+    $complex->addFormControl($input);
+
+    $input = new TextControl('state');
+    $complex->addFormControl($input);
+
+
+    $complex = new ComplexControl('post');
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl('zip-code');
+    $complex->addFormControl($input);
+
+    $input = new TextControl('state');
+    $complex->addFormControl($input);
+
+
+    $fieldset = new FieldSet('vacation');
+    $form->addFieldSet($fieldset);
+
+
+    $complex = new ComplexControl('');
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl('street');
+    $complex->addFormControl($input);
+
+    $input = new TextControl('city');
+    $complex->addFormControl($input);
+
+
+    $complex = new ComplexControl('post');
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl('street');
+    $complex->addFormControl($input);
+
+    $input = new TextControl('city');
+    $complex->addFormControl($input);
+
+
+    $complex = new ComplexControl('');
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl('street2');
+    $complex->addFormControl($input);
+
+    $input = new TextControl('city2');
+    $complex->addFormControl($input);
+
+    $form->prepare();
 
     return $form;
   }
@@ -367,20 +420,38 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   private function setForm2()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-
-    $complex = $fieldset->createFormControl('complex', '');
-    $complex->createFormControl('text', 'field_1');
-
-    $complex = $fieldset->createFormControl('complex', 'complex_name');
-    $complex->createFormControl('text', 'field_2');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
 
-    $complex2 = $complex->createFormControl('complex', '');
-    $complex2->createFormControl('text', 'field_3');
+    $complex1 = new ComplexControl('');
+    $fieldset->addFormControl($complex1);
 
-    $complex2 = $complex->createFormControl('complex', 'complex_name2');
-    $complex2->createFormControl('text', 'field_4');
+    $input = new TextControl('field_1');
+    $complex1->addFormControl($input);
+
+
+    $complex1 = new ComplexControl('complex_name');
+    $fieldset->addFormControl($complex1);
+
+    $input = new TextControl('field_2');
+    $complex1->addFormControl($input);
+
+
+    $complex2 = new ComplexControl('');
+    $complex1->addFormControl($complex2);
+
+    $input = new TextControl('field_3');
+    $complex2->addFormControl($input);
+
+
+    $complex3 = new ComplexControl('complex_name2');
+    $complex2->addFormControl($complex3);
+
+    $input = new TextControl('field_4');
+    $complex3->addFormControl($input);
+
+    $form->prepare();
 
     return $form;
   }
@@ -396,13 +467,19 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   private function setForm3($theName)
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $complex = $fieldset->createFormControl('complex', $theName);
-    $control = $complex->createFormControl('text', $theName);
+    $complex = new ComplexControl($theName);
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl($theName);
+    $complex->addFormControl($input);
 
     $this->myOriginComplexControl = $complex;
-    $this->myOriginControl        = $control;
+    $this->myOriginControl        = $input;
+
+    $form->prepare();
 
     return $form;
   }

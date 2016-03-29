@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -9,12 +11,14 @@ class SpanControlTest extends PHPUnit_Framework_TestCase
   public function testPrefixAndPostfix()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $control = $fieldset->createFormControl('span', 'name');
-
-    $control->setPrefix('Hello');
-    $control->setPostfix('World');
+    $input = new SpanControl('name');
+    $input->setPrefix('Hello');
+    $input->setPostfix('World');
+    $fieldset->addFormControl($input);
+    
     $form->prepare();
     $html = $form->generate();
 

@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\ButtonControl;
+
 require_once(__DIR__.'/PushMeControlTest.php');
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -10,13 +12,22 @@ class ButtonControlTest extends PushMeControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Return  button type for form control.
+   * Returns button type for form control.
    *
    * @return string
    */
   protected function getControlType()
   {
     return 'button';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * {@inheritdoc}
+   */
+  protected function getControl($theName)
+  {
+    return new ButtonControl($theName);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

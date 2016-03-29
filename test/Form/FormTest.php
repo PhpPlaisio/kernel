@@ -1,5 +1,9 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\CheckboxesControl;
+use SetBased\Abc\Form\Control\ComplexControl;
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -20,9 +24,9 @@ class FormTest extends PHPUnit_Framework_TestCase
     {
       $form = $this->setupFormFind('', $name);
 
-      $control = $form->findFormControlByName($name);
-      $this->assertNotEmpty($control);
-      $this->assertEquals($name, $control->getLocalName());
+      $input = $form->findFormControlByName($name);
+      $this->assertNotEmpty($input);
+      $this->assertEquals($name, $input->getLocalName());
     }
   }
 
@@ -38,9 +42,9 @@ class FormTest extends PHPUnit_Framework_TestCase
     {
       $form = $this->setupFormFind($name);
 
-      $control = $form->findFormControlByName($name);
-      $this->assertNotEmpty($control);
-      $this->assertEquals($name, $control->getLocalName());
+      $input = $form->findFormControlByName($name);
+      $this->assertNotEmpty($input);
+      $this->assertEquals($name, $input->getLocalName());
     }
   }
 
@@ -56,9 +60,9 @@ class FormTest extends PHPUnit_Framework_TestCase
     {
       $form = $this->setupFormFind('', 'post', $name);
 
-      $control = $form->findFormControlByName($name);
-      $this->assertNotEmpty($control);
-      $this->assertEquals($name, $control->getLocalName());
+      $input = $form->findFormControlByName($name);
+      $this->assertNotEmpty($input);
+      $this->assertEquals($name, $input->getLocalName());
     }
   }
 
@@ -74,14 +78,19 @@ class FormTest extends PHPUnit_Framework_TestCase
     $options[] = ['id' => 3, 'label' => 'label3'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $fieldset->createFormControl('text', 'name1');
-    $fieldset->createFormControl('text', 'name2');
+    $input = new TextControl('name1');
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('checkboxes', 'options');
-    $control->setOptions($options, 'id', 'label');
-
+    $input = new TextControl('name2');
+    $fieldset->addFormControl($input);
+      
+    $input = new CheckboxesControl('options');
+    $input->setOptions($options, 'id', 'label');
+    $fieldset->addFormControl($input);
+    
     $values['name1']      = 'name1';
     $values['name2']      = 'name2';
     $values['options'][1] = true;
@@ -180,13 +189,18 @@ class FormTest extends PHPUnit_Framework_TestCase
     $options[] = ['id' => 3, 'label' => 'label3'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet('fieldset', 'name');
+    $fieldset = new FieldSet('name');
+    $form->addFieldSet($fieldset);
 
-    $fieldset->createFormControl('text', 'name1');
-    $fieldset->createFormControl('text', 'name2');
+    $input = new TextControl('name1');
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('checkboxes', 'options');
-    $control->setOptions($options, 'id', 'label');
+    $input = new TextControl('name2');
+    $fieldset->addFormControl($input);
+    
+    $input = new CheckboxesControl('options');
+    $input->setOptions($options, 'id', 'label');
+    $fieldset->addFormControl($input);
 
     $values['name']['name1']      = 'name1';
     $values['name']['name2']      = 'name2';
@@ -245,13 +259,17 @@ class FormTest extends PHPUnit_Framework_TestCase
     $options[] = ['id' => 2, 'label' => 'label3'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    $input = new TextControl('name1');
+    $fieldset->addFormControl($input);
 
-    $fieldset->createFormControl('text', 'name1');
-    $fieldset->createFormControl('text', 'name2');
+    $input = new TextControl('name2');
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('checkboxes', 'options');
-    $control->setOptions($options, 'id', 'label');
+    $input = new CheckboxesControl('options');
+    $input->setOptions($options, 'id', 'label');
+    $fieldset->addFormControl($input);
 
     return $form;
   }
@@ -270,35 +288,66 @@ class FormTest extends PHPUnit_Framework_TestCase
   )
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet('fieldset', $theFieldSetName);
-    $complex  = $fieldset->createFormControl('complex', '');
-    $complex->createFormControl('text', 'street');
-    $complex->createFormControl('text', 'city');
+    $fieldset = new FieldSet($theFieldSetName);
+    $form->addFieldSet($fieldset);
 
-    $complex = $fieldset->createFormControl('complex', 'post');
-    $complex->createFormControl('text', 'street');
-    $complex->createFormControl('text', 'city');
+    
+    $complex = new ComplexControl('');
+    $fieldset->addFormControl($complex);
+    
+    $input = new TextControl('street');
+    $complex->addFormControl($input);
+    $input = new TextControl('city');
+    $complex->addFormControl($input);
 
-    $complex = $fieldset->createFormControl('complex', 'post');
-    $complex->createFormControl('text', 'zip-code');
-    $complex->createFormControl('text', 'state');
+    
+    $complex = new ComplexControl('post');
+    $fieldset->addFormControl($complex);
 
-    $complex = $fieldset->createFormControl('complex', 'post');
-    $complex->createFormControl('text', 'zip-code');
-    $complex->createFormControl('text', 'state');
+    $input = new TextControl('street');
+    $complex->addFormControl($input);
+    $input = new TextControl('city');
+    $complex->addFormControl($input);
 
-    $fieldset = $form->createFieldSet('fieldset', 'vacation');
-    $complex  = $fieldset->createFormControl('complex', '');
-    $complex->createFormControl('text', 'street');
-    $complex->createFormControl('text', 'city');
 
-    $complex = $fieldset->createFormControl('complex', $theComplexControlName);
-    $complex->createFormControl('text', 'street');
-    $complex->createFormControl('text', $theTextControlName);
+    $complex = new ComplexControl('post');
+    $fieldset->addFormControl($complex);
 
-    $complex2 = $complex->createFormControl('complex', '');
-    $complex2->createFormControl('text', 'street2');
-    $complex2->createFormControl('text', 'city2');
+    $input = new TextControl('zip-code');
+    $complex->addFormControl($input);
+    $input = new TextControl('state');
+    $complex->addFormControl($input);
+
+    
+    $fieldset = new FieldSet('vacation');
+    $form->addFieldSet($fieldset);
+
+
+    $complex = new ComplexControl('');
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl('street');
+    $complex->addFormControl($input);
+    $input = new TextControl('city');
+    $complex->addFormControl($input);
+
+
+    $complex = new ComplexControl($theComplexControlName);
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl('street');
+    $complex->addFormControl($input);
+    $input = new TextControl($theTextControlName);
+    $complex->addFormControl($input);
+
+
+    $complex = new ComplexControl('');
+    $fieldset->addFormControl($complex);
+
+    $input = new TextControl('street2');
+    $complex->addFormControl($input);
+    $input = new TextControl('city2');
+    $complex->addFormControl($input);
 
     return $form;
   }

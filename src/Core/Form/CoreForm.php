@@ -9,7 +9,7 @@ use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\Control\InvisibleControl;
-use SetBased\Abc\Form\Control\SubmitControl;
+
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 
@@ -20,6 +20,13 @@ use SetBased\Abc\Form\Form;
 class CoreForm extends Form
 {
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * The maximum size of a text control. The maximum text length can be larger.
+   *
+   * @var int
+   */
+  public static $ourMaxTextSize = 80;
+
   /**
    * FieldSet for all form control elements not of type "hidden".
    *
@@ -56,39 +63,39 @@ class CoreForm extends Form
    */
   public function addFormControl($theControl, $theWrdId = null, $theMandatoryFlag = false)
   {
-    if ($theControl instanceof HiddenControl ||
-      $theControl instanceof ConstantControl ||
-      $theControl instanceof InvisibleControl
-    )
+    switch (true)
     {
-      $this->myHiddenFieldSet->addFormControl($theControl);
-    }
-    else
-    {
-      $this->myVisibleFieldSet->addFormControl($theControl);
+      // Add hidden, constant, and invisible controls to the fieldset for hidden controls.
+      case ($theControl instanceof HiddenControl):
+      case ($theControl instanceof ConstantControl):
+      case ($theControl instanceof InvisibleControl):
+        $this->myHiddenFieldSet->addFormControl($theControl);
+        break;
 
-      if ($theControl instanceof TextControl)
-      {
-        $theControl->setAttrSize(80);
-      }
-    }
+      // Add all other controls to the visible fieldset.
+      default:
+        switch (true)
+        {
+          // Set the size of text controls.
+          case ($theControl instanceof TextControl):
+            $max_length = $theControl->getAttribute('maxlength');
+            $size       = (isset($max_length)) ? min($max_length, self::$ourMaxTextSize) : self::$ourMaxTextSize;
+            $theControl->setAttrSize($size);
+            break;
+        }
 
-    if ($theWrdId)
-    {
-      if (is_int($theWrdId))
-      {
-        $theControl->setFakeAttribute('_abc_label', Babel::getWord($theWrdId));
-      }
-      else
-      {
-        $theControl->setFakeAttribute('_abc_label', $theWrdId);
-      }
-    }
+        $this->myVisibleFieldSet->addFormControl($theControl);
 
-    if ($theMandatoryFlag)
-    {
-      $theControl->addValidator(new MandatoryValidator(0));
-      $theControl->setFakeAttribute('_set_mandatory', true);
+        if (isset($theWrdId))
+        {
+          $theControl->setFakeAttribute('_abc_label', (is_int($theWrdId)) ? Babel::getWord($theWrdId) : $theWrdId);
+        }
+
+        if ($theMandatoryFlag)
+        {
+          $theControl->addValidator(new MandatoryValidator(0));
+          $theControl->setFakeAttribute('_abc_mandatory', true);
+        }
     }
   }
 
@@ -103,50 +110,11 @@ class CoreForm extends Form
    *                              </ul>
    * @param string     $theMethod The name of method for handling the form submit.
    * @param string     $theName   The name of the submit button.
-   *
-   * @return SubmitControl
    */
   public function addSubmitButton($theWrdId, $theMethod, $theName = 'submit')
   {
-    /** @var SubmitControl $control */
     $control = $this->myVisibleFieldSet->addSubmitButton($theWrdId, $theName);
     $this->addSubmitHandler($control, $theMethod);
-
-    return $control;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Creates a form control.
-   *
-   * @param string          $theType          The type of the form control.
-   * @param string          $theName          The name of the form control.
-   * @param int|string|null $theWrdId         Depending on the type:
-   *                                          <ul>
-   *                                          <li>int:    The wrd_id of the legend of the form control.
-   *                                          <li>string: The legend of the form control.
-   *                                          <li>null:   The form control has no legend.
-   *                                          </ul>
-   * @param bool            $theMandatoryFlag If set the form control is mandatory.
-   *
-   * @return Control
-   */
-  public function createFormControl($theType, $theName, $theWrdId = null, $theMandatoryFlag = false)
-  {
-    switch ($theType)
-    {
-      case 'hidden':
-      case 'constant':
-      case 'invisible':
-        $ret = $this->myHiddenFieldSet->createFormControl($theType, $theName);
-        break;
-
-      default:
-        // Add all other controls to the visible field set.
-        $ret = $this->myVisibleFieldSet->createFormControl($theType, $theName, $theWrdId, $theMandatoryFlag);
-    }
-
-    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

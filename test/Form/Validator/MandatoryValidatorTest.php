@@ -1,5 +1,12 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\CheckboxControl;
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\HiddenControl;
+use SetBased\Abc\Form\Control\PasswordControl;
+use SetBased\Abc\Form\Control\SimpleControl;
+use SetBased\Abc\Form\Control\TextAreaControl;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
@@ -21,7 +28,30 @@ class MandatoryValidatorTest extends PHPUnit_Framework_TestCase
       {
 
         $_POST['input'] = $value;
-        $form           = $this->setupForm1($type);
+        $control        = null;
+        switch ($type)
+        {
+          case 'text':
+            $control = new TextControl('input');
+            break;
+
+          case 'password':
+            $control = new PasswordControl('input');
+            break;
+
+          case 'hidden':
+            $control = new HiddenControl('input');
+            break;
+
+          case 'textarea':
+            $control = new TextAreaControl('input');
+            break;
+
+          case 'checkbox':
+            $control = new CheckboxControl('input');
+            break;
+        }
+        $form = $this->setupForm1($control);
 
         $this->assertFalse($form->validate(),
                            sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
@@ -55,7 +85,22 @@ class MandatoryValidatorTest extends PHPUnit_Framework_TestCase
       {
 
         $_POST['input'] = $value;
-        $form           = $this->setupForm1($type);
+        $control        = null;
+        switch ($type)
+        {
+          case 'text':
+            $control = new TextControl('input');
+            break;
+
+          case 'password':
+            $control = new PasswordControl('input');
+            break;
+
+          case 'textarea':
+            $control = new TextAreaControl('input');
+            break;
+        }
+        $form = $this->setupForm1($control);
 
         $this->assertFalse($form->validate(),
                            sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
@@ -92,7 +137,26 @@ class MandatoryValidatorTest extends PHPUnit_Framework_TestCase
     foreach ($types as $type)
     {
       $_POST['input'] = 'Set Based IT Consultancy';
-      $form           = $this->setupForm1($type);
+      $control        = null;
+      switch ($type)
+      {
+        case 'text':
+          $control = new TextControl('input');
+          break;
+
+        case 'password':
+          $control = new PasswordControl('input');
+          break;
+
+        case 'hidden':
+          $control = new HiddenControl('input');
+          break;
+
+        case 'textarea':
+          $control = new TextAreaControl('input');
+          break;
+      }
+      $form = $this->setupForm1($control);
 
       $this->assertTrue($form->validate(), sprintf("type: '%s'.", $type));
     }
@@ -102,18 +166,19 @@ class MandatoryValidatorTest extends PHPUnit_Framework_TestCase
   /**
    * Setups a form with a single form control of certain type.
    *
-   * @param string $theType The form control type.
+   * @param SimpleControl $theControl
    *
    * @return RawForm
    */
-  private function setupForm1($theType)
+  private function setupForm1($theControl)
   {
-    $form = new RawForm();
+    $form     = new RawForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $fieldset = $form->createFieldSet('fieldset');
-
-    $control = $fieldset->createFormControl($theType, 'input');
-    $control->addValidator(new MandatoryValidator());
+    $input = $theControl;
+    $input->addValidator(new MandatoryValidator());
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -126,12 +191,13 @@ class MandatoryValidatorTest extends PHPUnit_Framework_TestCase
    */
   private function setupForm2()
   {
-    $form = new RawForm();
+    $form     = new RawForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $fieldset = $form->createFieldSet('fieldset');
-
-    $control = $fieldset->createFormControl('checkbox', 'box');
-    $control->addValidator(new MandatoryValidator());
+    $input = new CheckboxControl('box');
+    $input->addValidator(new MandatoryValidator());
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

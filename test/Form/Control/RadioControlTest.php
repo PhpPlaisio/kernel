@@ -1,5 +1,6 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\RadioControl;
 use SetBased\Abc\Form\RawForm;
 
@@ -10,12 +11,14 @@ class RadioControlTest extends PHPUnit_Framework_TestCase
   public function testPrefixAndPostfix()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $control = $fieldset->createFormControl('radio', 'name');
-
-    $control->setPrefix('Hello');
-    $control->setPostfix('World');
+    $input = new RadioControl('name');
+    $input->setPrefix('Hello');
+    $input->setPostfix('World');
+    $fieldset->addFormControl($input);
+    
     $form->prepare();
     $html = $form->generate();
 
@@ -124,17 +127,20 @@ class RadioControlTest extends PHPUnit_Framework_TestCase
   private function setForm1()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    /** @var RadioControl $control */
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue('1');
+    $input = new RadioControl('name');
+    $input->setAttrValue('1');
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue('2');
+    $input = new RadioControl('name');
+    $input->setAttrValue('2');
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue('3');
+    $input = new RadioControl('name');
+    $input->setAttrValue('3');
+    $fieldset->addFormControl($input);
 
     $form->prepare();
     $form->generate();
@@ -147,18 +153,21 @@ class RadioControlTest extends PHPUnit_Framework_TestCase
   private function setForm2()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    /** @var RadioControl $control */
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue(1);
-    $control->setValue(1);
+    $input = new RadioControl('name');
+    $input->setAttrValue(1);
+    $input->setValue(1);
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue(2);
+    $input = new RadioControl('name');
+    $input->setAttrValue(2);
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue(3);
+    $input = new RadioControl('name');
+    $input->setAttrValue(3);
+    $fieldset->addFormControl($input);
 
     $form->prepare();
     $form->generate();
@@ -171,18 +180,21 @@ class RadioControlTest extends PHPUnit_Framework_TestCase
   private function setForm3()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    /** @var RadioControl $control */
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue('0');
+    $input = new RadioControl('name');
+    $input->setAttrValue('0');
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue('0.0');
-    $control->setValue('0.0');
+    $input = new RadioControl('name');
+    $input->setAttrValue('0.0');
+    $input->setValue('0.0');
+    $fieldset->addFormControl($input);
 
-    $control = $fieldset->createFormControl('radio', 'name');
-    $control->setAttrValue(' ');
+    $input = new RadioControl('name');
+    $input->setAttrValue(' ');
+    $fieldset->addFormControl($input);
 
     $form->prepare();
     $form->generate();

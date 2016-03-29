@@ -1,5 +1,6 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\PushMeControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14,10 +15,11 @@ abstract class PushMeControlTest extends PHPUnit_Framework_TestCase
     $form     = new RawForm();
     $fieldset = $form->createFieldSet();
 
-    $control = $fieldset->createFormControl($this->getControlType(), 'name');
+    $input = $this->getControl('name');
+    $fieldset->addFormControl($input);
 
-    $control->setPrefix('Hello');
-    $control->setPostfix('World');
+    $input->setPrefix('Hello');
+    $input->setPostfix('World');
     $form->prepare();
     $form->prepare();
     $html = $form->generate();
@@ -37,9 +39,11 @@ abstract class PushMeControlTest extends PHPUnit_Framework_TestCase
   {
     // Create form.
     $form     = new RawForm();
-    $fieldset = $form->CreateFieldSet();
-    $button   = $fieldset->createFormControl($this->getControlType(), 'button');
-    $button->setValue("Do not push");
+    $fieldset = $form->createFieldSet();
+
+    $input = $this->getControl('button');
+    $input->setValue("Do not push");
+    $fieldset->addFormControl($input);
 
     // Set the values for button.
     $values['button'] = 'Push';
@@ -65,6 +69,16 @@ abstract class PushMeControlTest extends PHPUnit_Framework_TestCase
    * @return string
    */
   abstract protected function getControlType();
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a concrete instance of PushMeControl.
+   *
+   * @param string $theName The of the control.
+   *
+   * @return PushMeControl
+   */
+  abstract protected function getControl($theName);
 
   //--------------------------------------------------------------------------------------------------------------------
 }

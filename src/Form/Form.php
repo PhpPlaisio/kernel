@@ -7,6 +7,7 @@ use SetBased\Abc\Error\LogicException;
 use SetBased\Abc\Error\RuntimeException;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\SilentControl;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -59,7 +60,7 @@ class Form extends RawForm
     if ($theName!=='') $this->setAttrData('name', $theName);
 
     // Add hidden field for protection against CSRF.
-    if ($this->myEnableCsrfCheck) $this->myHiddenFieldSet->createFormControl('silent', 'ses_csrf_token');
+    if ($this->myEnableCsrfCheck) $this->myHiddenFieldSet->addFormControl(new SilentControl('ses_csrf_token'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

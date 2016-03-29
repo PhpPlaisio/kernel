@@ -3,6 +3,8 @@
 require_once(__DIR__.'/SimpleControlTest.php');
 
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -17,9 +19,12 @@ class HiddenControlTest extends SimpleControlTest
     $_POST['test'] = 'New value';
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('hidden', 'test');
-    $control->setValue('Old value');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new HiddenControl('test');
+    $input->setValue('Old value');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -27,7 +32,6 @@ class HiddenControlTest extends SimpleControlTest
 
     // Value is change.
     $this->assertNotEmpty($changed['test']);
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -39,12 +43,15 @@ class HiddenControlTest extends SimpleControlTest
     $_POST['test'] = '  Hello    World!   ';
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('hidden', 'test');
-    $control->setValue('Hello World!');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new HiddenControl('test');
+    $input->setValue('Hello World!');
+    $fieldset->addFormControl($input);
 
     // Set cleaner for hidden field (default it off).
-    $control->setCleaner(PruneWhitespaceCleaner::get());
+    $input->setCleaner(PruneWhitespaceCleaner::get());
 
     $form->loadSubmittedValues();
 
@@ -60,9 +67,9 @@ class HiddenControlTest extends SimpleControlTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  protected function getInputType()
+  protected function getControl($theName)
   {
-    return 'hidden';
+    return new HiddenControl($theName);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

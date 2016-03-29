@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\CheckboxesControl;
+use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -115,11 +117,14 @@ class CheckboxesControlTest extends PHPUnit_Framework_TestCase
 
     // Create a form with checkboxes.
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('checkboxes', 'cnt_id');
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new CheckboxesControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
-    $form->LoadSubmittedValues();
+    $form->loadSubmittedValues();
 
     // Generate HTML code for the form.
     $form->prepare();
@@ -160,9 +165,12 @@ class CheckboxesControlTest extends PHPUnit_Framework_TestCase
 
     // Create a form with checkboxes.
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('checkboxes', 'cnt_id');
-    $control->setOptions($countries, 'cnt_id', 'cnt_name', 'checked');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxesControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name', 'checked');
+    $fieldset->addFormControl($input);
 
     // Set the values of the checkboxes.
     $values['cnt_id'][0] = true;
@@ -300,9 +308,12 @@ class CheckboxesControlTest extends PHPUnit_Framework_TestCase
     $countries[] = ['cnt_id' => '0.1', 'cnt_name' => 'UA'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('checkboxes', 'cnt_id');
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxesControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -322,9 +333,12 @@ class CheckboxesControlTest extends PHPUnit_Framework_TestCase
     $countries[] = ['cnt_id' => 0.1, 'cnt_name' => 'UA'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('checkboxes', 'cnt_id');
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxesControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -341,9 +355,12 @@ class CheckboxesControlTest extends PHPUnit_Framework_TestCase
     $countries[] = ['cnt_id' => '0.0', 'cnt_name' => 'BE'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('checkboxes', 'cnt_id');
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxesControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -356,14 +373,16 @@ class CheckboxesControlTest extends PHPUnit_Framework_TestCase
    */
   private function setupForm4()
   {
-    $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('checkboxes', 'cnt_id');
-
     $countries[] = ['cnt_id' => 0, 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'BE'];
 
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $form     = new RawForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxesControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

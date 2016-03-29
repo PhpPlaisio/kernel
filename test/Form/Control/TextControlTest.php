@@ -1,6 +1,8 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
 use SetBased\Abc\Form\Cleaner\DateCleaner;
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Formatter\DateFormatter;
 use SetBased\Abc\Form\RawForm;
 
@@ -16,11 +18,14 @@ class TextControlTest extends SimpleControlTest
     $_POST['birthday'] = '10.04.1966';
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('text', 'birthday');
-    $control->setValue('1966-04-10');
-    $control->setCleaner(new DateCleaner('d-m-Y', '-', '/-. '));
-    $control->setFormatter(new DateFormatter('d-m-Y'));
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new TextControl('birthday');
+    $input->setValue('1966-04-10');
+    $input->setCleaner(new DateCleaner('d-m-Y', '-', '/-. '));
+    $input->setFormatter(new DateFormatter('d-m-Y'));
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -45,9 +50,12 @@ class TextControlTest extends SimpleControlTest
     $_POST['test'] = '  Hello    World!   ';
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('text', 'test');
-    $control->setValue('Hello World!');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input =  new TextControl('test');
+    $input->setValue('Hello World!');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -62,9 +70,9 @@ class TextControlTest extends SimpleControlTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  protected function getInputType()
+  protected function getControl($theName)
   {
-    return 'text';
+    return new TextControl($theName);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

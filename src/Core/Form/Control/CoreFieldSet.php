@@ -3,16 +3,9 @@
 namespace SetBased\Abc\Core\Form\Control;
 
 use SetBased\Abc\Babel;
-use SetBased\Abc\Core\Form\Validator\MandatoryValidator;
-use SetBased\Abc\Form\Control\CheckboxesControl;
-use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\RadiosControl;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\SimpleControl;
-use SetBased\Abc\Form\Control\SpanControl;
+use SetBased\Abc\Form\Control\ResetControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -55,15 +48,17 @@ class CoreFieldSet extends FieldSet
   {
     $this->myButtonFormControl = new CoreButtonControl('');
 
-    /** @var SubmitControl $submit */
-    $submit = $this->myButtonFormControl->createFormControl('submit', $theSubmitName);
+    // Create submit button.
+    $submit = new SubmitControl($theSubmitName);
     $submit->setValue($theSubmitButtonText);
+    $this->myButtonFormControl->addFormControl($submit);
 
+    // Create reset button.
     if ($theResetButtonText)
     {
-      /** @var SubmitControl $reset */
-      $reset = $this->myButtonFormControl->createFormControl('reset', $theResetName);
+      $reset = new ResetControl($theResetName);
       $reset->setValue($theResetButtonText);
+      $this->myButtonFormControl->addFormControl($reset);
     }
 
     $this->addFormControl($this->myButtonFormControl);
@@ -89,65 +84,15 @@ class CoreFieldSet extends FieldSet
     // If necessary create a button form control.
     if (!$this->myButtonFormControl)
     {
-      $this->myButtonFormControl = $this->addFormControl(new CoreButtonControl(''));
+      $this->myButtonFormControl = new CoreButtonControl('');
+      $this->addFormControl($this->myButtonFormControl);
     }
 
-    /** @var SubmitControl $input */
-    $input = $this->myButtonFormControl->addFormControl(new SubmitControl($theName));
+    $input = new SubmitControl($theName);
     $input->setValue((is_int($theWrdId)) ? Babel::getWord($theWrdId) : $theWrdId);
-
+    $this->myButtonFormControl->addFormControl($input);
+    
     return $input;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Creates a form control and adds this form control to this fieldset.
-   *
-   * @param string          $theType          The type of the form control.
-   * @param string          $theName          The name of the form control.
-   * @param int|string|null $theWrdId         Depending on the type:
-   *                                          <ul>
-   *                                          <li>int:    The wrd_id of the legend of the form control.
-   *                                          <li>string: The legend of the form control.
-   *                                          <li>null:   The form control has no legend.
-   *                                          </ul>
-   * @param bool            $theMandatoryFlag If set the form control is mandatory.
-   *
-   * @return CheckboxesControl|ComplexControl|RadiosControl|SelectControl|SimpleControl|SpanControl
-   */
-  public function createFormControl($theType, $theName, $theWrdId = null, $theMandatoryFlag = false)
-  {
-    switch ($theType)
-    {
-      case 'text':
-        $control = new TextControl($theName);
-        $control->setAttrSize(80);
-        $ret = $this->addFormControl($control);
-        break;
-
-      default:
-        $ret = parent::createFormControl($theType, $theName);
-    }
-
-    if ($theWrdId)
-    {
-      if (is_int($theWrdId))
-      {
-        $ret->setFakeAttribute('_abc_label', Babel::getWord($theWrdId));
-      }
-      else
-      {
-        $ret->setFakeAttribute('_abc_label', $theWrdId);
-      }
-    }
-
-    if ($theMandatoryFlag)
-    {
-      $ret->addValidator(new MandatoryValidator(0));
-      $ret->setFakeAttribute('_set_mandatory', true);
-    }
-
-    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -189,19 +134,19 @@ class CoreFieldSet extends FieldSet
         $ret .= '<tr>';
         $ret .= '<th>';
         $ret .= Html::txt2Html($control->getAttribute('_abc_label'));
-        if ($control->getAttribute('_set_mandatory')) $ret .= '<span class="mandatory">*</span>';
+        if ($control->getAttribute('_abc_mandatory')) $ret .= '<span class="mandatory">*</span>';
         $ret .= '</th>';
 
         $ret .= '<td>';
         $ret .= $control->generate();
         $ret .= '</td>';
 
-        $errmsg = $control->getErrorMessages(true);
-        if ($errmsg)
+        $messages = $control->getErrorMessages(true);
+        if ($messages)
         {
           $ret .= '<td class="error">';
           $first = true;
-          foreach ($errmsg as $err)
+          foreach ($messages as $err)
           {
             if ($first) $first = false;
             else        $ret .= '<br/>';

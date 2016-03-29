@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\EmailValidator;
 
@@ -222,11 +224,12 @@ class ValidatorEmailTest extends PHPUnit_Framework_TestCase
   private function setupForm1()
   {
     $form = new RawForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $fieldset = $form->createFieldSet('fieldset');
-
-    $control = $fieldset->createFormControl('text', 'email');
-    $control->addValidator(new EmailValidator());
+    $input = new TextControl('email');
+    $input->addValidator(new EmailValidator());
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

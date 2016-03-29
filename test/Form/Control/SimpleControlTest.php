@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -46,13 +48,15 @@ abstract class SimpleControlTest extends PHPUnit_Framework_TestCase
   public function testPrefixAndPostfix()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $control = $fieldset->createFormControl($this->getInputType(), 'name');
-    $control->setValue('1');
-
-    $control->setPrefix('Hello');
-    $control->setPostfix('World');
+    $input = $this->getControl('name');
+    $input->setValue('1');
+    $input->setPrefix('Hello');
+    $input->setPostfix('World');
+    $fieldset->addFormControl($input);
+    
     $form->prepare();
     $html = $form->generate();
 
@@ -98,7 +102,12 @@ abstract class SimpleControlTest extends PHPUnit_Framework_TestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  abstract protected function getInputType();
+  /**
+   * @param $theName
+   *
+   * @return SimpleControl
+   */
+  abstract protected function getControl($theName);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -111,10 +120,12 @@ abstract class SimpleControlTest extends PHPUnit_Framework_TestCase
   private function setupForm1($theValue)
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $control = $fieldset->createFormControl($this->getInputType(), 'name');
-    if (isset($theValue)) $control->setValue($theValue);
+    $input = $this->getControl('name');
+    if (isset($theValue)) $input->setValue($theValue);
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

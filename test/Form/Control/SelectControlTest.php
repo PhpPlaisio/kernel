@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -9,19 +11,21 @@ class SelectControlTest extends PHPUnit_Framework_TestCase
   public function testPrefixAndPostfix()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $control = $fieldset->createFormControl('checkbox', 'name');
-
-    $control->setPrefix('Hello');
-    $control->setPostfix('World');
+    $input = new SelectControl('name');
+    $input->setPrefix('Hello');
+    $input->setPostfix('World');
+    $fieldset->addFormControl($input);
+    
     $form->prepare();
     $html = $form->generate();
 
-    $pos = strpos($html, 'Hello<input');
+    $pos = strpos($html, 'Hello<select');
     $this->assertNotEquals(false, $pos);
 
-    $pos = strpos($html, '/>World');
+    $pos = strpos($html, '</select>World');
     $this->assertNotEquals(false, $pos);
   }
 
@@ -81,10 +85,13 @@ class SelectControlTest extends PHPUnit_Framework_TestCase
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('select', 'cnt_id');
-    $control->setEmptyOption(true);
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input  = new SelectControl('cnt_id');
+    $input->setEmptyOption(true);
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -103,11 +110,14 @@ class SelectControlTest extends PHPUnit_Framework_TestCase
     $countries[] = ['cnt_id' => 3, 'cnt_name' => 'LU'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('select', 'cnt_id');
-    $control->setEmptyOption(true);
-    $control->setValue('1');
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new SelectControl('cnt_id');
+    $input->setEmptyOption(true);
+    $input->setValue('1');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

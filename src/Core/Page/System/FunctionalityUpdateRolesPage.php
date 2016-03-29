@@ -11,6 +11,7 @@ use SetBased\Abc\Core\Form\SlatControlFactory\SystemFunctionalityUpdateRolesSlat
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 
+use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\Http;
@@ -101,7 +102,8 @@ class FunctionalityUpdateRolesPage extends CorePage
     $this->myForm = new CoreForm();
 
     // Add field set.
-    $field_set = $this->myForm->createFieldSet();
+    $field_set = new FieldSet('');
+    $this->myForm->addFieldSet($field_set);
 
     // Create factory.
     $factory = new SystemFunctionalityUpdateRolesSlatControlFactory();
@@ -109,9 +111,9 @@ class FunctionalityUpdateRolesPage extends CorePage
 
     // Add submit button.
     $button = new CoreButtonControl('');
-    /** @var SubmitControl $submit */
-    $submit = $button->createFormControl('submit', 'submit');
+    $submit = new SubmitControl('submit');
     $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_UPDATE));
+    $button->addFormControl($submit);
     $this->myForm->addSubmitHandler($button, 'handleForm');
 
     // Put everything together in a LouverControl.

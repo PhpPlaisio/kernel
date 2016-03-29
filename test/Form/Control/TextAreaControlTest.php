@@ -1,6 +1,9 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
+use SetBased\Abc\Form\Control\CheckboxControl;
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\TextAreaControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -10,12 +13,14 @@ class TextAreaControlTest extends PHPUnit_Framework_TestCase
   public function testPrefixAndPostfix()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $control = $fieldset->createFormControl('checkbox', 'name');
-
-    $control->setPrefix('Hello');
-    $control->setPostfix('World');
+    $input = new CheckboxControl('name');
+    $input->setPrefix('Hello');
+    $input->setPostfix('World');
+    $fieldset->addFormControl($input);
+    
     $form->prepare();
     $html = $form->generate();
 
@@ -35,12 +40,15 @@ class TextAreaControlTest extends PHPUnit_Framework_TestCase
     $_POST['test'] = '  Hello    World!   ';
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('textarea', 'test');
-    $control->setValue('Hello World!');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new TextAreaControl('test');
+    $input->setValue('Hello World!');
+    $fieldset->addFormControl($input);
 
     // Set cleaner for textarea field (default it off).
-    $control->setCleaner(PruneWhitespaceCleaner::get());
+    $input->setCleaner(PruneWhitespaceCleaner::get());
 
     $form->loadSubmittedValues();
 
@@ -64,9 +72,12 @@ class TextAreaControlTest extends PHPUnit_Framework_TestCase
     $_POST['test'] = 'Hello World!';
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('textarea', 'test');
-    $control->setValue('Hi World!');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new TextAreaControl('test');
+    $input->setValue('Hi World!');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

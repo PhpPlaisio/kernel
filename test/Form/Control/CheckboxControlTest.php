@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\CheckboxControl;
+use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -15,12 +17,14 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
   public function testPrefixAndPostfix()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $control = $fieldset->createFormControl('checkbox', 'name');
+    $input = new CheckboxControl('name');
+    $input->setPrefix('Hello');
+    $input->setPostfix('World');
+    $fieldset->addFormControl($input);
 
-    $control->setPrefix('Hello');
-    $control->setPostfix('World');
     $form->prepare();
     $html = $form->generate();
 
@@ -40,8 +44,11 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
   public function testSubmittedValue1()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $fieldset->createFormControl('checkbox', 'test1');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new CheckboxControl('test1');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
     $values  = $form->getValues();
@@ -64,9 +71,11 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
     $_POST['test2'] = 'on';
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $fieldset->createFormControl('checkbox', 'test2');
-
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new CheckboxControl('test2');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
     $values  = $form->getValues();
@@ -88,9 +97,12 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
   public function testSubmittedValue3()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('checkbox', 'test3');
-    $control->setValue(true);
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+    
+    $input = new CheckboxControl('test3');
+    $input->setValue(true);
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
     $values  = $form->getValues();
@@ -114,9 +126,12 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
     $_POST['test4'] = 'on';
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('checkbox', 'test4');
-    $control->setValue(true);
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxControl('test4');
+    $input->setValue(true);
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
     $values  = $form->getValues();

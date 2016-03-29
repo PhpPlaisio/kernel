@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\ConstantControl;
+use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -25,10 +27,12 @@ class ConstantControlTest extends PHPUnit_Framework_TestCase
   private function setupForm1()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $control = $fieldset->createFormControl('constant', 'name');
-    $control->setValue('1');
+    $input = new ConstantControl('name');
+    $input->setValue('1');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

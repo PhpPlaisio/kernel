@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\IntegerValidator;
 
@@ -203,11 +205,12 @@ class IntegerValidatorTest extends PHPUnit_Framework_TestCase
   private function setupForm1()
   {
     $form = new RawForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $fieldset = $form->createFieldSet();
-
-    $control = $fieldset->createFormControl('text', 'integer');
-    $control->addValidator(new IntegerValidator());
+    $input = new TextControl('integer');
+    $input->addValidator(new IntegerValidator());
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -221,11 +224,12 @@ class IntegerValidatorTest extends PHPUnit_Framework_TestCase
   private function setupForm2()
   {
     $form = new RawForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
 
-    $fieldset = $form->createFieldSet();
-
-    $control = $fieldset->createFormControl('text', 'integer');
-    $control->addValidator(new IntegerValidator(-1, 10));
+    $input = new TextControl('integer');
+    $input->addValidator(new IntegerValidator(-1, 10));
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

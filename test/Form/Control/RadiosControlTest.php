@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\RadiosControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -61,9 +63,12 @@ class RadiosControlTest extends PHPUnit_Framework_TestCase
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('radios', 'cnt_id');
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new RadiosControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 
@@ -82,10 +87,13 @@ class RadiosControlTest extends PHPUnit_Framework_TestCase
     $countries[] = ['cnt_id' => 3, 'cnt_name' => 'LU'];
 
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
-    $control  = $fieldset->createFormControl('radios', 'cnt_id');
-    $control->setValue('1');
-    $control->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new RadiosControl('cnt_id');
+    $input->setValue('1');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
 

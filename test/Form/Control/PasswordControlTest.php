@@ -1,14 +1,16 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\PasswordControl;
+
 require_once(__DIR__.'/SimpleControlTest.php');
 
 //----------------------------------------------------------------------------------------------------------------------
 class PasswordControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected function getInputType()
+  protected function getControl($theName)
   {
-    return 'password';
+    return new PasswordControl($theName);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
