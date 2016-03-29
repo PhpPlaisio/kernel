@@ -91,7 +91,7 @@ class CoreFieldSet extends FieldSet
     $input = new SubmitControl($theName);
     $input->setValue((is_int($theWrdId)) ? Babel::getWord($theWrdId) : $theWrdId);
     $this->myButtonFormControl->addFormControl($input);
-    
+
     return $input;
   }
 
@@ -134,7 +134,8 @@ class CoreFieldSet extends FieldSet
         $ret .= '<tr>';
         $ret .= '<th>';
         $ret .= Html::txt2Html($control->getAttribute('_abc_label'));
-        if ($control->getAttribute('_abc_mandatory')) $ret .= '<span class="mandatory">*</span>';
+        $mandatory = $control->getAttribute('_abc_mandatory');
+        if (!empty($mandatory)) $ret .= '<span class="mandatory">*</span>';
         $ret .= '</th>';
 
         $ret .= '<td>';

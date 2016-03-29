@@ -24,8 +24,8 @@ interface ObfuscatorFactory
   /**
    * Obfuscates a database ID.
    *
-   * @param int    $theId    The database ID.
-   * @param string $theLabel The alias for the column with the database IDs.
+   * @param int|null $theId    The database ID.
+   * @param string   $theLabel The alias for the column with the database IDs.
    *
    * @return string The obfuscated database ID.
    */

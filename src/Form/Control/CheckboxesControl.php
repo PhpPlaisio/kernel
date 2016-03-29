@@ -108,9 +108,9 @@ class CheckboxesControl extends Control
           $this->myOptionsObfuscator->encode($option[$this->myKeyKey]) : $option[$this->myKeyKey];
 
         $input_attributes['name']     = ($this->mySubmitName!=='') ? $this->mySubmitName.'['.$code.']' : $code;
-        $input_attributes['id']       = ($this->myIdKey && isset($option[$this->myIdKey])) ? $option[$this->myIdKey] : Html::getAutoId();
-        $input_attributes['checked']  = ($this->myCheckedKey && !empty($option[$this->myCheckedKey]));
-        $input_attributes['disabled'] = ($this->myDisabledKey && !empty($option[$this->myDisabledKey]));
+        $input_attributes['id']       = (isset($this->myIdKey) && isset($option[$this->myIdKey])) ? $option[$this->myIdKey] : Html::getAutoId();
+        $input_attributes['checked']  = (isset($this->myCheckedKey) && !empty($option[$this->myCheckedKey]));
+        $input_attributes['disabled'] = (isset($this->myDisabledKey) && !empty($option[$this->myDisabledKey]));
 
         $html .= Html::generateVoidElement('input', $input_attributes);
 

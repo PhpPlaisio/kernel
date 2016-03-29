@@ -85,7 +85,7 @@ class RadiosControl extends Control
         $key   = (string)$option[$this->myKeyKey];
         $value = ($this->myOptionsObfuscator) ? $this->myOptionsObfuscator->encode($key) : $key;
 
-        $input_attributes['id']       = ($this->myIdKey && isset($option[$this->myIdKey])) ? $option[$this->myIdKey] : Html::getAutoId();
+        $input_attributes['id']       = (isset($this->myIdKey) && isset($option[$this->myIdKey])) ? $option[$this->myIdKey] : Html::getAutoId();
         $input_attributes['value']    = $value;
         $input_attributes['checked']  = ((string)$this->myValue===(string)$key);
         $input_attributes['disabled'] = ($this->myDisabledKey && !empty($option[$this->myDisabledKey]));
