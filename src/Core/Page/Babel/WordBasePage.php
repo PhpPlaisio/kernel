@@ -156,10 +156,7 @@ abstract class WordBasePage extends BabelPage
         break;
 
       default:
-        if (isset($method))
-        {
-          throw new LogicException("Unknown form method '%s'.", $method);
-        }
+        $this->myForm->defaultHandler($method);
     };
   }
 
