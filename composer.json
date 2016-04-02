@@ -1,7 +1,7 @@
 {
   "name": "setbased/abc",
   "description": "SetBased ABC Framework",
-  "keyword": [
+  "keywords": [
     "Framework"
   ],
   "type": "library",

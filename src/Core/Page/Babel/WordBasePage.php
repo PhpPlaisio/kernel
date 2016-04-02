@@ -6,7 +6,6 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Error\LogicException;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
