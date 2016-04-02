@@ -202,18 +202,32 @@ abstract class Page
   /**
    * Returns the value of a boolean CGI variable.
    *
-   * @param string $theVarName The name of the CGI variable.
+   * If bivalent is applied returns:
+   * <ul>
+   * <li>true if the CGI variable is set and is not empty
+   * <li>false otherwise.
+   * <ul>
+   * If trinary logic is applied returns:
+   * <ul>
+   * <li>true if the CGI variable is set and is not empty
+   * <li>false if the CGI variable is set and is empty
+   * <li>null if the CGI variable not set.
+   * <ul>
    *
-   * @return bool
+   * @param string $theVarName     The name of the CGI variable.
+   * @param bool   $theTrinaryFlag If true trinary (a.k.a  three-valued) logic will be applied. Otherwise, bivalent
+   *                               logic will be applied.
+   *
+   * @return bool|null
    */
-  public static function getCgiBool($theVarName)
+  public static function getCgiBool($theVarName, $theTrinaryFlag = false)
   {
     if (isset($_GET[$theVarName]))
     {
       return !empty($_GET[$theVarName]);
     }
 
-    return false;
+    return ($theTrinaryFlag) ? null : false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -345,16 +359,35 @@ abstract class Page
   /**
    * Returns a string with holding a boolean CGI variable that can be used as a part of a URL.
    *
-   * @param string $theVarName The name of the boolean CGI variable.
-   * @param mixed  $theValue   The value of the CGI variable. Only and only a nonempty value evaluates to true.
+   * If bivalent is applied returns:
+   * <ul>
+   * <li>a clean CGI variable set to 1 if the value of the CGI variable is set and is not empty,
+   * <li>an empty string otherwise.
+   * <ul>
+   * If trinary logic is applied returns:
+   * <ul>
+   * <li>a clean CGI variable set to 1 if the value of the CGI variable is set and is not empty,
+   * <li>a clean CGI variable set to 0 if the value of the CGI variable is set and is empty,
+   * <li>an empty string otherwise.
+   * <ul>
+   *
+   * @param string $theVarName     The name of the boolean CGI variable.
+   * @param mixed  $theValue       The value of the CGI variable. Only and only a nonempty value evaluates to true.
+   * @param bool   $theTrinaryFlag If true trinary (a.k.a  three-valued) logic will be applied. Otherwise, bivalent
+   *                               logic will be applied.
    *
    * @return string
    */
-  public static function putCgiBool($theVarName, $theValue)
+  public static function putCgiBool($theVarName, $theValue, $theTrinaryFlag = false)
   {
     if (!empty($theValue))
     {
       return '/'.$theVarName.'/1';
+    }
+
+    if ($theTrinaryFlag && isset($theValue))
+    {
+      return '/'.$theVarName.'/0';
     }
 
     return '';
