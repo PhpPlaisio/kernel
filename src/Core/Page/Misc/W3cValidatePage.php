@@ -148,7 +148,7 @@ class W3cValidatePage extends Page
     else
     {
       # PHP 5.4.
-      $file = $this->myPathName.';type=text/html';
+      $file = '@'.$this->myPathName.';type=text/html';
     }
     $post                  = [];
     $post['uploaded_file'] = $file;
