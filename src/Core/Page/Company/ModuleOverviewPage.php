@@ -49,7 +49,7 @@ class ModuleOverviewPage extends CompanyPage
 
     // Show the name of the module.
     $col = $table->addColumn(new TextTableColumn('Model', 'mdl_name'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Generate the HTML code for the table.
     echo $table->getHtmlTable($modules);

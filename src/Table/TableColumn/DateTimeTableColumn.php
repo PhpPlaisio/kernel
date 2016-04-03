@@ -36,10 +36,10 @@ class DateTimeTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string      $theHeaderText The header text of this table column.
-   * @param string      $theFieldName  The field name of the data row used for generating this table column.
-   * @param string|null $theFormat     The format specifier for formatting the content of this table column. If null
-   *                                   the default format is used.
+   * @param string|int|null $theHeaderText The header text this table column. 
+   * @param string          $theFieldName  The field name of the data row used for generating this table column.
+   * @param string|null     $theFormat     The format specifier for formatting the content of this table column. If null
+   *                                       the default format is used.
    */
   public function __construct($theHeaderText, $theFieldName, $theFormat = null)
   {
@@ -53,13 +53,13 @@ class DateTimeTableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
-    $value = $theData[$this->myFieldName];
+    $value = $theRow[$this->myFieldName];
 
     if ($value!==false && $value!==null && $value!=='')
     {
-      $datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $theData[$this->myFieldName]);
+      $datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $theRow[$this->myFieldName]);
 
       if ($datetime)
       {
@@ -74,7 +74,7 @@ class DateTimeTableColumn extends TableColumn
       else
       {
         // The value is not a valid datetime.
-        return '<td>'.Html::txt2Html($theData[$this->myFieldName]).'</td>';
+        return '<td>'.Html::txt2Html($theRow[$this->myFieldName]).'</td>';
       }
     }
     else

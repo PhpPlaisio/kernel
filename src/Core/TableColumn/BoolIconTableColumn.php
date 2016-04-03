@@ -30,10 +30,10 @@ class BoolIconTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText    The header text this table column.
-   * @param string $theFieldName     The field name of the data row used for generating this table column.
-   * @param bool   $theShowFalseFlag If set for false values an icon is shown, otherwise the cell is empty for false
-   *                                 values.
+   * @param string|int|null $theHeaderText    The header text this table column.
+   * @param string          $theFieldName     The field name of the data row used for generating this table column.
+   * @param bool            $theShowFalseFlag If set for false values an icon is shown, otherwise the cell is empty for
+   *                                          false values.
    */
   public function __construct($theHeaderText, $theFieldName, $theShowFalseFlag = false)
   {
@@ -47,30 +47,30 @@ class BoolIconTableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
     $attributes = ['class' => 'bool'];
 
     switch (true)
     {
-      case $theData[$this->myFieldName] === 1:
-      case $theData[$this->myFieldName] === '1':
-      $attributes['data-value'] = 1;
+      case $theRow[$this->myFieldName]===1:
+      case $theRow[$this->myFieldName]==='1':
+        $attributes['data-value'] = 1;
         $html                     = '<img src="'.ICON_SMALL_TRUE.'" alt="1"/>';
         break;
 
-      case $theData[$this->myFieldName] === 0:
-      case $theData[$this->myFieldName] === '0':
-      case $theData[$this->myFieldName] === '':
-      case $theData[$this->myFieldName] === null:
-      case $theData[$this->myFieldName] === false:
+      case $theRow[$this->myFieldName]===0:
+      case $theRow[$this->myFieldName]==='0':
+      case $theRow[$this->myFieldName]==='':
+      case $theRow[$this->myFieldName]===null:
+      case $theRow[$this->myFieldName]===false:
         $attributes['data-value'] = 0;
         $html                     = ($this->myShowFalse) ? '<img src="'.ICON_SMALL_FALSE.'" alt="0"/>' : '';
         break;
 
       default:
-        $attributes['data-value'] = $theData[$this->myFieldName];
-        $html                     = Html::txt2Html($theData[$this->myFieldName]);
+        $attributes['data-value'] = $theRow[$this->myFieldName];
+        $html                     = Html::txt2Html($theRow[$this->myFieldName]);
     }
 
     return Html::generateElement('td', $attributes, $html, true);

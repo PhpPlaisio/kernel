@@ -14,7 +14,7 @@ class SpecificPageDeleteIconTableColumn extends DeleteIconTableColumn
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The ID of the target company.
-   * 
+   *
    * @var int
    */
   private $myTargetCmpId;

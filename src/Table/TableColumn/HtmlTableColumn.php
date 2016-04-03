@@ -20,8 +20,8 @@ class HtmlTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText The header text of this table column.
-   * @param string $theFieldName  The field name of the data row used for generating this table column.
+   * @param string|int|null $theHeaderText The header text this table column. 
+   * @param string          $theFieldName  The field name of the data row used for generating this table column.
    */
   public function __construct($theHeaderText, $theFieldName)
   {
@@ -34,9 +34,9 @@ class HtmlTableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
-    return '<td>'.$theData[$this->myFieldName].'</td>';
+    return '<td>'.$theRow[$this->myFieldName].'</td>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

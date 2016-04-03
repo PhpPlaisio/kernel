@@ -2,6 +2,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Table\TableColumn;
 
+use SetBased\Abc\Babel;
 use SetBased\Abc\Helper\Html;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -98,7 +99,7 @@ abstract class DualTableColumn extends TableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns HTML code (including opening and closing @a th tags) for the header of this table columns.
+   * Returns HTML code (including opening and closing th tags) for the header of this table columns.
    *
    * @return string
    */
@@ -144,7 +145,9 @@ abstract class DualTableColumn extends TableColumn
       }
     }
 
-    return '<th colspan="2" class="'.$class.'"><span>&nbsp;</span>'.Html::txt2Html($this->myHeaderText).'</th>';
+    $header_text = (is_int($this->myHeaderText)) ? Babel::getWord($this->myHeaderText) : $this->myHeaderText;
+
+    return '<th colspan="2" class="'.$class.'"><span>&nbsp;</span>'.Html::txt2Html($header_text).'</th>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

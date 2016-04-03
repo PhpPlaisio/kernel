@@ -45,7 +45,7 @@ class MenuOverviewPage extends CorePage
 
     // Show menu name.
     $col = $table->addColumn(new TextTableColumn('Name', 'mnu_name'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show menu level.
     $table->addColumn(new NumericTableColumn('Level', 'mnu_level'));

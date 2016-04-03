@@ -29,9 +29,10 @@ class NumericTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText The header text of this table column.
-   * @param string $theFieldName  The field name of the data row used for generating this table column.
-   * @param string $theFormat     The format specifier for formatting the content of this table column. See sprintf.
+   * @param string|int|null $theHeaderText The header text this table column. 
+   * @param string          $theFieldName  The field name of the data row used for generating this table column.
+   * @param string          $theFormat     The format specifier for formatting the content of this table column. See
+   *                                       sprintf.
    */
   public function __construct($theHeaderText, $theFieldName, $theFormat = '%d')
   {
@@ -45,9 +46,9 @@ class NumericTableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
-    $value = $theData[$this->myFieldName];
+    $value = $theRow[$this->myFieldName];
 
     if ($value!==false && $value!==null && $value!=='')
     {

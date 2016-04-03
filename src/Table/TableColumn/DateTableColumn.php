@@ -44,10 +44,10 @@ class DateTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string      $theHeaderText The header text for this column.
-   * @param string      $theFieldName  The field name of the data row used for generating this table column.
-   * @param string|null $theFormat     The format specifier for formatting the content of this table column. If null
-   *                                   the default format is used.
+   * @param string|int|null $theHeaderText The header text this table column. 
+   * @param string          $theFieldName  The field name of the data row used for generating this table column.
+   * @param string|null     $theFormat     The format specifier for formatting the content of this table column. If null
+   *                                       the default format is used.
    */
   public function __construct($theHeaderText, $theFieldName, $theFormat = null)
   {
@@ -61,13 +61,13 @@ class DateTableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
-    $value = $theData[$this->myFieldName];
+    $value = $theRow[$this->myFieldName];
 
-    if ($value!==false && $value!==null && $value!=='' && $theData[$this->myFieldName]!=self::$ourOpenDate)
+    if ($value!==false && $value!==null && $value!=='' && $theRow[$this->myFieldName]!=self::$ourOpenDate)
     {
-      $date = \DateTime::createFromFormat('Y-m-d', $theData[$this->myFieldName]);
+      $date = \DateTime::createFromFormat('Y-m-d', $theRow[$this->myFieldName]);
 
       if ($date)
       {
@@ -82,7 +82,7 @@ class DateTableColumn extends TableColumn
       else
       {
         // The $theData[$this->myFieldName] is not a valid date.
-        return '<td>'.Html::txt2Html($theData[$this->myFieldName]).'</td>';
+        return '<td>'.Html::txt2Html($theRow[$this->myFieldName]).'</td>';
       }
     }
     else

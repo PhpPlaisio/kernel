@@ -52,13 +52,13 @@ abstract class IconTableColumn extends TableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param array $theData
+   * @param array $theRow
    *
    * @return string
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
-    $url = $this->getUrl($theData);
+    $url = $this->getUrl($theRow);
 
     $ret = '<td>';
     if ($url)

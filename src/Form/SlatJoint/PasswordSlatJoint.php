@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\PasswordControl;
-use SetBased\Abc\Helper\Html;
+
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -15,12 +15,12 @@ class PasswordSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText The header text of this table column.
+   * @param string|int|null $theHeaderText The header text of this table column.
    */
   public function __construct($theHeaderText)
   {
     $this->myDataType   = 'control-password';
-    $this->myHeaderHtml = Html::txt2Html($theHeaderText);
+    $this->myHeaderText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ class PasswordSlatJoint extends SlatJoint
    *
    * @return PasswordControl
    */
-  public function createCell($theName)
+  public function createControl($theName)
   {
     return new PasswordControl($theName);
   }

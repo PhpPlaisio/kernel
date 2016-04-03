@@ -65,7 +65,7 @@ class WordGroupOverviewPage extends BabelPage
 
     // Show word group name.
     $col = $table->addColumn(new TextTableColumn('Word Group', 'wdg_name'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show total words in the word group.
     $table->addColumn(new TextTableColumn('# Words', 'n1'));

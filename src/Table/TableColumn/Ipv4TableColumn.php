@@ -22,8 +22,8 @@ class Ipv4TableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText The header text of this table column.
-   * @param string $theFieldName  The field name of the data row used for generating this table column.
+   * @param string|int|null $theHeaderText The header text this table column. 
+   * @param string          $theFieldName  The field name of the data row used for generating this table column.
    */
   public function __construct($theHeaderText, $theFieldName)
   {
@@ -36,9 +36,9 @@ class Ipv4TableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
-    return '<td class="ipv4">'.Html::txt2Html($theData[$this->myFieldName]).'</td>';
+    return '<td class="ipv4">'.Html::txt2Html($theRow[$this->myFieldName]).'</td>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ class ModuleOverviewPage extends CorePage
 
     // Show the name of the module.
     $col = $table->addColumn(new TextTableColumn('Module', 'mdl_name'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Add column with icon to view the details of the module.
     $table->addColumn(new ModuleDetailsIconTableColumn());

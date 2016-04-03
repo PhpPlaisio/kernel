@@ -18,7 +18,7 @@ class InvisibleSlatJoint extends SlatJoint
    *
    * @return InvisibleControl
    */
-  public function createCell($theName)
+  public function createControl($theName)
   {
     return new InvisibleControl($theName);
   }

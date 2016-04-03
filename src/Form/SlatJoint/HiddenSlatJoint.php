@@ -18,7 +18,7 @@ class HiddenSlatJoint extends SlatJoint
    *
    * @return HiddenControl
    */
-  public function createCell($theName)
+  public function createControl($theName)
   {
     return new HiddenControl($theName);
   }

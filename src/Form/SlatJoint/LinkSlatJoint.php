@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\LinkControl;
-use SetBased\Abc\Helper\Html;
+
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -15,12 +15,12 @@ class LinkSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText The header text of this table column.
+   * @param string|int|null $theHeaderText The header text of this table column.
    */
   public function __construct($theHeaderText)
   {
     $this->myDataType   = 'control-link';
-    $this->myHeaderHtml = Html::txt2Html($theHeaderText);
+    $this->myHeaderText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -31,20 +31,9 @@ class LinkSlatJoint extends SlatJoint
    *
    * @return LinkControl
    */
-  public function createCell($theName)
+  public function createControl($theName)
   {
     return new LinkControl($theName);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns HTML code (including opening and closing th tags) for the table filter cell.
-   *
-   * @return string
-   */
-  public function getHtmlColumnFilter()
-  {
-    return '<td><input type="text"/></td>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

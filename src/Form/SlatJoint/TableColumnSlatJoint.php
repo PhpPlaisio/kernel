@@ -36,7 +36,7 @@ class TableColumnSlatJoint extends SlatJoint
    *
    * @return TableColumnControl
    */
-  public function createCell($theName)
+  public function createControl($theName)
   {
     $control = new TableColumnControl($theName);
     $control->setTableColumn($this->myTableColumn);

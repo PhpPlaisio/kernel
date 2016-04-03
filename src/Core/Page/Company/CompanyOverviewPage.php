@@ -53,7 +53,7 @@ class CompanyOverviewPage extends CompanyPage
 
     // Show word group name.
     $col = $table->addColumn(new TextTableColumn('Company abbreviation', 'cmp_abbr'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show total words in the word group.
     $table->addColumn(new TextTableColumn('Label', 'cmp_label'));

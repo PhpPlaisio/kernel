@@ -39,7 +39,7 @@ class SystemModuleUpdateCompaniesSlatControlFactory extends SlatControlFactory
 
     // Create slat joint for table column with abbr of the company.
     $table_column = new TextTableColumn('Name', 'cmp_abbr');
-    $table_column->sortOrder(1);
+    $table_column->setSortOrder(1);
     $this->addSlatJoint('cmp_abbr', new TableColumnSlatJoint($table_column));
 
     // Create slat joint with checkbox for granting or revoking the module.

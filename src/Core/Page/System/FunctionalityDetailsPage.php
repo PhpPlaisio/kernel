@@ -117,7 +117,7 @@ class FunctionalityDetailsPage extends CorePage
 
     // Show class name.
     $col = $table->addColumn(new TextTableColumn('Class', 'pag_class'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show title of page.
     $table->addColumn(new TextTableColumn('Title', 'pag_title'));
@@ -149,7 +149,7 @@ class FunctionalityDetailsPage extends CorePage
 
     // Show Company abbreviation.
     $col = $table->addColumn(new TextTableColumn('Company', 'cmp_abbr'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show role ID.
     $table->addColumn(new NumericTableColumn('ID', 'rol_id'));

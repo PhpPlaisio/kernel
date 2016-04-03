@@ -36,11 +36,11 @@ class MultiEmailTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText    The header text for this table column.
-   * @param string $theFieldName     The field name of the data rows used for generating this table column.
-   * @param string $theDataSeparator The character for separating multiple email addresses in the input data.
-   * @param string $theHtmlSeparator The HTML snippet for separating multiple email addresses in the generated HTML
-   *                                 code.
+   * @param string|int|null $theHeaderText    The header text this table column. 
+   * @param string          $theFieldName     The field name of the data rows used for generating this table column.
+   * @param string          $theDataSeparator The character for separating multiple email addresses in the input data.
+   * @param string          $theHtmlSeparator The HTML snippet for separating multiple email addresses in the generated
+   *                                          HTML code.
    */
   public function __construct($theHeaderText, $theFieldName, $theDataSeparator = ',', $theHtmlSeparator = '<br/>')
   {
@@ -55,9 +55,9 @@ class MultiEmailTableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
-    $value = $theData[$this->myFieldName];
+    $value = $theRow[$this->myFieldName];
 
     if ($value!==false && $value!==null && $value!=='')
     {

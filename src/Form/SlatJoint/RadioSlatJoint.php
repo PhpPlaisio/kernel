@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\RadioControl;
-use SetBased\Abc\Helper\Html;
+
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -15,12 +15,12 @@ class RadioSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText The header text of this table column.
+   * @param string|int|null $theHeaderText The header text of this table column.
    */
   public function __construct($theHeaderText)
   {
     $this->myDataType   = 'control-radio';
-    $this->myHeaderHtml = Html::txt2Html($theHeaderText);
+    $this->myHeaderText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -31,20 +31,9 @@ class RadioSlatJoint extends SlatJoint
    *
    * @return RadioControl
    */
-  public function createCell($theName)
+  public function createControl($theName)
   {
     return new RadioControl($theName);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns HTML code (including opening and closing th tags) for the table filter cell.
-   *
-   * @return string
-   */
-  public function getHtmlColumnFilter()
-  {
-    return '<td><input type="text"/></td>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

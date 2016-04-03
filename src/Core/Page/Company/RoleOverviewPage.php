@@ -54,7 +54,7 @@ class RoleOverviewPage extends CompanyPage
 
     // Show the weight of the role.
     $col = $table->addColumn(new NumericTableColumn('Weight', 'rol_weight'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Add link to the details of the role.
     $table->addColumn(new RoleDetailsIconTableColumn());

@@ -141,7 +141,7 @@ class WordGroupDetailsPage extends BabelPage
 
     // Show reference text.
     $col = $table->addColumn(new TextTableColumn($ref_language, 'ref_wdt_text'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show target text.
     if ($this->myActLanId!=$this->myRefLanId)

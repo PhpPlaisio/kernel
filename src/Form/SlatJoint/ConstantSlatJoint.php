@@ -18,7 +18,7 @@ class ConstantSlatJoint extends SlatJoint
    *
    * @return ConstantControl
    */
-  public function createCell($theName)
+  public function createControl($theName)
   {
     return new ConstantControl($theName);
   }

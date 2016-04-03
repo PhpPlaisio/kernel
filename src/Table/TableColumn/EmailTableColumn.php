@@ -22,8 +22,8 @@ class EmailTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string $theHeaderText The header text for this table column.
-   * @param string $theFieldName  The field name of the data rows used for generating this table column.
+   * @param string|int|null $theHeaderText The header text this table column. 
+   * @param string          $theFieldName  The field name of the data rows used for generating this table column.
    */
   public function __construct($theHeaderText, $theFieldName)
   {
@@ -36,9 +36,9 @@ class EmailTableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theData)
+  public function getHtmlCell($theRow)
   {
-    $value = $theData[$this->myFieldName];
+    $value = $theRow[$this->myFieldName];
 
     if ($value!==false && $value!==null && $value!=='')
     {

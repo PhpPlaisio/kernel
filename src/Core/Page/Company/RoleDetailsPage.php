@@ -89,14 +89,14 @@ class RoleDetailsPage extends CompanyPage
 
     // Show name of module.
     $col = $table->addColumn(new TextTableColumn('Module', 'mdl_name'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show the ID of the functionality.
     $table->addColumn(new NumericTableColumn('ID', 'fun_id'));
 
     // Show name of functionality.
     $col = $table->addColumn(new TextTableColumn('Functionality', 'fun_name'));
-    $col->sortOrder(2);
+    $col->setSortOrder(2);
 
     // Add column with icon a link to view the details of the functionality.
     $table->addColumn(new FunctionalityDetailsIconTableColumn());
@@ -120,7 +120,7 @@ class RoleDetailsPage extends CompanyPage
 
     // Show class name.
     $col = $table->addColumn(new TextTableColumn('Class', 'pag_class'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show title of page.
     $table->addColumn(new TextTableColumn('Title', 'pag_title'));

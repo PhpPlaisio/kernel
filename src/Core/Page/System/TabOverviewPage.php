@@ -47,7 +47,7 @@ class TabOverviewPage extends CorePage
 
     // Show label title of the page tab.
     $col = $table->addColumn(new TextTableColumn('Title', 'ptb_title'));
-    $col->sortOrder(1);
+    $col->setSortOrder(1);
 
     // Show label of the page tab.
     $table->addColumn(new TextTableColumn('Label', 'ptb_label'));
