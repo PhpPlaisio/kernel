@@ -193,7 +193,6 @@ class Form extends RawForm
 
     // @todo implement dependant controls.
 
-    $method = null;
     if ($submitted)
     {
       $this->loadSubmittedValues();
