@@ -38,7 +38,7 @@ abstract class Page
   /**
    * List with CSS sources to be included on this page.
    *
-   * @var string[]
+   * @var array[]
    */
   protected $myCssSources = [];
 
@@ -238,7 +238,7 @@ abstract class Page
    * @param string $theLabel   An alias for the column holding database ID and must corresponds with label that was
    *                           used to obfuscate the database ID.
    *
-   * @return int
+   * @return int|null
    */
   public static function getCgiId($theVarName, $theLabel)
   {
@@ -261,7 +261,7 @@ abstract class Page
    * @param bool   $theForceRelativeFlag If set the URL must be a relative URL. If the URL is not a relative URL an
    *                                     exception will be thrown.
    *
-   * @return string
+   * @return string|null
    *
    * @throws InvalidUrlException
    */
@@ -289,7 +289,7 @@ abstract class Page
    *
    * @param string $theVarName The name of the CGI variable.
    *
-   * @return string
+   * @return string|null
    */
   public static function getCgiVar($theVarName)
   {
@@ -397,10 +397,10 @@ abstract class Page
   /**
    * Returns a string with holding a CGI variable that can be used as a part of a URL.
    *
-   * @param string $theVarName The name of the CGI variable.
-   * @param mixed  $theValue   The value (must be a scalar) of the CGI variable.
-   * @param string $theLabel   Must only be used if the CGI variable is a database ID. An alias for the column holding
-   *                           database ID.
+   * @param string      $theVarName The name of the CGI variable.
+   * @param mixed       $theValue   The value (must be a scalar) of the CGI variable.
+   * @param string|null $theLabel   Must only be used if the CGI variable is a database ID. An alias for the column
+   *                                holding database ID.
    *
    * @return string
    */

@@ -81,7 +81,7 @@ abstract class TabBasePage extends CorePage
     $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->myLanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
-    $input->setEmptyOption(true);
+    $input->setEmptyOption();
     $this->myForm->addFormControl($input, 'Title');
 
     // Create text box for (new) page title.
