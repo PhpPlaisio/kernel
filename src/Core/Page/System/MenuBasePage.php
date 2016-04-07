@@ -72,7 +72,7 @@ abstract class MenuBasePage extends CorePage
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
-    $input->setEmptyOption('');
+    $input->setEmptyOption();
     $this->myForm->addFormControl($input, 'Menu Title');
 
     // Create text box for the title the menu item.
@@ -85,7 +85,7 @@ abstract class MenuBasePage extends CorePage
     $pages = Abc::$DL->systemPageGetAll($this->myLanId);
     $input = new SelectControl('pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
-    $input->setEmptyOption(' ');
+    $input->setEmptyOption();
     $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
     $this->myForm->addFormControl($input, 'Page Class', true);
 

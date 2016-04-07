@@ -120,10 +120,13 @@ class SlatControl extends ComplexControl
       $error_messages = $this->getErrorMessages(true);
 
       $ret .= '<td class="error">';
-      foreach ($error_messages as $message)
+      if (!empty($error_messages))
       {
-        $ret .= Html::txt2Html($message);
-        $ret .= '<br/>';
+        foreach ($error_messages as $message)
+        {
+          $ret .= Html::txt2Html($message);
+          $ret .= '<br/>';
+        }
       }
       $ret .= '</td>';
     }

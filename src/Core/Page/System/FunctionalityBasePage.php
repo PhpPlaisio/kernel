@@ -72,14 +72,14 @@ abstract class FunctionalityBasePage extends CorePage
     // Input for module.
     $input = new SelectControl('mdl_id');
     $input->setOptions($modules, 'mdl_id', 'mdl_name');
-    $input->setEmptyOption(' ');
+    $input->setEmptyOption();
     $this->myForm->addFormControl($input, 'Module', true);
 
     // Input for functionality name.
     // @todo Make control for reusing a word or create a new word. 
     $input = new SelectControl('wrd_id');
     $input->setOptions($words, 'wrd_id', 'wrd_text');
-    $input->setEmptyOption(' ');
+    $input->setEmptyOption();
     $this->myForm->addFormControl($input, 'Name');
 
     $input = new TextControl('fun_name');

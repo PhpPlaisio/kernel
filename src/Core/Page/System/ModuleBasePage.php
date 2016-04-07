@@ -80,7 +80,7 @@ abstract class ModuleBasePage extends CorePage
       // module) create a select box with free modules names.
       $input = new SelectControl('wrd_id');
       $input->setOptions($words, 'wrd_id', 'wrd_text');
-      $input->setEmptyOption(' ');
+      $input->setEmptyOption();
       $this->myForm->addFormControl($input, 'Module Name');
     }
 

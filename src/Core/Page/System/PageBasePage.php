@@ -77,7 +77,7 @@ abstract class PageBasePage extends CorePage
     $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->myLanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
-    $input->setEmptyOption(true);
+    $input->setEmptyOption();
     $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
     $this->myForm->addFormControl($input, 'Title');
 
@@ -92,7 +92,7 @@ abstract class PageBasePage extends CorePage
     $tabs  = Abc::$DL->systemTabGetAll($this->myLanId);
     $input = new SelectControl('ptb_id');
     $input->setOptions($tabs, 'ptb_id', 'ptb_label');
-    $input->setEmptyOption('ptb');
+    $input->setEmptyOption();
     $this->myForm->addFormControl($input, 'Page Tab');
 
 
@@ -100,7 +100,7 @@ abstract class PageBasePage extends CorePage
     $pages = Abc::$DL->systemPageGetAllMasters($this->myLanId);
     $input = new SelectControl('pag_id_org');
     $input->setOptions($pages, 'pag_id', 'pag_class');
-    $input->setEmptyOption('');
+    $input->setEmptyOption();
     $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
     $this->myForm->addFormControl($input, 'Original Page');
 
@@ -109,7 +109,7 @@ abstract class PageBasePage extends CorePage
     $menus = Abc::$DL->systemMenuGetAllEntries($this->myLanId);
     $input = new SelectControl('mnu_id');
     $input->setOptions($menus, 'mnu_id', 'mnu_name');
-    $input->setEmptyOption(true);
+    $input->setEmptyOption();
     $input->setOptionsObfuscator(Abc::getObfuscator('mnu'));
     $this->myForm->addFormControl($input, 'Menu');
 

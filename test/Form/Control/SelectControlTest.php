@@ -89,7 +89,7 @@ class SelectControlTest extends PHPUnit_Framework_TestCase
     $form->addFieldSet($fieldset);
     
     $input  = new SelectControl('cnt_id');
-    $input->setEmptyOption(true);
+    $input->setEmptyOption();
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 

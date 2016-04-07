@@ -588,7 +588,7 @@ abstract class Abc
   {
     if (isset($_GET['pag']))
     {
-      $pag_id    = Abc::deObfuscate($_GET['pag'], 'pag');
+      $pag_id    = self::deObfuscate($_GET['pag'], 'pag');
       $pag_alias = null;
     }
     else if (isset($_GET['page']))
