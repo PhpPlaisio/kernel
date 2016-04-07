@@ -52,10 +52,10 @@ class TabOverviewPage extends CorePage
     // Show label of the page tab.
     $table->addColumn(new TextTableColumn('Label', 'ptb_label'));
 
-    // Add column with link to the details of the page tab.
+    // Show link to the details of the page tab.
     $table->addColumn(new TabDetailsIconTableColumn());
 
-    // Add column with link to the modify the page tab.
+    // Show link to the modify the page tab.
     $table->addColumn(new TabUpdateIconTableColumn());
 
     // Generate the HTML code for the table.

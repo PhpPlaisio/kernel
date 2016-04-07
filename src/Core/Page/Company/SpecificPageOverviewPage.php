@@ -76,13 +76,13 @@ class SpecificPageOverviewPage extends CompanyPage
     // Add column with name of child class.
     $table->addColumn(new TextTableColumn('Child Class', 'pag_class_child'));
 
-    // Add column with link to the details of the page.
+    // Show link to the details of the page.
     $table->addColumn(new PageDetailsIconTableColumn());
 
-    // Add column with link to modify Company specific page.
+    // Show link to modify Company specific page.
     $table->addColumn(new SpecificPageUpdateIconTableColumn($this->myActCmpId));
 
-    // Add column with link to delete Company specific page.
+    // Show link to delete Company specific page.
     $table->addColumn(new SpecificPageDeleteIconTableColumn($this->myActCmpId));
 
     echo $table->getHtmlTable($this->myPages);

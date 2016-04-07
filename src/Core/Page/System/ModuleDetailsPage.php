@@ -100,7 +100,7 @@ class ModuleDetailsPage extends CorePage
     // Show company abbr.
     $table->addColumn(new TextTableColumn('Company', 'cmp_abbr'));
 
-    // Add column with link to view the details of the company.
+    // Show link to view the details of the company.
     $table->addColumn(new CompanyDetailsIconTableColumn());
 
     echo $table->getHtmlTable($functions);
@@ -142,7 +142,7 @@ class ModuleDetailsPage extends CorePage
     // Show function name.
     $table->addColumn(new TextTableColumn('Function', 'fun_name'));
 
-    // Add column with link to view the details of the functionality.
+    // Show link to view the details of the functionality.
     $table->addColumn(new FunctionalityDetailsIconTableColumn());
 
     echo $table->getHtmlTable($functions);
