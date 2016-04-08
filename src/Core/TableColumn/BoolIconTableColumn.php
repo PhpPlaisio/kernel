@@ -30,7 +30,7 @@ class BoolIconTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText    The header text this table column.
+   * @param string|int|null $theHeaderText    The header text of this table column.
    * @param string          $theFieldName     The field name of the data row used for generating this table column.
    * @param bool            $theShowFalseFlag If set for false values an icon is shown, otherwise the cell is empty for
    *                                          false values.

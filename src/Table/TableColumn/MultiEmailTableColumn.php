@@ -36,7 +36,7 @@ class MultiEmailTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText    The header text this table column.
+   * @param string|int|null $theHeaderText    The header text of this table column.
    * @param string          $theFieldName     The field name of the data rows used for generating this table column.
    * @param string          $theDataSeparator The character for separating multiple email addresses in the input data.
    * @param string          $theHtmlSeparator The HTML snippet for separating multiple email addresses in the generated
