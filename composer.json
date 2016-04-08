@@ -10,7 +10,7 @@
   "prefer-stable": true,
   "require-dev": {
     "phing/phing": "*",
-    "phpunit/phpunit": ">=4.*"
+    "phpunit/phpunit": ">=4.0.0"
   },
   "require": {
     "php": ">=5.4.0",
