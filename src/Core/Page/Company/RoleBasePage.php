@@ -78,7 +78,7 @@ abstract class RoleBasePage extends CompanyPage
     // Create form control for comment.
     $input = new TextControl('rol_weight');
     $input->setAttrMaxLength(C::LEN_ROL_WEIGHT);
-    $this->myForm->addFormControl($input, 'Weight');    
+    $this->myForm->addFormControl($input, 'Weight');
     // XXX numeric
 
     // Create a submit button.

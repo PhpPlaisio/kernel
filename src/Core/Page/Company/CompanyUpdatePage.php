@@ -14,7 +14,7 @@ class CompanyUpdatePage extends CompanyBasePage
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The details of the target company.
-   * 
+   *
    * @var array
    */
   private $myDetails;

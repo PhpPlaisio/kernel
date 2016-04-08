@@ -2,8 +2,8 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Error\LogicException;
 use SetBased\Abc\Form\SlatJoint\SlatJoint;
+use SetBased\Affirm\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -66,7 +66,7 @@ abstract class SlatControlFactory
   public function createFormControl($theParentControl, $theSlatJointName, $theControlName = null)
   {
     $control = $this->mySlatJoints[$theSlatJointName]->createControl(isset($theControlName) ?
-                                                                    $theControlName : $theSlatJointName);
+                                                                       $theControlName : $theSlatJointName);
     $theParentControl->addFormControl($control);
 
     return $control;

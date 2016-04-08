@@ -22,7 +22,7 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The obfuscator for page IDs.
-   * 
+   *
    * @var Obfuscator
    */
   private $myPagIdObfuscator;

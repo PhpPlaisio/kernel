@@ -22,7 +22,7 @@ class SystemModuleUpdateCompaniesSlatControlFactory extends SlatControlFactory
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The obfuscator for company IDs.
-   * 
+   *
    * @var Obfuscator
    */
   private $myCmpIdObfuscator;

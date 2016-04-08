@@ -10,7 +10,6 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\SystemModuleUpdateCompaniesSlatControlFactory;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
-
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
@@ -104,7 +103,7 @@ class ModuleUpdateCompaniesPage extends CorePage
     // Add field set.
     $field_set = new FieldSet('');
     $this->myForm->addFieldSet($field_set);
-    
+
     // Create factory.
     $factory = new SystemModuleUpdateCompaniesSlatControlFactory();
     $factory->enableFilter();

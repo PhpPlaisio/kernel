@@ -15,7 +15,7 @@ class WordDeletePage extends BabelPage
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The ID of the word.
-   * 
+   *
    * @var int
    */
   private $myWrdId;

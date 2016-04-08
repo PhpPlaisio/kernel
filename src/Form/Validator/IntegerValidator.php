@@ -30,7 +30,7 @@ class IntegerValidator implements Validator
    * Object constructor.
    *
    * @param int|null $theMinValue The minimum required value.
-   * @param int $theMaxValue The maximum required value.
+   * @param int      $theMaxValue The maximum required value.
    */
   public function __construct($theMinValue = null, $theMaxValue = PHP_INT_MAX)
   {

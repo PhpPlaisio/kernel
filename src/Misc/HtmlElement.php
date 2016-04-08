@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Misc;
 
 //----------------------------------------------------------------------------------------------------------------------
-use SetBased\Abc\Error\LogicException;
+use SetBased\Affirm\Exception\LogicException;
 
 /**
  * Abstract parent class for HTML elements.

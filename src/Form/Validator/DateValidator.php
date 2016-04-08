@@ -2,8 +2,8 @@
 //--------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Validator;
 
-use SetBased\Abc\Error\LogicException;
 use SetBased\Abc\Form\Control\DateControl;
+use SetBased\Affirm\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**

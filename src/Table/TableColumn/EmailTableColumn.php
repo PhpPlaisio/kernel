@@ -22,7 +22,7 @@ class EmailTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text this table column. 
+   * @param string|int|null $theHeaderText The header text this table column.
    * @param string          $theFieldName  The field name of the data rows used for generating this table column.
    */
   public function __construct($theHeaderText, $theFieldName)

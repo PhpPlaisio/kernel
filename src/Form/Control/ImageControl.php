@@ -2,8 +2,8 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Error\LogicException;
 use SetBased\Abc\Helper\Html;
+use SetBased\Affirm\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**

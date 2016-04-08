@@ -8,7 +8,6 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\CompanyRoleUpdateFunctionalitiesSlatControlFactory;
-
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
@@ -23,7 +22,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The details of the role.
-   * 
+   *
    * @var array
    */
   private $myDetails;

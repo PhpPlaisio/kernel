@@ -21,7 +21,7 @@ class SpecificPageOverviewPage extends CompanyPage
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The details of the company specific pages.
-   * 
+   *
    * @var array[]
    */
   private $myPages;

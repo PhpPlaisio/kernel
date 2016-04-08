@@ -2,10 +2,10 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Error\LogicException;
 use SetBased\Abc\Form\Cleaner\Cleaner;
 use SetBased\Abc\Form\Formatter\Formatter;
 use SetBased\Abc\Helper\Html;
+use SetBased\Affirm\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**

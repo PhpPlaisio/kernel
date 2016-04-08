@@ -21,7 +21,7 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The obfuscator for module IDs.
-   * 
+   *
    * @var Obfuscator
    */
   private $myMdlIdObfuscator;

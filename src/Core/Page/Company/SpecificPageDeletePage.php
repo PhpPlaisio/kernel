@@ -16,14 +16,14 @@ class SpecificPageDeletePage extends Page
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The ID of the target company.
-   * 
+   *
    * @var int
    */
   private $myTargetCmpId;
 
   /**
    * The ID of the target page.
-   * 
+   *
    * @var int
    */
   private $myTargetPagId;

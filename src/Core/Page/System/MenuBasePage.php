@@ -116,7 +116,7 @@ abstract class MenuBasePage extends CorePage
     $input = new TextControl('mnu_link');
     $input->setAttrMaxLength(C::LEN_MNU_LINK);
     $this->myForm->addFormControl($input, 'Menu Link');
-    
+
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

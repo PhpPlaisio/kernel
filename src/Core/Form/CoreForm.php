@@ -9,7 +9,6 @@ use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\Control\InvisibleControl;
-
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 

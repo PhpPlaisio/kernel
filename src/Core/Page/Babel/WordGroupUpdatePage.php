@@ -14,7 +14,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The details of the word group.
-   * 
+   *
    * @var array
    */
   private $myDetails;

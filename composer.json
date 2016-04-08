@@ -10,12 +10,13 @@
   "prefer-stable": true,
   "require-dev": {
     "phing/phing": "*",
-    "phpunit/phpunit": "*"
+    "phpunit/phpunit": "5.*"
   },
   "require": {
     "php": ">=5.4.0",
     "gajus/dindent": "2.*",
     "ircmaxell/password-compat": ">=1.0.3",
+    "setbased/php-affirm": "*",
     "setbased/php-stratum": "*"
   },
   "autoload": {

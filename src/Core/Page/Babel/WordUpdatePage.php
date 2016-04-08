@@ -14,7 +14,7 @@ class WordUpdatePage extends WordBasePage
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The details of the word.
-   * 
+   *
    * @var array
    */
   private $myDetails;

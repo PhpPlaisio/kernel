@@ -94,7 +94,7 @@ abstract class TabBasePage extends CorePage
     $input = new TextControl('ptb_label');
     $input->setAttrMaxLength(C::LEN_PTB_LABEL);
     $this->myForm->addFormControl($input, 'Label');
-    
+
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

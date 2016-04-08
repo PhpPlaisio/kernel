@@ -3,11 +3,11 @@
 namespace SetBased\Abc\Form;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Error\LogicException;
-use SetBased\Abc\Error\RuntimeException;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SilentControl;
+use SetBased\Affirm\Exception\LogicException;
+use SetBased\Affirm\Exception\RuntimeException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**

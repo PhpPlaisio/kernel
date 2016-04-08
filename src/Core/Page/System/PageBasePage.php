@@ -137,7 +137,7 @@ abstract class PageBasePage extends CorePage
     $input = new TextControl('pag_weight');
     $input->setAttrMaxLength(C::LEN_PAG_WEIGHT);
     $this->myForm->addFormControl($input, 'Weight');
-    
+
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

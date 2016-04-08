@@ -29,7 +29,7 @@ class NumericTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text this table column. 
+   * @param string|int|null $theHeaderText The header text this table column.
    * @param string          $theFieldName  The field name of the data row used for generating this table column.
    * @param string          $theFormat     The format specifier for formatting the content of this table column. See
    *                                       sprintf.
