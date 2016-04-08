@@ -65,7 +65,7 @@ class PageOverviewPage extends CorePage
     // Show modifying the page.
     $table->addColumn(new PageDetailsIconTableColumn());
 
-    // Add column with link to the details of the page.
+    // Show link to the details of the page.
     $table->addColumn(new PageUpdateIconTableColumn());
 
     echo $table->getHtmlTable($pages);
