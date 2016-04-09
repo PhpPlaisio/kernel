@@ -243,7 +243,7 @@ abstract class CorePage extends Page
     foreach ($menu_items as $i => $menu_item)
     {
       $mnu_link = '/pag/'.Abc::obfuscate($menu_item['pag_id'], 'pag').$menu_item['mnu_link'];
-      $class    = "class='menu_".$menu_item['mnu_level'];
+      $class    = " class='menu_".$menu_item['mnu_level'];
 
       if ($i==0) $class .= ' first';
       if ($i==count($menu_items) - 1) $class .= ' last';
