@@ -3,18 +3,20 @@
  * will be created always.
  *
  * @param p_cmp_id        The ID of the company (safeguard).
+ * @param p_blb_date      The lats modification time of the BLOB. Defaults to now().
  * @param p_blb_filename  The filename given to the BLOB.
  * @param p_blb_mime_type The mime type of the BLOB.
  * @param p_bdt_data      The actual BLOB.
  */
 create procedure abc_blob_insert_blob( in p_cmp_id        @abc_blob.cmp_id%type@,
+                                       in p_blb_date      @abc_blob.blb_date%type@,
                                        in p_blb_filename  @abc_blob.blb_file_name%type@,
                                        in p_blb_mime_type @abc_blob.blb_mime_type%type@,
                                        in p_bdt_data      @abc_blob_data.bdt_data%type@ )
 modifies sql data
 -- type: singleton0
 begin
-  declare l_done          boolean default false;
+  declare l_done          boolean;
   declare l_bdt_id        @abc_blob_data.bdt_id%type@;
   declare l_bdt_crc32     @abc_blob_data.bdt_crc32%type@;
   declare l_bdt_size      @abc_blob_data.bdt_size%type@;
@@ -42,6 +44,7 @@ begin
 
   open c_data;
   loop1: loop
+    set l_done = false;
     fetch c_data
     into  l_bdt_id
     ,     l_bdt_data
@@ -69,7 +72,7 @@ begin
     ,                          bdt_mime_type
     ,                          bdt_data )
     values( p_cmp_id
-    ,       now()
+    ,       sysdate()
     ,       l_bdt_crc32
     ,       l_bdt_size
     ,       p_blb_mime_type
@@ -81,14 +84,14 @@ begin
 
   insert into ABC_BLOB( cmp_id
   ,                     bdt_id
-  ,                     blb_inserted
+  ,                     blb_date
   ,                     blb_crc32
   ,                     blb_file_name
   ,                     blb_mime_type
   ,                     blb_size )
   values( p_cmp_id
   ,       l_bdt_id
-  ,       utc_timestamp()
+  ,       ifnull(p_blb_date, now())
   ,       l_bdt_crc32
   ,       p_blb_filename
   ,       p_blb_mime_type

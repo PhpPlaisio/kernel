@@ -9,11 +9,12 @@ create procedure abc_blob_find_by_crc32( in p_cmp_id @abc_blob.cmp_id%type@,
 reads sql data
 -- type: rows
 begin
-  select blb_id                                      blb_id
-  ,      blb_file_name                               blb_file_name
-  ,      blb_mime_type                               blb_mime_type
-  ,      blb_size                                    blb_size
-  ,      date_format(blb_inserted,'%a, %d %b %Y %T') blb_date
+  select blb_id
+  ,      blb_date
+  ,      blb_crc32
+  ,      blb_file_name
+  ,      blb_mime_type
+  ,      blb_size
   from   ABC_BLOB
   where  blb_crc32 = p_crc32
   and    cmp_id    = p_cmp_id

@@ -9,11 +9,12 @@ create procedure abc_blob_get_details( in p_cmp_id @abc_blob.cmp_id%type@,
 reads sql data
 -- type: row1
 begin
-  select blb_id             blb_id
-  ,      blb_file_name      blb_file_name
-  ,      blb_mime_type      blb_mime_type
-  ,      blb_size           blb_size
-  ,      blb_inserted       blb_date
+  select blb_id
+  ,      blb_date
+  ,      blb_crc32
+  ,      blb_file_name
+  ,      blb_mime_type
+  ,      blb_size
   from   ABC_BLOB
   where  blb_id = p_blb_id
   and    cmp_id = p_cmp_id
