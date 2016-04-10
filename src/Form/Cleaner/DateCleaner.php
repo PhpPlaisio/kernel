@@ -75,8 +75,8 @@ class DateCleaner implements Cleaner
     }
 
     // First validate against ISO 8601.
-    $parts = explode('-', $theValue);
-    $valid = (count($parts)==3 && checkdate($parts[1], $parts[2], $parts[0]));
+    $match = preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $theValue, $parts);
+    $valid = ($match && checkdate($parts[2], $parts[3], $parts[1]));
     if ($valid)
     {
       $date = new \DateTime($theValue);

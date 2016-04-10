@@ -79,37 +79,37 @@ class DateCleanerTest extends CleanerTest
    */
   public function testClean4()
   {
-    $cleaner = new DateCleaner('m/d/Y', '/', '/-. ');
+    $cleaner = new DateCleaner('m-d-Y', '-', '/-. ');
 
     // Test against ISO 8601.
     $raw   = '1966-04-10';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('1966-04-10', $value);
+    $this->assertEquals('1966-04-10', $value, "Raw: $raw");
 
     // Test against format.
     $raw   = '04-10-1966';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('1966-04-10', $value);
+    $this->assertEquals('1966-04-10', $value, "Raw: $raw");
 
     // Test against format.
     $raw   = '4-10-1966';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('1966-04-10', $value);
+    $this->assertEquals('1966-04-10', $value, "Raw: $raw");
 
     // Test against format.
     $raw   = '04.10-1966';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('1966-04-10', $value);
+    $this->assertEquals('1966-04-10', $value, "Raw: $raw");
 
     // Test against format.
     $raw   = '4 10 1966';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('1966-04-10', $value);
+    $this->assertEquals('1966-04-10', $value, "Raw: $raw");
 
     // Test against format.
     $raw   = '4 10.1966';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('1966-04-10', $value);
+    $this->assertEquals('1966-04-10', $value, "Raw: $raw");
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -138,6 +138,25 @@ class DateCleanerTest extends CleanerTest
     $raw   = '11/31/1966';
     $value = $cleaner->clean($raw);
     $this->assertEquals('11/31/1966', $value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against illegal dates.
+   */
+  public function testClean10()
+  {
+    // String with 3 parts.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = '10-april-1966';
+    $value   = $cleaner->clean($raw);
+    $this->assertEquals('10-april-1966', $value);
+
+    // Some other string.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = 'Hello world.';
+    $value   = $cleaner->clean($raw);
+    $this->assertEquals('Hello world.', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
