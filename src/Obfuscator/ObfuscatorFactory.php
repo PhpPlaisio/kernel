@@ -11,7 +11,7 @@ interface ObfuscatorFactory
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * De-obfuscated database ID.
+   * De-obfuscates an obfuscated database ID.
    *
    * @param string $theCode  The obfuscated database ID.
    * @param string $theLabel The alias for the column with the database IDs.
