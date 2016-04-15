@@ -16,6 +16,7 @@
     "php": ">=5.4.0",
     "gajus/dindent": "2.*",
     "ircmaxell/password-compat": ">=1.0.3",
+    "setbased/abc-obfuscator-interface": "*",
     "setbased/php-affirm": "*",
     "setbased/php-stratum": "*"
   },
