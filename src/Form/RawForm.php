@@ -8,7 +8,7 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Validator\CompoundValidator;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Misc\HtmlElement;
-use SetBased\Affirm\Exception\FallenException;
+use SetBased\Exception\FallenException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**

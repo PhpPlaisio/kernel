@@ -8,7 +8,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Page\Page;
-use SetBased\Affirm\Exception\FallenException;
+use SetBased\Exception\FallenException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**

@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
-use SetBased\Affirm\Exception\LogicException;
+use SetBased\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**

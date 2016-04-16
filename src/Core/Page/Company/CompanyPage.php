@@ -9,7 +9,7 @@ use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\Http;
-use SetBased\Affirm\Exception\LogicException;
+use SetBased\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**

@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\Cleaner;
-use SetBased\Affirm\Exception\LogicException;
+use SetBased\Exception\LogicException;
 
 /**
  * Class for complex form controls. A complex form control consists of one of more form controls.

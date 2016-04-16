@@ -7,7 +7,7 @@ use SetBased\Abc\Core\Page\Misc\W3cValidatePage;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\Url;
-use SetBased\Affirm\Exception\LogicException;
+use SetBased\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
