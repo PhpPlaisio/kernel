@@ -63,7 +63,6 @@ class TabDetailsPage extends CorePage
     $this->showDetails();
 
     $this->showMasterPages();
-
     // XXX Show all pages.
   }
 

@@ -4,7 +4,6 @@ namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\RadiosControl;
 
-
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat joint for table columns witch table cells with a radios form controls.

@@ -54,7 +54,6 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   protected $myValues = [];
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.

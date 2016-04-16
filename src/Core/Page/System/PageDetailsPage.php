@@ -64,7 +64,6 @@ class PageDetailsPage extends CorePage
     $this->showFunctionalities();
 
     $this->showGrantedRoles();
-
     // XXX Show all child pages (if page is a master page).
   }
 

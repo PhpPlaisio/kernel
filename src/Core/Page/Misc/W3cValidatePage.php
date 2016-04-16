@@ -161,7 +161,6 @@ class W3cValidatePage extends Page
 
     $response = curl_exec($ch);
 
-
     if (strpos($response, 'X-W3C-Validator-Status: Valid')>0)
     {
       echo 'xhtml: OK';

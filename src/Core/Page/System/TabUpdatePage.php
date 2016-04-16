@@ -67,7 +67,6 @@ class TabUpdatePage extends TabBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-
     if ($values['ptb_title'])
     {
       $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,

@@ -245,7 +245,6 @@ class LoginPage extends Page
           // Unset session and CSRF cookies.
           setcookie('ses_session_token', false, false, '/', $abc->getCanonicalServerName(), true, true);
           setcookie('ses_csrf_token', false, false, '/', $abc->getCanonicalServerName(), true, false);
-
           /*
           // Get tokens for cross domain redirect.
           $tokens = Abc::$DL->sessionGetRedirectTokens( $this->myRequestBus->getSesId() );

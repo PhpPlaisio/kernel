@@ -63,7 +63,6 @@ abstract class Control extends HtmlElement
    */
   protected $myValidators = [];
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.

@@ -80,7 +80,6 @@ abstract class MenuBasePage extends CorePage
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
     $this->myForm->addFormControl($input, 'Menu Title');
 
-
     // Create select box for chose page for menu.
     $pages = Abc::$DL->systemPageGetAll($this->myLanId);
     $input = new SelectControl('pag_id');
@@ -89,7 +88,6 @@ abstract class MenuBasePage extends CorePage
     $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
     $this->myForm->addFormControl($input, 'Page Class', true);
 
-
     // Create text form control for input menu level.
     $input = new TextControl('mnu_level');
     $input->setAttrMaxLength(C::LEN_MNU_LEVEL);
@@ -97,13 +95,11 @@ abstract class MenuBasePage extends CorePage
     $input->addValidator(new IntegerValidator(0, 100));
     $this->myForm->addFormControl($input, 'Menu Level', true);
 
-
     // Create text form control for input menu group.
     $input = new TextControl('mnu_group');
     $input->setAttrMaxLength(C::LEN_MNU_GROUP);
     $input->addValidator(new IntegerValidator(0, 100));
     $this->myForm->addFormControl($input, 'Menu Group', true);
-
 
     // Create text form control for input menu weight.
     $input = new TextControl('mnu_weight');
@@ -111,12 +107,10 @@ abstract class MenuBasePage extends CorePage
     $input->addValidator(new IntegerValidator(0, 999));
     $this->myForm->addFormControl($input, 'Menu Weight', true);
 
-
     // Create text box for URL of the menu item.
     $input = new TextControl('mnu_link');
     $input->setAttrMaxLength(C::LEN_MNU_LINK);
     $this->myForm->addFormControl($input, 'Menu Link');
-
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

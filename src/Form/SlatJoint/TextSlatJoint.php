@@ -4,7 +4,6 @@ namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\TextControl;
 
-
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat joint for table columns with table cells with a input:text form control.

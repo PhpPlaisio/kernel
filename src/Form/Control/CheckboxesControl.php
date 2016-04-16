@@ -315,7 +315,6 @@ class CheckboxesControl extends Control
 
         // Set the white listed value.
         $theWhiteListValue[$this->myName][$key] = !empty($submitted);
-
       }
       else
       {

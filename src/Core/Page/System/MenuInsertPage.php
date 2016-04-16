@@ -64,7 +64,6 @@ class MenuInsertPage extends MenuBasePage
                                $values['mnu_group'],
                                $values['mnu_weight'],
                                $values['mnu_link']);
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------

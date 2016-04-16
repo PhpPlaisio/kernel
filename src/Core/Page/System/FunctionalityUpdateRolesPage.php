@@ -191,7 +191,6 @@ class FunctionalityUpdateRolesPage extends CorePage
   private function showFunctionality()
   {
 
-
     $table = new CoreDetailTable();
 
     // Add row for the ID of the function.

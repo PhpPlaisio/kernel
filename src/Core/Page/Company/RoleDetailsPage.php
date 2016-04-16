@@ -81,7 +81,6 @@ class RoleDetailsPage extends CompanyPage
     // Add table action for modifying the granted functionalities.
     $table->addTableAction('default', new RoleUpdateFunctionalitiesTableAction($this->myActCmpId, $this->myRolId));
 
-
     // Show the ID of the module.
     $table->addColumn(new NumericTableColumn('ID', 'mdl_id'));
 

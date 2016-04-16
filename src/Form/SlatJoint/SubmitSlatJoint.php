@@ -4,7 +4,6 @@ namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\SubmitControl;
 
-
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat joint for table columns witch table cells with a input:submit form control.

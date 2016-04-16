@@ -87,14 +87,12 @@ abstract class PageBasePage extends CorePage
     $this->myForm->addFormControl($input, 'Title');
     /** @todo Add validator: either wrd_id is not empty or pag_title is not empty */
 
-
     // Create form control for page tab group.
     $tabs  = Abc::$DL->systemTabGetAll($this->myLanId);
     $input = new SelectControl('ptb_id');
     $input->setOptions($tabs, 'ptb_id', 'ptb_label');
     $input->setEmptyOption();
     $this->myForm->addFormControl($input, 'Page Tab');
-
 
     // Create form control for original page.
     $pages = Abc::$DL->systemPageGetAllMasters($this->myLanId);
@@ -104,7 +102,6 @@ abstract class PageBasePage extends CorePage
     $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
     $this->myForm->addFormControl($input, 'Original Page');
 
-
     // Create form control for menu item with which the page is associated..
     $menus = Abc::$DL->systemMenuGetAllEntries($this->myLanId);
     $input = new SelectControl('mnu_id');
@@ -113,31 +110,26 @@ abstract class PageBasePage extends CorePage
     $input->setOptionsObfuscator(Abc::getObfuscator('mnu'));
     $this->myForm->addFormControl($input, 'Menu');
 
-
     // Create form control for page alias.
     $input = new TextControl('pag_alias');
     $input->setAttrMaxLength(C::LEN_PAG_ALIAS);
     $this->myForm->addFormControl($input, 'Alias');
-
 
     // Create form control for page class.
     $input = new TextControl('pag_class');
     $input->setAttrMaxLength(C::LEN_PAG_CLASS);
     $this->myForm->addFormControl($input, 'Class', true);
 
-
     // Create form control for the page label.
     $input = new TextControl('pag_label');
     $input->setAttrMaxLength(C::LEN_PAG_LABEL);
     $this->myForm->addFormControl($input, 'Label');
-
 
     // Create form control for the weight of the page (inside a tab group).
     /** @todo validate weight is a number and/or form control or validator for numeric input. */
     $input = new TextControl('pag_weight');
     $input->setAttrMaxLength(C::LEN_PAG_WEIGHT);
     $this->myForm->addFormControl($input, 'Weight');
-
 
     // Create a submit button.
     $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');

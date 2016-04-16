@@ -49,7 +49,6 @@ class OverviewTable extends HtmlElement
    */
   private $mySortable = true;
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds @a $theColumn to this table and returns the column.
@@ -124,18 +123,15 @@ class OverviewTable extends HtmlElement
     }
     $ret .= '</colgroup>';
 
-
     // Generate HTML code for the table header.
     $ret .= '<thead>';
     $ret .= $this->getHtmlHeader();
     $ret .= '</thead>';
 
-
     // Generate HTML code for the table body.
     $ret .= '<tbody>';
     $ret .= $this->getHtmlBody($theRows);
     $ret .= '</tbody>';
-
 
     $ret .= '</table>';
 
