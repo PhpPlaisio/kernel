@@ -24,7 +24,7 @@ class DivControl extends Control
   public function generate()
   {
     $html = $this->myPrefix;
-    $html .= Html::generateElement('div', $this->myAttributes, $this->myInnerHtml, true);
+    $html .= Html::generateElement('div', $this->attributes, $this->myInnerHtml, true);
     $html .= $this->myPostfix;
 
     return $html;

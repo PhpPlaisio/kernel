@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Table;
 
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Misc\HtmlElement;
+use SetBased\Abc\HtmlElement;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -40,7 +40,7 @@ class DetailTable extends HtmlElement
   {
     $ret = $this->getHtmlPrefix();
 
-    $ret .= Html::generateTag('table', $this->myAttributes);
+    $ret .= Html::generateTag('table', $this->attributes);
 
     // Generate HTML code for the table header.
     $ret .= '<thead>';

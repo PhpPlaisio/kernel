@@ -134,7 +134,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrAutoComplete($theValue)
   {
-    $this->myAttributes['autocomplete'] = $theValue;
+    $this->attributes['autocomplete'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrAutoFocus($theValue)
   {
-    $this->myAttributes['autofocus'] = $theValue;
+    $this->attributes['autofocus'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -160,7 +160,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrDisabled($theValue)
   {
-    $this->myAttributes['disabled'] = $theValue;
+    $this->attributes['disabled'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -171,7 +171,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrForm($theValue)
   {
-    $this->myAttributes['form'] = $theValue;
+    $this->attributes['form'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrList($theValue)
   {
-    $this->myAttributes['list'] = $theValue;
+    $this->attributes['list'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrMax($theValue)
   {
-    $this->myAttributes['max'] = $theValue;
+    $this->attributes['max'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -204,7 +204,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrMaxLength($theValue)
   {
-    $this->myAttributes['maxlength'] = $theValue;
+    $this->attributes['maxlength'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -215,7 +215,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrMin($theValue)
   {
-    $this->myAttributes['min'] = $theValue;
+    $this->attributes['min'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -228,7 +228,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrMultiple($theValue)
   {
-    $this->myAttributes['multiple'] = $theValue;
+    $this->attributes['multiple'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -239,7 +239,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrPattern($theValue)
   {
-    $this->myAttributes['pattern'] = $theValue;
+    $this->attributes['pattern'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrPlaceHolder($theValue)
   {
-    $this->myAttributes['placeholder'] = $theValue;
+    $this->attributes['placeholder'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -263,7 +263,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrReadOnly($theValue)
   {
-    $this->myAttributes['readonly'] = $theValue;
+    $this->attributes['readonly'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -276,7 +276,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrRequired($theValue)
   {
-    $this->myAttributes['required'] = $theValue;
+    $this->attributes['required'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -287,7 +287,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrSize($theValue)
   {
-    $this->myAttributes['size'] = $theValue;
+    $this->attributes['size'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -298,7 +298,7 @@ abstract class SimpleControl extends Control
    */
   public function setAttrStep($theValue)
   {
-    $this->myAttributes['step'] = $theValue;
+    $this->attributes['step'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -461,15 +461,15 @@ abstract class SimpleControl extends Control
     // If a label must be generated make sure the form control and the label have matching 'id' and 'for' attributes.
     if (isset($this->myLabelPosition))
     {
-      if (!isset($this->myAttributes['id']))
+      if (!isset($this->attributes['id']))
       {
         $id                             = Html::getAutoId();
-        $this->myAttributes['id']       = $id;
+        $this->attributes['id']         = $id;
         $this->myLabelAttributes['for'] = $id;
       }
       else
       {
-        $this->myLabelAttributes['for'] = $this->myAttributes['id'];
+        $this->myLabelAttributes['for'] = $this->attributes['id'];
       }
     }
 

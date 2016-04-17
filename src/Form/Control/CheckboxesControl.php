@@ -91,7 +91,7 @@ class CheckboxesControl extends Control
   public function generate()
   {
     $html = $this->myPrefix;
-    $html .= Html::generateTag('span', $this->myAttributes);
+    $html .= Html::generateTag('span', $this->attributes);
 
     if (is_array($this->myOptions))
     {

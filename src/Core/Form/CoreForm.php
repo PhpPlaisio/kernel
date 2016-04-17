@@ -41,8 +41,8 @@ class CoreForm extends Form
   {
     parent::__construct($theName, $theCsrfCheckFlag);
 
-    $this->myAttributes['class']        = 'input_table';
-    $this->myAttributes['autocomplete'] = false;
+    $this->attributes['class']        = 'input_table';
+    $this->attributes['autocomplete'] = false;
 
     $this->myVisibleFieldSet = $this->addFieldSet(new CoreFieldSet(''));
   }

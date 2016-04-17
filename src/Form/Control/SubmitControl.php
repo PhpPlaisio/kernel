@@ -27,7 +27,7 @@ class SubmitControl extends PushMeControl
    */
   public function setAttrFormAction($theValue)
   {
-    $this->myAttributes['formaction'] = $theValue;
+    $this->attributes['formaction'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class SubmitControl extends PushMeControl
    */
   public function setAttrFormEncType($theValue)
   {
-    $this->myAttributes['formenctype'] = $theValue;
+    $this->attributes['formenctype'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ class SubmitControl extends PushMeControl
    */
   public function setAttrFormMethod($theValue)
   {
-    $this->myAttributes['formmethod'] = $theValue;
+    $this->attributes['formmethod'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ class SubmitControl extends PushMeControl
    */
   public function setAttrFormTarget($theValue)
   {
-    $this->myAttributes['formtarget'] = $theValue;
+    $this->attributes['formtarget'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

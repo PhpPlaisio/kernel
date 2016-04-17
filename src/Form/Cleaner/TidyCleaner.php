@@ -57,7 +57,7 @@ class TidyCleaner implements Cleaner
 
     $tidy = new \tidy;
 
-    $tidy->parseString($value, $tidy_config, Html::$ourEncoding);
+    $tidy->parseString($value, $tidy_config, Html::$encoding);
     $tidy->cleanRepair();
     $value = trim(tidy_get_output($tidy));
 

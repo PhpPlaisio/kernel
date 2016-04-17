@@ -29,10 +29,10 @@ class TextAreaControl extends SimpleControl
    */
   public function generate()
   {
-    $this->myAttributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->mySubmitName;
 
     $html = $this->myPrefix;
-    $html .= Html::generateElement('textarea', $this->myAttributes, $this->myValue);
+    $html .= Html::generateElement('textarea', $this->attributes, $this->myValue);
     $html .= $this->myPostfix;
 
     return $html;
@@ -46,7 +46,7 @@ class TextAreaControl extends SimpleControl
    */
   public function setAttrCols($theValue)
   {
-    $this->myAttributes['cols'] = $theValue;
+    $this->attributes['cols'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ class TextAreaControl extends SimpleControl
    */
   public function setAttrRows($theValue)
   {
-    $this->myAttributes['rows'] = $theValue;
+    $this->attributes['rows'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ class TextAreaControl extends SimpleControl
    */
   public function setAttrWrap($theValue)
   {
-    $this->myAttributes['wrap'] = $theValue;
+    $this->attributes['wrap'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

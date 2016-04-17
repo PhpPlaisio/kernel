@@ -7,7 +7,7 @@ use SetBased\Abc\Form\Control\CompoundControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Validator\CompoundValidator;
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Misc\HtmlElement;
+use SetBased\Abc\HtmlElement;
 use SetBased\Exception\FallenException;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -62,8 +62,8 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function __construct($theName = '')
   {
-    $this->myAttributes['action'] = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
-    $this->myAttributes['method'] = 'post';
+    $this->attributes['action'] = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
+    $this->attributes['method'] = 'post';
 
     $this->myFieldSets = new ComplexControl($theName);
   }
@@ -281,7 +281,7 @@ class RawForm extends HtmlElement implements CompoundControl
   public function isSubmitted($theName)
   {
     /** @todo check value is white list. */
-    switch ($this->myAttributes['method'])
+    switch ($this->attributes['method'])
     {
       case 'post':
         if (isset($_POST[$theName])) return true;
@@ -292,7 +292,7 @@ class RawForm extends HtmlElement implements CompoundControl
         break;
 
       default:
-        throw new FallenException('method', $this->myAttributes['method']);
+        throw new FallenException('method', $this->attributes['method']);
     }
 
     return false;
@@ -304,7 +304,7 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function loadSubmittedValues()
   {
-    switch ($this->myAttributes['method'])
+    switch ($this->attributes['method'])
     {
       case 'post':
         $values = &$_POST;
@@ -315,7 +315,7 @@ class RawForm extends HtmlElement implements CompoundControl
         break;
 
       default:
-        throw new FallenException('method', $this->myAttributes['method']);
+        throw new FallenException('method', $this->attributes['method']);
     }
 
     // For all field sets load all submitted values.
@@ -354,7 +354,7 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function setAttrAutoComplete($theAutoCompleteFlag)
   {
-    $this->myAttributes['autocomplete'] = $theAutoCompleteFlag;
+    $this->attributes['autocomplete'] = $theAutoCompleteFlag;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -368,7 +368,7 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function setAttrEncType($theEncType)
   {
-    $this->myAttributes['enctype'] = $theEncType;
+    $this->attributes['enctype'] = $theEncType;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -381,7 +381,7 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function setAttrMethod($theMethod)
   {
-    $this->myAttributes['method'] = $theMethod;
+    $this->attributes['method'] = $theMethod;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -432,7 +432,7 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   protected function generateStartTag()
   {
-    return Html::generateTag('form', $this->myAttributes);
+    return Html::generateTag('form', $this->attributes);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -67,10 +67,10 @@ class SelectControl extends SimpleControl
    */
   public function generate()
   {
-    $this->myAttributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->mySubmitName;
 
     $html = $this->myPrefix;
-    $html .= Html::generateTag('select', $this->myAttributes);
+    $html .= Html::generateTag('select', $this->attributes);
 
     // Add an empty option, if necessary.
     if (isset($this->myEmptyOption))

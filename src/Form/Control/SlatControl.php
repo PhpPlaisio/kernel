@@ -23,7 +23,7 @@ class SlatControl extends ComplexControl
   public function generate()
   {
     // Create start tag of table row.
-    $ret = Html::generateTag('tr', $this->myAttributes);
+    $ret = Html::generateTag('tr', $this->attributes);
 
     // Create table cells.
     foreach ($this->myControls as $control)

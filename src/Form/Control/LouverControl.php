@@ -69,7 +69,7 @@ class LouverControl extends ComplexControl
 
     $ret = $this->myPrefix;
 
-    $ret .= Html::generateTag('div', $this->myAttributes);
+    $ret .= Html::generateTag('div', $this->attributes);
     $ret .= '<table>';
 
     // Generate HTML code for the column classes.

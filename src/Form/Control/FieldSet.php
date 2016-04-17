@@ -100,7 +100,7 @@ class FieldSet extends ComplexControl
    */
   protected function generateStartTag()
   {
-    return Html::generateTag('fieldset', $this->myAttributes);
+    return Html::generateTag('fieldset', $this->attributes);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

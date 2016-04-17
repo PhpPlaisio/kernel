@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Table;
 
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Misc\HtmlElement;
+use SetBased\Abc\HtmlElement;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;
 use SetBased\Abc\Table\TableColumn\TableColumn;
 
@@ -109,7 +109,7 @@ class OverviewTable extends HtmlElement
   {
     $ret = $this->getHtmlPrefix();
 
-    $ret .= Html::generateTag('table', $this->myAttributes);
+    $ret .= Html::generateTag('table', $this->attributes);
 
     // Generate HTML code for the column classes.
     $ret .= '<colgroup>';

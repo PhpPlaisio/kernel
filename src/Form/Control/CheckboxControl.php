@@ -28,13 +28,13 @@ class CheckboxControl extends SimpleControl
    */
   public function generate()
   {
-    $this->myAttributes['type']    = 'checkbox';
-    $this->myAttributes['name']    = $this->mySubmitName;
-    $this->myAttributes['checked'] = $this->myValue;
+    $this->attributes['type']    = 'checkbox';
+    $this->attributes['name']    = $this->mySubmitName;
+    $this->attributes['checked'] = $this->myValue;
 
     $html = $this->myPrefix;
     $html .= $this->generatePrefixLabel();
-    $html .= Html::generateVoidElement('input', $this->myAttributes);
+    $html .= Html::generateVoidElement('input', $this->attributes);
     $html .= $this->generatePostfixLabel();
     $html .= $this->myPostfix;
 

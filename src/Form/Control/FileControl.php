@@ -18,12 +18,12 @@ class FileControl extends SimpleControl
    */
   public function generate()
   {
-    $this->myAttributes['type'] = 'file';
-    $this->myAttributes['name'] = $this->mySubmitName;
+    $this->attributes['type'] = 'file';
+    $this->attributes['name'] = $this->mySubmitName;
 
     $ret = $this->myPrefix;
     $ret .= $this->generatePrefixLabel();
-    $ret .= Html::generateVoidElement('input', $this->myAttributes);
+    $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
     $ret .= $this->myPostfix;
 
@@ -38,7 +38,7 @@ class FileControl extends SimpleControl
    */
   public function setAttrForm($theValue)
   {
-    $this->myAttributes['accept'] = $theValue;
+    $this->attributes['accept'] = $theValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

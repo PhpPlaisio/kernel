@@ -622,7 +622,7 @@ abstract class Page
   protected function echoMetaTags()
   {
     // Echo meta tag that specifies the character encoding.
-    echo '<meta', Html::generateAttribute('charset', Html::$ourEncoding), '/>';
+    echo '<meta', Html::generateAttribute('charset', Html::$encoding), '/>';
 
     // Echo meta tag for keywords (if any).
     $this->echoMetaTagKeywords();

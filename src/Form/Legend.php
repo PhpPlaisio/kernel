@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Form;
 
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Misc\HtmlElement;
+use SetBased\Abc\HtmlElement;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -25,7 +25,7 @@ class Legend extends HtmlElement
    */
   public function generate()
   {
-    return Html::generateElement('legend', $this->myAttributes, $this->myLegend, true);
+    return Html::generateElement('legend', $this->attributes, $this->myLegend, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

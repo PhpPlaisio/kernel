@@ -24,7 +24,7 @@ class LinkControl extends Control
   public function generate()
   {
     $ret = $this->myPrefix;
-    $ret .= Html::generateElement('a', $this->myAttributes, $this->myInnerHtml, true);
+    $ret .= Html::generateElement('a', $this->attributes, $this->myInnerHtml, true);
     $ret .= $this->myPostfix;
 
     return $ret;

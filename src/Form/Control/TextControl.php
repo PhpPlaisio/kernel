@@ -29,27 +29,27 @@ class TextControl extends SimpleControl
    */
   public function generate()
   {
-    $this->myAttributes['type'] = 'text';
-    $this->myAttributes['name'] = $this->mySubmitName;
+    $this->attributes['type'] = 'text';
+    $this->attributes['name'] = $this->mySubmitName;
 
-    if ($this->myFormatter) $this->myAttributes['value'] = $this->myFormatter->format($this->myValue);
-    else                    $this->myAttributes['value'] = $this->myValue;
+    if ($this->myFormatter) $this->attributes['value'] = $this->myFormatter->format($this->myValue);
+    else                    $this->attributes['value'] = $this->myValue;
 
-    if (isset($this->myAttributes['maxlength']))
+    if (isset($this->attributes['maxlength']))
     {
-      if (isset($this->myAttributes['size']))
+      if (isset($this->attributes['size']))
       {
-        $this->myAttributes['size'] = min($this->myAttributes['size'], $this->myAttributes['maxlength']);
+        $this->attributes['size'] = min($this->attributes['size'], $this->attributes['maxlength']);
       }
       else
       {
-        $this->myAttributes['size'] = $this->myAttributes['maxlength'];
+        $this->attributes['size'] = $this->attributes['maxlength'];
       }
     }
 
     $ret = $this->myPrefix;
     $ret .= $this->generatePrefixLabel();
-    $ret .= Html::generateVoidElement('input', $this->myAttributes);
+    $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
     $ret .= $this->myPostfix;
 

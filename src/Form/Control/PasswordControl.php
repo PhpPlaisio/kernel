@@ -31,25 +31,25 @@ class PasswordControl extends SimpleControl
    */
   public function generate()
   {
-    $this->myAttributes['type']  = 'password';
-    $this->myAttributes['name']  = $this->mySubmitName;
-    $this->myAttributes['value'] = $this->myValue;
+    $this->attributes['type']  = 'password';
+    $this->attributes['name']  = $this->mySubmitName;
+    $this->attributes['value'] = $this->myValue;
 
-    if (isset($this->myAttributes['maxlength']))
+    if (isset($this->attributes['maxlength']))
     {
-      if (isset($this->myAttributes['size']))
+      if (isset($this->attributes['size']))
       {
-        $this->myAttributes['size'] = min($this->myAttributes['size'], $this->myAttributes['maxlength']);
+        $this->attributes['size'] = min($this->attributes['size'], $this->attributes['maxlength']);
       }
       else
       {
-        $this->myAttributes['size'] = $this->myAttributes['maxlength'];
+        $this->attributes['size'] = $this->attributes['maxlength'];
       }
     }
 
     $ret = $this->myPrefix;
     $ret .= $this->generatePrefixLabel();
-    $ret .= Html::generateVoidElement('input', $this->myAttributes);
+    $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
     $ret .= $this->myPostfix;
 

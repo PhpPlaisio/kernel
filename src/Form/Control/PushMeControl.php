@@ -26,15 +26,15 @@ class PushMeControl extends SimpleControl
    */
   public function generate()
   {
-    $this->myAttributes['type'] = $this->myButtonType;
-    $this->myAttributes['name'] = $this->mySubmitName;
+    $this->attributes['type'] = $this->myButtonType;
+    $this->attributes['name'] = $this->mySubmitName;
 
-    if ($this->myFormatter) $this->myAttributes['value'] = $this->myFormatter->format($this->myValue);
-    else                    $this->myAttributes['value'] = $this->myValue;
+    if ($this->myFormatter) $this->attributes['value'] = $this->myFormatter->format($this->myValue);
+    else                    $this->attributes['value'] = $this->myValue;
 
     $ret = $this->myPrefix;
     $ret .= $this->generatePrefixLabel();
-    $ret .= Html::generateVoidElement('input', $this->myAttributes);
+    $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
     $ret .= $this->myPostfix;
 

@@ -4,7 +4,7 @@ namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Validator\CompoundValidator;
 use SetBased\Abc\Form\Validator\Validator;
-use SetBased\Abc\Misc\HtmlElement;
+use SetBased\Abc\HtmlElement;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ abstract class Control extends HtmlElement
    */
   public function getAttribute($theName)
   {
-    return (isset($this->myAttributes[$theName])) ? $this->myAttributes[$theName] : null;
+    return (isset($this->attributes[$theName])) ? $this->attributes[$theName] : null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
