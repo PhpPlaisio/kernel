@@ -82,7 +82,7 @@ class ModuleUpdatePage extends CompanyPage
 
     // Put everything together in a LoverControl.
     $louver = new LouverControl('data');
-    $louver->setAttrClass('overview_table');
+    $louver->addClass('overview_table');
     $louver->setRowFactory($factory);
     $louver->setFooterControl($button);
     $louver->setData($modules);

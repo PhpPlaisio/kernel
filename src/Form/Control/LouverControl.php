@@ -62,7 +62,7 @@ class LouverControl extends ComplexControl
       // additional rows to the louver control.
       $this->myTemplateData[$this->myTemplateKey] = 0;
       $row                                        = $this->myRowFactory->createRow($this, $this->myTemplateData);
-      $row->setAttrClass('slat_template');
+      $row->addClass('slat_template');
       $row->setAttrStyle('visibility: collapse');
       $row->prepare($this->mySubmitName);
     }
@@ -205,7 +205,7 @@ class LouverControl extends ComplexControl
       if ($control!==$this->myFooterControl)
       {
         // Add class for zebra theme.
-        $control->setAttrClass(($i % 2==0) ? 'even' : 'odd');
+        $control->addClass(($i % 2==0) ? 'even' : 'odd');
 
         // Generate the table row.
         $ret .= $control->generate();

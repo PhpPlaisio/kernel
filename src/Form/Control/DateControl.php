@@ -37,7 +37,7 @@ class DateControl extends TextControl
 
     $this->setAttrSize(10);
     $this->setAttrMaxLength(10);
-    $this->setAttrClass('datepicker');
+    $this->addClass('datepicker');
     $this->setCleaner(new DateCleaner('d-m-Y', '-', '/. :\\'));
     $this->setFormatter(new DateFormatter('d-m-Y'));
 
