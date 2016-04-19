@@ -19,6 +19,7 @@
     "setbased/exception": "1.*",
     "setbased/abc-html": "1.*",
     "setbased/abc-obfuscator-interface": "1.*",
+    "setbased/abc-url": "*",
     "setbased/php-affirm": "*",
     "setbased/php-stratum": "*"
   },
