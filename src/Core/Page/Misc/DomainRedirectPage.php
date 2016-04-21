@@ -6,7 +6,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\Form;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Page\Page;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -76,14 +76,14 @@ class DomainRedirectPage extends Page
       {
         // Fall back to general URL of OnzeRelaties.
         $parts = explode('.', $_SERVER['SERVER_NAME']);
-        Http::redirect('https://www.'.$parts[1].'.'.$parts[2]);
+        HttpHeader::redirectSeeOther('https://www.'.$parts[1].'.'.$parts[2]);
       }
     }
     else
     {
       // Fall back to general URL of OnzeRelaties.
       $parts = explode('.', $_SERVER['SERVER_NAME']);
-      Http::redirect('https://www.'.$parts[1].'.'.$parts[2]);
+      HttpHeader::redirectSeeOther('https://www.'.$parts[1].'.'.$parts[2]);
     }
   }
 
@@ -128,12 +128,12 @@ class DomainRedirectPage extends Page
       setcookie('ses_csrf_token', $session['ses_csrf_token'], false, '/', $_SERVER['SERVER_NAME'], true, false);
 
       // Redirect the browser to the requested page (if any).
-      Http::redirect(($this->myRedirect) ? $this->myRedirect : '/');
+      HttpHeader::redirectSeeOther(($this->myRedirect) ? $this->myRedirect : '/');
     }
     else
     {
       // Just in case fall back to general URL.
-      Http::redirect('https://www.'.$parts[1].'.'.$parts[2]);
+      HttpHeader::redirectSeeOther('https://www.'.$parts[1].'.'.$parts[2]);
     }
   }
 

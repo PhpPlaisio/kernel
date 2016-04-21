@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ abstract class CompanyPage extends CorePage
 
     $values           = $theForm->getValues();
     $this->myActCmpId = Abc::$DL->companyGetCmpIdByCmpAbbr($values['cmp_abbr']);
-    if ($this->myActCmpId) Http::redirect(self::getChildUrl($abc->getPagId(), $this->myActCmpId));
+    if ($this->myActCmpId) HttpHeader::redirectSeeOther(self::getChildUrl($abc->getPagId(), $this->myActCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

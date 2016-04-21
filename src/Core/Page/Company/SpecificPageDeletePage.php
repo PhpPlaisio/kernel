@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Page\Page;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ class SpecificPageDeletePage extends Page
   {
     Abc::$DL->companySpecificPageDelete($this->myTargetCmpId, $this->myTargetPagId);
 
-    Http::redirect(SpecificPageOverviewPage::getUrl($this->myTargetCmpId));
+    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->myTargetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -58,7 +58,7 @@ abstract class TabBasePage extends CorePage
   {
     $this->databaseAction();
 
-    Http::redirect(TabOverviewPage::getUrl());
+    HttpHeader::redirectSeeOther(TabOverviewPage::getUrl());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

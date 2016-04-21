@@ -11,7 +11,7 @@ use SetBased\Abc\Core\Form\SlatControlFactory\CompanyModulesUpdateSlatControlFac
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -146,7 +146,7 @@ class ModuleUpdatePage extends CompanyPage
   {
     $this->databaseAction();
 
-    Http::redirect(ModuleOverviewPage::getUrl($this->myActCmpId));
+    HttpHeader::redirectSeeOther(ModuleOverviewPage::getUrl($this->myActCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

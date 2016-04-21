@@ -11,7 +11,7 @@ use SetBased\Abc\Core\Form\SlatControlFactory\CompanyRoleUpdateFunctionalitiesSl
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -175,7 +175,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   {
     $this->databaseAction();
 
-    Http::redirect(RoleDetailsPage::getUrl($this->myActCmpId, $this->myRolId));
+    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->myActCmpId, $this->myRolId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -8,7 +8,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -185,7 +185,7 @@ class WordTranslatePage extends BabelPage
   {
     $this->dataBaseAction();
 
-    Http::redirect($this->myRedirectUrl);
+    HttpHeader::redirectSeeOther($this->myRedirectUrl);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

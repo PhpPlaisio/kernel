@@ -10,7 +10,7 @@ use SetBased\Abc\Form\Control\PasswordControl;
 use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\Password;
 use SetBased\Abc\Page\Page;
 
@@ -286,7 +286,7 @@ class LoginPage extends Page
                     false);
         }
 
-        Http::redirect(($this->myRedirect) ? $this->myRedirect : '/');
+        HttpHeader::redirectSeeOther(($this->myRedirect) ? $this->myRedirect : '/');
       }
 
       return true;

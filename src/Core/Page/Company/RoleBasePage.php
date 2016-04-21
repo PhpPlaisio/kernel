@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -111,7 +111,7 @@ abstract class RoleBasePage extends CompanyPage
   {
     $this->databaseAction();
 
-    Http::redirect(RoleDetailsPage::getUrl($this->myActCmpId, $this->myRolId));
+    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->myActCmpId, $this->myRolId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

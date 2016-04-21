@@ -7,7 +7,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\HtmlControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -151,7 +151,7 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     $this->databaseAction();
 
-    Http::redirect(SpecificPageOverviewPage::getUrl($this->myActCmpId));
+    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->myActCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

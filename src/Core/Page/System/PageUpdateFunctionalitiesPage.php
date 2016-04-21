@@ -14,7 +14,7 @@ use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
@@ -179,7 +179,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
   {
     $this->databaseAction();
 
-    Http::redirect(PageDetailsPage::getUrl($this->myTargetPagId));
+    HttpHeader::redirectSeeOther(PageDetailsPage::getUrl($this->myTargetPagId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

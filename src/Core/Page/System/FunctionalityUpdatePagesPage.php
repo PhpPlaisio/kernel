@@ -13,7 +13,7 @@ use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
@@ -170,7 +170,7 @@ class FunctionalityUpdatePagesPage extends CorePage
   {
     $this->databaseAction();
 
-    Http::redirect(FunctionalityDetailsPage::getUrl($this->myFunId));
+    HttpHeader::redirectSeeOther(FunctionalityDetailsPage::getUrl($this->myFunId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

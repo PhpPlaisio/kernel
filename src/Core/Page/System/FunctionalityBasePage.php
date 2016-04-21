@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -116,7 +116,7 @@ abstract class FunctionalityBasePage extends CorePage
   {
     $this->dataBaseAction();
 
-    Http::redirect(FunctionalityOverviewPage::getUrl());
+    HttpHeader::redirectSeeOther(FunctionalityOverviewPage::getUrl());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
@@ -181,7 +181,7 @@ class ModuleUpdateCompaniesPage extends CorePage
   {
     $this->databaseAction();
 
-    Http::redirect(ModuleDetailsPage::getUrl($this->myModId));
+    HttpHeader::redirectSeeOther(ModuleDetailsPage::getUrl($this->myModId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

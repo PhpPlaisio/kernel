@@ -6,7 +6,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -119,7 +119,7 @@ abstract class WordGroupBasePage extends BabelPage
   {
     $this->databaseAction();
 
-    Http::redirect(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
+    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

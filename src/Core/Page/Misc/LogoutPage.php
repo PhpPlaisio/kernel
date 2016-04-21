@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\Misc;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Page\Page;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ class LogoutPage extends Page
     session_start();
     session_destroy();
 
-    Http::redirect('/');
+    HttpHeader::redirectSeeOther('/');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

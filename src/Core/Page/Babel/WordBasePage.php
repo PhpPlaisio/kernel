@@ -10,7 +10,7 @@ use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
@@ -167,7 +167,7 @@ abstract class WordBasePage extends BabelPage
   {
     $this->databaseAction();
 
-    Http::redirect(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
+    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

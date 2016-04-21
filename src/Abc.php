@@ -5,7 +5,7 @@ namespace SetBased\Abc;
 use SetBased\Abc\Core\Page\Misc\LoginPage;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Error\NotAuthorizedException;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
 use SetBased\Abc\Page\Page;
@@ -445,7 +445,7 @@ abstract class Abc
       {
         // The preferred URI differs from the requested URI. Redirect the user agent to the preferred URL.
         self::$DL->rollback();
-        Http::redirect($uri, Http::HTTP_MOVED_PERMANENTLY);
+        HttpHeader::redirectMovedPermanently($uri);
       }
       else
       {
@@ -512,8 +512,9 @@ abstract class Abc
   {
     $this->logException($theException);
     self::$DL->rollback();
+
     // Set the HTTP status to 500 (Internal Server Error).
-    Http::error(Http::HTTP_INTERNAL_SERVER_ERROR);
+    HttpHeader::serverErrorInternalServerError();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -526,8 +527,9 @@ abstract class Abc
   {
     $this->logException($theException);
     self::$DL->rollback();
+
     // Set the HTTP status to 404 (Not Found).
-    Http::error(Http::HTTP_NOT_FOUND);
+    HttpHeader::clientErrorNotFound();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -545,15 +547,16 @@ abstract class Abc
       // Redirect the user agent to the login page. After the user has successfully logged on the user agent will be
       // redirected to currently requested URL.
 
-      Http::redirect(LoginPage::getUrl($_SERVER['REQUEST_URI']));
+      HttpHeader::redirectSeeOther(LoginPage::getUrl($_SERVER['REQUEST_URI']));
     }
     else
     {
       // The user is logged on and the user has requested an URL for which the user has no authorization.
       $this->logException($theException);
       self::$DL->rollback();
+
       // Set the HTTP status to 404 (Not Found).
-      Http::error(Http::HTTP_NOT_FOUND);
+      HttpHeader::clientErrorNotFound();
     }
   }
 

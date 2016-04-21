@@ -9,7 +9,7 @@ use SetBased\Abc\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -121,7 +121,7 @@ abstract class ModuleBasePage extends CorePage
   {
     $this->databaseAction();
 
-    Http::redirect(ModuleDetailsPage::getUrl($this->myMdlId));
+    HttpHeader::redirectSeeOther(ModuleDetailsPage::getUrl($this->myMdlId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -57,7 +57,7 @@ class WordDeletePage extends BabelPage
 
     Abc::$DL->wordDeleteWord($this->myWrdId);
 
-    Http::redirect(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->myActLanId));
+    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->myActLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

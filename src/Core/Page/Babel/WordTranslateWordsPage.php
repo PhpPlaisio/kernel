@@ -11,7 +11,7 @@ use SetBased\Abc\Core\Form\SlatControlFactory\BabelWordTranslateSlatControlFacto
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -158,7 +158,7 @@ class WordTranslateWordsPage extends BabelPage
   {
     $this->databaseAction();
 
-    Http::redirect(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
+    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

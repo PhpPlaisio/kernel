@@ -18,6 +18,7 @@
     "ircmaxell/password-compat": ">=1.0.3",
     "setbased/exception": "1.*",
     "setbased/abc-html": "1.*",
+    "setbased/abc-http-header": "*",
     "setbased/abc-obfuscator-interface": "1.*",
     "setbased/abc-url": "*",
     "setbased/php-affirm": "*",

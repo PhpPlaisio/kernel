@@ -9,7 +9,7 @@ use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Validator\IntegerValidator;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -142,7 +142,7 @@ abstract class MenuBasePage extends CorePage
   {
     $this->databaseAction();
 
-    Http::redirect(MenuOverviewPage::getUrl());
+    HttpHeader::redirectSeeOther(MenuOverviewPage::getUrl());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

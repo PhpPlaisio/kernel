@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Form;
-use SetBased\Abc\Helper\Http;
+use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -92,7 +92,7 @@ abstract class BabelPage extends CorePage
       $url .= '/'.$name.'/'.$value;
     }
 
-    Http::redirect($url);
+    HttpHeader::redirectSeeOther($url);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
