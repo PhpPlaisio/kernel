@@ -15,23 +15,23 @@ class NumericTableRow
   /**
    * Adds a row with a numeric value to a detail table.
    *
-   * @param DetailTable $theTable  The (detail) table.
-   * @param string      $theHeader The row header text.
-   * @param string      $theValue  The text.
-   * @param string      $theFormat The formatting string (see sprintf).
+   * @param DetailTable $table  The (detail) table.
+   * @param string      $header The row header text.
+   * @param string      $value  The text.
+   * @param string      $format The formatting string (see sprintf).
    */
-  public static function addRow($theTable, $theHeader, $theValue, $theFormat)
+  public static function addRow($table, $header, $value, $format)
   {
     $row = '<tr><th>';
-    $row .= Html::txt2Html($theHeader);
+    $row .= Html::txt2Html($header);
     $row .= '</th><td class="number">';
-    if ($theValue!==null && $theValue!==false && $theValue!=='')
+    if ($value!==null && $value!==false && $value!=='')
     {
-      $row .= Html::txt2Html(sprintf($theFormat, $theValue));
+      $row .= Html::txt2Html(sprintf($format, $value));
     }
     $row .= '</td></tr>';
 
-    $theTable->addRow($row);
+    $table->addRow($row);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

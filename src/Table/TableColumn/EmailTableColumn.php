@@ -16,29 +16,29 @@ class EmailTableColumn extends TableColumn
    *
    * @var string
    */
-  protected $myFieldName;
+  protected $fieldName;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
-   * @param string          $theFieldName  The field name of the data rows used for generating this table column.
+   * @param string|int|null $headerText The header text of this table column.
+   * @param string          $fieldName  The field name of the data rows used for generating this table column.
    */
-  public function __construct($theHeaderText, $theFieldName)
+  public function __construct($headerText, $fieldName)
   {
-    $this->myDataType   = 'email';
-    $this->myHeaderText = $theHeaderText;
-    $this->myFieldName  = $theFieldName;
+    $this->dataType   = 'email';
+    $this->headerText = $headerText;
+    $this->fieldName  = $fieldName;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theRow)
+  public function getHtmlCell($row)
   {
-    $value = $theRow[$this->myFieldName];
+    $value = $row[$this->fieldName];
 
     if ($value!==false && $value!==null && $value!=='')
     {

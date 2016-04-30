@@ -14,29 +14,29 @@ class HtmlTableColumn extends TableColumn
    *
    * @var string
    */
-  protected $myFieldName;
+  protected $fieldName;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
-   * @param string          $theFieldName  The field name of the data row used for generating this table column.
+   * @param string|int|null $headerText The header text of this table column.
+   * @param string          $fieldName  The field name of the data row used for generating this table column.
    */
-  public function __construct($theHeaderText, $theFieldName)
+  public function __construct($headerText, $fieldName)
   {
-    $this->myDataType   = 'text';
-    $this->myHeaderText = $theHeaderText;
-    $this->myFieldName  = $theFieldName;
+    $this->dataType   = 'text';
+    $this->headerText = $headerText;
+    $this->fieldName  = $fieldName;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theRow)
+  public function getHtmlCell($row)
   {
-    return '<td>'.$theRow[$this->myFieldName].'</td>';
+    return '<td>'.$row[$this->fieldName].'</td>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

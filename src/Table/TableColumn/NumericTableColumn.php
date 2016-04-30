@@ -16,43 +16,43 @@ class NumericTableColumn extends TableColumn
    *
    * @var string
    */
-  protected $myFieldName;
+  protected $fieldName;
 
   /**
    * The format specifier for formatting the content of this table column.
    *
    * @var string
    */
-  protected $myFormat;
+  protected $format;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
-   * @param string          $theFieldName  The field name of the data row used for generating this table column.
-   * @param string          $theFormat     The format specifier for formatting the content of this table column. See
-   *                                       sprintf.
+   * @param string|int|null $headerText The header text of this table column.
+   * @param string          $fieldName  The field name of the data row used for generating this table column.
+   * @param string          $format     The format specifier for formatting the content of this table column. See
+   *                                    sprintf.
    */
-  public function __construct($theHeaderText, $theFieldName, $theFormat = '%d')
+  public function __construct($headerText, $fieldName, $format = '%d')
   {
-    $this->myDataType   = 'numeric';
-    $this->myHeaderText = $theHeaderText;
-    $this->myFieldName  = $theFieldName;
-    $this->myFormat     = $theFormat;
+    $this->dataType   = 'numeric';
+    $this->headerText = $headerText;
+    $this->fieldName  = $fieldName;
+    $this->format     = $format;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theRow)
+  public function getHtmlCell($row)
   {
-    $value = $theRow[$this->myFieldName];
+    $value = $row[$this->fieldName];
 
     if ($value!==false && $value!==null && $value!=='')
     {
-      return '<td class="number">'.Html::txt2Html(sprintf($this->myFormat, $value)).'</td>';
+      return '<td class="number">'.Html::txt2Html(sprintf($this->format, $value)).'</td>';
     }
     else
     {

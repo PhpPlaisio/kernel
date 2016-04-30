@@ -18,8 +18,8 @@ class PasswordSlatJoint extends SlatJoint
    */
   public function __construct($theHeaderText)
   {
-    $this->myDataType   = 'control-password';
-    $this->myHeaderText = $theHeaderText;
+    $this->dataType   = 'control-password';
+    $this->headerText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

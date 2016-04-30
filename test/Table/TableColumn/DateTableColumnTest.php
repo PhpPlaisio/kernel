@@ -50,7 +50,7 @@ class DateTableColumnTest extends PHPUnit_Framework_TestCase
    */
   public function testOpenEndDate2()
   {
-    DateTableColumn::$ourOpenDate = '8888-88-88';
+    DateTableColumn::$openDate = '8888-88-88';
 
     $column = new DateTableColumn('header', 'date');
     $row    = ['date' => '8888-88-88'];

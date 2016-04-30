@@ -18,8 +18,8 @@ class CheckboxesSlatJoint extends SlatJoint
    */
   public function __construct($theHeaderText)
   {
-    $this->myDataType   = 'control-checkboxes';
-    $this->myHeaderText = $theHeaderText;
+    $this->dataType   = 'control-checkboxes';
+    $this->headerText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

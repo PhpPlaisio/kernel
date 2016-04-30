@@ -12,11 +12,11 @@ abstract class TableColumn extends BaseTableColumn
   /**
    * Returns HTML code (including opening and closing td tags) for the table cell.
    *
-   * @param array $theRow The data of a row in the overview table.
+   * @param array $row The data of a row in the overview table.
    *
    * @return string
    */
-  abstract public function getHtmlCell($theRow);
+  abstract public function getHtmlCell($row);
 
   //--------------------------------------------------------------------------------------------------------------------
 }

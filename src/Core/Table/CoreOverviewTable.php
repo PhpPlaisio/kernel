@@ -34,7 +34,7 @@ class CoreOverviewTable extends OverviewTable
   public function __construct()
   {
     // Enable filtering by default.
-    $this->myFilter = true;
+    $this->filter = true;
 
     $this->myTablesActionGroups['default'] = [];
   }
@@ -100,21 +100,21 @@ class CoreOverviewTable extends OverviewTable
   /**
    * Returns the outer HTML code of this table.
    *
-   * @param array[] $theRows The data shown in the table.
+   * @param array[] $rows The data shown in the table.
    *
    * @return string
    */
-  public function getHtmlTable($theRows)
+  public function getHtmlTable($rows)
   {
     // Always add row count to the default table actions.
-    $this->addTableAction('default', new RowCountTableAction(count($theRows)));
+    $this->addTableAction('default', new RowCountTableAction(count($rows)));
 
     // Don't show filters if the number of rows is less or equal than 3.
-    if (count($theRows)<=3) $this->myFilter = false;
+    if (count($rows)<=3) $this->filter = false;
 
     // Generate the HTML code for the table.
     $ret = '<div class="overview_table">';
-    $ret .= parent::getHtmlTable($theRows);
+    $ret .= parent::getHtmlTable($rows);
     $ret .= '</div>';
 
     return $ret;

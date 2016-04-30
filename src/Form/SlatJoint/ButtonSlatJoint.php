@@ -18,8 +18,8 @@ class ButtonSlatJoint extends SlatJoint
    */
   public function __construct($theHeaderText)
   {
-    $this->myDataType   = 'control-button';
-    $this->myHeaderText = $theHeaderText;
+    $this->dataType   = 'control-button';
+    $this->headerText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

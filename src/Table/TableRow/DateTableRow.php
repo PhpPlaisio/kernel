@@ -17,7 +17,7 @@ class DateTableRow
    *
    * @var string
    */
-  public static $ourDefaultFormat = 'd-m-Y';
+  public static $defaultFormat = 'd-m-Y';
 
   /**
    * Many (database) systems use a certain value for empty dates or open end dates. Such a value must be shown as an
@@ -25,45 +25,44 @@ class DateTableRow
    *
    * @var string
    */
-  public static $ourOpenDate = '9999-12-31';
+  public static $openDate = '9999-12-31';
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a row with a date value to a detail table.
    *
-   * @param DetailTable $theTable  The (detail) table.
-   * @param string      $theHeader The row header text.
-   * @param string      $theValue  The date in YYYY-MM-DD format.
-   * @param string|null $theFormat The format specifier for formatting the content of this table column. If null
-   *                               the default format is used.
+   * @param DetailTable $table  The (detail) table.
+   * @param string      $header The row header text.
+   * @param string      $value  The date in YYYY-MM-DD format.
+   * @param string|null $format The format specifier for formatting the content of this table column. If null the
+   *                            default format is used.
    */
-  public static function addRow($theTable, $theHeader, $theValue, $theFormat = null)
+  public static function addRow($table, $header, $value, $format = null)
   {
     $row = '<tr>';
 
     $row .= '<th>';
-    $row .= Html::txt2Html($theHeader);
+    $row .= Html::txt2Html($header);
     $row .= '</th>';
 
-    if ($theValue && $theValue!=self::$ourOpenDate)
+    if ($value && $value!=self::$openDate)
     {
-      $date = \DateTime::createFromFormat('Y-m-d', $theValue);
+      $date = \DateTime::createFromFormat('Y-m-d', $value);
 
       if ($date)
       {
         // The $theValue is a valid date.
-        $format = ($theFormat) ? $theFormat : self::$ourDefaultFormat;
         $row .= '<td class="date" data-value="';
         $row .= $date->format('Y-m-d');
         $row .= '">';
-        $row .= Html::txt2Html($date->format($format));
+        $row .= Html::txt2Html($date->format(($format) ? $format : self::$defaultFormat));
         $row .= '</td>';
       }
       else
       {
         // The $theValue is not a valid date.
         $row .= '<td>';
-        $row .= Html::txt2Html($theValue);
+        $row .= Html::txt2Html($value);
         $row .= '</td>';
       }
     }
@@ -75,7 +74,7 @@ class DateTableRow
 
     $row .= '</tr>';
 
-    $theTable->addRow($row);
+    $table->addRow($row);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

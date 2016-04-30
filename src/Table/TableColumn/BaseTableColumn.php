@@ -18,7 +18,7 @@ abstract class BaseTableColumn
    *
    * @var string
    */
-  protected $myDataType;
+  protected $dataType;
 
   /**
    * The header of this column. We distinguish 3 types:
@@ -32,14 +32,14 @@ abstract class BaseTableColumn
    *
    * @var string|int|null
    */
-  protected $myHeaderText;
+  protected $headerText;
 
   /**
    * The sort direction of the data in this column.
    *
    * @var string
    */
-  protected $mySortDirection;
+  protected $sortDirection;
 
   /**
    * If set the data in the table of this column is sorted or must be sorted by this column (and possible by other
@@ -47,14 +47,14 @@ abstract class BaseTableColumn
    *
    * @var int
    */
-  protected $mySortOrder;
+  protected $sortOrder;
 
   /**
    * If set this column can be used for sorting the data in the table of this column.
    *
    * @var bool
    */
-  protected $mySortable = true;
+  protected $sortable = true;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -75,7 +75,7 @@ abstract class BaseTableColumn
    */
   public function getDataType()
   {
-    return $this->myDataType;
+    return $this->dataType;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -87,9 +87,9 @@ abstract class BaseTableColumn
   public function getHtmlColumn()
   {
     // Add class indicating the type of data of this column.
-    if ($this->myDataType)
+    if ($this->dataType)
     {
-      $class = 'data-type-'.$this->myDataType;
+      $class = 'data-type-'.$this->dataType;
     }
     else
     {
@@ -107,7 +107,7 @@ abstract class BaseTableColumn
    */
   public function getHtmlColumnFilter()
   {
-    if ($this->myHeaderText===null)
+    if ($this->headerText===null)
     {
       // If the column header is empty there is no column filter by default. This behaviour can be overridden in a
       // child class.
@@ -128,29 +128,29 @@ abstract class BaseTableColumn
    */
   public function getHtmlColumnHeader()
   {
-    if ($this->myHeaderText===null)
+    if ($this->headerText===null)
     {
       $header_text = '';
       $class       = 'empty';
     }
     else
     {
-      $header_text = (is_int($this->myHeaderText)) ? Babel::getWord($this->myHeaderText) : $this->myHeaderText;
-      if ($this->mySortable)
+      $header_text = (is_int($this->headerText)) ? Babel::getWord($this->headerText) : $this->headerText;
+      if ($this->sortable)
       {
         // Add class indicating this column can be used for sorting.
         $class = 'sort';
 
         // Add class indicating the sort order of this column.
-        if ($this->mySortOrder)
+        if ($this->sortOrder)
         {
           if ($class) $class .= ' ';
 
           // Add class indicating this column can be used for sorting.
           $class .= 'sort-order-';
-          $class .= $this->mySortOrder;
+          $class .= $this->sortOrder;
 
-          $class .= ($this->mySortDirection=='desc') ? ' sorted-desc' : ' sorted-asc';
+          $class .= ($this->sortDirection=='desc') ? ' sorted-desc' : ' sorted-asc';
         }
       }
       else
@@ -170,7 +170,7 @@ abstract class BaseTableColumn
    */
   public function hasEmptyHeader()
   {
-    return !isset($this->myHeaderText);
+    return !isset($this->headerText);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -180,17 +180,17 @@ abstract class BaseTableColumn
    */
   public function notSortable()
   {
-    $this->mySortable = false;
+    $this->sortable = false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * This function is called by OverviewTable::addColumn.
    *
-   * @param OverviewTable $theTable
-   * @param int           $theColumnIndex
+   * @param OverviewTable $table
+   * @param int           $columnIndex
    */
-  public function onAddColumn($theTable, $theColumnIndex)
+  public function onAddColumn($table, $columnIndex)
   {
     // Nothing to do.
   }
@@ -199,13 +199,13 @@ abstract class BaseTableColumn
   /**
    * Sets the sorting order of this column.
    *
-   * @param int  $theSortOrder      The sorting order.
-   * @param bool $theDescendingFlag If true the data is sorted descending, otherwise ascending.
+   * @param int  $sortOrder      The sorting order.
+   * @param bool $descendingFlag If true the data is sorted descending, otherwise ascending.
    */
-  public function setSortOrder($theSortOrder, $theDescendingFlag = false)
+  public function setSortOrder($sortOrder, $descendingFlag = false)
   {
-    $this->mySortDirection = ($theDescendingFlag) ? 'desc' : 'asc';
-    $this->mySortOrder     = $theSortOrder;
+    $this->sortDirection = ($descendingFlag) ? 'desc' : 'asc';
+    $this->sortOrder     = $sortOrder;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

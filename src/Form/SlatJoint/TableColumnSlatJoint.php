@@ -24,7 +24,7 @@ class TableColumnSlatJoint extends SlatJoint
    */
   public function __construct($theTableColumn)
   {
-    $this->myDataType    = $theTableColumn->getDataType();
+    $this->dataType      = $theTableColumn->getDataType();
     $this->myTableColumn = $theTableColumn;
   }
 

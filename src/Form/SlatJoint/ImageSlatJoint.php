@@ -18,8 +18,8 @@ class ImageSlatJoint extends SlatJoint
    */
   public function __construct($theHeaderText)
   {
-    $this->myDataType   = 'control-image';
-    $this->myHeaderText = $theHeaderText;
+    $this->dataType   = 'control-image';
+    $this->headerText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -15,18 +15,18 @@ class EmailTableRow
   /**
    * Adds a row with a email address to a detail table.
    *
-   * @param DetailTable $theTable  The (detail) table.
-   * @param string      $theHeader The row header text.
-   * @param string      $theValue  The email address.
+   * @param DetailTable $table  The (detail) table.
+   * @param string      $header The row header text.
+   * @param string      $value  The email address.
    */
-  public static function addRow($theTable, $theHeader, $theValue)
+  public static function addRow($table, $header, $value)
   {
     $row = '<tr><th>';
-    $row .= Html::txt2Html($theHeader);
+    $row .= Html::txt2Html($header);
     $row .= '</th><td class="email">';
-    if ($theValue!==null && $theValue!==false && $theValue!=='')
+    if ($value!==null && $value!==false && $value!=='')
     {
-      $address = Html::txt2Html($theValue);
+      $address = Html::txt2Html($value);
       $row .= '<a href="mailto:';
       $row .= $address;
       $row .= '">';
@@ -35,7 +35,7 @@ class EmailTableRow
     }
     $row .= '</td></tr>';
 
-    $theTable->addRow($row);
+    $table->addRow($row);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

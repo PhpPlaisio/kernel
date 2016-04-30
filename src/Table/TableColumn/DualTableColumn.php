@@ -17,14 +17,14 @@ abstract class DualTableColumn extends TableColumn
    *
    * @var string
    */
-  protected $myDataType2;
+  protected $dataType2;
 
   /**
    * The sort direction of the data in the second column.
    *
    * @var string|null
    */
-  protected $mySortDirection2;
+  protected $sortDirection2;
 
   /**
    * If set the data in the table of the second column is sorted or must be sorted by this column (and possible by other
@@ -32,14 +32,14 @@ abstract class DualTableColumn extends TableColumn
    *
    * @var int
    */
-  protected $mySortOrder2;
+  protected $sortOrder2;
 
   /**
    * If set second column can be used for sorting the data in the table of this column.
    *
    * @var bool
    */
-  protected $mySortable2 = true;
+  protected $sortable2 = true;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -61,9 +61,9 @@ abstract class DualTableColumn extends TableColumn
   public function getHtmlColumn()
   {
     // Add class indicating the type of data of the first column.
-    if ($this->myDataType)
+    if ($this->dataType)
     {
-      $class1 = 'data-type-'.$this->myDataType;
+      $class1 = 'data-type-'.$this->dataType;
     }
     else
     {
@@ -71,9 +71,9 @@ abstract class DualTableColumn extends TableColumn
     }
 
     // Add class indicating the type of data of the second column.
-    if ($this->myDataType2)
+    if ($this->dataType2)
     {
-      $class2 = 'data-type-'.$this->myDataType2;
+      $class2 = 'data-type-'.$this->dataType2;
     }
     else
     {
@@ -108,44 +108,44 @@ abstract class DualTableColumn extends TableColumn
     $class = '';
 
     // Add class indicating this column can be used for sorting.
-    if ($this->mySortable)
+    if ($this->sortable)
     {
       if ($class) $class .= ' ';
       $class .= 'sort-1';
     }
 
     // Add class indicating the sort order of this column.
-    if ($this->mySortable && $this->mySortDirection)
+    if ($this->sortable && $this->sortDirection)
     {
       if ($class) $class .= ' ';
 
       // Add class indicating this column can be used for sorting.
       $class .= 'sort-order-1-';
-      $class .= $this->mySortOrder;
+      $class .= $this->sortOrder;
 
-      $class .= ($this->mySortDirection=='desc') ? ' sorted-1-desc' : ' sorted-1-asc';
+      $class .= ($this->sortDirection=='desc') ? ' sorted-1-desc' : ' sorted-1-asc';
     }
 
     // Add class indicating this column can be used for sorting.
-    if ($this->mySortable2)
+    if ($this->sortable2)
     {
       if ($class) $class .= ' ';
       $class .= 'sort-2';
 
       // Add class indicating the sort order of this column.
-      if ($this->mySortOrder2)
+      if ($this->sortOrder2)
       {
         if ($class) $class .= ' ';
 
         // Add class indicating this column can be used for sorting.
         $class .= 'sort-order-2-';
-        $class .= $this->mySortOrder2;
+        $class .= $this->sortOrder2;
 
-        $class .= ($this->mySortDirection2=='desc') ? ' sorted-2-desc' : ' sorted-2-asc';
+        $class .= ($this->sortDirection2=='desc') ? ' sorted-2-desc' : ' sorted-2-asc';
       }
     }
 
-    $header_text = (is_int($this->myHeaderText)) ? Babel::getWord($this->myHeaderText) : $this->myHeaderText;
+    $header_text = (is_int($this->headerText)) ? Babel::getWord($this->headerText) : $this->headerText;
 
     return '<th colspan="2" class="'.$class.'"><span>&nbsp;</span>'.Html::txt2Html($header_text).'</th>';
   }
@@ -156,8 +156,8 @@ abstract class DualTableColumn extends TableColumn
    */
   public function notSortable()
   {
-    $this->mySortable  = false;
-    $this->mySortable2 = false;
+    $this->sortable  = false;
+    $this->sortable2 = false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -166,7 +166,7 @@ abstract class DualTableColumn extends TableColumn
    */
   public function notSortable1()
   {
-    $this->mySortable = false;
+    $this->sortable = false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -175,33 +175,33 @@ abstract class DualTableColumn extends TableColumn
    */
   public function notSortable2()
   {
-    $this->mySortable2 = false;
+    $this->sortable2 = false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the sorting order of the first table column.
    *
-   * @param int  $theSortOrder      The sorting order.
-   * @param bool $theDescendingFlag If set the data is sorted descending, otherwise ascending.
+   * @param int  $sortOrder      The sorting order.
+   * @param bool $descendingFlag If set the data is sorted descending, otherwise ascending.
    */
-  public function sortOrder1($theSortOrder, $theDescendingFlag = false)
+  public function sortOrder1($sortOrder, $descendingFlag = false)
   {
-    $this->mySortDirection = ($theDescendingFlag) ? 'desc' : 'asc';
-    $this->mySortOrder     = $theSortOrder;
+    $this->sortDirection = ($descendingFlag) ? 'desc' : 'asc';
+    $this->sortOrder     = $sortOrder;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the sorting order of second table column.
    *
-   * @param int  $theSortOrder      The sorting order.
-   * @param bool $theDescendingFlag If set the data is sorted descending, otherwise ascending.
+   * @param int  $sortOrder      The sorting order.
+   * @param bool $descendingFlag If set the data is sorted descending, otherwise ascending.
    */
-  public function sortOrder2($theSortOrder, $theDescendingFlag = false)
+  public function sortOrder2($sortOrder, $descendingFlag = false)
   {
-    $this->mySortDirection2 = ($theDescendingFlag) ? 'desc' : 'asc';
-    $this->mySortOrder2     = $theSortOrder;
+    $this->sortDirection2 = ($descendingFlag) ? 'desc' : 'asc';
+    $this->sortOrder2     = $sortOrder;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

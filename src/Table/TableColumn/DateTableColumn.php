@@ -16,7 +16,7 @@ class DateTableColumn extends TableColumn
    *
    * @var string
    */
-  public static $ourDefaultFormat = 'd-m-Y';
+  public static $defaultFormat = 'd-m-Y';
 
   /**
    * Many (database) system use a certain value for empty dates or open end dates. Such a value must be shown as an
@@ -24,57 +24,57 @@ class DateTableColumn extends TableColumn
    *
    * @var string
    */
-  public static $ourOpenDate = '9999-12-31';
+  public static $openDate = '9999-12-31';
 
   /**
    * The field name of the data row used for generating this table column.
    *
    * @var string
    */
-  protected $myFieldName;
+  protected $fieldName;
 
   /**
    * The format specifier for formatting the content of this table column.
    *
    * @var string
    */
-  protected $myFormat;
+  protected $format;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
-   * @param string          $theFieldName  The field name of the data row used for generating this table column.
-   * @param string|null     $theFormat     The format specifier for formatting the content of this table column. If null
-   *                                       the default format is used.
+   * @param string|int|null $headerText The header text of this table column.
+   * @param string          $fieldName  The field name of the data row used for generating this table column.
+   * @param string|null     $format     The format specifier for formatting the content of this table column. If null
+   *                                    the default format is used.
    */
-  public function __construct($theHeaderText, $theFieldName, $theFormat = null)
+  public function __construct($headerText, $fieldName, $format = null)
   {
-    $this->myDataType   = 'date';
-    $this->myHeaderText = $theHeaderText;
-    $this->myFieldName  = $theFieldName;
-    $this->myFormat     = ($theFormat) ? $theFormat : self::$ourDefaultFormat;
+    $this->dataType   = 'date';
+    $this->headerText = $headerText;
+    $this->fieldName  = $fieldName;
+    $this->format     = ($format) ? $format : self::$defaultFormat;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theRow)
+  public function getHtmlCell($row)
   {
-    $value = $theRow[$this->myFieldName];
+    $value = $row[$this->fieldName];
 
-    if ($value!==false && $value!==null && $value!=='' && $theRow[$this->myFieldName]!=self::$ourOpenDate)
+    if ($value!==false && $value!==null && $value!=='' && $row[$this->fieldName]!=self::$openDate)
     {
-      $date = \DateTime::createFromFormat('Y-m-d', $theRow[$this->myFieldName]);
+      $date = \DateTime::createFromFormat('Y-m-d', $row[$this->fieldName]);
 
       if ($date)
       {
         $cell = '<td class="date" data-value="';
         $cell .= $date->format('Y-m-d');
         $cell .= '">';
-        $cell .= Html::txt2Html($date->format($this->myFormat));
+        $cell .= Html::txt2Html($date->format($this->format));
         $cell .= '</td>';
 
         return $cell;
@@ -82,7 +82,7 @@ class DateTableColumn extends TableColumn
       else
       {
         // The $theData[$this->myFieldName] is not a valid date.
-        return '<td>'.Html::txt2Html($theRow[$this->myFieldName]).'</td>';
+        return '<td>'.Html::txt2Html($row[$this->fieldName]).'</td>';
       }
     }
     else

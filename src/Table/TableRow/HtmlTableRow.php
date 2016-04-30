@@ -15,19 +15,19 @@ class HtmlTableRow
   /**
    * Adds a row with a HTML snippet to a detail table.
    *
-   * @param DetailTable $theTable       The (detail) table.
-   * @param string      $theHeader      The row header text.
-   * @param string      $theHtmlSnippet The HTML snippet.
+   * @param DetailTable $table       The (detail) table.
+   * @param string      $header      The row header text.
+   * @param string      $htmlSnippet The HTML snippet.
    */
-  public static function addRow($theTable, $theHeader, $theHtmlSnippet)
+  public static function addRow($table, $header, $htmlSnippet)
   {
     $row = '<tr><th>';
-    $row .= Html::txt2Html($theHeader);
+    $row .= Html::txt2Html($header);
     $row .= '</th><td class="html">';
-    $row .= $theHtmlSnippet;
+    $row .= $htmlSnippet;
     $row .= '</td></tr>';
 
-    $theTable->addRow($row);
+    $table->addRow($row);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

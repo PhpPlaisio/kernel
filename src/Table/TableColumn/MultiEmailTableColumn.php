@@ -16,58 +16,58 @@ class MultiEmailTableColumn extends TableColumn
    *
    * @var string
    */
-  protected $myDataSeparator;
+  protected $dataSeparator;
 
   /**
    * The field name of the data row used for generating this table column.
    *
    * @var string
    */
-  protected $myFieldName;
+  protected $fieldName;
 
   /**
    * The character for separating multiple email addresses  in the generated HTML code.
    *
    * @var string
    */
-  protected $myHtmlSeparator;
+  protected $htmlSeparator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText    The header text of this table column.
-   * @param string          $theFieldName     The field name of the data rows used for generating this table column.
-   * @param string          $theDataSeparator The character for separating multiple email addresses in the input data.
-   * @param string          $theHtmlSeparator The HTML snippet for separating multiple email addresses in the generated
-   *                                          HTML code.
+   * @param string|int|null $headerText     The header text of this table column.
+   * @param string          $fieldName      The field name of the data rows used for generating this table column.
+   * @param string          $dataSeparator  The character for separating multiple email addresses in the input data.
+   * @param string          $htmlSeparator  The HTML snippet for separating multiple email addresses in the generated
+   *                                        HTML code.
    */
-  public function __construct($theHeaderText, $theFieldName, $theDataSeparator = ',', $theHtmlSeparator = '<br/>')
+  public function __construct($headerText, $fieldName, $dataSeparator = ',', $htmlSeparator = '<br/>')
   {
-    $this->myDataType      = 'email';
-    $this->myHeaderText    = $theHeaderText;
-    $this->myFieldName     = $theFieldName;
-    $this->myDataSeparator = $theDataSeparator;
-    $this->myHtmlSeparator = $theHtmlSeparator;
+    $this->dataType      = 'email';
+    $this->headerText    = $headerText;
+    $this->fieldName     = $fieldName;
+    $this->dataSeparator = $dataSeparator;
+    $this->htmlSeparator = $htmlSeparator;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theRow)
+  public function getHtmlCell($row)
   {
-    $value = $theRow[$this->myFieldName];
+    $value = $row[$this->fieldName];
 
     if ($value!==false && $value!==null && $value!=='')
     {
       // Value has 1 or more mail addresses.
-      $addresses = explode($this->myDataSeparator, $value);
+      $addresses = explode($this->dataSeparator, $value);
 
       $html = '<td class="email">';
       foreach ($addresses as $i => $address)
       {
-        if ($i) $html .= $this->myHtmlSeparator;
+        if ($i) $html .= $this->htmlSeparator;
         $address = Html::txt2Html($address);
 
         $html .= '<a href="mailto:';

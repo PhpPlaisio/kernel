@@ -15,19 +15,19 @@ class Ipv4TableRow
   /**
    * Adds a row with a IPv4 value to a detail table.
    *
-   * @param DetailTable $theTable      The (detail) table.
-   * @param string      $theHeader     The row header text.
-   * @param string      $theIp4Address The IPv4 address.
+   * @param DetailTable $table      The (detail) table.
+   * @param string      $header     The row header text.
+   * @param string      $ip4Address The IPv4 address.
    */
-  public static function addRow($theTable, $theHeader, $theIp4Address)
+  public static function addRow($table, $header, $ip4Address)
   {
     $row = '<tr><th>';
-    $row .= Html::txt2Html($theHeader);
+    $row .= Html::txt2Html($header);
     $row .= '</th><td class="ipv4">';
-    $row .= Html::txt2Html($theIp4Address);
+    $row .= Html::txt2Html($ip4Address);
     $row .= '</td></tr>';
 
-    $theTable->addRow($row);
+    $table->addRow($row);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

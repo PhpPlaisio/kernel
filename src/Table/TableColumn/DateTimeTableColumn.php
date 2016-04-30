@@ -16,57 +16,57 @@ class DateTimeTableColumn extends TableColumn
    *
    * @var string
    */
-  public static $ourDefaultFormat = 'd-m-Y H:i:s';
+  public static $defaultFormat = 'd-m-Y H:i:s';
 
   /**
    * The field name of the data row used for generating this table column.
    *
    * @var string
    */
-  protected $myFieldName;
+  protected $fieldName;
 
   /**
    * The format specifier for formatting the content of this table column.
    *
    * @var string
    */
-  protected $myFormat;
+  protected $format;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
-   * @param string          $theFieldName  The field name of the data row used for generating this table column.
-   * @param string|null     $theFormat     The format specifier for formatting the content of this table column. If null
-   *                                       the default format is used.
+   * @param string|int|null $headerText The header text of this table column.
+   * @param string          $fieldName  The field name of the data row used for generating this table column.
+   * @param string|null     $format     The format specifier for formatting the content of this table column. If null
+   *                                    the default format is used.
    */
-  public function __construct($theHeaderText, $theFieldName, $theFormat = null)
+  public function __construct($headerText, $fieldName, $format = null)
   {
-    $this->myDataType   = 'datetime';
-    $this->myHeaderText = $theHeaderText;
-    $this->myFieldName  = $theFieldName;
-    $this->myFormat     = ($theFormat) ? $theFormat : self::$ourDefaultFormat;
+    $this->dataType   = 'datetime';
+    $this->headerText = $headerText;
+    $this->fieldName  = $fieldName;
+    $this->format     = ($format) ? $format : self::$defaultFormat;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theRow)
+  public function getHtmlCell($row)
   {
-    $value = $theRow[$this->myFieldName];
+    $value = $row[$this->fieldName];
 
     if ($value!==false && $value!==null && $value!=='')
     {
-      $datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $theRow[$this->myFieldName]);
+      $datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $row[$this->fieldName]);
 
       if ($datetime)
       {
         $cell = '<td class="datetime" data-value="';
         $cell .= $datetime->format('Y-m-d H:i:s');
         $cell .= '">';
-        $cell .= Html::txt2Html($datetime->format($this->myFormat));
+        $cell .= Html::txt2Html($datetime->format($this->format));
         $cell .= '</td>';
 
         return $cell;
@@ -74,7 +74,7 @@ class DateTimeTableColumn extends TableColumn
       else
       {
         // The value is not a valid datetime.
-        return '<td>'.Html::txt2Html($theRow[$this->myFieldName]).'</td>';
+        return '<td>'.Html::txt2Html($row[$this->fieldName]).'</td>';
       }
     }
     else

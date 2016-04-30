@@ -37,40 +37,40 @@ class BoolIconTableColumn extends TableColumn
    */
   public function __construct($theHeaderText, $theFieldName, $theShowFalseFlag = false)
   {
-    $this->myDataType   = 'bool';
-    $this->myHeaderText = $theHeaderText;
-    $this->myFieldName  = $theFieldName;
-    $this->myShowFalse  = $theShowFalseFlag;
+    $this->dataType    = 'bool';
+    $this->headerText  = $theHeaderText;
+    $this->myFieldName = $theFieldName;
+    $this->myShowFalse = $theShowFalseFlag;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($theRow)
+  public function getHtmlCell($row)
   {
     $attributes = ['class' => 'bool'];
 
     switch (true)
     {
-      case $theRow[$this->myFieldName]===1:
-      case $theRow[$this->myFieldName]==='1':
+      case $row[$this->myFieldName]===1:
+      case $row[$this->myFieldName]==='1':
         $attributes['data-value'] = 1;
         $html                     = '<img src="'.ICON_SMALL_TRUE.'" alt="1"/>';
         break;
 
-      case $theRow[$this->myFieldName]===0:
-      case $theRow[$this->myFieldName]==='0':
-      case $theRow[$this->myFieldName]==='':
-      case $theRow[$this->myFieldName]===null:
-      case $theRow[$this->myFieldName]===false:
+      case $row[$this->myFieldName]===0:
+      case $row[$this->myFieldName]==='0':
+      case $row[$this->myFieldName]==='':
+      case $row[$this->myFieldName]===null:
+      case $row[$this->myFieldName]===false:
         $attributes['data-value'] = 0;
         $html                     = ($this->myShowFalse) ? '<img src="'.ICON_SMALL_FALSE.'" alt="0"/>' : '';
         break;
 
       default:
-        $attributes['data-value'] = $theRow[$this->myFieldName];
-        $html                     = Html::txt2Html($theRow[$this->myFieldName]);
+        $attributes['data-value'] = $row[$this->myFieldName];
+        $html                     = Html::txt2Html($row[$this->myFieldName]);
     }
 
     return Html::generateElement('td', $attributes, $html, true);

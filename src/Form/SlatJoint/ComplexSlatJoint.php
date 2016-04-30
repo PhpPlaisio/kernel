@@ -18,8 +18,8 @@ class ComplexSlatJoint extends SlatJoint
    */
   public function __construct($theHeaderText)
   {
-    $this->myDataType   = 'control-complex';
-    $this->myHeaderText = $theHeaderText;
+    $this->dataType   = 'control-complex';
+    $this->headerText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

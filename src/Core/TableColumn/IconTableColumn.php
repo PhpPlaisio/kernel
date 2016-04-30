@@ -46,19 +46,19 @@ abstract class IconTableColumn extends TableColumn
    */
   public function __construct()
   {
-    $this->mySortable = false;
-    $this->myDataType = 'none';
+    $this->sortable = false;
+    $this->dataType = 'none';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param array $theRow
+   * @param array $row
    *
    * @return string
    */
-  public function getHtmlCell($theRow)
+  public function getHtmlCell($row)
   {
-    $url = $this->getUrl($theRow);
+    $url = $this->getUrl($row);
 
     $ret = '<td>';
     if ($url)

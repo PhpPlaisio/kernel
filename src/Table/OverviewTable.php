@@ -19,55 +19,55 @@ class OverviewTable extends HtmlElement
    *
    * @var TableColumn[]
    */
-  protected $myColumns = [];
+  protected $columns = [];
 
   /**
    * If set to true the header will contain a row for filtering.
    *
    * @var bool
    */
-  protected $myFilter = false;
+  protected $filter = false;
 
   /**
    * The title of this table.
    *
    * @var string
    */
-  protected $myTitle;
+  protected $title;
 
   /**
    * The index in $myColumns of the next column added to this table.
    *
    * @var int
    */
-  private $myColIndex = 1;
+  private $columnIndex = 1;
 
   /**
    * If set to true the table is sortable.
    *
    * @var bool
    */
-  private $mySortable = true;
+  private $sortable = true;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds @a $theColumn to this table and returns the column.
    *
-   * @param TableColumn $theColumn
+   * @param TableColumn $column
    *
    * @return TableColumn|DualTableColumn
    */
-  public function addColumn($theColumn)
+  public function addColumn($column)
   {
     // Add the column to our array of columns.
-    $this->myColumns[$this->myColIndex] = $theColumn;
+    $this->columns[$this->columnIndex] = $column;
 
-    $theColumn->onAddColumn($this, $this->myColIndex);
+    $column->onAddColumn($this, $this->columnIndex);
 
     // Increase the index for the next added column.
-    $this->myColIndex += $theColumn->getColSpan();
+    $this->columnIndex += $column->getColSpan();
 
-    return $theColumn;
+    return $column;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ class OverviewTable extends HtmlElement
    */
   public function disableFilter()
   {
-    $this->myFilter = false;
+    $this->filter = false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ class OverviewTable extends HtmlElement
    */
   public function disableSorting()
   {
-    $this->mySortable = false;
+    $this->sortable = false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -94,18 +94,18 @@ class OverviewTable extends HtmlElement
    */
   public function enableFilter()
   {
-    $this->myFilter = true;
+    $this->filter = true;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the HTML code of this table
    *
-   * @param array $theRows The data shown in the table.
+   * @param array $rows The data shown in the table.
    *
    * @return string
    */
-  public function getHtmlTable($theRows)
+  public function getHtmlTable($rows)
   {
     $ret = $this->getHtmlPrefix();
 
@@ -113,10 +113,10 @@ class OverviewTable extends HtmlElement
 
     // Generate HTML code for the column classes.
     $ret .= '<colgroup>';
-    foreach ($this->myColumns as $column)
+    foreach ($this->columns as $column)
     {
       // If required disable sorting of this column.
-      if (!$this->mySortable) $column->notSortable();
+      if (!$this->sortable) $column->notSortable();
 
       // Generate column element.
       $ret .= $column->getHtmlColumn();
@@ -130,7 +130,7 @@ class OverviewTable extends HtmlElement
 
     // Generate HTML code for the table body.
     $ret .= '<tbody>';
-    $ret .= $this->getHtmlBody($theRows);
+    $ret .= $this->getHtmlBody($rows);
     $ret .= '</tbody>';
 
     $ret .= '</table>';
@@ -148,7 +148,7 @@ class OverviewTable extends HtmlElement
    */
   public function getNumberOfColumns()
   {
-    return $this->myColIndex - 1;
+    return $this->columnIndex - 1;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -157,37 +157,37 @@ class OverviewTable extends HtmlElement
    */
   public function getTitle()
   {
-    return $this->myTitle;
+    return $this->title;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the title of this table.
    *
-   * @param string $theTitle The title.
+   * @param string $title The title.
    */
-  public function setTitle($theTitle)
+  public function setTitle($title)
   {
-    $this->myTitle = $theTitle;
+    $this->title = $title;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the inner HTML code of the body for this table holding @a $theRows as data.
    *
-   * @param array $theRows
+   * @param array $rows
    *
    * @return string
    */
-  protected function getHtmlBody($theRows)
+  protected function getHtmlBody($rows)
   {
     $ret = '';
     $i   = 0;
-    foreach ($theRows as $row)
+    foreach ($rows as $row)
     {
       if ($i % 2==0) $ret .= '<tr class="even">';
       else           $ret .= '<tr class="odd">';
-      foreach ($this->myColumns as $column)
+      foreach ($this->columns as $column)
       {
         $ret .= $column->getHtmlCell($row);
       }
@@ -208,13 +208,13 @@ class OverviewTable extends HtmlElement
   {
     $ret = '';
 
-    if ($this->myTitle)
+    if ($this->title)
     {
       $mode    = 1;
       $colspan = 0;
 
       $ret .= '<tr class="title">';
-      foreach ($this->myColumns as $column)
+      foreach ($this->columns as $column)
       {
         $empty = $column->hasEmptyHeader();
 
@@ -245,7 +245,7 @@ class OverviewTable extends HtmlElement
         if ($mode==3)
         {
           if ($colspan==1) $colspan = null;
-          $ret .= '<th'.Html::generateAttribute('colspan', $colspan).'>'.Html::txt2Html($this->myTitle).'</th>';
+          $ret .= '<th'.Html::generateAttribute('colspan', $colspan).'>'.Html::txt2Html($this->title).'</th>';
           $mode = 4;
         }
 
@@ -258,23 +258,23 @@ class OverviewTable extends HtmlElement
       if ($mode==2)
       {
         if ($colspan==1) $colspan = null;
-        $ret .= '<th'.Html::generateAttribute('colspan', $colspan).'>'.Html::txt2Html($this->myTitle).'</th>';
+        $ret .= '<th'.Html::generateAttribute('colspan', $colspan).'>'.Html::txt2Html($this->title).'</th>';
       }
 
       $ret .= '</tr>';
     }
 
     $ret .= '<tr class="header">';
-    foreach ($this->myColumns as $column)
+    foreach ($this->columns as $column)
     {
       $ret .= $column->getHtmlColumnHeader();
     }
     $ret .= '</tr>';
 
-    if ($this->myFilter)
+    if ($this->filter)
     {
       $ret .= '<tr class="filter">';
-      foreach ($this->myColumns as $column)
+      foreach ($this->columns as $column)
       {
         $ret .= $column->getHtmlColumnFilter();
       }

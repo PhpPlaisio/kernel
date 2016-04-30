@@ -18,8 +18,8 @@ class TextAreaSlatJoint extends SlatJoint
    */
   public function __construct($theHeaderText)
   {
-    $this->myDataType   = 'control-text-area';
-    $this->myHeaderText = $theHeaderText;
+    $this->dataType   = 'control-text-area';
+    $this->headerText = $theHeaderText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

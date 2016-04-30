@@ -18,16 +18,16 @@ class DetailTable extends HtmlElement
    * @var string
    */
   protected $myRows;
-
+  
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a row to this table.
    *
-   * @param string $theRow An HTML snippet with a table row.
+   * @param string $row An HTML snippet with a table row.
    */
-  public function addRow($theRow)
+  public function addRow($row)
   {
-    $this->myRows .= $theRow;
+    $this->myRows .= $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
