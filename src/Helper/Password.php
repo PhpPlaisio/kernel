@@ -16,22 +16,22 @@ class Password
    *
    * @var int
    */
-  public static $ourCost = 14;
+  public static $cost = 14;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns a hashed password using PHP native [password_hash](http://php.net/manual/function.password-hash.php)
    * function.
    *
-   * @param string $thePassword The password (given by the user).
+   * @param string $password The password (given by the user).
    *
    * @return string The hashed password.
    */
-  public static function passwordHash($thePassword)
+  public static function passwordHash($password)
   {
-    $options = ['cost' => self::$ourCost];
+    $options = ['cost' => self::$cost];
 
-    $hash = password_hash($thePassword, PASSWORD_DEFAULT, $options);
+    $hash = password_hash($password, PASSWORD_DEFAULT, $options);
     if ($hash===false)
     {
       throw new RuntimeException('Function password_hash failed');
@@ -45,15 +45,15 @@ class Password
    * Checks if the given hash matches the given options using PHP native
    * [password_needs_rehash](http://php.net/manual/function.password-needs-rehash.php) function.
    *
-   * @param string $theHash The hash (stored in the system).
+   * @param string $hash The hash (stored in the system).
    *
    * @return bool True if and only if the password matches with the hash value.
    */
-  public static function passwordNeedsRehash($theHash)
+  public static function passwordNeedsRehash($hash)
   {
-    $options = ['cost' => self::$ourCost];
+    $options = ['cost' => self::$cost];
 
-    return password_needs_rehash($theHash, PASSWORD_DEFAULT, $options);
+    return password_needs_rehash($hash, PASSWORD_DEFAULT, $options);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -61,14 +61,14 @@ class Password
    * Verifies that a password matches a hash using PHP native
    * [password_verify](http://php.net/manual/function.password-verify.php) function.
    *
-   * @param string $thePassword The password (given by the user).
-   * @param string $theHash     The hash (stored in the system).
+   * @param string $password The password (given by the user).
+   * @param string $hash     The hash (stored in the system).
    *
    * @return bool True if and only if the password matches with the hash value.
    */
-  public static function passwordVerify($thePassword, $theHash)
+  public static function passwordVerify($password, $hash)
   {
-    return password_verify($thePassword, $theHash);
+    return password_verify($password, $hash);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
