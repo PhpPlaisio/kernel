@@ -22,14 +22,14 @@ class W3cValidatePage extends Page
    *
    * @var string
    */
-  private $myCaBundlePath = '/etc/pki/tls/certs/ca-bundle.crt';
+  private $caBundlePath = '/etc/pki/tls/certs/ca-bundle.crt';
 
   /**
    * The basename of the temporary file with the HTML code which must be validated.
    *
    * @var string
    */
-  private $myFilename;
+  private $filename;
 
   /**
    * The mode of this page:
@@ -38,21 +38,21 @@ class W3cValidatePage extends Page
    *
    * @var string
    */
-  private $myMode;
+  private $mode;
 
   /**
    * The path to the temporary file with the HTML code which must be validated.
    *
    * @var string
    */
-  private $myPathName;
+  private $pathName;
 
   /**
    * The (base) URL where the W3C Markup Validator is installed.
    *
    * @var string
    */
-  private $myValidatorUrl = 'https://validator.setbased.nl/w3c-validator/';
+  private $validatorUrl = 'https://validator.setbased.nl/w3c-validator/';
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -62,26 +62,26 @@ class W3cValidatePage extends Page
   {
     parent::__construct();
 
-    $this->myFilename = self::getCgiVar('file');
-    $this->myMode     = self::getCgiVar('mode');
+    $this->filename = self::getCgiVar('file');
+    $this->mode     = self::getCgiVar('mode');
 
-    $this->myPathName = DIR_TMP.'/'.$this->myFilename;
+    $this->pathName = DIR_TMP.'/'.$this->filename;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Return the URL of this page.
    *
-   * @param string $theFileName The name fo the file that must be validated.
-   * @param string $theMode     Either 'validate', or 'source'.
+   * @param string $fileName The name fo the file that must be validated.
+   * @param string $mode     Either 'validate', or 'source'.
    *
    * @return string The URL of this page.
    */
-  public static function getUrl($theFileName, $theMode = 'validate')
+  public static function getUrl($fileName, $mode = 'validate')
   {
     $url = self::putCgiVar('pag', C::PAG_ID_MISC_W3C_VALIDATE, 'pag');
-    $url .= self::putCgiVar('mode', $theMode);
-    $url .= self::putCgiVar('file', $theFileName);
+    $url .= self::putCgiVar('mode', $mode);
+    $url .= self::putCgiVar('file', $fileName);
 
     return $url;
   }
@@ -93,16 +93,16 @@ class W3cValidatePage extends Page
   public function checkAuthorization()
   {
     // Assert that the filename is a basename (and does not contain crafted (sub-)directories).
-    if (basename($this->myFilename)!==$this->myFilename)
+    if (basename($this->filename)!==$this->filename)
     {
-      throw new NotAuthorizedException("Filename '%s' is not a basename.", $this->myFilename);
+      throw new NotAuthorizedException("Filename '%s' is not a basename.", $this->filename);
     }
 
-    $prefix = 'w3c_validator_'.Abc::obfuscate($this->myUsrId, 'usr').'_';
-    if (strncmp($this->myFilename, $prefix, strlen($prefix))!==0)
+    $prefix = 'w3c_validator_'.Abc::obfuscate($this->usrId, 'usr').'_';
+    if (strncmp($this->filename, $prefix, strlen($prefix))!==0)
     {
       throw new NotAuthorizedException("Filename '%s' is not a file for W3C validation owned by the current user.",
-                                       $this->myFilename);
+                                       $this->filename);
     }
   }
 
@@ -112,7 +112,7 @@ class W3cValidatePage extends Page
    */
   public function echoPage()
   {
-    switch ($this->myMode)
+    switch ($this->mode)
     {
       case 'validate':
         $this->showValidateResponse();
@@ -123,7 +123,7 @@ class W3cValidatePage extends Page
         break;
 
       default:
-        throw new FallenException('mode', $this->myMode);
+        throw new FallenException('mode', $this->mode);
     }
   }
 
@@ -137,18 +137,18 @@ class W3cValidatePage extends Page
     curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 0);
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible;)');
-    curl_setopt($ch, CURLOPT_URL, $this->myValidatorUrl.'check');
+    curl_setopt($ch, CURLOPT_URL, $this->validatorUrl.'check');
     curl_setopt($ch, CURLOPT_POST, true);
 
     if (class_exists('\\CURLFile'))
     {
       // PHP 5.5 and higher.
-      $file = new \CURLFile($this->myPathName, 'text/html', $this->myPathName);
+      $file = new \CURLFile($this->pathName, 'text/html', $this->pathName);
     }
     else
     {
       // PHP 5.4.
-      $file = '@'.$this->myPathName.';type=text/html';
+      $file = '@'.$this->pathName.';type=text/html';
     }
     $post                  = [];
     $post['uploaded_file'] = $file;
@@ -157,7 +157,7 @@ class W3cValidatePage extends Page
 
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-    curl_setopt($ch, CURLOPT_CAPATH, $this->myCaBundlePath);
+    curl_setopt($ch, CURLOPT_CAPATH, $this->caBundlePath);
 
     $response = curl_exec($ch);
 
@@ -166,11 +166,11 @@ class W3cValidatePage extends Page
       echo 'xhtml: OK';
 
       // The HTML is valid. Remove the temporary file.
-      unlink($this->myPathName);
+      unlink($this->pathName);
     }
     elseif (strpos($response, 'X-W3C-Validator-Status: Invalid')>0)
     {
-      $url = self::getUrl($this->myFilename, 'source');
+      $url = self::getUrl($this->filename, 'source');
       echo '<a', Html::generateAttribute('href', $url),
       ' target="_blank" class="w3c_validator_status_invalid">w3c validate</a>';
     }
@@ -190,29 +190,29 @@ class W3cValidatePage extends Page
     curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 0);
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible;)');
-    curl_setopt($ch, CURLOPT_URL, $this->myValidatorUrl.'check');
+    curl_setopt($ch, CURLOPT_URL, $this->validatorUrl.'check');
     curl_setopt($ch, CURLOPT_POST, true);
 
     try
     {
       $indenter = new Indenter(['indentation_character' => '  ']);
-      file_put_contents($this->myPathName, $indenter->indent(file_get_contents($this->myPathName)));
+      file_put_contents($this->pathName, $indenter->indent(file_get_contents($this->pathName)));
     }
     catch (\Exception $e)
     {
       // Indenter is a memory hork and might consume too much memory.
-      file_put_contents($this->myPathName, file_get_contents($this->myPathName));
+      file_put_contents($this->pathName, file_get_contents($this->pathName));
     };
 
     if (class_exists('\\CURLFile'))
     {
       // PHP 5.5 and higher.
-      $file = new \CURLFile($this->myPathName, 'text/html', $this->myPathName);
+      $file = new \CURLFile($this->pathName, 'text/html', $this->pathName);
     }
     else
     {
       // PHP 5.4.
-      $file = $this->myPathName.';type=text/html';
+      $file = $this->pathName.';type=text/html';
     }
     $post                  = [];
     $post['uploaded_file'] = $file;
@@ -223,7 +223,7 @@ class W3cValidatePage extends Page
 
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-    curl_setopt($ch, CURLOPT_CAPATH, $this->myCaBundlePath);
+    curl_setopt($ch, CURLOPT_CAPATH, $this->caBundlePath);
 
     $response = curl_exec($ch);
 
@@ -231,7 +231,7 @@ class W3cValidatePage extends Page
     $body        = substr($response, $header_size);
 
     $body = preg_replace("/(href=|src=|@import\\s)(['\"])([^#:'\"]*)(['\"]|(?:(?:%20|\\s|\\+)[^'\"]*))/",
-                         '$1$2'.$this->myValidatorUrl.'$3$4',
+                         '$1$2'.$this->validatorUrl.'$3$4',
                          $body);
 
     echo $body;

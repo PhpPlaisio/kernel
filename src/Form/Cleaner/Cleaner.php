@@ -12,11 +12,11 @@ interface Cleaner
   /**
    * Cleans a submitted value.
    *
-   * @param mixed $theValue The submitted value.
+   * @param mixed $value The submitted value.
    *
    * @return mixed The cleaned submitted value.
    */
-  public function clean($theValue);
+  public function clean($value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------

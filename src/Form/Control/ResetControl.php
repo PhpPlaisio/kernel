@@ -12,11 +12,11 @@ class ResetControl extends PushMeControl
   /**
    * {@inheritdoc}
    */
-  public function __construct($theName)
+  public function __construct($name)
   {
-    parent::__construct($theName);
+    parent::__construct($name);
 
-    $this->myButtonType = 'reset';
+    $this->buttonType = 'reset';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

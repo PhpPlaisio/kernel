@@ -22,14 +22,14 @@ class DomainRedirectPage extends Page
    *
    * @var Form
    */
-  private $myForm;
+  private $form;
 
   /**
    * The requested URL (to which the user agent must be redirected).
    *
    * @var string
    */
-  private $myRedirect;
+  private $redirect;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -39,21 +39,21 @@ class DomainRedirectPage extends Page
   {
     parent::__construct();
 
-    $this->myRedirect = self::getCgiUrl('redirect');
+    $this->redirect = self::getCgiUrl('redirect');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL to this page.
    *
-   * @param string $theRequest The URL to which the user agent is redirect on success.
+   * @param string $request The URL to which the user agent is redirect on success.
    *
    * @return string The URL to this page.
    */
-  public static function getUrl($theRequest)
+  public static function getUrl($request)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_USER_DOMAIN_REDIRECT, 'pag');
-    $url .= self::putCgiVar('redirect', $theRequest);
+    $url .= self::putCgiVar('redirect', $request);
 
     return $url;
   }
@@ -67,8 +67,8 @@ class DomainRedirectPage extends Page
     $this->createForm();
     if ($_SERVER['REQUEST_METHOD']=='POST')
     {
-      $this->myForm->loadSubmittedValues();
-      if ($this->myForm->validate())
+      $this->form->loadSubmittedValues();
+      if ($this->form->validate())
       {
         $this->handleForm();
       }
@@ -93,8 +93,8 @@ class DomainRedirectPage extends Page
    */
   private function createForm()
   {
-    $this->myForm = new Form();
-    $fieldset     = $this->myForm->addFieldSet(new FieldSet(''));
+    $this->form = new Form();
+    $fieldset     = $this->form->addFieldSet(new FieldSet(''));
 
     // Add hidden control for cdr_token2.
     $hidden = new HiddenControl('cdr_token2');
@@ -108,7 +108,7 @@ class DomainRedirectPage extends Page
     $cdr_token1 = ($_COOKIE['SLD_SESSION']) ? $_COOKIE['SLD_SESSION'] : null;
 
     // Get cdr_token2 from form.
-    $values     = $this->myForm->getValues();
+    $values     = $this->form->getValues();
     $cdr_token2 = $values['cdr_token2'];
 
     // Get session by cdr_token's.
@@ -128,7 +128,7 @@ class DomainRedirectPage extends Page
       setcookie('ses_csrf_token', $session['ses_csrf_token'], false, '/', $_SERVER['SERVER_NAME'], true, false);
 
       // Redirect the browser to the requested page (if any).
-      HttpHeader::redirectSeeOther(($this->myRedirect) ? $this->myRedirect : '/');
+      HttpHeader::redirectSeeOther(($this->redirect) ? $this->redirect : '/');
     }
     else
     {

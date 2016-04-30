@@ -19,68 +19,68 @@ abstract class Control extends HtmlElement
    *
    * @var string[]|null
    */
-  protected $myErrorMessages;
+  protected $errorMessages;
 
   /**
    * The (local) name of this form control.
    *
    * @var string
    */
-  protected $myName;
+  protected $name;
 
   /**
    * The obfuscator to obfuscate the (submitted) name of this form control.
    *
    * @var Obfuscator
    */
-  protected $myObfuscator;
+  protected $obfuscator;
 
   /**
    * The HTML code that will be appended after the HTML code of this form control.
    *
    * @var string
    */
-  protected $myPostfix;
+  protected $postfix;
 
   /**
    * The HTML code that will be inserted before the HTML code of this form control.
    *
    * @var string
    */
-  protected $myPrefix;
+  protected $prefix;
 
   /**
    * The submit name or name in the generated HTMl code of this form control.
    *
    * @var string
    */
-  protected $mySubmitName;
+  protected $submitName;
 
   /**
    * The validators that will be used to validate this form control.
    *
    * @var Validator[]
    */
-  protected $myValidators = [];
+  protected $validators = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string $theName The (local) name of this form control.
+   * @param string $name The (local) name of this form control.
    */
-  public function __construct($theName)
+  public function __construct($name)
   {
-    if ($theName===null || $theName===false || $theName==='')
+    if ($name===null || $name===false || $name==='')
     {
       // We consider null, bool(false), and string(0) as empty. In these cases we set the name to '' such that
       // we only have to test against '' using the === operator in other parts of the code.
-      $this->myName = '';
+      $this->name = '';
     }
     else
     {
       // We consider int(0), float(0), string(3) "0.0" as non empty names.
-      $this->myName = (string)$theName;
+      $this->name = (string)$name;
     }
   }
 
@@ -88,11 +88,11 @@ abstract class Control extends HtmlElement
   /**
    * Adds a compound validator for this form control.
    *
-   * @param Validator|CompoundValidator $theValidator
+   * @param Validator|CompoundValidator $validator
    */
-  public function addValidator($theValidator)
+  public function addValidator($validator)
   {
-    $this->myValidators[] = $theValidator;
+    $this->validators[] = $validator;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -117,27 +117,27 @@ abstract class Control extends HtmlElement
    *       <li> size
    *       </ul>
    *
-   * @param string $theName The name of the requested attribute.
+   * @param string $name The name of the requested attribute.
    *
    * @return string|null
    */
-  public function getAttribute($theName)
+  public function getAttribute($name)
   {
-    return (isset($this->attributes[$theName])) ? $this->attributes[$theName] : null;
+    return (isset($this->attributes[$name])) ? $this->attributes[$name] : null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the the error messages of this form control.
    *
-   * @param bool $theRecursiveFlag
+   * @param bool $recursive
    *
    * @return string[]|null
    */
   public function getErrorMessages(/** @noinspection PhpUnusedParameterInspection */
-    $theRecursiveFlag = false)
+    $recursive = false)
   {
-    return $this->myErrorMessages;
+    return $this->errorMessages;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -159,16 +159,16 @@ abstract class Control extends HtmlElement
    */
   public function getLocalName()
   {
-    return $this->myName;
+    return $this->name;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the value of this form control.
    *
-   * @param array $theValues
+   * @param array $values
    */
-  public function getSetValuesBase(&$theValues)
+  public function getSetValuesBase(&$values)
   {
     // Nothing to do.
   }
@@ -181,7 +181,7 @@ abstract class Control extends HtmlElement
    */
   public function getSubmitName()
   {
-    return $this->mySubmitName;
+    return $this->submitName;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -194,9 +194,9 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param mixed $theValues
+   * @param mixed $values
    */
-  public function mergeValuesBase($theValues)
+  public function mergeValuesBase($values)
   {
     // Nothing to do.
   }
@@ -205,51 +205,51 @@ abstract class Control extends HtmlElement
   /**
    * Adds an error message to the list of error messages for this form control.
    *
-   * @param string $theMessage The error message.
+   * @param string $message The error message.
    */
-  public function setErrorMessage($theMessage)
+  public function setErrorMessage($message)
   {
-    $this->myErrorMessages[] = $theMessage;
+    $this->errorMessages[] = $message;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the obfuscator for the name of this form control.
    *
-   * @param Obfuscator $theObfuscator The obfuscator.
+   * @param Obfuscator $obfuscator The obfuscator.
    */
-  public function setObfuscator($theObfuscator)
+  public function setObfuscator($obfuscator)
   {
-    $this->myObfuscator = $theObfuscator;
+    $this->obfuscator = $obfuscator;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the HTML code that is inserted before the HTML code of this form control.
    *
-   * @param string $theHtmlSnippet The HTML prefix.
+   * @param string $htmlSnippet The HTML prefix.
    */
-  public function setPostfix($theHtmlSnippet)
+  public function setPostfix($htmlSnippet)
   {
-    $this->myPostfix = $theHtmlSnippet;
+    $this->postfix = $htmlSnippet;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the HTML code that is appended after the HTML code of this form control.
    *
-   * @param string $theHtmlSnippet The HTML postfix.
+   * @param string $htmlSnippet The HTML postfix.
    */
-  public function setPrefix($theHtmlSnippet)
+  public function setPrefix($htmlSnippet)
   {
-    $this->myPrefix = $theHtmlSnippet;
+    $this->prefix = $htmlSnippet;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param mixed $theValues
+   * @param mixed $values
    */
-  public function setValuesBase($theValues)
+  public function setValuesBase($values)
   {
     // Nothing to do.
   }
@@ -258,43 +258,43 @@ abstract class Control extends HtmlElement
   /**
    * Loads the submitted values.
    *
-   * @param array $theSubmittedValue The submitted values.
-   * @param array $theWhiteListValue The white listed values.
-   * @param array $theChangedInputs  The form controls which values are changed by the form submit.
+   * @param array $submittedValue The submitted values.
+   * @param array $whiteListValue The white listed values.
+   * @param array $changedInputs  The form controls which values are changed by the form submit.
    *
    * @return void
    */
-  abstract protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs);
+  abstract protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Prepares this form control for HTML code generation or loading submitted values.
    *
-   * @param string $theParentSubmitName The submit name of the parent control.
+   * @param string $parentSubmitName The submit name of the parent control.
    */
-  protected function prepare($theParentSubmitName)
+  protected function prepare($parentSubmitName)
   {
-    $this->setSubmitName($theParentSubmitName);
+    $this->setSubmitName($parentSubmitName);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the name this will be used for this form control when the form is submitted.
    *
-   * @param string $theParentSubmitName The submit name of the parent form control of this form control.
+   * @param string $parentSubmitName The submit name of the parent form control of this form control.
    */
-  protected function setSubmitName($theParentSubmitName)
+  protected function setSubmitName($parentSubmitName)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if ($theParentSubmitName!=='')
+    if ($parentSubmitName!=='')
     {
-      if ($submit_name!=='') $this->mySubmitName = $theParentSubmitName.'['.$submit_name.']';
-      else                   $this->mySubmitName = $theParentSubmitName;
+      if ($submit_name!=='') $this->submitName = $parentSubmitName.'['.$submit_name.']';
+      else                   $this->submitName = $parentSubmitName;
     }
     else
     {
-      $this->mySubmitName = $submit_name;
+      $this->submitName = $submit_name;
     }
   }
 
@@ -302,11 +302,11 @@ abstract class Control extends HtmlElement
   /**
    * Executes the validators of this form control.
    *
-   * @param array $theInvalidFormControls The form controls with invalid submitted values.
+   * @param array $invalidFormControls The form controls with invalid submitted values.
    *
    * @return bool True if and only if the submitted values are valid.
    */
-  abstract protected function validateBase(&$theInvalidFormControls);
+  abstract protected function validateBase(&$invalidFormControls);
 
   //--------------------------------------------------------------------------------------------------------------------
 }

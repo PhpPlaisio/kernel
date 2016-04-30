@@ -16,14 +16,14 @@ class UpdateItemTableAction implements TableAction
    *
    * @var string
    */
-  protected $myTitle;
+  protected $title;
 
   /**
    * The URL of the table action.
    *
    * @var string
    */
-  protected $myUrl;
+  protected $url;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -32,9 +32,9 @@ class UpdateItemTableAction implements TableAction
   public function getHtml()
   {
     $ret = '<a';
-    $ret .= Html::generateAttribute('href', $this->myUrl);
+    $ret .= Html::generateAttribute('href', $this->url);
     $ret .= '><img';
-    $ret .= Html::generateAttribute('title', $this->myTitle);
+    $ret .= Html::generateAttribute('title', $this->title);
     $ret .= Html::generateAttribute('src', ICON_EDIT);
     $ret .= ' width="16" height="16" alt="update"/></a>';
 

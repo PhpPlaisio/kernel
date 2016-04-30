@@ -15,13 +15,13 @@ class WordInsertTableAction extends InsertItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $theWdgId The ID of the word group of the new word.
+   * @param int $wdgId The ID of the word group of the new word.
    */
-  public function __construct($theWdgId)
+  public function __construct($wdgId)
   {
-    $this->myUrl = WordInsertPage::getUrl($theWdgId);
+    $this->url = WordInsertPage::getUrl($wdgId);
 
-    $this->myTitle = 'Create word';
+    $this->title = 'Create word';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

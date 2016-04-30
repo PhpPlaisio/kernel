@@ -16,7 +16,7 @@ class UrlCleaner implements Cleaner
    *
    * @var UrlCleaner
    */
-  static private $ourSingleton;
+  static private $singleton;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -26,24 +26,24 @@ class UrlCleaner implements Cleaner
    */
   public static function get()
   {
-    if (!self::$ourSingleton) self::$ourSingleton = new self();
+    if (!self::$singleton) self::$singleton = new self();
 
-    return self::$ourSingleton;
+    return self::$singleton;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns a normalized URL if the submitted value is a URL. Otherwise returns the submitted value.
    *
-   * @param string $theValue The submitted URL.
+   * @param string $value The submitted URL.
    *
    * @return string|null
    */
-  public function clean($theValue)
+  public function clean($value)
   {
     // First prune whitespace.
     $cleaner = PruneWhitespaceCleaner::get();
-    $value   = $cleaner->clean($theValue);
+    $value   = $cleaner->clean($value);
 
     // If the value is empty return immediately,
     if ($value==='' || $value===null || $value===false)

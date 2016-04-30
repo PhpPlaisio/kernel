@@ -20,77 +20,77 @@ class CoreFieldSet extends FieldSet
    *
    * @var CoreButtonControl
    */
-  private $myButtonFormControl;
+  private $buttonControl;
 
   /**
    * The title of the in the header of the form of this field set.
    *
    * @var string
    */
-  private $myHtmlTitle;
+  private $htmlTitle;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a button control to this fieldset.
    *
-   * @param string $theSubmitButtonText The text of the submit button.
-   * @param null   $theResetButtonText  The text of the reset button. If null no reset button will be created.
-   * @param string $theSubmitName       The name of the submit button.
-   * @param string $theResetName        The name of the reset button.
+   * @param string $submitButtonText The text of the submit button.
+   * @param null   $resetButtonText  The text of the reset button. If null no reset button will be created.
+   * @param string $submitName       The name of the submit button.
+   * @param string $resetName        The name of the reset button.
    *
    * @return CoreButtonControl
    */
-  public function addButton($theSubmitButtonText = 'OK',
-                            $theResetButtonText = null,
-                            $theSubmitName = 'submit',
-                            $theResetName = 'reset'
+  public function addButton($submitButtonText = 'OK',
+                            $resetButtonText = null,
+                            $submitName = 'submit',
+                            $resetName = 'reset'
   )
   {
-    $this->myButtonFormControl = new CoreButtonControl('');
+    $this->buttonControl = new CoreButtonControl('');
 
     // Create submit button.
-    $submit = new SubmitControl($theSubmitName);
-    $submit->setValue($theSubmitButtonText);
-    $this->myButtonFormControl->addFormControl($submit);
+    $submit = new SubmitControl($submitName);
+    $submit->setValue($submitButtonText);
+    $this->buttonControl->addFormControl($submit);
 
     // Create reset button.
-    if ($theResetButtonText)
+    if ($resetButtonText)
     {
-      $reset = new ResetControl($theResetName);
-      $reset->setValue($theResetButtonText);
-      $this->myButtonFormControl->addFormControl($reset);
+      $reset = new ResetControl($resetName);
+      $reset->setValue($resetButtonText);
+      $this->buttonControl->addFormControl($reset);
     }
 
-    $this->addFormControl($this->myButtonFormControl);
+    $this->addFormControl($this->buttonControl);
 
-    return $this->myButtonFormControl;
+    return $this->buttonControl;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a submit button to this fieldset.
    *
-   * @param int|string $theWrdId Depending on the type:
+   * @param int|string $wrdId Depending on the type:
    *                             <ul>
    *                             <li>int: The ID of the word of the button text.
    *                             <li>string: The text of the button.
    *                             </ul>
-   * @param string     $theName  The name of the submit button.
+   * @param string     $name  The name of the submit button.
    *
    * @return SubmitControl
    */
-  public function addSubmitButton($theWrdId, $theName = 'submit')
+  public function addSubmitButton($wrdId, $name = 'submit')
   {
     // If necessary create a button form control.
-    if (!$this->myButtonFormControl)
+    if (!$this->buttonControl)
     {
-      $this->myButtonFormControl = new CoreButtonControl('');
-      $this->addFormControl($this->myButtonFormControl);
+      $this->buttonControl = new CoreButtonControl('');
+      $this->addFormControl($this->buttonControl);
     }
 
-    $input = new SubmitControl($theName);
-    $input->setValue((is_int($theWrdId)) ? Babel::getWord($theWrdId) : $theWrdId);
-    $this->myButtonFormControl->addFormControl($input);
+    $input = new SubmitControl($name);
+    $input->setValue((is_int($wrdId)) ? Babel::getWord($wrdId) : $wrdId);
+    $this->buttonControl->addFormControl($input);
 
     return $input;
   }
@@ -106,30 +106,30 @@ class CoreFieldSet extends FieldSet
     $ret .= '<div class="input_table">';
     $ret .= '<table>';
 
-    if ($this->myHtmlTitle)
+    if ($this->htmlTitle)
     {
       $ret .= '<thead>';
       $ret .= '<tr>';
-      $ret .= '<th colspan="2">'.$this->myHtmlTitle.'</th>';
+      $ret .= '<th colspan="2">'.$this->htmlTitle.'</th>';
       $ret .= '</tr>';
       $ret .= '</thead>';
     }
 
-    if ($this->myButtonFormControl)
+    if ($this->buttonControl)
     {
       $ret .= '<tfoot class="button">';
       $ret .= '<tr>';
       $ret .= '<td colspan="2">';
-      $ret .= $this->myButtonFormControl->generate();
+      $ret .= $this->buttonControl->generate();
       $ret .= '</td>';
       $ret .= '</tr>';
       $ret .= '</tfoot>';
     }
 
     $ret .= '<tbody>';
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
-      if ($control!=$this->myButtonFormControl)
+      if ($control!=$this->buttonControl)
       {
         $ret .= '<tr>';
         $ret .= '<th>';
@@ -173,11 +173,11 @@ class CoreFieldSet extends FieldSet
   /**
    * Sets the title of the form of this field set.
    *
-   * @param string $theTitle
+   * @param string $title
    */
-  public function setTitle($theTitle)
+  public function setTitle($title)
   {
-    $this->myHtmlTitle = Html::txt2Html($theTitle);
+    $this->htmlTitle = Html::txt2Html($title);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

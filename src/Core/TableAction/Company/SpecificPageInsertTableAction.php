@@ -15,13 +15,13 @@ class SpecificPageInsertTableAction extends InsertItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $theActCmpId The ID of the target company.
+   * @param int $actCmpId The ID of the target company.
    */
-  public function __construct($theActCmpId)
+  public function __construct($actCmpId)
   {
-    $this->myUrl = SpecificPageInsertPage::getUrl($theActCmpId);
+    $this->url = SpecificPageInsertPage::getUrl($actCmpId);
 
-    $this->myTitle = 'Add new page';
+    $this->title = 'Add new page';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -35,7 +35,7 @@ class TabOverviewPage extends CorePage
    */
   protected function echoTabContent()
   {
-    $tabs = Abc::$DL->systemTabGetAll($this->myLanId);
+    $tabs = Abc::$DL->systemTabGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
 

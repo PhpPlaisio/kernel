@@ -30,21 +30,21 @@ class PageUpdateFunctionalitiesPage extends CorePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  private $myForm;
+  private $form;
 
   /**
    * The ID of the target page.
    *
    * @var int
    */
-  private $myTargetPagId;
+  private $targetPagId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -54,22 +54,22 @@ class PageUpdateFunctionalitiesPage extends CorePage
   {
     parent::__construct();
 
-    $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
-    $this->myDetails     = Abc::$DL->systemPageGetDetails($this->myTargetPagId, $this->myLanId);
+    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->details     = Abc::$DL->systemPageGetDetails($this->targetPagId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $thePagId
+   * @param int $pagId
    *
    * @return string
    */
-  public static function getUrl($thePagId)
+  public static function getUrl($pagId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= self::putCgiVar('tar_pag', $thePagId, 'pag');
+    $url .= self::putCgiVar('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -80,8 +80,8 @@ class PageUpdateFunctionalitiesPage extends CorePage
    */
   protected function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
@@ -90,11 +90,11 @@ class PageUpdateFunctionalitiesPage extends CorePage
     {
       if ($values['data'][$fun_id]['fun_checked'])
       {
-        Abc::$DL->systemFunctionalityInsertPage($fun_id, $this->myTargetPagId);
+        Abc::$DL->systemFunctionalityInsertPage($fun_id, $this->targetPagId);
       }
       else
       {
-        Abc::$DL->systemFunctionalityDeletePage($fun_id, $this->myTargetPagId);
+        Abc::$DL->systemFunctionalityDeletePage($fun_id, $this->targetPagId);
       }
     }
 
@@ -121,14 +121,14 @@ class PageUpdateFunctionalitiesPage extends CorePage
   private function createForm()
   {
     // Get all functionalities.
-    $pages = Abc::$DL->systemPageGetAvailableFunctionalities($this->myTargetPagId, $this->myLanId);
+    $pages = Abc::$DL->systemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
 
     // Create form.
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Add field set.
     $field_set = new FieldSet('');
-    $this->myForm->addFieldSet($field_set);
+    $this->form->addFieldSet($field_set);
 
     // Create factory.
     $factory = new SystemPageUpdateFunctionalitiesSlatControlFactory();
@@ -139,7 +139,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
     $submit = new SubmitControl('submit');
     $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
-    $this->myForm->addSubmitHandler($button, 'handleForm');
+    $this->form->addSubmitHandler($button, 'handleForm');
 
     // Put everything together in a LouverControl.
     $louver = new LouverControl('data');
@@ -159,7 +159,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case  'handleForm':
@@ -167,7 +167,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -179,7 +179,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(PageDetailsPage::getUrl($this->myTargetPagId));
+    HttpHeader::redirectSeeOther(PageDetailsPage::getUrl($this->targetPagId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
    */
   private function showPageDetails()
   {
-    $details = Abc::$DL->systemPageGetDetails($this->myTargetPagId, $this->myLanId);
+    $details = Abc::$DL->systemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the page.

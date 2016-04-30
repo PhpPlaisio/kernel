@@ -18,7 +18,7 @@ class PushMeControl extends SimpleControl
    *  <li> button
    *  </ul>
    */
-  protected $myButtonType;
+  protected $buttonType;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -26,17 +26,17 @@ class PushMeControl extends SimpleControl
    */
   public function generate()
   {
-    $this->attributes['type'] = $this->myButtonType;
-    $this->attributes['name'] = $this->mySubmitName;
+    $this->attributes['type'] = $this->buttonType;
+    $this->attributes['name'] = $this->submitName;
 
-    if ($this->myFormatter) $this->attributes['value'] = $this->myFormatter->format($this->myValue);
-    else                    $this->attributes['value'] = $this->myValue;
+    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
+    else                    $this->attributes['value'] = $this->value;
 
-    $ret = $this->myPrefix;
+    $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -45,9 +45,9 @@ class PushMeControl extends SimpleControl
   /**
    * Has no effect. The value of a button is not retrieved by this method.
    *
-   * @param array $theValues Not used.
+   * @param array $values Not used.
    */
-  public function getCurrentValues(&$theValues)
+  public function getCurrentValues(&$values)
   {
     // Nothing to do.
   }
@@ -56,9 +56,9 @@ class PushMeControl extends SimpleControl
   /**
    * Has no effect. The value of a button is not set by this method.
    *
-   * @param array $theValues Not used.
+   * @param array $values Not used.
    */
-  public function mergeValuesBase($theValues)
+  public function mergeValuesBase($values)
   {
     // Nothing to do.
   }
@@ -67,9 +67,9 @@ class PushMeControl extends SimpleControl
   /**
    * Has no effect. The value of a button is not set by this method.
    *
-   * @param array $theValues Not used.
+   * @param array $values Not used.
    */
-  public function setValuesBase($theValues)
+  public function setValuesBase($values)
   {
     // Nothing to do.
   }
@@ -78,17 +78,17 @@ class PushMeControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if (isset($theSubmittedValue[$submit_name]) && $theSubmittedValue[$submit_name]===$this->myValue)
+    if (isset($submittedValue[$submit_name]) && $submittedValue[$submit_name]===$this->value)
     {
       // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
       // So, skip the following code.
-      // $theChangedInputs[$this->myName] = $this;
+      // $changedInputs[$this->myName] = $this;
 
-      $theWhiteListValue[$this->myName] = $this->myValue;
+      $whiteListValue[$this->name] = $this->value;
     }
   }
 

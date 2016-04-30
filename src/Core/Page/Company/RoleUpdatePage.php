@@ -17,7 +17,7 @@ class RoleUpdatePage extends RoleBasePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,26 +27,26 @@ class RoleUpdatePage extends RoleBasePage
   {
     parent::__construct();
 
-    $this->myActCmpId    = self::getCgiId('cmp', 'cmp');
-    $this->myRolId       = self::getCgiId('rol', 'rol');
-    $this->myDetails     = Abc::$DL->companyRoleGetDetails($this->myActCmpId, $this->myRolId);
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->actCmpId      = self::getCgiId('cmp', 'cmp');
+    $this->rolId         = self::getCgiId('rol', 'rol');
+    $this->details       = Abc::$DL->companyRoleGetDetails($this->actCmpId, $this->rolId);
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theCmpId The ID of the target company.
-   * @param int $theRolId The ID of role to be modified.
+   * @param int $cmpId The ID of the target company.
+   * @param int $rolId The ID of role to be modified.
    *
    * @return string
    */
-  public static function getUrl($theCmpId, $theRolId)
+  public static function getUrl($cmpId, $rolId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
-    $url .= self::putCgiVar('rol', $theRolId, 'rol');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -57,13 +57,13 @@ class RoleUpdatePage extends RoleBasePage
    */
   protected function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Abc::$DL->companyRoleUpdate($this->myActCmpId, $this->myRolId, $values['rol_name'], $values['rol_weight']);
+    Abc::$DL->companyRoleUpdate($this->actCmpId, $this->rolId, $values['rol_name'], $values['rol_weight']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ class RoleUpdatePage extends RoleBasePage
    */
   protected function loadValues()
   {
-    $this->myForm->setValues($this->myDetails);
+    $this->form->setValues($this->details);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

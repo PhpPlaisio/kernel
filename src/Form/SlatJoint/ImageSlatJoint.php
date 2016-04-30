@@ -14,25 +14,25 @@ class ImageSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
+   * @param string|int|null $headerText The header text of this table column.
    */
-  public function __construct($theHeaderText)
+  public function __construct($headerText)
   {
     $this->dataType   = 'control-image';
-    $this->headerText = $theHeaderText;
+    $this->headerText = $headerText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates and returns a image form control.
    *
-   * @param string $theName The local name of the image form control.
+   * @param string $name The local name of the image form control.
    *
    * @return ImageControl
    */
-  public function createControl($theName)
+  public function createControl($name)
   {
-    return new ImageControl($theName);
+    return new ImageControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

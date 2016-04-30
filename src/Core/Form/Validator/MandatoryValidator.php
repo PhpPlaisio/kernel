@@ -14,32 +14,32 @@ class MandatoryValidator extends \SetBased\Abc\Form\Validator\MandatoryValidator
    *
    * @var int
    */
-  private $myTxtId;
+  private $txtId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int $theTxtId The text ID of the error message.
+   * @param int $txtId The text ID of the error message.
    */
-  public function __construct($theTxtId)
+  public function __construct($txtId)
   {
-    $this->myTxtId = $theTxtId;
+    $this->txtId = $txtId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function validate($theFormControl)
+  public function validate($control)
   {
-    $valid = parent::validate($theFormControl);
+    $valid = parent::validate($control);
 
     if (!$valid)
     {
       // @todo Improve validator error messages.
       $errmsg = 'Verplicht veld.';
-      $theFormControl->setErrorMessage($errmsg);
+      $control->setErrorMessage($errmsg);
     }
 
     return $valid;

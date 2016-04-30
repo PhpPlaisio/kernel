@@ -24,7 +24,7 @@ class PageDetailsPage extends CorePage
   /**
    * @var int The ID of the target page shown on this page.
    */
-  protected $myTargetPagId;
+  protected $targetPagId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -34,21 +34,21 @@ class PageDetailsPage extends CorePage
   {
     parent::__construct();
 
-    $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $thePagId The Company shown on this page.
+   * @param int $pagId The Company shown on this page.
    *
    * @return string
    */
-  public static function getUrl($thePagId)
+  public static function getUrl($pagId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
-    $url .= self::putCgiVar('tar_pag', $thePagId, 'pag');
+    $url .= self::putCgiVar('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -73,11 +73,11 @@ class PageDetailsPage extends CorePage
    */
   private function showDetails()
   {
-    $details = Abc::$DL->systemPageGetDetails($this->myTargetPagId, $this->myLanId);
+    $details = Abc::$DL->systemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add table action for updating the page details.
-    $table->addTableAction('default', new PageUpdateTableAction($this->myTargetPagId));
+    $table->addTableAction('default', new PageUpdateTableAction($this->targetPagId));
 
     // Add row with the ID of the page.
     NumericTableRow::addRow($table, 'ID', $details['pag_id'], '%d');
@@ -112,12 +112,12 @@ class PageDetailsPage extends CorePage
    */
   private function showFunctionalities()
   {
-    $roles = Abc::$DL->systemPageGetGrantedFunctionalities($this->myTargetPagId, $this->myLanId);
+    $roles = Abc::$DL->systemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
     // Table action for modify the functionalities that grant access to the page whow on this page.
-    $table->addTableAction('default', new PageUpdateFunctionalitiesTableAction($this->myTargetPagId));
+    $table->addTableAction('default', new PageUpdateFunctionalitiesTableAction($this->targetPagId));
 
     // Show module name.
     $table->addColumn(new TextTableColumn('Module', 'mdl_name'));
@@ -134,7 +134,7 @@ class PageDetailsPage extends CorePage
    */
   private function showGrantedRoles()
   {
-    $roles = Abc::$DL->systemPageGetGrantedRoles($this->myTargetPagId, $this->myLanId);
+    $roles = Abc::$DL->systemPageGetGrantedRoles($this->targetPagId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

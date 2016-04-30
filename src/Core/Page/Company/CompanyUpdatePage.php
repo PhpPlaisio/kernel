@@ -17,30 +17,30 @@ class CompanyUpdatePage extends CompanyBasePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   public function __construct()
   {
     parent::__construct();
 
-    $this->myActCmpId    = self::getCgiId('cmp', 'cmp');
-    $this->myDetails     = Abc::$DL->companyGetDetails($this->myActCmpId);
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->actCmpId    = self::getCgiId('cmp', 'cmp');
+    $this->details     = Abc::$DL->companyGetDetails($this->actCmpId);
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theCmpId The ID of the target language.
+   * @param int $cmpId The ID of the target language.
    *
    * @return string
    */
-  public static function getUrl($theCmpId)
+  public static function getUrl($cmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
 
     return $url;
   }
@@ -51,13 +51,13 @@ class CompanyUpdatePage extends CompanyBasePage
    */
   protected function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Abc::$DL->companyUpdate($this->myActCmpId, $values['cmp_abbr'], $values['cmp_label']);
+    Abc::$DL->companyUpdate($this->actCmpId, $values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ class CompanyUpdatePage extends CompanyBasePage
    */
   protected function loadValues()
   {
-    $this->myForm->setValues($this->myDetails);
+    $this->form->setValues($this->details);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

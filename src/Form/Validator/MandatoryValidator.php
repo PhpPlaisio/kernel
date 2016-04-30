@@ -18,13 +18,13 @@ class MandatoryValidator implements Validator
    * * Empty values are considered invalid.
    * * If the form control is a complex form control all child form control must have a value.
    *
-   * @param Control $theFormControl The form control.
+   * @param Control $control The form control.
    *
    * @return bool
    */
-  public function validate($theFormControl)
+  public function validate($control)
   {
-    $value = $theFormControl->getSubmittedValue();
+    $value = $control->getSubmittedValue();
 
     if ($value==='' || $value===null || $value===false)
     {
@@ -41,15 +41,15 @@ class MandatoryValidator implements Validator
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Validates recursively if one of the leaves of @a $theArray has a non-empty value.
+   * Validates recursively if one of the leaves of @a $array has a non-empty value.
    *
-   * @param array $theArray
+   * @param array $array
    *
    * @return bool
    */
-  private function validateArray($theArray)
+  private function validateArray($array)
   {
-    foreach ($theArray as $element)
+    foreach ($array as $element)
     {
       if (is_scalar($element))
       {

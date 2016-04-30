@@ -22,21 +22,21 @@ abstract class PageBasePage extends CorePage
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * The ID of the page created or modified
    *
    * @var int .
    */
-  protected $myTargetPagId;
+  protected $targetPagId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -71,68 +71,68 @@ abstract class PageBasePage extends CorePage
    */
   private function createForm()
   {
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->myLanId);
+    $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setEmptyOption();
     $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
-    $this->myForm->addFormControl($input, 'Title');
+    $this->form->addFormControl($input, 'Title');
 
     // Create text box for (new) page title.
     $input = new TextControl('pag_title');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $this->myForm->addFormControl($input, 'Title');
+    $this->form->addFormControl($input, 'Title');
     /** @todo Add validator: either wrd_id is not empty or pag_title is not empty */
 
     // Create form control for page tab group.
-    $tabs  = Abc::$DL->systemTabGetAll($this->myLanId);
+    $tabs  = Abc::$DL->systemTabGetAll($this->lanId);
     $input = new SelectControl('ptb_id');
     $input->setOptions($tabs, 'ptb_id', 'ptb_label');
     $input->setEmptyOption();
-    $this->myForm->addFormControl($input, 'Page Tab');
+    $this->form->addFormControl($input, 'Page Tab');
 
     // Create form control for original page.
-    $pages = Abc::$DL->systemPageGetAllMasters($this->myLanId);
+    $pages = Abc::$DL->systemPageGetAllMasters($this->lanId);
     $input = new SelectControl('pag_id_org');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
     $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
-    $this->myForm->addFormControl($input, 'Original Page');
+    $this->form->addFormControl($input, 'Original Page');
 
     // Create form control for menu item with which the page is associated..
-    $menus = Abc::$DL->systemMenuGetAllEntries($this->myLanId);
+    $menus = Abc::$DL->systemMenuGetAllEntries($this->lanId);
     $input = new SelectControl('mnu_id');
     $input->setOptions($menus, 'mnu_id', 'mnu_name');
     $input->setEmptyOption();
     $input->setOptionsObfuscator(Abc::getObfuscator('mnu'));
-    $this->myForm->addFormControl($input, 'Menu');
+    $this->form->addFormControl($input, 'Menu');
 
     // Create form control for page alias.
     $input = new TextControl('pag_alias');
     $input->setAttrMaxLength(C::LEN_PAG_ALIAS);
-    $this->myForm->addFormControl($input, 'Alias');
+    $this->form->addFormControl($input, 'Alias');
 
     // Create form control for page class.
     $input = new TextControl('pag_class');
     $input->setAttrMaxLength(C::LEN_PAG_CLASS);
-    $this->myForm->addFormControl($input, 'Class', true);
+    $this->form->addFormControl($input, 'Class', true);
 
     // Create form control for the page label.
     $input = new TextControl('pag_label');
     $input->setAttrMaxLength(C::LEN_PAG_LABEL);
-    $this->myForm->addFormControl($input, 'Label');
+    $this->form->addFormControl($input, 'Label');
 
     // Create form control for the weight of the page (inside a tab group).
     /** @todo validate weight is a number and/or form control or validator for numeric input. */
     $input = new TextControl('pag_weight');
     $input->setAttrMaxLength(C::LEN_PAG_WEIGHT);
-    $this->myForm->addFormControl($input, 'Weight');
+    $this->form->addFormControl($input, 'Weight');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ abstract class PageBasePage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case  'handleForm':
@@ -149,7 +149,7 @@ abstract class PageBasePage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -161,7 +161,7 @@ abstract class PageBasePage extends CorePage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(PageDetailsPage::getUrl($this->myTargetPagId));
+    HttpHeader::redirectSeeOther(PageDetailsPage::getUrl($this->targetPagId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

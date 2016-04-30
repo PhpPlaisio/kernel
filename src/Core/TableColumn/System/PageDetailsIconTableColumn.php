@@ -15,9 +15,9 @@ class PageDetailsIconTableColumn extends DetailsIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return PageDetailsPage::getUrl($theRow['pag_id']);
+    return PageDetailsPage::getUrl($row['pag_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

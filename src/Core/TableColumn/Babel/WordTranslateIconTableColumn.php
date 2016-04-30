@@ -17,30 +17,30 @@ class WordTranslateIconTableColumn extends IconTableColumn
    *
    * @var int
    */
-  private $myActLanId;
+  private $actLanId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int $theTargetLanId The ID of the target language.
+   * @param int $targetLanId The ID of the target language.
    */
-  public function __construct($theTargetLanId)
+  public function __construct($targetLanId)
   {
     parent::__construct();
 
-    $this->myIconUrl  = ICON_SMALL_BABEL_FISH;
-    $this->myAltValue = 'translate';
-    $this->myActLanId = $theTargetLanId;
+    $this->iconUrl  = ICON_SMALL_BABEL_FISH;
+    $this->altValue = 'translate';
+    $this->actLanId = $targetLanId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return WordTranslatePage::getUrl($theRow['wrd_id'], $this->myActLanId);
+    return WordTranslatePage::getUrl($row['wrd_id'], $this->actLanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

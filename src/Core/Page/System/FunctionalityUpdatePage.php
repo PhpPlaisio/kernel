@@ -17,14 +17,14 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   /**
    * The ID of the functionality.
    *
    * @var int
    */
-  private $myFunId;
+  private $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -34,23 +34,23 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
   {
     parent::__construct();
 
-    $this->myFunId       = self::getCgiId('fun', 'fun');
-    $this->myDetails     = Abc::$DL->systemFunctionalityGetDetails($this->myFunId, $this->myLanId);
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->funId       = self::getCgiId('fun', 'fun');
+    $this->details     = Abc::$DL->systemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $theFunId The ID of the functionality.
+   * @param int $funId The ID of the functionality.
    *
    * @return string
    */
-  public static function getUrl($theFunId)
+  public static function getUrl($funId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
-    $url .= self::putCgiVar('fun', $theFunId, 'fun');
+    $url .= self::putCgiVar('fun', $funId, 'fun');
 
     return $url;
   }
@@ -61,15 +61,15 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    */
   protected function dataBaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
     if ($values['fun_name'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
                                          C::WDG_ID_FUNCTIONALITIES,
                                          false,
                                          false,
@@ -80,7 +80,7 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemFunctionalityUpdateDetails($this->myFunId, $values['mdl_id'], $wrd_id);
+    Abc::$DL->systemFunctionalityUpdateDetails($this->funId, $values['mdl_id'], $wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -89,10 +89,10 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    */
   protected function loadValues()
   {
-    $values = $this->myDetails;
+    $values = $this->details;
     unset($values['fun_name']);
 
-    $this->myForm->mergeValues($values);
+    $this->form->mergeValues($values);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

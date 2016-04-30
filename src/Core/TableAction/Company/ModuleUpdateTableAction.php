@@ -15,13 +15,13 @@ class ModuleUpdateTableAction extends UpdateItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $theCmpId The ID of the target company.
+   * @param int $cmpId The ID of the target company.
    */
-  public function __construct($theCmpId)
+  public function __construct($cmpId)
   {
-    $this->myUrl = ModuleUpdatePage::getUrl($theCmpId);
+    $this->url = ModuleUpdatePage::getUrl($cmpId);
 
-    $this->myTitle = 'Modify enabled modules';
+    $this->title = 'Modify enabled modules';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

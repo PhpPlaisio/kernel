@@ -14,25 +14,25 @@ class FileSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
+   * @param string|int|null $headerText The header text of this table column.
    */
-  public function __construct($theHeaderText)
+  public function __construct($headerText)
   {
     $this->dataType   = 'control-file';
-    $this->headerText = $theHeaderText;
+    $this->headerText = $headerText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates and returns a file form control.
    *
-   * @param string $theName The local name of the file form control.
+   * @param string $name The local name of the file form control.
    *
    * @return FileControl
    */
-  public function createControl($theName)
+  public function createControl($name)
   {
-    return new FileControl($theName);
+    return new FileControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

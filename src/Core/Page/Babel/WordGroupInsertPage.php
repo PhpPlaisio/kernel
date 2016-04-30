@@ -19,7 +19,7 @@ class WordGroupInsertPage extends WordGroupBasePage
   {
     parent::__construct();
 
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_INSERT;
+    $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -42,9 +42,9 @@ class WordGroupInsertPage extends WordGroupBasePage
    */
   protected function databaseAction()
   {
-    $values = $this->myForm->getValues();
+    $values = $this->form->getValues();
 
-    $this->myWdgId = Abc::$DL->wordGroupInsertDetails($values['wdg_name'], $values['wdg_label']);
+    $this->wdgId = Abc::$DL->wordGroupInsertDetails($values['wdg_name'], $values['wdg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

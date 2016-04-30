@@ -14,13 +14,13 @@ class InvisibleSlatJoint extends SlatJoint
   /**
    * Creates and returns a invisible form control.
    *
-   * @param string $theName The local name of the invisible form control.
+   * @param string $name The local name of the invisible form control.
    *
    * @return InvisibleControl
    */
-  public function createControl($theName)
+  public function createControl($name)
   {
-    return new InvisibleControl($theName);
+    return new InvisibleControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

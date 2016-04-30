@@ -15,7 +15,7 @@ class ModuleUpdatePage extends ModuleBasePage
   /**
    * @var array The details of the module.
    */
-  private $myDetails;
+  private $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -25,23 +25,23 @@ class ModuleUpdatePage extends ModuleBasePage
   {
     parent::__construct();
 
-    $this->myMdlId       = self::getCgiId('mdl', 'mdl');
-    $this->myDetails     = Abc::$DL->systemModuleGetDetails($this->myMdlId, $this->myLanId);
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->mdlId         = self::getCgiId('mdl', 'mdl');
+    $this->details       = Abc::$DL->systemModuleGetDetails($this->mdlId, $this->lanId);
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $theMdlId The ID of the module.
+   * @param int $mdlId The ID of the module.
    *
    * @return string
    */
-  public static function getUrl($theMdlId)
+  public static function getUrl($mdlId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE, 'pag');
-    $url .= self::putCgiVar('mdl', $theMdlId, 'mdl');
+    $url .= self::putCgiVar('mdl', $mdlId, 'mdl');
 
     return $url;
   }
@@ -52,8 +52,8 @@ class ModuleUpdatePage extends ModuleBasePage
    */
   protected function dataBaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
@@ -61,7 +61,7 @@ class ModuleUpdatePage extends ModuleBasePage
     if ($values['mdl_name'])
     {
       // New module name. Insert word en retrieve wrd_id of the new word.
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
                                          C::WDG_ID_MODULE,
                                          false,
                                          false,
@@ -74,7 +74,7 @@ class ModuleUpdatePage extends ModuleBasePage
     }
 
     // Create the new module in the database.
-    Abc::$DL->systemModuleModify($this->myMdlId, $wrd_id);
+    Abc::$DL->systemModuleModify($this->mdlId, $wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -83,10 +83,10 @@ class ModuleUpdatePage extends ModuleBasePage
    */
   protected function loadValues()
   {
-    $values = $this->myDetails;
+    $values = $this->details;
     unset($values['mdl_name']);
 
-    $this->myForm->mergeValues($values);
+    $this->form->mergeValues($values);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

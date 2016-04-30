@@ -17,7 +17,7 @@ class WordUpdatePage extends WordBasePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,26 +27,26 @@ class WordUpdatePage extends WordBasePage
   {
     parent::__construct();
 
-    $this->myWrdId       = self::getCgiId('wrd', 'wrd');
-    $this->myDetails     = Abc::$DL->wordGetDetails($this->myWrdId, $this->myActLanId);
-    $this->myWdgId       = $this->myDetails['wdg_id'];
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->wrdId       = self::getCgiId('wrd', 'wrd');
+    $this->details     = Abc::$DL->wordGetDetails($this->wrdId, $this->actLanId);
+    $this->wdgId       = $this->details['wdg_id'];
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int         $theWrdId       The ID of the word.
-   * @param string|null $theRedirectUrl If set the URL to redirect the user agent.
+   * @param int         $wrdId       The ID of the word.
+   * @param string|null $redirectUrl If set the URL to redirect the user agent.
    *
    * @return string
    */
-  public static function getUrl($theWrdId, $theRedirectUrl = null)
+  public static function getUrl($wrdId, $redirectUrl = null)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
-    $url .= self::putCgiVar('wrd', $theWrdId, 'wrd');
-    $url .= self::putCgiVar('redirect', $theRedirectUrl);
+    $url .= self::putCgiVar('wrd', $wrdId, 'wrd');
+    $url .= self::putCgiVar('redirect', $redirectUrl);
 
     return $url;
   }
@@ -57,13 +57,13 @@ class WordUpdatePage extends WordBasePage
    */
   public function databaseAction()
   {
-    $values  = $this->myForm->getValues();
-    $changes = $this->myForm->getChangedControls();
+    $values  = $this->form->getValues();
+    $changes = $this->form->getChangedControls();
 
     // Return immediately when no form controls are changed.
     if (empty($changes)) return;
 
-    Abc::$DL->wordUpdateDetails($this->myWrdId,
+    Abc::$DL->wordUpdateDetails($this->wrdId,
                                 $values['wdg_id'],
                                 $values['wrd_label'],
                                 $values['wrd_comment'],
@@ -76,7 +76,7 @@ class WordUpdatePage extends WordBasePage
    */
   protected function setValues()
   {
-    $this->myForm->setValues($this->myDetails);
+    $this->form->setValues($this->details);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

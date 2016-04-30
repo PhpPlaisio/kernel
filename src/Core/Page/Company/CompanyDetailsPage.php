@@ -21,14 +21,14 @@ class CompanyDetailsPage extends CompanyPage
    *
    * @var int
    */
-  protected $myActCmpId;
+  protected $actCmpId;
 
   /**
    * The details of the target company.
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -38,23 +38,23 @@ class CompanyDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->myActCmpId = self::getCgiId('cmp', 'cmp');
+    $this->actCmpId = self::getCgiId('cmp', 'cmp');
 
-    $this->myDetails = Abc::$DL->companyGetDetails($this->myActCmpId);
+    $this->details = Abc::$DL->companyGetDetails($this->actCmpId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theCmpId The ID of the target company.
+   * @param int $cmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($theCmpId)
+  public static function getUrl($cmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
 
     return $url;
   }
@@ -77,16 +77,16 @@ class CompanyDetailsPage extends CompanyPage
     $table = new CoreDetailTable();
 
     // Add table action for update the company details.
-    $table->addTableAction('default', new CompanyUpdateTableAction($this->myActCmpId));
+    $table->addTableAction('default', new CompanyUpdateTableAction($this->actCmpId));
 
     // Show company ID.
-    NumericTableRow::addRow($table, 'ID', $this->myDetails['cmp_id'], '%d');
+    NumericTableRow::addRow($table, 'ID', $this->details['cmp_id'], '%d');
 
     // Show company abbreviation.
-    TextTableRow::addRow($table, 'Abbreviation', $this->myDetails['cmp_abbr']);
+    TextTableRow::addRow($table, 'Abbreviation', $this->details['cmp_abbr']);
 
     // Show label.
-    TextTableRow::addRow($table, 'Label', $this->myDetails['cmp_label']);
+    TextTableRow::addRow($table, 'Label', $this->details['cmp_label']);
 
     echo $table->getHtmlTable();
   }

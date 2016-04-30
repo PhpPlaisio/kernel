@@ -18,28 +18,28 @@ class SpecificPageUpdateIconTableColumn extends UpdateIconTableColumn
    *
    * @var int
    */
-  private $myTargetCmpId;
+  private $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int $theTargetCmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    */
-  public function __construct($theTargetCmpId)
+  public function __construct($targetCmpId)
   {
     parent::__construct();
 
-    $this->myTargetCmpId = $theTargetCmpId;
+    $this->targetCmpId = $targetCmpId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return SpecificPageUpdatePage::getUrl($this->myTargetCmpId, $theRow['pag_id']);
+    return SpecificPageUpdatePage::getUrl($this->targetCmpId, $row['pag_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

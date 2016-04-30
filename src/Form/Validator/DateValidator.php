@@ -18,13 +18,13 @@ class DateValidator implements Validator
    * Note:
    * * Empty values are considered valid.
    *
-   * @param DateControl $theFormControl
+   * @param DateControl $control
    *
    * @return bool
    */
-  public function validate($theFormControl)
+  public function validate($control)
   {
-    $value = $theFormControl->getSubmittedValue();
+    $value = $control->getSubmittedValue();
 
     // An empty value is valid.
     if ($value===null || $value===false || $value==='') return true;
@@ -39,8 +39,8 @@ class DateValidator implements Validator
     if (!$valid)
     {
       // @todo babel
-      $message = sprintf("'%s' is geen geldige datum.", $theFormControl->getSubmittedValue());
-      $theFormControl->setErrorMessage($message);
+      $message = sprintf("'%s' is geen geldige datum.", $control->getSubmittedValue());
+      $control->setErrorMessage($message);
     }
 
     return $valid;

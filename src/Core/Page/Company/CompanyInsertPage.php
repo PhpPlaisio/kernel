@@ -19,7 +19,7 @@ class CompanyInsertPage extends CompanyBasePage
   {
     parent::__construct();
 
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_INSERT;
+    $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -37,9 +37,9 @@ class CompanyInsertPage extends CompanyBasePage
    */
   protected function databaseAction()
   {
-    $values = $this->myForm->getValues();
+    $values = $this->form->getValues();
 
-    $this->myActCmpId = Abc::$DL->companyInsert($values['cmp_abbr'], $values['cmp_label']);
+    $this->actCmpId = Abc::$DL->companyInsert($values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

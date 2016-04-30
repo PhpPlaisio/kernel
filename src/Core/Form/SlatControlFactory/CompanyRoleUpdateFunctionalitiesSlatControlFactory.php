@@ -24,7 +24,7 @@ class CompanyRoleUpdateFunctionalitiesSlatControlFactory extends SlatControlFact
    *
    * @var Obfuscator
    */
-  private $myFunIdObfuscator;
+  private $funIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -46,30 +46,30 @@ class CompanyRoleUpdateFunctionalitiesSlatControlFactory extends SlatControlFact
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('fun_enabled', $table_column);
 
-    $this->myFunIdObfuscator = Abc::getObfuscator('fun');
+    $this->funIdObfuscator = Abc::getObfuscator('fun');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function createRow($theLouverControl, $theData)
+  public function createRow($louverControl, $data)
   {
     /** @var SlatControl $row */
-    $row = $theLouverControl->addFormControl(new SlatControl($theData['fun_id']));
-    $row->setObfuscator($this->myFunIdObfuscator);
+    $row = $louverControl->addFormControl(new SlatControl($data['fun_id']));
+    $row->setObfuscator($this->funIdObfuscator);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'mdl_name');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'fun_name');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'fun_enabled');
-    $control->setValue($theData['fun_enabled']);
+    $control->setValue($data['fun_enabled']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

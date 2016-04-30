@@ -17,14 +17,14 @@ class CoreDetailTable extends DetailTable
    *
    * @var bool
    */
-  protected $myShowTableActions = true;
+  protected $showTableActions = true;
 
   /**
    * Array with all table actions of this table.
    *
    * @var array
    */
-  protected $myTablesActionGroups = [];
+  protected $tablesActionGroups = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -32,19 +32,19 @@ class CoreDetailTable extends DetailTable
    */
   public function __construct()
   {
-    $this->myTablesActionGroups['default'] = [];
+    $this->tablesActionGroups['default'] = [];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a table action to the list of table actions of this table.
    *
-   * @param string      $theGroupName   The group to witch the table action must be added.
-   * @param TableAction $theTableAction The table action.
+   * @param string      $groupName   The group to witch the table action must be added.
+   * @param TableAction $tableAction The table action.
    */
-  public function addTableAction($theGroupName, $theTableAction)
+  public function addTableAction($groupName, $tableAction)
   {
-    $this->myTablesActionGroups[$theGroupName][] = $theTableAction;
+    $this->tablesActionGroups[$groupName][] = $tableAction;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -57,13 +57,13 @@ class CoreDetailTable extends DetailTable
   {
     $ret = null;
 
-    if ($this->myShowTableActions)
+    if ($this->showTableActions)
     {
       $ret .= '<tr class="table_actions">';
       $ret .= '<td colspan="2">';
 
       $first_group = true;
-      foreach ($this->myTablesActionGroups as $group)
+      foreach ($this->tablesActionGroups as $group)
       {
         // Add a separator between groups of table actions.
         if (!$first_group)
@@ -109,11 +109,11 @@ class CoreDetailTable extends DetailTable
   /**
    * Set the flag for enabling or disabling table actions. By default table actions are shown.
    *
-   * @param bool $theFlag If empty table actions are not shown.
+   * @param bool $flag If empty table actions are not shown.
    */
-  public function setShowTableActions($theFlag)
+  public function setShowTableActions($flag)
   {
-    $this->myShowTableActions = ($theFlag) ? true : false;
+    $this->showTableActions = ($flag) ? true : false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

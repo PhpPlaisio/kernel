@@ -24,7 +24,7 @@ class SpecificPageOverviewPage extends CompanyPage
    *
    * @var array[]
    */
-  private $myPages;
+  private $pages;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -34,21 +34,21 @@ class SpecificPageOverviewPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->myPages = Abc::$DL->companySpecificPageGetAll($this->myActCmpId, $this->myLanId);
+    $this->pages = Abc::$DL->companySpecificPageGetAll($this->actCmpId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL of this page.
    *
-   * @param int $theCmpId The ID of the target company.
+   * @param int $cmpId The ID of the target company.
    *
    * @return string The URL of this page.
    */
-  public static function getUrl($theCmpId)
+  public static function getUrl($cmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_OVERVIEW, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
 
     return $url;
   }
@@ -61,7 +61,7 @@ class SpecificPageOverviewPage extends CompanyPage
   {
     $table = new CoreOverviewTable();
 
-    $table->addTableAction('default', new SpecificPageInsertTableAction($this->myActCmpId));
+    $table->addTableAction('default', new SpecificPageInsertTableAction($this->actCmpId));
 
     // Add column with page ID.
     $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
@@ -80,12 +80,12 @@ class SpecificPageOverviewPage extends CompanyPage
     $table->addColumn(new PageDetailsIconTableColumn());
 
     // Show link to modify Company specific page.
-    $table->addColumn(new SpecificPageUpdateIconTableColumn($this->myActCmpId));
+    $table->addColumn(new SpecificPageUpdateIconTableColumn($this->actCmpId));
 
     // Show link to delete Company specific page.
-    $table->addColumn(new SpecificPageDeleteIconTableColumn($this->myActCmpId));
+    $table->addColumn(new SpecificPageDeleteIconTableColumn($this->actCmpId));
 
-    echo $table->getHtmlTable($this->myPages);
+    echo $table->getHtmlTable($this->pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

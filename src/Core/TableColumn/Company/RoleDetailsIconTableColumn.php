@@ -15,9 +15,9 @@ class RoleDetailsIconTableColumn extends DetailsIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return RoleDetailsPage::getUrl($theRow['cmp_id'], $theRow['rol_id']);
+    return RoleDetailsPage::getUrl($row['cmp_id'], $row['rol_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

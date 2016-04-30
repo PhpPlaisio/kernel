@@ -81,7 +81,7 @@ class DateTableColumn extends TableColumn
       }
       else
       {
-        // The $theData[$this->myFieldName] is not a valid date.
+        // The $data[$this->fieldName] is not a valid date.
         return '<td>'.Html::txt2Html($row[$this->fieldName]).'</td>';
       }
     }

@@ -16,8 +16,8 @@ abstract class DeleteIconTableColumn extends IconTableColumn
   {
     parent::__construct();
 
-    $this->myIconUrl  = ICON_SMALL_DELETE;
-    $this->myAltValue = 'delete';
+    $this->iconUrl  = ICON_SMALL_DELETE;
+    $this->altValue = 'delete';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

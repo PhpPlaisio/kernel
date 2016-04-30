@@ -21,14 +21,14 @@ class WordGroupOverviewPage extends BabelPage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int|null $theTargetLanId
+   * @param int|null $targetLanId
    *
    * @return string
    */
-  public static function getUrl($theTargetLanId = null)
+  public static function getUrl($targetLanId = null)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
-    $url .= self::putCgiVar('act_lan', $theTargetLanId, 'lan');
+    $url .= self::putCgiVar('act_lan', $targetLanId, 'lan');
 
     return $url;
   }
@@ -41,7 +41,7 @@ class WordGroupOverviewPage extends BabelPage
   {
     $this->selectLanguage();
 
-    if ($this->myActLanId)
+    if ($this->actLanId)
     {
       $this->showWordGroups();
     }
@@ -53,7 +53,7 @@ class WordGroupOverviewPage extends BabelPage
    */
   private function showWordGroups()
   {
-    $groups = Abc::$DL->wordGroupGetAll($this->myActLanId);
+    $groups = Abc::$DL->wordGroupGetAll($this->actLanId);
 
     $table = new CoreOverviewTable();
 
@@ -71,13 +71,13 @@ class WordGroupOverviewPage extends BabelPage
     $table->addColumn(new TextTableColumn('# Words', 'n1'));
 
     // Show total words to be translated in the word group.
-    if ($this->myActLanId!=$this->myRefLanId)
+    if ($this->actLanId!=$this->refLanId)
     {
       $table->addColumn(new TextTableColumn('To Do', 'n2'));
     }
 
     // Add link to the details of the word group.
-    $table->addColumn(new WordGroupDetailsIconTableColumn($this->myActLanId));
+    $table->addColumn(new WordGroupDetailsIconTableColumn($this->actLanId));
 
     // Add link to the modify the word group.
     $table->addColumn(new WordGroupUpdateIconTableColumn());

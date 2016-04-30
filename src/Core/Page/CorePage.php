@@ -14,30 +14,30 @@ abstract class CorePage extends Page
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * If set disabled tabs (i.e. tabs in $myTabs field 'url' is empty) are shown. Otherwise, disabled tabs are hidden.
+   * If set disabled tabs (i.e. tabs in $tabs field 'url' is empty) are shown. Otherwise, disabled tabs are hidden.
    */
-  protected $myShowDisabledTabs = true;
+  protected $showDisabledTabs = true;
 
   /**
    * If set the tab content is shown.
    *
    * @var bool
    */
-  protected $myShowTabContent = false;
+  protected $showTabContent = false;
 
   /**
    * The tabs of the core page.
    *
    * @var array[]
    */
-  protected $myTabs;
+  protected $tabs;
 
   /**
    * If set the JQuery UI date picker will be loaded.
    *
    * @var bool
    */
-  private $myDatePickerEnabled = false;
+  private $datePickerEnabled = false;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -102,9 +102,9 @@ abstract class CorePage extends Page
     $this->echoPageTrailer();
 
     // Write the HTML code of this page to the file system for (asynchronous) validation.
-    if ($this->myW3cValidate)
+    if ($this->w3cValidate)
     {
-      file_put_contents($this->myW3cPathName, ob_get_contents());
+      file_put_contents($this->w3cPathName, ob_get_contents());
     }
 
     $this->setPageSize(ob_get_length());
@@ -158,7 +158,7 @@ abstract class CorePage extends Page
     $this->getPageTabs();
 
     echo '<ul>';
-    foreach ($this->myTabs as &$tab)
+    foreach ($this->tabs as &$tab)
     {
       if (isset($tab['url']))
       {
@@ -167,10 +167,10 @@ abstract class CorePage extends Page
       }
       else
       {
-        if ($this->myShowDisabledTabs) echo '<li><a class="disabled">', Html::txt2Html($tab['tab_name']), '</a></li>';
+        if ($this->showDisabledTabs) echo '<li><a class="disabled">', Html::txt2Html($tab['tab_name']), '</a></li>';
       }
 
-      if ($tab['pag_id']==$pag_id_org && $tab['url']) $this->myShowTabContent = true;
+      if ($tab['pag_id']==$pag_id_org && $tab['url']) $this->showTabContent = true;
     }
     echo '</ul>';
   }
@@ -181,13 +181,13 @@ abstract class CorePage extends Page
    */
   protected function enableDatePicker()
   {
-    if (!$this->myDatePickerEnabled)
+    if (!$this->datePickerEnabled)
     {
       $this->jsAdmFunctionCall('SetBased/Abc/Page/Page', 'enableDatePicker');
 
       $this->cssAppendSource('/css/ui-lightness/jquery-ui-1.10.4.custom.min.css');
 
-      $this->myDatePickerEnabled = true;
+      $this->datePickerEnabled = true;
     }
   }
 
@@ -197,11 +197,11 @@ abstract class CorePage extends Page
    */
   protected function getPageTabs()
   {
-    $this->myTabs = Abc::$DL->authGetPageTabs($this->myCmpId,
-                                              Abc::getInstance()->getPtbId(),
-                                              $this->myProId,
-                                              $this->myLanId);
-    foreach ($this->myTabs as &$tab)
+    $this->tabs = Abc::$DL->authGetPageTabs($this->cmpId,
+                                            Abc::getInstance()->getPtbId(),
+                                            $this->proId,
+                                            $this->lanId);
+    foreach ($this->tabs as &$tab)
     {
       $tab['url'] = $this->getTabUrl($tab['pag_id']);
     }
@@ -211,13 +211,13 @@ abstract class CorePage extends Page
   /**
    * Returns the URL of a tab of the page group of current page.
    *
-   * @param int $thePagId The ID of the page of the tab.
+   * @param int $pagId The ID of the page of the tab.
    *
    * @return string
    */
-  protected function getTabUrl($thePagId)
+  protected function getTabUrl($pagId)
   {
-    $url = self::putCgiVar('pag', $thePagId, 'pag');
+    $url = self::putCgiVar('pag', $pagId, 'pag');
 
     return $url;
   }
@@ -234,7 +234,7 @@ abstract class CorePage extends Page
    */
   private function echoMainMenu()
   {
-    $menu_items  = Abc::$DL->authGetMenu($this->myCmpId, $this->myProId, $this->myLanId);
+    $menu_items  = Abc::$DL->authGetMenu($this->cmpId, $this->proId, $this->lanId);
     $page_mnu_id = Abc::getInstance()->getMnuId();
 
     echo '<ul>';
@@ -263,7 +263,7 @@ abstract class CorePage extends Page
     echo '</ul>';
 
     // Define a content area for the feed back of w3c-validator.
-    if ($this->myW3cValidate)
+    if ($this->w3cValidate)
     {
       echo '<div id="w3c_validate"></div>';
     }

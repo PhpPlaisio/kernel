@@ -14,11 +14,11 @@ interface CompoundValidator
   /**
    * Validates a compound control (e.g. a complex control or a form).
    *
-   * @param CompoundControl $theControl The compound control to be validated.
+   * @param CompoundControl $control The compound control to be validated.
    *
    * @return bool On Successful validation returns true, otherwise false.
    */
-  public function validate($theControl);
+  public function validate($control);
 
   //--------------------------------------------------------------------------------------------------------------------
 }

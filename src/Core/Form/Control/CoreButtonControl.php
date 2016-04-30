@@ -16,11 +16,11 @@ class CoreButtonControl extends ComplexControl
    */
   public function generate()
   {
-    $html = $this->myPrefix;
+    $html = $this->prefix;
     $html .= '<table class="button">';
     $html .= '<tr>';
 
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
       $html .= '<td>';
       $html .= $control->generate();
@@ -29,7 +29,7 @@ class CoreButtonControl extends ComplexControl
 
     $html .= '</tr>';
     $html .= '</table>';
-    $html .= $this->myPostfix;
+    $html .= $this->postfix;
 
     return $html;
   }

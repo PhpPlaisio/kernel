@@ -15,13 +15,13 @@ class FunctionalityUpdateRolesTableAction extends UpdateItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $theFunId The ID of the functionality.
+   * @param int $funId The ID of the functionality.
    */
-  public function __construct($theFunId)
+  public function __construct($funId)
   {
-    $this->myUrl = FunctionalityUpdateRolesPage::getUrl($theFunId);
+    $this->url = FunctionalityUpdateRolesPage::getUrl($funId);
 
-    $this->myTitle = 'Grant/revoke';
+    $this->title = 'Grant/revoke';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

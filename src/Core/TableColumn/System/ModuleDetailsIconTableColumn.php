@@ -15,9 +15,9 @@ class ModuleDetailsIconTableColumn extends DetailsIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return ModuleDetailsPage::getUrl($theRow['mdl_id']);
+    return ModuleDetailsPage::getUrl($row['mdl_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

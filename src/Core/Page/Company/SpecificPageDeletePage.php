@@ -19,14 +19,14 @@ class SpecificPageDeletePage extends Page
    *
    * @var int
    */
-  private $myTargetCmpId;
+  private $targetCmpId;
 
   /**
    * The ID of the target page.
    *
    * @var int
    */
-  private $myTargetPagId;
+  private $targetPagId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -36,25 +36,25 @@ class SpecificPageDeletePage extends Page
   {
     parent::__construct();
 
-    $this->myTargetCmpId = self::getCgiId('cmp', 'cmp');
+    $this->targetCmpId = self::getCgiId('cmp', 'cmp');
 
-    $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL of this page.
    *
-   * @param int $theCmpId       The ID of the target company.
-   * @param int $theTargetPagId The ID of the page the must be deleted.
+   * @param int $cmpId       The ID of the target company.
+   * @param int $targetPagId The ID of the page the must be deleted.
    *
    * @return string
    */
-  public static function getUrl($theCmpId, $theTargetPagId)
+  public static function getUrl($cmpId, $targetPagId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_DELETE, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
-    $url .= self::putCgiVar('tar_pag', $theTargetPagId, 'pag');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('tar_pag', $targetPagId, 'pag');
 
     return $url;
   }
@@ -65,9 +65,9 @@ class SpecificPageDeletePage extends Page
    */
   public function echoPage()
   {
-    Abc::$DL->companySpecificPageDelete($this->myTargetCmpId, $this->myTargetPagId);
+    Abc::$DL->companySpecificPageDelete($this->targetCmpId, $this->targetPagId);
 
-    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->myTargetCmpId));
+    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

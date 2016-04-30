@@ -17,29 +17,29 @@ class FieldSet extends ComplexControl
    *
    * @var Legend
    */
-  protected $myLegend;
+  protected $legend;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates a legend for this fieldset.
    *
-   * @param string $theType The class name of the legend.
+   * @param string $type The class name of the legend.
    *
    * @return Legend
    */
-  public function createLegend($theType = 'legend')
+  public function createLegend($type = 'legend')
   {
-    switch ($theType)
+    switch ($type)
     {
       case 'legend':
         $tmp = new Legend();
         break;
 
       default:
-        $tmp = new $theType();
+        $tmp = new $type();
     }
 
-    $this->myLegend = $tmp;
+    $this->legend = $tmp;
 
     return $tmp;
   }
@@ -80,9 +80,9 @@ class FieldSet extends ComplexControl
    */
   protected function generateLegend()
   {
-    if ($this->myLegend)
+    if ($this->legend)
     {
-      $ret = $this->myLegend->generate();
+      $ret = $this->legend->generate();
     }
     else
     {

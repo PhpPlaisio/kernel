@@ -15,13 +15,13 @@ class PageUpdateTableAction extends UpdateItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $thePagId The ID of the target page.
+   * @param int $pagId The ID of the target page.
    */
-  public function __construct($thePagId)
+  public function __construct($pagId)
   {
-    $this->myUrl = PageUpdatePage::getUrl($thePagId);
+    $this->url = PageUpdatePage::getUrl($pagId);
 
-    $this->myTitle = 'Modify page';
+    $this->title = 'Modify page';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

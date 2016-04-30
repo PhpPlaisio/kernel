@@ -25,7 +25,7 @@ class TabDetailsPage extends CorePage
    *
    * @var int
    */
-  protected $myTabId;
+  protected $tabId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -35,21 +35,21 @@ class TabDetailsPage extends CorePage
   {
     parent::__construct();
 
-    $this->myTabId = self::getCgiId('ptb', 'ptb');
+    $this->tabId = self::getCgiId('ptb', 'ptb');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theTabId The ID of the tab shown on this page.
+   * @param int $tabId The ID of the tab shown on this page.
    *
    * @return string
    */
-  public static function getUrl($theTabId)
+  public static function getUrl($tabId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
-    $url .= self::putCgiVar('ptb', $theTabId, 'ptb');
+    $url .= self::putCgiVar('ptb', $tabId, 'ptb');
 
     return $url;
   }
@@ -72,7 +72,7 @@ class TabDetailsPage extends CorePage
    */
   private function showDetails()
   {
-    $details = Abc::$DL->systemTabGetDetails($this->myTabId, $this->myLanId);
+    $details = Abc::$DL->systemTabGetDetails($this->tabId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the tab.
@@ -93,7 +93,7 @@ class TabDetailsPage extends CorePage
    */
   private function showMasterPages()
   {
-    $pages = Abc::$DL->systemTabGetMasterPages($this->myTabId, $this->myLanId);
+    $pages = Abc::$DL->systemTabGetMasterPages($this->tabId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

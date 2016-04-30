@@ -18,14 +18,14 @@ class CoreOverviewTable extends OverviewTable
    *
    * @var bool
    */
-  protected $myShowTableActions = true;
+  protected $showTableActions = true;
 
   /**
    * Array with all table actions of this table.
    *
    * @var array
    */
-  protected $myTablesActionGroups = [];
+  protected $tablesActionGroups = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -36,19 +36,19 @@ class CoreOverviewTable extends OverviewTable
     // Enable filtering by default.
     $this->filter = true;
 
-    $this->myTablesActionGroups['default'] = [];
+    $this->tablesActionGroups['default'] = [];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a table action to the list of table actions of this table.
    *
-   * @param string      $theGroupName   The group to witch the table action must be added.
-   * @param TableAction $theTableAction The table action.
+   * @param string      $groupName   The group to witch the table action must be added.
+   * @param TableAction $tableAction The table action.
    */
-  public function addTableAction($theGroupName, $theTableAction)
+  public function addTableAction($groupName, $tableAction)
   {
-    $this->myTablesActionGroups[$theGroupName][] = $theTableAction;
+    $this->tablesActionGroups[$groupName][] = $tableAction;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ class CoreOverviewTable extends OverviewTable
   {
     $ret = null;
 
-    if ($this->myShowTableActions)
+    if ($this->showTableActions)
     {
       $colspan = $this->getNumberOfColumns();
 
@@ -69,7 +69,7 @@ class CoreOverviewTable extends OverviewTable
       $ret .= '<td colspan="'.$colspan.'">';
 
       $first_group = true;
-      foreach ($this->myTablesActionGroups as $group)
+      foreach ($this->tablesActionGroups as $group)
       {
         // Add a separator between groups of table actions.
         if (!$first_group)
@@ -124,11 +124,11 @@ class CoreOverviewTable extends OverviewTable
   /**
    * Set the flag for enabling or disabling table actions. By default table actions are shown.
    *
-   * @param bool $theFlag If empty table actions are not shown.
+   * @param bool $flag If empty table actions are not shown.
    */
-  public function setShowTableActions($theFlag)
+  public function setShowTableActions($flag)
   {
-    $this->myShowTableActions = ($theFlag) ? true : false;
+    $this->showTableActions = ($flag) ? true : false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -26,19 +26,19 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
    *
    * @var Obfuscator
    */
-  private $myWrdIdObfuscator;
+  private $wrdIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int $theLanId       The ID of the reference language.
-   * @param int $theTargetLanId The ID of the target language.
+   * @param int $lanId       The ID of the reference language.
+   * @param int $targetLanId The ID of the target language.
    */
-  public function __construct($theLanId, $theTargetLanId)
+  public function __construct($lanId, $targetLanId)
   {
-    $ref_language = Abc::$DL->languageGetName($theLanId, $theLanId);
-    $act_language = Abc::$DL->LanguageGetName($theTargetLanId, $theLanId);
+    $ref_language = Abc::$DL->languageGetName($lanId, $lanId);
+    $act_language = Abc::$DL->LanguageGetName($targetLanId, $lanId);
 
     // Create slat joint for table column with word ID.
     $table_column = new NumericTableColumn('ID', 'wrd_id');
@@ -52,30 +52,30 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $table_column = new TextSlatJoint($act_language);
     $this->addSlatJoint('act_wdt_text', $table_column);
 
-    $this->myWrdIdObfuscator = Abc::getObfuscator('wrd');
+    $this->wrdIdObfuscator = Abc::getObfuscator('wrd');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function createRow($theLouverControl, $theData)
+  public function createRow($louverControl, $data)
   {
     /** @var SlatControl $row */
-    $row = $theLouverControl->addFormControl(new SlatControl($theData['wrd_id']));
-    $row->setObfuscator($this->myWrdIdObfuscator);
+    $row = $louverControl->addFormControl(new SlatControl($data['wrd_id']));
+    $row->setObfuscator($this->wrdIdObfuscator);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'wrd_id');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'ref_wdt_text');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var TextControl $control */
     $control = $this->createFormControl($row, 'act_wdt_text');
-    $control->setValue($theData['act_wdt_text']);
+    $control->setValue($data['act_wdt_text']);
     $control->setAttrSize(C::LEN_WDT_TEXT);
   }
 

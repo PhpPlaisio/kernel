@@ -14,13 +14,13 @@ class HiddenSlatJoint extends SlatJoint
   /**
    * Creates and returns a hidden form control.
    *
-   * @param string $theName The local name of the hidden form control.
+   * @param string $name The local name of the hidden form control.
    *
    * @return HiddenControl
    */
-  public function createControl($theName)
+  public function createControl($name)
   {
-    return new HiddenControl($theName);
+    return new HiddenControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

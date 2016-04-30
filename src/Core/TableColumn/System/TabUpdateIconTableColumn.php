@@ -15,9 +15,9 @@ class TabUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return TabUpdatePage::getUrl($theRow['ptb_id']);
+    return TabUpdatePage::getUrl($row['ptb_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

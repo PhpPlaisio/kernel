@@ -19,22 +19,22 @@ class WordInsertPage extends WordBasePage
   {
     parent::__construct();
 
-    $this->myWdgId       = self::getCgiId('wdg', 'wdg');
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_INSERT;
+    $this->wdgId       = self::getCgiId('wdg', 'wdg');
+    $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theWdgId The ID of the word group.
+   * @param int $wdgId The ID of the word group.
    *
    * @return string
    */
-  public static function getUrl($theWdgId)
+  public static function getUrl($wdgId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_INSERT, 'pag');
-    $url .= self::putCgiVar('wdg', $theWdgId, 'wdg');
+    $url .= self::putCgiVar('wdg', $wdgId, 'wdg');
     $url .= self::putCgiVar('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
@@ -46,10 +46,10 @@ class WordInsertPage extends WordBasePage
    */
   protected function databaseAction()
   {
-    $values = $this->myForm->getValues();
+    $values = $this->form->getValues();
 
-    $this->myWrdId = Abc::$DL->WordInsertWord($this->myUsrId,
-                                              $this->myWdgId,
+    $this->wrdId = Abc::$DL->WordInsertWord($this->usrId,
+                                            $this->wdgId,
                                               $values['wrd_label'],
                                               $values['wrd_comment'],
                                               $values['wdt_text']);

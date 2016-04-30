@@ -23,57 +23,57 @@ class Form extends RawForm
    *
    * @var bool
    */
-  protected $myEnableCsrfCheck;
+  protected $enableCsrfCheck;
 
   /**
    * FieldSet for all form control elements of type "hidden".
    *
    * @var FieldSet
    */
-  protected $myHiddenFieldSet;
+  protected $hiddenFieldSet;
 
   /**
    * The handlers for handling submits of this form.
    *
    * @var array
    */
-  protected $mySubmitHandlers = [];
+  protected $submitHandlers = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string $theName
-   * @param bool   $theCsrfCheckFlag If set the generated form has protection against CSRF.
+   * @param string $name
+   * @param bool   $csrfCheckFlag If set the generated form has protection against CSRF.
    */
-  public function __construct($theName = '', $theCsrfCheckFlag = true)
+  public function __construct($name = '', $csrfCheckFlag = true)
   {
-    parent::__construct($theName);
+    parent::__construct($name);
 
-    $this->myEnableCsrfCheck = $theCsrfCheckFlag;
+    $this->enableCsrfCheck = $csrfCheckFlag;
 
     // Create a fieldset for hidden form controls.
-    $this->myHiddenFieldSet = new FieldSet('');
-    $this->addFieldSet($this->myHiddenFieldSet);
+    $this->hiddenFieldSet = new FieldSet('');
+    $this->addFieldSet($this->hiddenFieldSet);
 
     // Set attribute for name (used by JavaScript).
-    if ($theName!=='') $this->setAttrData('name', $theName);
+    if ($name!=='') $this->setAttrData('name', $name);
 
     // Add hidden field for protection against CSRF.
-    if ($this->myEnableCsrfCheck) $this->myHiddenFieldSet->addFormControl(new SilentControl('ses_csrf_token'));
+    if ($this->enableCsrfCheck) $this->hiddenFieldSet->addFormControl(new SilentControl('ses_csrf_token'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test whether a form control is submitted.
    *
-   * @param string $theSubmitName The submit name of the form control.
+   * @param string $submitName The submit name of the form control.
    *
    * @return mixed
    */
-  private static function testSubmitted($theSubmitName)
+  private static function testSubmitted($submitName)
   {
-    $parts = explode('[', str_replace(']', '', $theSubmitName));
+    $parts = explode('[', str_replace(']', '', $submitName));
 
     $ret = $_POST;
     foreach ($parts as $part)
@@ -96,24 +96,24 @@ class Form extends RawForm
   /**
    * Adds a hidden form control to the fieldset for hidden form controls.
    *
-   * @param Control $theControl The hidden form control.
+   * @param Control $control The hidden form control.
    */
-  public function addHiddenFormControl($theControl)
+  public function addHiddenFormControl($control)
   {
-    $this->myHiddenFieldSet->addFormControl($theControl);
+    $this->hiddenFieldSet->addFormControl($control);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Appends an event handler for form submit.
    *
-   * @param Control $theControl The form control that submits the form.
-   * @param string  $theMethod  The method for handling the form submit.
+   * @param Control $control The form control that submits the form.
+   * @param string  $method  The method for handling the form submit.
    */
-  public function addSubmitHandler($theControl, $theMethod)
+  public function addSubmitHandler($control, $method)
   {
-    $this->mySubmitHandlers[] = ['control' => $theControl,
-                                 'method'  => $theMethod];
+    $this->submitHandlers[] = ['control' => $control,
+                               'method'  => $method];
   }
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -124,9 +124,9 @@ class Form extends RawForm
   public function csrfCheck()
   {
     // Return immediately if CSRF check is disabled.
-    if (!$this->myEnableCsrfCheck) return;
+    if (!$this->enableCsrfCheck) return;
 
-    $control = $this->myHiddenFieldSet->getFormControlByName('ses_csrf_token');
+    $control = $this->hiddenFieldSet->getFormControlByName('ses_csrf_token');
 
     // If CSRF tokens (from session and from submitted form) don't match: possible CSRF attack.
     $ses_csrf_token1 = Abc::getInstance()->getCsrfToken();
@@ -141,18 +141,18 @@ class Form extends RawForm
   /**
    * The default form handler. It only handles method 'handleEchoForm'. Otherwise an exception is thrown.
    *
-   * @param string $theMethod The name of the method for handling the form state.
+   * @param string $method The name of the method for handling the form state.
    */
-  public function defaultHandler($theMethod)
+  public function defaultHandler($method)
   {
-    switch ($theMethod)
+    switch ($method)
     {
       case 'handleEchoForm':
         $this->handleEchoForm();
         break;
 
       default:
-        throw new LogicException("Unknown form method '%s'.", $theMethod);
+        throw new LogicException("Unknown form method '%s'.", $method);
     }
   }
 
@@ -180,7 +180,7 @@ class Form extends RawForm
     // @todo implement submit without button (i.e. submit via JS)
     $handler   = null;
     $submitted = null;
-    foreach ($this->mySubmitHandlers as $handler)
+    foreach ($this->submitHandlers as $handler)
     {
       /** @var Control $control */
       $control = $handler['control'];
@@ -222,7 +222,7 @@ class Form extends RawForm
    */
   public function getHiddenFieldSet()
   {
-    return $this->myHiddenFieldSet;
+    return $this->hiddenFieldSet;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

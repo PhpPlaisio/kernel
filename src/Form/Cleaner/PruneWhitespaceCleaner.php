@@ -15,7 +15,7 @@ class PruneWhitespaceCleaner implements Cleaner
    *
    * @var PruneWhitespaceCleaner
    */
-  static private $ourSingleton;
+  static private $singleton;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -25,9 +25,9 @@ class PruneWhitespaceCleaner implements Cleaner
    */
   public static function get()
   {
-    if (!self::$ourSingleton) self::$ourSingleton = new self();
+    if (!self::$singleton) self::$singleton = new self();
 
-    return self::$ourSingleton;
+    return self::$singleton;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -35,18 +35,18 @@ class PruneWhitespaceCleaner implements Cleaner
    * Returns a submitted value with leading and training whitespace removed. Intermediate whitespace and multiple
    * intermediate whitespace (including new lines and tabs) are replaced with a single space.
    *
-   * @param string $theValue The submitted value.
+   * @param string $value The submitted value.
    *
    * @return string|null
    */
-  public function clean($theValue)
+  public function clean($value)
   {
-    if ($theValue==='' || $theValue===null || $theValue===false)
+    if ($value==='' || $value===null || $value===false)
     {
       return null;
     }
 
-    $tmp = trim(mb_ereg_replace('[\ \t\n\r\0\x0B\xA0]+', ' ', $theValue, 'p'));
+    $tmp = trim(mb_ereg_replace('[\ \t\n\r\0\x0B\xA0]+', ' ', $value, 'p'));
     if ($tmp==='') $tmp = null;
 
     return $tmp;

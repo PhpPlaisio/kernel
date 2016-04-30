@@ -36,7 +36,7 @@ class OverviewTable extends HtmlElement
   protected $title;
 
   /**
-   * The index in $myColumns of the next column added to this table.
+   * The index in $columns of the next column added to this table.
    *
    * @var int
    */
@@ -51,7 +51,7 @@ class OverviewTable extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adds @a $theColumn to this table and returns the column.
+   * Adds @a $column to this table and returns the column.
    *
    * @param TableColumn $column
    *
@@ -173,7 +173,7 @@ class OverviewTable extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the inner HTML code of the body for this table holding @a $theRows as data.
+   * Returns the inner HTML code of the body for this table holding @a $rows as data.
    *
    * @param array $rows
    *

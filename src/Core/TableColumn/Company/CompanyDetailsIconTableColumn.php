@@ -15,9 +15,9 @@ class CompanyDetailsIconTableColumn extends DetailsIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return CompanyDetailsPage::getUrl($theRow['cmp_id']);
+    return CompanyDetailsPage::getUrl($row['cmp_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

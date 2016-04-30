@@ -17,7 +17,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,23 +27,23 @@ class WordGroupUpdatePage extends WordGroupBasePage
   {
     parent::__construct();
 
-    $this->myWdgId       = self::getCgiId('wdg', 'wdg');
-    $this->myDetails     = Abc::$DL->WordGroupGetDetails($this->myWdgId);
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->wdgId         = self::getCgiId('wdg', 'wdg');
+    $this->details       = Abc::$DL->WordGroupGetDetails($this->wdgId);
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theWdgId
+   * @param int $wdgId
    *
    * @return string
    */
-  public static function getUrl($theWdgId)
+  public static function getUrl($wdgId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
-    $url .= self::putCgiVar('wdg', $theWdgId, 'wdg');
+    $url .= self::putCgiVar('wdg', $wdgId, 'wdg');
     $url .= self::putCgiVar('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
@@ -55,9 +55,9 @@ class WordGroupUpdatePage extends WordGroupBasePage
    */
   protected function databaseAction()
   {
-    $values = $this->myForm->getValues();
+    $values = $this->form->getValues();
 
-    Abc::$DL->wordGroupUpdateDetails($this->myWdgId, $values['wdg_name'], $values['wdg_label']);
+    Abc::$DL->wordGroupUpdateDetails($this->wdgId, $values['wdg_name'], $values['wdg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
    */
   protected function setValues()
   {
-    $this->myForm->setValues($this->myDetails);
+    $this->form->setValues($this->details);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

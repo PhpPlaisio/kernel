@@ -17,30 +17,30 @@ class BoolIconTableColumn extends TableColumn
    *
    * @var string
    */
-  protected $myFieldName;
+  protected $fieldName;
 
   /**
    * If set false values are shown explicitly. Otherwise when the value evaluates to false an empty cell is shown.
    *
    * @var bool
    */
-  private $myShowFalse;
+  private $showFalse;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText    The header text of this table column.
-   * @param string          $theFieldName     The field name of the data row used for generating this table column.
-   * @param bool            $theShowFalseFlag If set for false values an icon is shown, otherwise the cell is empty for
-   *                                          false values.
+   * @param string|int|null $headerText    The header text of this table column.
+   * @param string          $fieldName     The field name of the data row used for generating this table column.
+   * @param bool            $showFalse     If set for false values an icon is shown, otherwise the cell is empty for
+   *                                       false values.
    */
-  public function __construct($theHeaderText, $theFieldName, $theShowFalseFlag = false)
+  public function __construct($headerText, $fieldName, $showFalse = false)
   {
-    $this->dataType    = 'bool';
-    $this->headerText  = $theHeaderText;
-    $this->myFieldName = $theFieldName;
-    $this->myShowFalse = $theShowFalseFlag;
+    $this->dataType   = 'bool';
+    $this->headerText = $headerText;
+    $this->fieldName  = $fieldName;
+    $this->showFalse  = $showFalse;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,24 +53,24 @@ class BoolIconTableColumn extends TableColumn
 
     switch (true)
     {
-      case $row[$this->myFieldName]===1:
-      case $row[$this->myFieldName]==='1':
+      case $row[$this->fieldName]===1:
+      case $row[$this->fieldName]==='1':
         $attributes['data-value'] = 1;
         $html                     = '<img src="'.ICON_SMALL_TRUE.'" alt="1"/>';
         break;
 
-      case $row[$this->myFieldName]===0:
-      case $row[$this->myFieldName]==='0':
-      case $row[$this->myFieldName]==='':
-      case $row[$this->myFieldName]===null:
-      case $row[$this->myFieldName]===false:
+      case $row[$this->fieldName]===0:
+      case $row[$this->fieldName]==='0':
+      case $row[$this->fieldName]==='':
+      case $row[$this->fieldName]===null:
+      case $row[$this->fieldName]===false:
         $attributes['data-value'] = 0;
-        $html                     = ($this->myShowFalse) ? '<img src="'.ICON_SMALL_FALSE.'" alt="0"/>' : '';
+        $html                     = ($this->showFalse) ? '<img src="'.ICON_SMALL_FALSE.'" alt="0"/>' : '';
         break;
 
       default:
-        $attributes['data-value'] = $row[$this->myFieldName];
-        $html                     = Html::txt2Html($row[$this->myFieldName]);
+        $attributes['data-value'] = $row[$this->fieldName];
+        $html                     = Html::txt2Html($row[$this->fieldName]);
     }
 
     return Html::generateElement('td', $attributes, $html, true);

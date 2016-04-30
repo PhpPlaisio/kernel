@@ -25,21 +25,21 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  private $myForm;
+  private $form;
 
   /**
    * The ID of the role.
    *
    * @var int
    */
-  private $myRolId;
+  private $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -49,25 +49,25 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->myRolId = self::getCgiId('rol', 'rol');
+    $this->rolId = self::getCgiId('rol', 'rol');
 
-    $this->myDetails = Abc::$DL->companyRoleGetDetails($this->myActCmpId, $this->myRolId);
+    $this->details = Abc::$DL->companyRoleGetDetails($this->actCmpId, $this->rolId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theCmpId The ID of the target company
-   * @param int $theRolId The ID of role to be modified.
+   * @param int $cmpId The ID of the target company
+   * @param int $rolId The ID of role to be modified.
    *
    * @return string
    */
-  public static function getUrl($theCmpId, $theRolId)
+  public static function getUrl($cmpId, $rolId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
-    $url .= self::putCgiVar('rol', $theRolId, 'rol');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -89,14 +89,14 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   private function createForm()
   {
     // Get all available functionalities.
-    $pages = Abc::$DL->companyRoleGetAvailableFunctionalities($this->myActCmpId, $this->myRolId, $this->myLanId);
+    $pages = Abc::$DL->companyRoleGetAvailableFunctionalities($this->actCmpId, $this->rolId, $this->lanId);
 
     // Create form.
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Add field set.
     $field_set = new FieldSet('');
-    $this->myForm->addFieldSet($field_set);
+    $this->form->addFieldSet($field_set);
 
     // Create factory.
     $factory = new CompanyRoleUpdateFunctionalitiesSlatControlFactory();
@@ -107,7 +107,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     $submit = new SubmitControl('submit');
     $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
-    $this->myForm->addSubmitHandler($button, 'handleForm');
+    $this->form->addSubmitHandler($button, 'handleForm');
 
     // Put everything together in a LouverControl.
     $louver = new LouverControl('data');
@@ -127,8 +127,8 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
    */
   private function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
@@ -137,11 +137,11 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     {
       if ($values['data'][$fun_id]['fun_enabled'])
       {
-        Abc::$DL->companyRoleInsertFunctionality($this->myActCmpId, $this->myRolId, $fun_id);
+        Abc::$DL->companyRoleInsertFunctionality($this->actCmpId, $this->rolId, $fun_id);
       }
       else
       {
-        Abc::$DL->companyRoleDeleteFunctionality($this->myActCmpId, $this->myRolId, $fun_id);
+        Abc::$DL->companyRoleDeleteFunctionality($this->actCmpId, $this->rolId, $fun_id);
       }
     }
 
@@ -155,7 +155,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -163,7 +163,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -175,7 +175,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->myActCmpId, $this->myRolId));
+    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->actCmpId, $this->rolId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

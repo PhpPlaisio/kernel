@@ -15,9 +15,9 @@ class RoleUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return RoleUpdatePage::getUrl($theRow['cmp_id'], $theRow['rol_id']);
+    return RoleUpdatePage::getUrl($row['cmp_id'], $row['rol_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

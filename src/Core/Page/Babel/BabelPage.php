@@ -22,14 +22,14 @@ abstract class BabelPage extends CorePage
    *
    * @var int
    */
-  protected $myActLanId;
+  protected $actLanId;
 
   /**
    * The language ID from which the word/text/topic is been translated.
    *
    * @var int
    */
-  protected $myRefLanId;
+  protected $refLanId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -39,10 +39,10 @@ abstract class BabelPage extends CorePage
   {
     parent::__construct();
 
-    $this->myRefLanId = C::LAN_ID_BABEL_REFERENCE;
+    $this->refLanId = C::LAN_ID_BABEL_REFERENCE;
 
-    $this->myActLanId = self::getCgiId('act_lan', 'lan');
-    if (!isset($this->myActLanId)) $this->myActLanId = $this->myLanId;
+    $this->actLanId = self::getCgiId('act_lan', 'lan');
+    if (!isset($this->actLanId)) $this->actLanId = $this->lanId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -51,14 +51,14 @@ abstract class BabelPage extends CorePage
    */
   public function selectLanguage()
   {
-    $languages = Abc::$DL->languageGetAllLanguages($this->myRefLanId);
+    $languages = Abc::$DL->languageGetAllLanguages($this->refLanId);
 
     // If translator is authorized for 1 language return immediately.
     if (count($languages)==1)
     {
       $key = key($languages);
 
-      $this->myActLanId = $languages[$key]['lan_id'];
+      $this->actLanId = $languages[$key]['lan_id'];
     }
 
     $form   = $this->createSelectLanguageForm($languages);
@@ -76,15 +76,15 @@ abstract class BabelPage extends CorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param Form $theForm The form for selecting the language.
+   * @param Form $form The form for selecting the language.
    */
-  protected function handleSelectLanguage($theForm)
+  protected function handleSelectLanguage($form)
   {
-    $values           = $theForm->getValues();
-    $this->myActLanId = $values['babel']['act_lan_id'];
+    $values         = $form->getValues();
+    $this->actLanId = $values['babel']['act_lan_id'];
 
     $get            = $_GET;
-    $get['act_lan'] = Abc::obfuscate($this->myActLanId, 'lan');
+    $get['act_lan'] = Abc::obfuscate($this->actLanId, 'lan');
 
     $url = '';
     foreach ($get as $name => $value)
@@ -104,7 +104,7 @@ abstract class BabelPage extends CorePage
     $input = new SelectControl('act_lan_id');
     $input->setOptions($languages, 'lan_id', 'lan_name');
     $input->setOptionsObfuscator(Abc::getObfuscator('lan'));
-    $input->setValue($this->myActLanId);
+    $input->setValue($this->actLanId);
     $form->addFormControl($input, C::WRD_ID_LANGUAGE, true);
 
     // Create a submit button.

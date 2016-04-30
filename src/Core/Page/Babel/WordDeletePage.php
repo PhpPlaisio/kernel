@@ -18,7 +18,7 @@ class WordDeletePage extends BabelPage
    *
    * @var int
    */
-  private $myWrdId;
+  private $wrdId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -28,21 +28,21 @@ class WordDeletePage extends BabelPage
   {
     parent::__construct();
 
-    $this->myWrdId = self::getCgiId('wrd', 'wrd');
+    $this->wrdId = self::getCgiId('wrd', 'wrd');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theWrdId The ID of the word to be deleted.
+   * @param int $wrdId The ID of the word to be deleted.
    *
    * @return string
    */
-  public static function getUrl($theWrdId)
+  public static function getUrl($wrdId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_DELETE, 'pag');
-    $url .= self::putCgiVar('wrd', $theWrdId, 'wrd');
+    $url .= self::putCgiVar('wrd', $wrdId, 'wrd');
 
     return $url;
   }
@@ -53,11 +53,11 @@ class WordDeletePage extends BabelPage
    */
   protected function echoTabContent()
   {
-    $details = Abc::$DL->wordGetDetails($this->myWrdId, $this->myLanId);
+    $details = Abc::$DL->wordGetDetails($this->wrdId, $this->lanId);
 
-    Abc::$DL->wordDeleteWord($this->myWrdId);
+    Abc::$DL->wordDeleteWord($this->wrdId);
 
-    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->myActLanId));
+    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->actLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

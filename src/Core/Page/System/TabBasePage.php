@@ -22,14 +22,14 @@ abstract class TabBasePage extends CorePage
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -75,27 +75,27 @@ abstract class TabBasePage extends CorePage
    */
   private function createForm()
   {
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->myLanId);
+    $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setEmptyOption();
-    $this->myForm->addFormControl($input, 'Title');
+    $this->form->addFormControl($input, 'Title');
 
     // Create text box for (new) page title.
     $input = new TextControl('ptb_title');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $this->myForm->addFormControl($input, 'Title');
+    $this->form->addFormControl($input, 'Title');
 
     // Create form control for the page label.
     $input = new TextControl('ptb_label');
     $input->setAttrMaxLength(C::LEN_PTB_LABEL);
-    $this->myForm->addFormControl($input, 'Label');
+    $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ abstract class TabBasePage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case  'handleForm':
@@ -112,7 +112,7 @@ abstract class TabBasePage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 

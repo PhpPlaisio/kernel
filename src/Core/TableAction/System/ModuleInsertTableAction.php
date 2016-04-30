@@ -17,9 +17,9 @@ class ModuleInsertTableAction extends InsertItemTableAction
    */
   public function __construct()
   {
-    $this->myUrl = ModuleInsertPage::getUrl();
+    $this->url = ModuleInsertPage::getUrl();
 
-    $this->myTitle = 'Create module';
+    $this->title = 'Create module';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

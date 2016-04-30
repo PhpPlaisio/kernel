@@ -19,14 +19,14 @@ class SilentControl extends SimpleControl
   public function generate()
   {
     $this->attributes['type'] = 'hidden';
-    $this->attributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->submitName;
 
-    if ($this->myFormatter) $this->attributes['value'] = $this->myFormatter->format($this->myValue);
-    else                    $this->attributes['value'] = $this->myValue;
+    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
+    else                  $this->attributes['value'] = $this->value;
 
-    $ret = $this->myPrefix;
+    $ret = $this->prefix;
     $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -46,20 +46,20 @@ class SilentControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value and clean it (if required).
-    if (isset($theSubmittedValue[$submit_name]))
+    if (isset($submittedValue[$submit_name]))
     {
-      if ($this->myCleaner)
+      if ($this->cleaner)
       {
-        $new_value = $this->myCleaner->clean($theSubmittedValue[$submit_name]);
+        $new_value = $this->cleaner->clean($submittedValue[$submit_name]);
       }
       else
       {
-        $new_value = $theSubmittedValue[$submit_name];
+        $new_value = $submittedValue[$submit_name];
       }
     }
     else
@@ -68,12 +68,12 @@ class SilentControl extends SimpleControl
     }
 
     // Normalize old (original) value and new (submitted) value.
-    $old_value = (string)$this->myValue;
+    $old_value = (string)$this->value;
     $new_value = (string)$new_value;
 
     if ($old_value!==$new_value)
     {
-      $this->myValue = $new_value;
+      $this->value = $new_value;
     }
   }
 

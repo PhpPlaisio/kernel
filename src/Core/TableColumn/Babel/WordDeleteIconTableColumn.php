@@ -13,15 +13,15 @@ class WordDeleteIconTableColumn extends DeleteIconTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param array $theRow
+   * @param array $row
    *
    * @return string
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    $this->myConfirmMessage = 'Remove word '.$theRow['wrd_id'].'?'; // xxxbbl
+    $this->confirmMessage = 'Remove word '.$row['wrd_id'].'?'; // xxxbbl
 
-    return WordDeletePage::getUrl($theRow['wrd_id']);
+    return WordDeletePage::getUrl($row['wrd_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

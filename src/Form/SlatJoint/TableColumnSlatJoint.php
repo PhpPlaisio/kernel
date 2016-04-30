@@ -14,32 +14,32 @@ class TableColumnSlatJoint extends SlatJoint
    *
    * @var TableColumn
    */
-  private $myTableColumn;
+  private $tableColumn;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param TableColumn $theTableColumn
+   * @param TableColumn $tableColumn
    */
-  public function __construct($theTableColumn)
+  public function __construct($tableColumn)
   {
-    $this->dataType      = $theTableColumn->getDataType();
-    $this->myTableColumn = $theTableColumn;
+    $this->dataType    = $tableColumn->getDataType();
+    $this->tableColumn = $tableColumn;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates and returns a button form control.
    *
-   * @param string $theName The local name of the button form control.
+   * @param string $name The local name of the button form control.
    *
    * @return TableColumnControl
    */
-  public function createControl($theName)
+  public function createControl($name)
   {
-    $control = new TableColumnControl($theName);
-    $control->setTableColumn($this->myTableColumn);
+    $control = new TableColumnControl($name);
+    $control->setTableColumn($this->tableColumn);
 
     return $control;
   }
@@ -50,7 +50,7 @@ class TableColumnSlatJoint extends SlatJoint
    */
   public function getColSpan()
   {
-    return $this->myTableColumn->getColSpan();
+    return $this->tableColumn->getColSpan();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ class TableColumnSlatJoint extends SlatJoint
    */
   public function getHtmlColumn()
   {
-    return $this->myTableColumn->getHtmlColumn();
+    return $this->tableColumn->getHtmlColumn();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ class TableColumnSlatJoint extends SlatJoint
    */
   public function getHtmlColumnFilter()
   {
-    return $this->myTableColumn->getHtmlColumnFilter();
+    return $this->tableColumn->getHtmlColumnFilter();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ class TableColumnSlatJoint extends SlatJoint
    */
   public function getHtmlColumnHeader()
   {
-    return $this->myTableColumn->getHtmlColumnHeader();
+    return $this->tableColumn->getHtmlColumnHeader();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

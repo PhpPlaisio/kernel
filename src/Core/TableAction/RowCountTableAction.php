@@ -16,17 +16,17 @@ class RowCountTableAction implements TableAction
    *
    * @var int
    */
-  protected $myRowCount;
+  protected $rowCount;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int $theRowCount The number of rows in the table body.
+   * @param int $rowCount The number of rows in the table body.
    */
-  public function __construct($theRowCount)
+  public function __construct($rowCount)
   {
-    $this->myRowCount = $theRowCount;
+    $this->rowCount = $rowCount;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class RowCountTableAction implements TableAction
    */
   public function getHtml()
   {
-    return '<span class="row_count">'.Html::txt2Html($this->myRowCount).'</span>';
+    return '<span class="row_count">'.Html::txt2Html($this->rowCount).'</span>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

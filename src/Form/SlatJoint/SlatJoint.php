@@ -17,11 +17,11 @@ abstract class SlatJoint extends BaseTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param string $theName The name of the form control in the table cell.
+   * @param string $name The name of the form control in the table cell.
    *
    * @return ComplexControl|SimpleControl|SelectControl|CheckboxesControl|RadiosControl
    */
-  abstract public function createControl($theName);
+  abstract public function createControl($name);
 
   //--------------------------------------------------------------------------------------------------------------------
 }

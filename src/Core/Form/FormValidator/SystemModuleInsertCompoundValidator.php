@@ -15,22 +15,22 @@ class SystemModuleInsertCompoundValidator implements CompoundValidator
   /**
    * {@inheritdoc}
    */
-  public function validate($theControl)
+  public function validate($control)
   {
     $ret = true;
 
-    $values = $theControl->getSubmittedValue();
+    $values = $control->getSubmittedValue();
 
     // Only and only one of mdl_name or wrd_id must be set.
     if (!isset($values['mdl_name']) && !$values['wrd_id'])
     {
-      /** @var SimpleControl $control */
-      $control = $theControl->getFormControlByName('wrd_id');
-      $control->setErrorMessage('Mandatory field');
+      /** @var SimpleControl $input */
+      $input = $control->getFormControlByName('wrd_id');
+      $input->setErrorMessage('Mandatory field');
 
-      /** @var SimpleControl $control */
-      $control = $theControl->getFormControlByName('mdl_name');
-      $control->setErrorMessage('Mandatory field');
+      /** @var SimpleControl $input */
+      $input = $control->getFormControlByName('mdl_name');
+      $input->setErrorMessage('Mandatory field');
 
       $ret = false;
     }

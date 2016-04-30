@@ -17,27 +17,27 @@ class SpecificPageDeleteIconTableColumn extends DeleteIconTableColumn
    *
    * @var int
    */
-  private $myTargetCmpId;
+  private $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param int $theTargetCmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    */
-  public function __construct($theTargetCmpId)
+  public function __construct($targetCmpId)
   {
     parent::__construct();
 
-    $this->myTargetCmpId = $theTargetCmpId;
+    $this->targetCmpId = $targetCmpId;
   }
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    $this->myConfirmMessage = 'Remove page "'.$theRow['pag_class_child'].'?'; // xxxbbl
+    $this->confirmMessage = 'Remove page "'.$row['pag_class_child'].'?'; // xxxbbl
 
-    return SpecificPageDeletePage::getUrl($this->myTargetCmpId, $theRow['pag_id']);
+    return SpecificPageDeletePage::getUrl($this->targetCmpId, $row['pag_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

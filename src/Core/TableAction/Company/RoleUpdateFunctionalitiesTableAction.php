@@ -15,14 +15,14 @@ class RoleUpdateFunctionalitiesTableAction extends UpdateItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $theTargetCmpId The ID of the target company of the role.
-   * @param int $theRolId       The ID of the role.
+   * @param int $targetCmpId The ID of the target company of the role.
+   * @param int $rolId       The ID of the role.
    */
-  public function __construct($theTargetCmpId, $theRolId)
+  public function __construct($targetCmpId, $rolId)
   {
-    $this->myUrl = RoleUpdateFunctionalitiesPage::getUrl($theTargetCmpId, $theRolId);
+    $this->url = RoleUpdateFunctionalitiesPage::getUrl($targetCmpId, $rolId);
 
-    $this->myTitle = 'Modify functionalities';
+    $this->title = 'Modify functionalities';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

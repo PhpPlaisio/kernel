@@ -21,21 +21,21 @@ class SpecificPageUpdatePage extends CompanyPage
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * The ID of the target page.
    *
    * @var int
    */
-  private $myTargetPagId;
+  private $targetPagId;
 
   /**
    * The details om the company specific page.
    *
    * @var array
    */
-  private $myTargetPageDetails;
+  private $targetPageDetails;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -45,27 +45,27 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     parent::__construct();
 
-    $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
 
-    $this->myTargetPageDetails = Abc::$DL->companySpecificPageGetDetails($this->myActCmpId,
-                                                                         $this->myTargetPagId,
-                                                                         $this->myLanId);
+    $this->targetPageDetails = Abc::$DL->companySpecificPageGetDetails($this->actCmpId,
+                                                                       $this->targetPagId,
+                                                                       $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL of this page.
    *
-   * @param int $theCmpId       The ID of the target company.
-   * @param int $theTargetPagId The ID of the page.
+   * @param int $cmpId       The ID of the target company.
+   * @param int $targetPagId The ID of the page.
    *
    * @return string The URL of this page.
    */
-  public static function getUrl($theCmpId, $theTargetPagId)
+  public static function getUrl($cmpId, $targetPagId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
-    $url .= self::putCgiVar('tar_pag', $theTargetPagId, 'pag');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('tar_pag', $targetPagId, 'pag');
 
     return $url;
   }
@@ -76,11 +76,11 @@ class SpecificPageUpdatePage extends CompanyPage
    */
   protected function databaseAction()
   {
-    if (!$this->myForm->getChangedControls()) return;
+    if (!$this->form->getChangedControls()) return;
 
-    $values = $this->myForm->getValues();
+    $values = $this->form->getValues();
 
-    Abc::$DL->companySpecificPageUpdate($this->myActCmpId, $this->myTargetPagId, $values['pag_class_child']);
+    Abc::$DL->companySpecificPageUpdate($this->actCmpId, $this->targetPagId, $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -99,30 +99,30 @@ class SpecificPageUpdatePage extends CompanyPage
    */
   private function createForm()
   {
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Show the ID of the page.
     $input = new HtmlControl('pag_id');
-    $input->setHtml($this->myTargetPageDetails['pag_id']);
-    $this->myForm->addFormControl($input, 'ID');
+    $input->setHtml($this->targetPageDetails['pag_id']);
+    $this->form->addFormControl($input, 'ID');
 
     // Show the title of the page.
     $input = new HtmlControl('pag_title');
-    $input->setHtml($this->myTargetPageDetails['pag_title']);
-    $this->myForm->addFormControl($input, 'Title');
+    $input->setHtml($this->targetPageDetails['pag_title']);
+    $this->form->addFormControl($input, 'Title');
 
     // Show the parent class name of the page.
     $input = new HtmlControl('pag_class_parent');
-    $input->setHtml($this->myTargetPageDetails['pag_class_parent']);
-    $this->myForm->addFormControl($input, 'Parent Class');
+    $input->setHtml($this->targetPageDetails['pag_class_parent']);
+    $this->form->addFormControl($input, 'Parent Class');
 
     // Create text control for the child class name.
     $input = new TextControl('pag_class_child');
-    $input->setValue($this->myTargetPageDetails['pag_class_child']);
-    $this->myForm->addFormControl($input, 'Child Class');
+    $input->setValue($this->targetPageDetails['pag_class_child']);
+    $this->form->addFormControl($input, 'Child Class');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm');
+    $this->form->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ class SpecificPageUpdatePage extends CompanyPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case  'handleForm':
@@ -139,7 +139,7 @@ class SpecificPageUpdatePage extends CompanyPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -151,7 +151,7 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->myActCmpId));
+    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->actCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

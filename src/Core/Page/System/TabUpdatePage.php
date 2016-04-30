@@ -17,14 +17,14 @@ class TabUpdatePage extends TabBasePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   /**
    * The ID of the page group.
    *
    * @var int
    */
-  private $myPtbId;
+  private $ptbId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -34,23 +34,23 @@ class TabUpdatePage extends TabBasePage
   {
     parent::__construct();
 
-    $this->myPtbId       = self::getCgiId('ptb', 'ptb');
-    $this->myDetails     = Abc::$DL->systemTabGetDetails($this->myPtbId, $this->myLanId);
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->ptbId         = self::getCgiId('ptb', 'ptb');
+    $this->details       = Abc::$DL->systemTabGetDetails($this->ptbId, $this->lanId);
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $thePtbId The ID of the page tab.
+   * @param int $ptbId The ID of the page tab.
    *
    * @return string
    */
-  public static function getUrl($thePtbId)
+  public static function getUrl($ptbId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_TAB_UPDATE, 'pag');
-    $url .= self::putCgiVar('ptb', $thePtbId, 'ptb');
+    $url .= self::putCgiVar('ptb', $ptbId, 'ptb');
 
     return $url;
   }
@@ -61,15 +61,15 @@ class TabUpdatePage extends TabBasePage
    */
   protected function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
     if ($values['ptb_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
                                          C::WDG_ID_PAGE_GROUP_TITLE,
                                          false,
                                          false,
@@ -80,7 +80,7 @@ class TabUpdatePage extends TabBasePage
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemTabUpdateDetails($this->myPtbId, $wrd_id, $values['ptb_label']);
+    Abc::$DL->systemTabUpdateDetails($this->ptbId, $wrd_id, $values['ptb_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -89,10 +89,10 @@ class TabUpdatePage extends TabBasePage
    */
   protected function loadValues()
   {
-    $values = $this->myDetails;
+    $values = $this->details;
     unset($values['ptb_title']);
 
-    $this->myForm->setValues($values);
+    $this->form->setValues($values);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

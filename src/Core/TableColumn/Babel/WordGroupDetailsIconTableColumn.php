@@ -17,28 +17,28 @@ class WordGroupDetailsIconTableColumn extends DetailsIconTableColumn
    *
    * @var int
    */
-  private $myActLanId;
+  private $actLanId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int $theTargetLanId The ID of the target language.
+   * @param int $targetLanId The ID of the target language.
    */
-  public function __construct($theTargetLanId)
+  public function __construct($targetLanId)
   {
     parent::__construct();
 
-    $this->myActLanId = $theTargetLanId;
+    $this->actLanId = $targetLanId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return WordGroupDetailsPage::getUrl($theRow['wdg_id'], $this->myActLanId);
+    return WordGroupDetailsPage::getUrl($row['wdg_id'], $this->actLanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

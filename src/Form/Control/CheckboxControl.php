@@ -18,7 +18,7 @@ class CheckboxControl extends SimpleControl
    *
    * @var bool
    */
-  protected $myValue;
+  protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -29,14 +29,14 @@ class CheckboxControl extends SimpleControl
   public function generate()
   {
     $this->attributes['type']    = 'checkbox';
-    $this->attributes['name']    = $this->mySubmitName;
-    $this->attributes['checked'] = $this->myValue;
+    $this->attributes['name']    = $this->submitName;
+    $this->attributes['checked'] = $this->value;
 
-    $html = $this->myPrefix;
+    $html = $this->prefix;
     $html .= $this->generatePrefixLabel();
     $html .= Html::generateVoidElement('input', $this->attributes);
     $html .= $this->generatePostfixLabel();
-    $html .= $this->myPostfix;
+    $html .= $this->postfix;
 
     return $html;
   }
@@ -56,28 +56,28 @@ class CheckboxControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     /** @todo Decide whether to test submitted value is white listed, i.e. $this->myAttributes['value'] (or 'on'
      *  if $this->myAttributes['value'] is null) or null.
      */
 
-    if (empty($this->myValue)!==empty($theSubmittedValue[$submit_name]))
+    if (empty($this->value)!==empty($submittedValue[$submit_name]))
     {
-      $theChangedInputs[$this->myName] = $this;
+      $changedInputs[$this->name] = $this;
     }
 
-    if (!empty($theSubmittedValue[$submit_name]))
+    if (!empty($submittedValue[$submit_name]))
     {
-      $this->myValue                    = true;
-      $theWhiteListValue[$this->myName] = true;
+      $this->value                 = true;
+      $whiteListValue[$this->name] = true;
     }
     else
     {
-      $this->myValue                    = false;
-      $theWhiteListValue[$this->myName] = false;
+      $this->value                 = false;
+      $whiteListValue[$this->name] = false;
     }
   }
 

@@ -17,9 +17,9 @@ class TabInsertTableAction extends InsertItemTableAction
    */
   public function __construct()
   {
-    $this->myUrl = TabInsertPage::getUrl();
+    $this->url = TabInsertPage::getUrl();
 
-    $this->myTitle = 'Create page tab';
+    $this->title = 'Create page tab';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

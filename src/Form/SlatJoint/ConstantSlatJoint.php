@@ -14,13 +14,13 @@ class ConstantSlatJoint extends SlatJoint
   /**
    * Creates and returns a constant form control.
    *
-   * @param string $theName The local name of the constant form control.
+   * @param string $name The local name of the constant form control.
    *
    * @return ConstantControl
    */
-  public function createControl($theName)
+  public function createControl($name)
   {
-    return new ConstantControl($theName);
+    return new ConstantControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

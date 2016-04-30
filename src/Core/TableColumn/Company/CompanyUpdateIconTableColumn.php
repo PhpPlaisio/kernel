@@ -15,9 +15,9 @@ class CompanyUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return CompanyUpdatePage::getUrl($theRow['cmp_id']);
+    return CompanyUpdatePage::getUrl($row['cmp_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

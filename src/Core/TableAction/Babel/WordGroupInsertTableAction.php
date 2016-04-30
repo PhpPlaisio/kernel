@@ -17,9 +17,9 @@ class WordGroupInsertTableAction extends InsertItemTableAction
    */
   public function __construct()
   {
-    $this->myUrl = WordGroupInsertPage::getUrl();
+    $this->url = WordGroupInsertPage::getUrl();
 
-    $this->myTitle = 'Create word group';
+    $this->title = 'Create word group';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

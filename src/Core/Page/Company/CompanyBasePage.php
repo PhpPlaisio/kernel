@@ -20,21 +20,21 @@ abstract class CompanyBasePage extends CorePage
    *
    * @var int
    */
-  protected $myActCmpId;
+  protected $actCmpId;
 
   /**
    * The ID of the word for the text of the submit button of the form shown on this page.
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -69,20 +69,20 @@ abstract class CompanyBasePage extends CorePage
    */
   private function createForm()
   {
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Create form control for company name.
     $input = new TextControl('cmp_abbr');
     $input->setAttrMaxLength(C::LEN_CMP_ABBR);
-    $this->myForm->addFormControl($input, 'CompanyPage Abbreviation');
+    $this->form->addFormControl($input, 'CompanyPage Abbreviation');
 
     // Create form control for comment.
     $input = new TextControl('cmp_label');
     $input->setAttrMaxLength(C::LEN_CMP_LABEL);
-    $this->myForm->addFormControl($input, 'Label');
+    $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ abstract class CompanyBasePage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -99,7 +99,7 @@ abstract class CompanyBasePage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -111,7 +111,7 @@ abstract class CompanyBasePage extends CorePage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(CompanyDetailsPage::getUrl($this->myActCmpId));
+    HttpHeader::redirectSeeOther(CompanyDetailsPage::getUrl($this->actCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

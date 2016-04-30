@@ -24,7 +24,7 @@ class RoleDetailsPage extends CompanyPage
   /**
    * @var int The ID of the role of which data is shown on this page.
    */
-  protected $myRolId;
+  protected $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -34,23 +34,23 @@ class RoleDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->myRolId = self::getCgiId('rol', 'rol');
+    $this->rolId = self::getCgiId('rol', 'rol');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theCmpId The ID of the target company.
-   * @param int $theRolId The ID of the role.
+   * @param int $cmpId The ID of the target company.
+   * @param int $rolId The ID of the role.
    *
    * @return string
    */
-  public static function getUrl($theCmpId, $theRolId)
+  public static function getUrl($cmpId, $rolId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
-    $url .= self::putCgiVar('rol', $theRolId, 'rol');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -74,12 +74,12 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showFunctionalities()
   {
-    $functionalities = Abc::$DL->companyRoleGetFunctionalities($this->myActCmpId, $this->myRolId, $this->myLanId);
+    $functionalities = Abc::$DL->companyRoleGetFunctionalities($this->actCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
     // Add table action for modifying the granted functionalities.
-    $table->addTableAction('default', new RoleUpdateFunctionalitiesTableAction($this->myActCmpId, $this->myRolId));
+    $table->addTableAction('default', new RoleUpdateFunctionalitiesTableAction($this->actCmpId, $this->rolId));
 
     // Show the ID of the module.
     $table->addColumn(new NumericTableColumn('ID', 'mdl_id'));
@@ -108,7 +108,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showPages()
   {
-    $pages = Abc::$DL->companyRoleGetPages($this->myActCmpId, $this->myRolId, $this->myLanId);
+    $pages = Abc::$DL->companyRoleGetPages($this->actCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -137,7 +137,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showRole()
   {
-    $details = Abc::$DL->companyRoleGetDetails($this->myActCmpId, $this->myRolId);
+    $details = Abc::$DL->companyRoleGetDetails($this->actCmpId, $this->rolId);
 
     $table = new CoreDetailTable();
 

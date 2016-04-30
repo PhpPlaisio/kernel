@@ -14,25 +14,25 @@ class CheckboxesSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
+   * @param string|int|null $headerText The header text of this table column.
    */
-  public function __construct($theHeaderText)
+  public function __construct($headerText)
   {
     $this->dataType   = 'control-checkboxes';
-    $this->headerText = $theHeaderText;
+    $this->headerText = $headerText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates and returns a checkboxes form control.
    *
-   * @param string $theName The local name of the checkboxes form control.
+   * @param string $name The local name of the checkboxes form control.
    *
    * @return CheckboxesControl
    */
-  public function createControl($theName)
+  public function createControl($name)
   {
-    return new CheckboxesControl($theName);
+    return new CheckboxesControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

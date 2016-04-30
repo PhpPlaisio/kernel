@@ -15,9 +15,9 @@ class FunctionalityDetailsIconTableColumn extends DetailsIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return FunctionalityDetailsPage::getUrl($theRow['fun_id']);
+    return FunctionalityDetailsPage::getUrl($row['fun_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -19,7 +19,7 @@ class PageInsertPage extends PageBasePage
   {
     parent::__construct();
 
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_INSERT;
+    $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -39,10 +39,10 @@ class PageInsertPage extends PageBasePage
    */
   protected function databaseAction()
   {
-    $values = $this->myForm->getValues();
+    $values = $this->form->getValues();
     if ($values['pag_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
                                          C::WDG_ID_PAGE_TITLE,
                                          false,
                                          false,
@@ -53,14 +53,14 @@ class PageInsertPage extends PageBasePage
       $wrd_id = $values['wrd_id'];
     }
 
-    $this->myTargetPagId = Abc::$DL->systemPageInsertDetails($wrd_id,
+    $this->targetPagId = Abc::$DL->systemPageInsertDetails($wrd_id,
                                                              $values['ptb_id'],
                                                              $values['pag_id_org'],
                                                              $values['mnu_id'],
                                                              $values['pag_alias'],
                                                              $values['pag_class'],
-                                                             $values['pag_label'],
-                                                             $values['pag_weight']);
+                                                           $values['pag_label'],
+                                                           $values['pag_weight']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -14,25 +14,25 @@ class TextAreaSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string|int|null $theHeaderText The header text of this table column.
+   * @param string|int|null $headerText The header text of this table column.
    */
-  public function __construct($theHeaderText)
+  public function __construct($headerText)
   {
     $this->dataType   = 'control-text-area';
-    $this->headerText = $theHeaderText;
+    $this->headerText = $headerText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates and returns a textarea form control.
    *
-   * @param string $theName The local name of the textarea form control.
+   * @param string $name The local name of the textarea form control.
    *
    * @return TextAreaControl
    */
-  public function createControl($theName)
+  public function createControl($name)
   {
-    return new TextAreaControl($theName);
+    return new TextAreaControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

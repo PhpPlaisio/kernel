@@ -17,9 +17,9 @@ class PageInsertTableAction extends InsertItemTableAction
    */
   public function __construct()
   {
-    $this->myUrl = PageInsertPage::getUrl();
+    $this->url = PageInsertPage::getUrl();
 
-    $this->myTitle = 'Create page';
+    $this->title = 'Create page';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

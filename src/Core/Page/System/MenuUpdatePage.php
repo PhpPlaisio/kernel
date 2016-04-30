@@ -17,14 +17,14 @@ class MenuUpdatePage extends MenuBasePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   /**
    * The ID of the menu entry.
    *
    * @var int
    */
-  private $myMnuId;
+  private $mnuId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -34,23 +34,23 @@ class MenuUpdatePage extends MenuBasePage
   {
     parent::__construct();
 
-    $this->myMnuId       = self::getCgiId('mnu', 'mnu');
-    $this->myDetails     = Abc::$DL->systemMenuGetDetails($this->myMnuId, $this->myLanId);
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->mnuId         = self::getCgiId('mnu', 'mnu');
+    $this->details       = Abc::$DL->systemMenuGetDetails($this->mnuId, $this->lanId);
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $theMnuId
+   * @param int $mnuId
    *
    * @return string
    */
-  public static function getUrl($theMnuId)
+  public static function getUrl($mnuId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_MENU_MODIFY, 'pag');
-    $url .= self::putCgiVar('mnu', $theMnuId, 'mnu');
+    $url .= self::putCgiVar('mnu', $mnuId, 'mnu');
 
     return $url;
   }
@@ -61,15 +61,15 @@ class MenuUpdatePage extends MenuBasePage
    */
   protected function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately of no changes are submitted.
     if (empty($changes)) return;
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
                                          C::WDG_ID_MENU,
                                          false,
                                          false,
@@ -80,7 +80,7 @@ class MenuUpdatePage extends MenuBasePage
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemMenuUpdate($this->myMnuId,
+    Abc::$DL->systemMenuUpdate($this->mnuId,
                                $wrd_id,
                                $values['pag_id'],
                                $values['mnu_level'],
@@ -95,7 +95,7 @@ class MenuUpdatePage extends MenuBasePage
    */
   protected function loadValues()
   {
-    $this->myForm->setValues($this->myDetails);
+    $this->form->setValues($this->details);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -24,7 +24,7 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
    *
    * @var Obfuscator
    */
-  private $myMdlIdObfuscator;
+  private $mdlIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -40,26 +40,26 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('mdl_enabled', $table_column);
 
-    $this->myMdlIdObfuscator = Abc::getObfuscator('mdl');
+    $this->mdlIdObfuscator = Abc::getObfuscator('mdl');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function createRow($theLouverControl, $theData)
+  public function createRow($louverControl, $data)
   {
     /** @var SlatControl $row */
-    $row = $theLouverControl->addFormControl(new SlatControl($theData['mdl_id']));
-    $row->setObfuscator($this->myMdlIdObfuscator);
+    $row = $louverControl->addFormControl(new SlatControl($data['mdl_id']));
+    $row->setObfuscator($this->mdlIdObfuscator);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'mdl_name');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'mdl_enabled');
-    $control->setValue($theData['mdl_enabled']);
+    $control->setValue($data['mdl_enabled']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

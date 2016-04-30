@@ -17,9 +17,9 @@ class CompanyInsertTableAction extends InsertItemTableAction
    */
   public function __construct()
   {
-    $this->myUrl = CompanyInsertPage::getUrl();
+    $this->url = CompanyInsertPage::getUrl();
 
-    $this->myTitle = 'Create Company';
+    $this->title = 'Create Company';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

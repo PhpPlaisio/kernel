@@ -17,7 +17,7 @@ class PageUpdatePage extends PageBasePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,23 +27,23 @@ class PageUpdatePage extends PageBasePage
   {
     parent::__construct();
 
-    $this->myTargetPagId = self::getCgiId('tar_pag', 'pag');
-    $this->myDetails     = Abc::$DL->systemPageGetDetails($this->myTargetPagId, $this->myLanId);
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->targetPagId   = self::getCgiId('tar_pag', 'pag');
+    $this->details       = Abc::$DL->systemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $thePagId
+   * @param int $pagId
    *
    * @return string
    */
-  public static function getUrl($thePagId)
+  public static function getUrl($pagId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
-    $url .= self::putCgiVar('tar_pag', $thePagId, 'pag');
+    $url .= self::putCgiVar('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -54,15 +54,15 @@ class PageUpdatePage extends PageBasePage
    */
   protected function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
     if ($values['pag_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
                                          C::WDG_ID_PAGE_TITLE,
                                          false,
                                          false,
@@ -73,7 +73,7 @@ class PageUpdatePage extends PageBasePage
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemPageUpdateDetails($this->myTargetPagId,
+    Abc::$DL->systemPageUpdateDetails($this->targetPagId,
                                       $wrd_id,
                                       $values['ptb_id'],
                                       $values['pag_id_org'],
@@ -90,10 +90,10 @@ class PageUpdatePage extends PageBasePage
    */
   protected function loadValues()
   {
-    $values = $this->myDetails;
+    $values = $this->details;
     unset($values['pag_title']);
 
-    $this->myForm->setValues($values);
+    $this->form->setValues($values);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

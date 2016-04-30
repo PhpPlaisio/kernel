@@ -20,14 +20,14 @@ class InvisibleControl extends SimpleControl
   public function generate()
   {
     $this->attributes['type'] = 'hidden';
-    $this->attributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->submitName;
 
-    if ($this->myFormatter) $this->attributes['value'] = $this->myFormatter->format($this->myValue);
-    else                    $this->attributes['value'] = $this->myValue;
+    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
+    else                    $this->attributes['value'] = $this->value;
 
-    $ret = $this->myPrefix;
+    $ret = $this->prefix;
     $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -49,12 +49,12 @@ class InvisibleControl extends SimpleControl
    *
    * Note:
    * Always sets the white listed value to the value of this constant form control.
-   * Never uses $theSubmittedValue and never sets the $theChangedInputs.
+   * Never uses $submittedValue and never sets the $changedInputs.
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
     // Note: by definition the value of a input:invisible form control will not be changed, whatever is submitted.
-    $theWhiteListValue[$this->myName] = $this->myValue;
+    $whiteListValue[$this->name] = $this->value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

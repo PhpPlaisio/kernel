@@ -16,8 +16,8 @@ abstract class UpdateIconTableColumn extends IconTableColumn
   {
     parent::__construct();
 
-    $this->myIconUrl  = ICON_SMALL_EDIT;
-    $this->myAltValue = 'edit';
+    $this->iconUrl  = ICON_SMALL_EDIT;
+    $this->altValue = 'edit';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

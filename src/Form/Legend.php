@@ -15,7 +15,7 @@ class Legend extends HtmlElement
   /**
    * @var string The inner HTML snippet of this legend.
    */
-  protected $myLegend;
+  protected $legend;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -25,29 +25,29 @@ class Legend extends HtmlElement
    */
   public function generate()
   {
-    return Html::generateElement('legend', $this->attributes, $this->myLegend, true);
+    return Html::generateElement('legend', $this->attributes, $this->legend, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the inner HTML of this legend.
    *
-   * @param string $theHtml The HTML of legend. It is the developer's responsibility that it is valid HTML code.
+   * @param string $html The HTML of legend. It is the developer's responsibility that it is valid HTML code.
    */
-  public function setLegendHtml($theHtml)
+  public function setLegendHtml($html)
   {
-    $this->myLegend = $theHtml;
+    $this->legend = $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the inner HTML of this legend.
    *
-   * @param string $theText The text of legend. Special characters will be converted to HTML entities.
+   * @param string $text The text of legend. Special characters will be converted to HTML entities.
    */
-  public function setLegendText($theText)
+  public function setLegendText($text)
   {
-    $this->myLegend = Html::txt2Html($theText);
+    $this->legend = Html::txt2Html($text);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

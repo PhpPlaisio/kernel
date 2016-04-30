@@ -19,21 +19,21 @@ abstract class RoleBasePage extends CompanyPage
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * The ID of the role that is been inserted or updated.
    *
    * @var int
    */
-  protected $myRolId;
+  protected $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -68,21 +68,21 @@ abstract class RoleBasePage extends CompanyPage
    */
   private function createForm()
   {
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Create form control for Company name.
     $input = new TextControl('rol_name');
     $input->setAttrMaxLength(C::LEN_ROL_NAME);
-    $this->myForm->addFormControl($input, 'Role');
+    $this->form->addFormControl($input, 'Role');
 
     // Create form control for comment.
     $input = new TextControl('rol_weight');
     $input->setAttrMaxLength(C::LEN_ROL_WEIGHT);
-    $this->myForm->addFormControl($input, 'Weight');
+    $this->form->addFormControl($input, 'Weight');
     // XXX numeric
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ abstract class RoleBasePage extends CompanyPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -99,7 +99,7 @@ abstract class RoleBasePage extends CompanyPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -111,7 +111,7 @@ abstract class RoleBasePage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->myActCmpId, $this->myRolId));
+    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->actCmpId, $this->rolId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ class RemoveWhitespaceCleaner implements Cleaner
    *
    * @var RemoveWhitespaceCleaner
    */
-  static private $ourSingleton;
+  static private $singleton;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -24,27 +24,27 @@ class RemoveWhitespaceCleaner implements Cleaner
    */
   public static function get()
   {
-    if (!self::$ourSingleton) self::$ourSingleton = new self();
+    if (!self::$singleton) self::$singleton = new self();
 
-    return self::$ourSingleton;
+    return self::$singleton;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns a submitted value with all whitespace removed.
    *
-   * @param string $theValue The submitted value.
+   * @param string $value The submitted value.
    *
    * @return string|null
    */
-  public function clean($theValue)
+  public function clean($value)
   {
-    if ($theValue==='' || $theValue===null || $theValue===false)
+    if ($value==='' || $value===null || $value===false)
     {
       return null;
     }
 
-    $tmp = trim(mb_ereg_replace('[\ \t\n\r\0\x0B\xA0]+', '', $theValue, 'p'));
+    $tmp = trim(mb_ereg_replace('[\ \t\n\r\0\x0B\xA0]+', '', $value, 'p'));
     if ($tmp==='') $tmp = null;
 
     return $tmp;

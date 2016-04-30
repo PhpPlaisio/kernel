@@ -25,20 +25,20 @@ class ModuleUpdatePage extends CompanyPage
    *
    * @var CoreForm
    */
-  private $myForm;
+  private $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL of this page.
    *
-   * @param int $theCmpId The ID of the target company.
+   * @param int $cmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($theCmpId)
+  public static function getUrl($cmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_MODULE_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
 
     return $url;
   }
@@ -60,14 +60,14 @@ class ModuleUpdatePage extends CompanyPage
   private function createForm()
   {
     // Get all available modules.
-    $modules = Abc::$DL->companyModuleGetAllAvailable($this->myActCmpId, $this->myLanId);
+    $modules = Abc::$DL->companyModuleGetAllAvailable($this->actCmpId, $this->lanId);
 
     // Create the form.
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Add field set.
     $field_set = new FieldSet('');
-    $this->myForm->addFieldSet($field_set);
+    $this->form->addFieldSet($field_set);
 
     // Create factory.
     $factory = new CompanyModulesUpdateSlatControlFactory();
@@ -78,7 +78,7 @@ class ModuleUpdatePage extends CompanyPage
     $submit = new SubmitControl('submit');
     $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_OK));
     $button->addFormControl($submit);
-    $this->myForm->addSubmitHandler($button, 'handleForm');
+    $this->form->addSubmitHandler($button, 'handleForm');
 
     // Put everything together in a LoverControl.
     $louver = new LouverControl('data');
@@ -98,8 +98,8 @@ class ModuleUpdatePage extends CompanyPage
    */
   private function databaseAction()
   {
-    $values  = $this->myForm->getValues();
-    $changes = $this->myForm->getChangedControls();
+    $values  = $this->form->getValues();
+    $changes = $this->form->getChangedControls();
 
     // If no changes are submitted return immediately.
     if (empty($changes)) return;
@@ -108,11 +108,11 @@ class ModuleUpdatePage extends CompanyPage
     {
       if ($values['data'][$mdl_id]['mdl_enabled'])
       {
-        Abc::$DL->companyModuleEnable($this->myActCmpId, $mdl_id);
+        Abc::$DL->companyModuleEnable($this->actCmpId, $mdl_id);
       }
       else
       {
-        Abc::$DL->companyModuleDisable($this->myActCmpId, $mdl_id);
+        Abc::$DL->companyModuleDisable($this->actCmpId, $mdl_id);
       }
     }
 
@@ -126,7 +126,7 @@ class ModuleUpdatePage extends CompanyPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -134,7 +134,7 @@ class ModuleUpdatePage extends CompanyPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -146,7 +146,7 @@ class ModuleUpdatePage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(ModuleOverviewPage::getUrl($this->myActCmpId));
+    HttpHeader::redirectSeeOther(ModuleOverviewPage::getUrl($this->actCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

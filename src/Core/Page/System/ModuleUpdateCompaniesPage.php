@@ -29,21 +29,21 @@ class ModuleUpdateCompaniesPage extends CorePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  private $myForm;
+  private $form;
 
   /**
    * The ID of the module that will be granted or revoked to or from companies.
    *
    * @var int
    */
-  private $myModId;
+  private $modId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -53,25 +53,25 @@ class ModuleUpdateCompaniesPage extends CorePage
   {
     parent::__construct();
 
-    $this->myModId = self::getCgiId('mdl', 'mdl');
+    $this->modId = self::getCgiId('mdl', 'mdl');
 
-    $this->myDetails = Abc::$DL->systemModuleGetDetails($this->myModId, $this->myLanId);
+    $this->details = Abc::$DL->systemModuleGetDetails($this->modId, $this->lanId);
 
-    $this->appendPageTitle($this->myDetails['mdl_name']);
+    $this->appendPageTitle($this->details['mdl_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $theModId The ID of the module.
+   * @param int $modId The ID of the module.
    *
    * @return string
    */
-  public static function getUrl($theModId)
+  public static function getUrl($modId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE_COMPANIES, 'pag');
-    $url .= self::putCgiVar('mdl', $theModId, 'mdl');
+    $url .= self::putCgiVar('mdl', $modId, 'mdl');
 
     return $url;
   }
@@ -95,14 +95,14 @@ class ModuleUpdateCompaniesPage extends CorePage
   private function createForm()
   {
     // Get all available pages.
-    $pages = Abc::$DL->systemModuleGetAvailableCompanies($this->myModId);
+    $pages = Abc::$DL->systemModuleGetAvailableCompanies($this->modId);
 
     // Create form.
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Add field set.
     $field_set = new FieldSet('');
-    $this->myForm->addFieldSet($field_set);
+    $this->form->addFieldSet($field_set);
 
     // Create factory.
     $factory = new SystemModuleUpdateCompaniesSlatControlFactory();
@@ -113,7 +113,7 @@ class ModuleUpdateCompaniesPage extends CorePage
     $submit = new SubmitControl('submit');
     $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
-    $this->myForm->addSubmitHandler($button, 'handleForm');
+    $this->form->addSubmitHandler($button, 'handleForm');
 
     // Put everything together in a LouverControl.
     $louver = new LouverControl('data');
@@ -133,8 +133,8 @@ class ModuleUpdateCompaniesPage extends CorePage
    */
   private function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
@@ -143,11 +143,11 @@ class ModuleUpdateCompaniesPage extends CorePage
     {
       if ($values['data'][$cmp_id]['mdl_granted'])
       {
-        Abc::$DL->companyModuleEnable($cmp_id, $this->myModId);
+        Abc::$DL->companyModuleEnable($cmp_id, $this->modId);
       }
       else
       {
-        Abc::$DL->companyModuleDisable($cmp_id, $this->myModId);
+        Abc::$DL->companyModuleDisable($cmp_id, $this->modId);
       }
     }
 
@@ -161,7 +161,7 @@ class ModuleUpdateCompaniesPage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case  'handleForm':
@@ -169,7 +169,7 @@ class ModuleUpdateCompaniesPage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -181,7 +181,7 @@ class ModuleUpdateCompaniesPage extends CorePage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(ModuleDetailsPage::getUrl($this->myModId));
+    HttpHeader::redirectSeeOther(ModuleDetailsPage::getUrl($this->modId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -193,10 +193,10 @@ class ModuleUpdateCompaniesPage extends CorePage
     $table = new CoreDetailTable();
 
     // Add row for the ID of the module.
-    NumericTableRow::addRow($table, 'ID', $this->myDetails['mdl_id'], '%d');
+    NumericTableRow::addRow($table, 'ID', $this->details['mdl_id'], '%d');
 
     // Add row for the module name.
-    TextTableRow::addRow($table, 'Module', $this->myDetails['mdl_name']);
+    TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);
 
     echo $table->getHtmlTable();
   }

@@ -15,9 +15,9 @@ class FunctionalityUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return FunctionalityUpdatePage::getUrl($theRow['fun_id']);
+    return FunctionalityUpdatePage::getUrl($row['fun_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -18,27 +18,27 @@ class WordTranslateWordsTableAction implements TableAction
    *
    * @var string
    */
-  protected $myTitle;
+  protected $title;
 
   /**
    * The URL of the table action.
    *
    * @var string
    */
-  protected $myUrl;
+  protected $url;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int $theWdgId       The ID of the word group of the new word.
-   * @param int $theTargetLanId The ID of the target language.
+   * @param int $wdgId       The ID of the word group of the new word.
+   * @param int $targetLanId The ID of the target language.
    */
-  public function __construct($theWdgId, $theTargetLanId)
+  public function __construct($wdgId, $targetLanId)
   {
-    $this->myUrl = WordTranslateWordsPage::getUrl($theWdgId, $theTargetLanId);
+    $this->url = WordTranslateWordsPage::getUrl($wdgId, $targetLanId);
 
-    $this->myTitle = 'Translate words';
+    $this->title = 'Translate words';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -48,9 +48,9 @@ class WordTranslateWordsTableAction implements TableAction
   public function getHtml()
   {
     $ret = '<a';
-    $ret .= Html::generateAttribute('href', $this->myUrl);
+    $ret .= Html::generateAttribute('href', $this->url);
     $ret .= '><img';
-    $ret .= Html::generateAttribute('title', $this->myTitle);
+    $ret .= Html::generateAttribute('title', $this->title);
     $ret .= Html::generateAttribute('src', ICON_BABEL_FISH);
     $ret .= ' width="16" height="16" alt="translate"/></a>';
 

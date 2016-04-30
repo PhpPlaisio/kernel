@@ -15,9 +15,9 @@ class WordGroupUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getUrl($theRow)
+  public function getUrl($row)
   {
-    return WordGroupUpdatePage::getUrl($theRow['wdg_id']);
+    return WordGroupUpdatePage::getUrl($row['wdg_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

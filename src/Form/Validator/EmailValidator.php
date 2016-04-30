@@ -17,13 +17,13 @@ class EmailValidator implements Validator
    * * Empty values are considered valid.
    * * This validator will test if the domain exists.
    *
-   * @param Control $theFormControl The form control.
+   * @param Control $control The form control.
    *
    * @return bool
    */
-  public function validate($theFormControl)
+  public function validate($control)
   {
-    $value = $theFormControl->getSubmittedValue();
+    $value = $control->getSubmittedValue();
 
     // An empty value is valid.
     if ($value==='' || $value===null || $value===false)

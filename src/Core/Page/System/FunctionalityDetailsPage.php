@@ -28,14 +28,14 @@ class FunctionalityDetailsPage extends CorePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   /**
    * The ID of the functionality.
    *
    * @var int
    */
-  private $myFunId;
+  private $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -45,25 +45,25 @@ class FunctionalityDetailsPage extends CorePage
   {
     parent::__construct();
 
-    $this->myFunId = self::getCgiId('fun', 'fun');
+    $this->funId = self::getCgiId('fun', 'fun');
 
-    $this->myDetails = Abc::$DL->systemFunctionalityGetDetails($this->myFunId, $this->myLanId);
+    $this->details = Abc::$DL->systemFunctionalityGetDetails($this->funId, $this->lanId);
 
-    $this->appendPageTitle($this->myDetails['fun_name']);
+    $this->appendPageTitle($this->details['fun_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $theFunId The ID of the functionality.
+   * @param int $funId The ID of the functionality.
    *
    * @return string
    */
-  public static function getUrl($theFunId)
+  public static function getUrl($funId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS, 'pag');
-    $url .= self::putCgiVar('fun', $theFunId, 'fun');
+    $url .= self::putCgiVar('fun', $funId, 'fun');
 
     return $url;
   }
@@ -90,13 +90,13 @@ class FunctionalityDetailsPage extends CorePage
     $table = new CoreDetailTable();
 
     // Add row for the ID of the function.
-    NumericTableRow::addRow($table, 'ID', $this->myDetails['fun_id'], '%d');
+    NumericTableRow::addRow($table, 'ID', $this->details['fun_id'], '%d');
 
     // Add row for the module name to which the function belongs.
-    TextTableRow::addRow($table, 'Module', $this->myDetails['mdl_name']);
+    TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);
 
     // Add row for the name of the function.
-    TextTableRow::addRow($table, 'Functionality', $this->myDetails['fun_name']);
+    TextTableRow::addRow($table, 'Functionality', $this->details['fun_name']);
 
     echo $table->getHtmlTable();
   }
@@ -107,10 +107,10 @@ class FunctionalityDetailsPage extends CorePage
    */
   private function showPages()
   {
-    $pages = Abc::$DL->systemFunctionalityGetPages($this->myFunId, $this->myLanId);
+    $pages = Abc::$DL->systemFunctionalityGetPages($this->funId, $this->lanId);
 
     $table = new CoreOverviewTable();
-    $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->myFunId));
+    $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->funId));
 
     // Show page ID.
     $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
@@ -137,12 +137,12 @@ class FunctionalityDetailsPage extends CorePage
    */
   private function showRoles()
   {
-    $roles = Abc::$DL->systemFunctionalityGetRoles($this->myFunId);
+    $roles = Abc::$DL->systemFunctionalityGetRoles($this->funId);
 
     $table = new CoreOverviewTable();
 
     // Add table action for granting and revoking this functionality to/from roles.
-    $table->addTableAction('default', new FunctionalityUpdateRolesTableAction($this->myFunId));
+    $table->addTableAction('default', new FunctionalityUpdateRolesTableAction($this->funId));
 
     // Show Company ID.
     $table->addColumn(new NumericTableColumn('ID', 'cmp_id'));

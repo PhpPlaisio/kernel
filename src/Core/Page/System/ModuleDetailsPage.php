@@ -28,14 +28,14 @@ class ModuleDetailsPage extends CorePage
    *
    * @var array
    */
-  private $myDetails;
+  private $details;
 
   /**
    * The ID of the functionality.
    *
    * @var int
    */
-  private $myMdlId;
+  private $mdlId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -45,25 +45,25 @@ class ModuleDetailsPage extends CorePage
   {
     parent::__construct();
 
-    $this->myMdlId = self::getCgiId('mdl', 'mdl');
+    $this->mdlId = self::getCgiId('mdl', 'mdl');
 
-    $this->myDetails = Abc::$DL->systemModuleGetDetails($this->myMdlId, $this->myLanId);
+    $this->details = Abc::$DL->systemModuleGetDetails($this->mdlId, $this->lanId);
 
-    $this->appendPageTitle($this->myDetails['mdl_name']);
+    $this->appendPageTitle($this->details['mdl_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $theMdlId The ID of the module.
+   * @param int $mdlId The ID of the module.
    *
    * @return string
    */
-  public static function getUrl($theMdlId)
+  public static function getUrl($mdlId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
-    $url .= self::putCgiVar('mdl', $theMdlId, 'mdl');
+    $url .= self::putCgiVar('mdl', $mdlId, 'mdl');
 
     return $url;
   }
@@ -87,12 +87,12 @@ class ModuleDetailsPage extends CorePage
    */
   private function showCompanies()
   {
-    $functions = Abc::$DL->systemModuleGetGrantedCompanies($this->myMdlId);
+    $functions = Abc::$DL->systemModuleGetGrantedCompanies($this->mdlId);
 
     $table = new CoreOverviewTable();
 
     // Add table action for granting this module to companies.
-    $table->addTableAction('default', new ModuleUpdateCompaniesTableAction($this->myMdlId));
+    $table->addTableAction('default', new ModuleUpdateCompaniesTableAction($this->mdlId));
 
     // Show company ID.
     $table->addColumn(new NumericTableColumn('ID', 'cmp_id'));
@@ -115,13 +115,13 @@ class ModuleDetailsPage extends CorePage
     $table = new CoreDetailTable();
 
     // Add table action for updating the module details.
-    $table->addTableAction('default', new ModuleUpdateTableAction($this->myMdlId));
+    $table->addTableAction('default', new ModuleUpdateTableAction($this->mdlId));
 
     // Add row for the ID of the module.
-    NumericTableRow::addRow($table, 'ID', $this->myDetails['mdl_id'], '%d');
+    NumericTableRow::addRow($table, 'ID', $this->details['mdl_id'], '%d');
 
     // Add row for the name of the module.
-    TextTableRow::addRow($table, 'Module', $this->myDetails['mdl_name']);
+    TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);
 
     echo $table->getHtmlTable();
   }
@@ -132,7 +132,7 @@ class ModuleDetailsPage extends CorePage
    */
   private function showFunctionalities()
   {
-    $functions = Abc::$DL->systemModuleGetFunctions($this->myMdlId, $this->myLanId);
+    $functions = Abc::$DL->systemModuleGetFunctions($this->mdlId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

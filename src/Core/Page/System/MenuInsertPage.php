@@ -19,7 +19,7 @@ class MenuInsertPage extends MenuBasePage
   {
     parent::__construct();
 
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_INSERT;
+    $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -39,15 +39,15 @@ class MenuInsertPage extends MenuBasePage
    */
   protected function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately of no changes are submitted.
     if (empty($changes)) return;
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
                                          C::WDG_ID_MENU,
                                          false,
                                          false,

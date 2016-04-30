@@ -19,7 +19,7 @@ class ModuleInsertPage extends ModuleBasePage
   {
     parent::__construct();
 
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_INSERT;
+    $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -39,8 +39,8 @@ class ModuleInsertPage extends ModuleBasePage
    */
   protected function dataBaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
@@ -48,7 +48,7 @@ class ModuleInsertPage extends ModuleBasePage
     if ($values['mdl_name'])
     {
       // New module name. Insert word en retrieve wrd_id of the new word.
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId,
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
                                          C::WDG_ID_MODULE,
                                          false,
                                          false,
@@ -61,7 +61,7 @@ class ModuleInsertPage extends ModuleBasePage
     }
 
     // Create the new module in the database.
-    $this->myMdlId = Abc::$DL->systemModuleInsert($wrd_id);
+    $this->mdlId = Abc::$DL->systemModuleInsert($wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -23,14 +23,14 @@ abstract class MenuBasePage extends CorePage
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -65,55 +65,55 @@ abstract class MenuBasePage extends CorePage
    */
   private function createForm()
   {
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_MENU, $this->myLanId);
+    $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
     $input->setEmptyOption();
-    $this->myForm->addFormControl($input, 'Menu Title');
+    $this->form->addFormControl($input, 'Menu Title');
 
     // Create text box for the title the menu item.
     $input = new TextControl('mnu_title');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $this->myForm->addFormControl($input, 'Menu Title');
+    $this->form->addFormControl($input, 'Menu Title');
 
     // Create select box for chose page for menu.
-    $pages = Abc::$DL->systemPageGetAll($this->myLanId);
+    $pages = Abc::$DL->systemPageGetAll($this->lanId);
     $input = new SelectControl('pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
     $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
-    $this->myForm->addFormControl($input, 'Page Class', true);
+    $this->form->addFormControl($input, 'Page Class', true);
 
     // Create text form control for input menu level.
     $input = new TextControl('mnu_level');
     $input->setAttrMaxLength(C::LEN_MNU_LEVEL);
     $input->setValue(1);
     $input->addValidator(new IntegerValidator(0, 100));
-    $this->myForm->addFormControl($input, 'Menu Level', true);
+    $this->form->addFormControl($input, 'Menu Level', true);
 
     // Create text form control for input menu group.
     $input = new TextControl('mnu_group');
     $input->setAttrMaxLength(C::LEN_MNU_GROUP);
     $input->addValidator(new IntegerValidator(0, 100));
-    $this->myForm->addFormControl($input, 'Menu Group', true);
+    $this->form->addFormControl($input, 'Menu Group', true);
 
     // Create text form control for input menu weight.
     $input = new TextControl('mnu_weight');
     $input->setAttrMaxLength(C::LEN_MNU_WEIGHT);
     $input->addValidator(new IntegerValidator(0, 999));
-    $this->myForm->addFormControl($input, 'Menu Weight', true);
+    $this->form->addFormControl($input, 'Menu Weight', true);
 
     // Create text box for URL of the menu item.
     $input = new TextControl('mnu_link');
     $input->setAttrMaxLength(C::LEN_MNU_LINK);
-    $this->myForm->addFormControl($input, 'Menu Link');
+    $this->form->addFormControl($input, 'Menu Link');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ abstract class MenuBasePage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -130,7 +130,7 @@ abstract class MenuBasePage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 

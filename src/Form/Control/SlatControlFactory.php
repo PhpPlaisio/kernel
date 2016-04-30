@@ -17,57 +17,56 @@ abstract class SlatControlFactory
    *
    * @var bool
    */
-  protected $myFilter = false;
+  protected $filter = false;
 
   /**
    * The slat joints for the louver control of this slat control factory.
    *
    * @var SlatJoint[]
    */
-  protected $mySlatJoints;
+  protected $slatJoints;
 
   /**
    * The number of columns in the under lying table of the slat form control.
    *
    * @var int
    */
-  private $myNumberOfColumns = 0;
+  private $numberOfColumns = 0;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a slat joint (i.e. a column to the form) to this slat control factory and returns this slat joint.
    *
-   * @param string    $theSlatJointName The name of the slat joint.
-   * @param SlatJoint $theSlatJoint     The slat joint.
+   * @param string    $slatJointName The name of the slat joint.
+   * @param SlatJoint $slatJoint     The slat joint.
    *
    * @return SlatJoint
    */
-  public function addSlatJoint($theSlatJointName, $theSlatJoint)
+  public function addSlatJoint($slatJointName, $slatJoint)
   {
-    $this->mySlatJoints[$theSlatJointName] = $theSlatJoint;
+    $this->slatJoints[$slatJointName] = $slatJoint;
 
-    $this->myNumberOfColumns += $theSlatJoint->getColSpan();
+    $this->numberOfColumns += $slatJoint->getColSpan();
 
-    return $theSlatJoint;
+    return $slatJoint;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates a form control using a slat joint and returns the created form control.
    *
-   * @param ComplexControl $theParentControl The parent form control for the created form control.
-   * @param string         $theSlatJointName The name of the slat joint.
-   * @param string|null    $theControlName   The name of the created form control. If null the form control will have
+   * @param ComplexControl $parentControl    The parent form control for the created form control.
+   * @param string         $slatJointName    The name of the slat joint.
+   * @param string|null    $controlName      The name of the created form control. If null the form control will have
    *                                         the same name as the slat joint. Use '' for an empty name (should only be
    *                                         used if the created form control is a complex form control).
    *
    * @return ComplexControl|SimpleControl|SelectControl|CheckboxesControl|RadiosControl
    */
-  public function createFormControl($theParentControl, $theSlatJointName, $theControlName = null)
+  public function createFormControl($parentControl, $slatJointName, $controlName = null)
   {
-    $control = $this->mySlatJoints[$theSlatJointName]->createControl(isset($theControlName) ?
-                                                                       $theControlName : $theSlatJointName);
-    $theParentControl->addFormControl($control);
+    $control = $this->slatJoints[$slatJointName]->createControl(isset($controlName) ? $controlName : $slatJointName);
+    $parentControl->addFormControl($control);
 
     return $control;
   }
@@ -76,12 +75,12 @@ abstract class SlatControlFactory
   /**
    * Creates the form controls of a slat in a louver control.
    *
-   * @param LouverControl $theLouverControl The louver control.
-   * @param array         $theData          An array from the nested arrays as set in LouverControl::setData.
+   * @param LouverControl $louverControl The louver control.
+   * @param array         $data          An array from the nested arrays as set in LouverControl::setData.
    *
    * @return SlatControl
    */
-  abstract public function createRow($theLouverControl, $theData);
+  abstract public function createRow($louverControl, $data);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -89,7 +88,7 @@ abstract class SlatControlFactory
    */
   public function disableFilter()
   {
-    $this->myFilter = false;
+    $this->filter = false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -98,7 +97,7 @@ abstract class SlatControlFactory
    */
   public function enableFilter()
   {
-    $this->myFilter = true;
+    $this->filter = true;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -110,7 +109,7 @@ abstract class SlatControlFactory
   public function getColumnGroup()
   {
     $ret = '';
-    foreach ($this->mySlatJoints as $factory)
+    foreach ($this->slatJoints as $factory)
     {
       $ret .= $factory->getHtmlColumn();
     }
@@ -129,17 +128,17 @@ abstract class SlatControlFactory
   public function getHtmlHeader()
   {
     $ret = '<tr class="header">';
-    foreach ($this->mySlatJoints as $factory)
+    foreach ($this->slatJoints as $factory)
     {
       $ret .= $factory->getHtmlColumnHeader();
     }
     $ret .= '<td class="error"></td>';
     $ret .= '</tr>';
 
-    if ($this->myFilter)
+    if ($this->filter)
     {
       $ret .= '<tr class="filter">';
-      foreach ($this->mySlatJoints as $factory)
+      foreach ($this->slatJoints as $factory)
       {
         $ret .= $factory->getHtmlColumnFilter();
       }
@@ -158,32 +157,32 @@ abstract class SlatControlFactory
    */
   public function getNumberOfColumns()
   {
-    return $this->myNumberOfColumns;
+    return $this->numberOfColumns;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the 0-indexed ordinal of a slat joint in the underlying table of the louver form control.
    *
-   * @param string $theSlatJointName The name of the slat joint.
+   * @param string $slatJointName The name of the slat joint.
    *
    * @return int
    * @throws LogicException
    */
-  public function getOrdinal($theSlatJointName)
+  public function getOrdinal($slatJointName)
   {
     $ordinal = 0;
     $key     = null;
-    foreach ($this->mySlatJoints as $key => $slat_joint)
+    foreach ($this->slatJoints as $key => $slat_joint)
     {
-      if ($key==$theSlatJointName) break;
+      if ($key==$slatJointName) break;
 
       $ordinal += $slat_joint->getColSpan();
     }
 
-    if ($key!=$theSlatJointName)
+    if ($key!=$slatJointName)
     {
-      throw new LogicException("SlatJoint '%s' not found.", $theSlatJointName);
+      throw new LogicException("SlatJoint '%s' not found.", $slatJointName);
     }
 
     return $ordinal;

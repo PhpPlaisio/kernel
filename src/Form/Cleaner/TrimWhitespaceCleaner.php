@@ -14,7 +14,7 @@ class TrimWhitespaceCleaner implements Cleaner
    *
    * @var TrimWhitespaceCleaner
    */
-  static private $ourSingleton;
+  static private $singleton;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -24,27 +24,27 @@ class TrimWhitespaceCleaner implements Cleaner
    */
   public static function get()
   {
-    if (!self::$ourSingleton) self::$ourSingleton = new self();
+    if (!self::$singleton) self::$singleton = new self();
 
-    return self::$ourSingleton;
+    return self::$singleton;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns a submitted value with leading and training whitespace removed.
    *
-   * @param string $theValue The submitted value.
+   * @param string $value The submitted value.
    *
    * @return string|null
    */
-  public function clean($theValue)
+  public function clean($value)
   {
-    if ($theValue==='' || $theValue===null || $theValue===false)
+    if ($value==='' || $value===null || $value===false)
     {
       return null;
     }
 
-    $tmp = trim($theValue, " \t\n\r\0\x0B\xA0");
+    $tmp = trim($value, " \t\n\r\0\x0B\xA0");
     if ($tmp==='') $tmp = null;
 
     return $tmp;

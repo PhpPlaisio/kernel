@@ -15,12 +15,12 @@ class TextControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  public function __construct($theName)
+  public function __construct($name)
   {
-    parent::__construct($theName);
+    parent::__construct($name);
 
     // By default whitespace is pruned from text form controls.
-    $this->myCleaner = PruneWhitespaceCleaner::get();
+    $this->cleaner = PruneWhitespaceCleaner::get();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -30,10 +30,10 @@ class TextControl extends SimpleControl
   public function generate()
   {
     $this->attributes['type'] = 'text';
-    $this->attributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->submitName;
 
-    if ($this->myFormatter) $this->attributes['value'] = $this->myFormatter->format($this->myValue);
-    else                    $this->attributes['value'] = $this->myValue;
+    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
+    else                    $this->attributes['value'] = $this->value;
 
     if (isset($this->attributes['maxlength']))
     {
@@ -47,11 +47,11 @@ class TextControl extends SimpleControl
       }
     }
 
-    $ret = $this->myPrefix;
+    $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -60,22 +60,22 @@ class TextControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value and cleaned (if required).
-    $new_value = (isset($theSubmittedValue[$submit_name])) ? $theSubmittedValue[$submit_name] : null;
-    if ($this->myCleaner) $new_value = $this->myCleaner->clean($new_value);
+    $new_value = (isset($submittedValue[$submit_name])) ? $submittedValue[$submit_name] : null;
+    if ($this->cleaner) $new_value = $this->cleaner->clean($new_value);
 
-    if ((string)$this->myValue!==(string)$new_value)
+    if ((string)$this->value!==(string)$new_value)
     {
-      $theChangedInputs[$this->myName] = $this;
-      $this->myValue                   = $new_value;
+      $changedInputs[$this->name] = $this;
+      $this->value                = $new_value;
     }
 
     // The user can enter any text in a input:text box. So, any value is white listed.
-    $theWhiteListValue[$this->myName] = $new_value;
+    $whiteListValue[$this->name] = $new_value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

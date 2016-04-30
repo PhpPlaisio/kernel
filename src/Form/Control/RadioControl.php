@@ -21,10 +21,10 @@ class RadioControl extends SimpleControl
   public function generate()
   {
     $this->attributes['type'] = 'radio';
-    $this->attributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->submitName;
 
     // A radio button is checked if and only if its value equals to the value of attribute value.
-    if (isset($this->attributes['value']) && ((string)$this->myValue===(string)$this->attributes['value']))
+    if (isset($this->attributes['value']) && ((string)$this->value===(string)$this->attributes['value']))
     {
       $this->attributes['checked'] = true;
     }
@@ -33,11 +33,11 @@ class RadioControl extends SimpleControl
       unset($this->attributes['checked']);
     }
 
-    $ret = $this->myPrefix;
+    $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -46,47 +46,47 @@ class RadioControl extends SimpleControl
   /**
    * Sets the attribute [value](http://www.w3schools.com/tags/att_input_value.asp).
    *
-   * @param mixed $theValue The attribute value.
+   * @param mixed $value The attribute value.
    */
-  public function setAttrValue($theValue)
+  public function setAttrValue($value)
   {
-    $this->attributes['value'] = $theValue;
+    $this->attributes['value'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
-    $new_value   = (isset($theSubmittedValue[$submit_name])) ? (string)$theSubmittedValue[$submit_name] : null;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $new_value   = (isset($submittedValue[$submit_name])) ? (string)$submittedValue[$submit_name] : null;
 
     if (isset($this->attributes['value']) && $new_value===(string)$this->attributes['value'])
     {
       if (empty($this->attributes['checked']))
       {
-        $theChangedInputs[$this->myName] = $this;
+        $changedInputs[$this->name] = $this;
       }
-      $this->attributes['checked']      = true;
-      $theWhiteListValue[$this->myName] = $this->attributes['value'];
-      $this->myValue                    = $this->attributes['value'];
+      $this->attributes['checked'] = true;
+      $whiteListValue[$this->name] = $this->attributes['value'];
+      $this->value                 = $this->attributes['value'];
     }
     else
     {
       if (!empty($this->attributes['checked']))
       {
-        $theChangedInputs[$this->myName] = $this;
+        $changedInputs[$this->name] = $this;
       }
       $this->attributes['checked'] = false;
-      $this->myValue               = null;
+      $this->value                 = null;
 
       // If the white listed value is not set by a radio button with the same name as this radio button, set the white
       // listed value of this radio button (and other radio buttons with the same name) to null. If another radio button
       // with the same name is checked the white listed value will be overwritten.
-      if (!isset($theWhiteListValue[$this->myName]))
+      if (!isset($whiteListValue[$this->name]))
       {
-        $theWhiteListValue[$this->myName] = null;
+        $whiteListValue[$this->name] = null;
       }
     }
   }

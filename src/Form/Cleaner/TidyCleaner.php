@@ -16,7 +16,7 @@ class TidyCleaner implements Cleaner
    *
    * @var TidyCleaner
    */
-  static private $ourSingleton;
+  static private $singleton;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -26,24 +26,24 @@ class TidyCleaner implements Cleaner
    */
   public static function get()
   {
-    if (!self::$ourSingleton) self::$ourSingleton = new self();
+    if (!self::$singleton) self::$singleton = new self();
 
-    return self::$ourSingleton;
+    return self::$singleton;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns a HTML snippet cleaned by [HTML Tidy](http://www.html-tidy.org/).
    *
-   * @param string $theValue The submitted HTML snippet.
+   * @param string $value The submitted HTML snippet.
    *
    * @return string|null
    */
-  public function clean($theValue)
+  public function clean($value)
   {
     // First prune whitespace.
     $cleaner = PruneWhitespaceCleaner::get();
-    $value   = $cleaner->clean($theValue);
+    $value   = $cleaner->clean($value);
 
     if ($value==='' || $value===null || $value===false)
     {

@@ -17,9 +17,9 @@ class FunctionalityInsertTableAction extends InsertItemTableAction
    */
   public function __construct()
   {
-    $this->myUrl = FunctionalityInsertPage::getUrl();
+    $this->url = FunctionalityInsertPage::getUrl();
 
-    $this->myTitle = 'Create functionally';
+    $this->title = 'Create functionally';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ class SlatControl extends ComplexControl
   /**
    * @var Control;
    */
-  private $myDeleteControl;
+  private $deleteControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -26,7 +26,7 @@ class SlatControl extends ComplexControl
     $ret = Html::generateTag('tr', $this->attributes);
 
     // Create table cells.
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
       $ret .= $control->getHtmlTableCell();
     }
@@ -41,9 +41,9 @@ class SlatControl extends ComplexControl
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function setDeleteControl($theControl)
+  public function setDeleteControl($control)
   {
-    $this->myDeleteControl = $theControl;
+    $this->deleteControl = $control;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -51,24 +51,24 @@ class SlatControl extends ComplexControl
    * Executes a validators on the child form controls of this form complex control. If  and only if all child form
    * controls are valid the validators of this complex control are executed.
    *
-   * @param array $theInvalidFormControls A nested array of invalid form controls.
+   * @param array $invalidFormControls A nested array of invalid form controls.
    *
    * @return bool True if and only if all form controls are valid.
    */
-  public function validateBase(&$theInvalidFormControls)
+  public function validateBase(&$invalidFormControls)
   {
     $valid = true;
 
-    if ($this->myDeleteControl)
+    if ($this->deleteControl)
     {
-      if (!$this->myDeleteControl->validateBase($theInvalidFormControls))
+      if (!$this->deleteControl->validateBase($invalidFormControls))
       {
-        $this->myInvalidControls[] = $this->myDeleteControl;
-        $valid                     = false;
+        $this->invalidControls[] = $this->deleteControl;
+        $valid                   = false;
       }
       else
       {
-        if ($this->myDeleteControl->getSubmittedValue())
+        if ($this->deleteControl->getSubmittedValue())
         {
           return $valid;
         }
@@ -76,14 +76,14 @@ class SlatControl extends ComplexControl
     }
 
     // First, validate all child form controls.
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
-      if ($control!==$this->myDeleteControl)
+      if ($control!==$this->deleteControl)
       {
-        if (!$control->validateBase($theInvalidFormControls))
+        if (!$control->validateBase($invalidFormControls))
         {
-          $this->myInvalidControls[] = $control;
-          $valid                     = false;
+          $this->invalidControls[] = $control;
+          $valid                   = false;
         }
       }
     }
@@ -91,12 +91,12 @@ class SlatControl extends ComplexControl
     if ($valid)
     {
       // All the child form controls are valid. Validate this complex form control.
-      foreach ($this->myValidators as $validator)
+      foreach ($this->validators as $validator)
       {
         $valid = $validator->validate($this);
         if ($valid!==true)
         {
-          $theInvalidFormControls[] = $this;
+          $invalidFormControls[] = $this;
           break;
         }
       }

@@ -21,20 +21,20 @@ class SpecificPageInsertPage extends CompanyPage
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL of this page.
    *
-   * @param int $theCmpId The ID of the target company.
+   * @param int $cmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($theCmpId)
+  public static function getUrl($cmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_INSERT, 'pag');
-    $url .= self::putCgiVar('cmp', $theCmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
 
     return $url;
   }
@@ -45,9 +45,9 @@ class SpecificPageInsertPage extends CompanyPage
    */
   protected function databaseAction()
   {
-    $values = $this->myForm->getValues();
+    $values = $this->form->getValues();
 
-    Abc::$DL->companySpecificPageInsert($this->myActCmpId, $values['prt_pag_id'], $values['pag_class_child']);
+    Abc::$DL->companySpecificPageInsert($this->actCmpId, $values['prt_pag_id'], $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -66,23 +66,23 @@ class SpecificPageInsertPage extends CompanyPage
    */
   private function createForm()
   {
-    $pages = Abc::$DL->systemPageGetAll($this->myLanId);
+    $pages = Abc::$DL->systemPageGetAll($this->lanId);
 
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Input for parent class.
     $input = new SelectControl('prt_pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
-    $this->myForm->addFormControl($input, 'Parent Class');
+    $this->form->addFormControl($input, 'Parent Class');
 
     // Input for company specific page.
     $input = new TextControl('pag_class_child');
     $input->setAttrMax(C::LEN_PAG_CLASS);
-    $this->myForm->addFormControl($input, 'Child Class');
+    $this->form->addFormControl($input, 'Child Class');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton(C::WRD_ID_BUTTON_INSERT, 'handleForm');
+    $this->form->addSubmitButton(C::WRD_ID_BUTTON_INSERT, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ class SpecificPageInsertPage extends CompanyPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -99,7 +99,7 @@ class SpecificPageInsertPage extends CompanyPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -111,7 +111,7 @@ class SpecificPageInsertPage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->myActCmpId));
+    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->actCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

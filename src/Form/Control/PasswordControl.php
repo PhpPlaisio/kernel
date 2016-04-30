@@ -15,12 +15,12 @@ class PasswordControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  public function __construct($theName)
+  public function __construct($name)
   {
-    parent::__construct($theName);
+    parent::__construct($name);
 
     // By default whitespace is trimmed from password form controls.
-    $this->myCleaner = PruneWhitespaceCleaner::get();
+    $this->cleaner = PruneWhitespaceCleaner::get();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -32,8 +32,8 @@ class PasswordControl extends SimpleControl
   public function generate()
   {
     $this->attributes['type']  = 'password';
-    $this->attributes['name']  = $this->mySubmitName;
-    $this->attributes['value'] = $this->myValue;
+    $this->attributes['name']  = $this->submitName;
+    $this->attributes['value'] = $this->value;
 
     if (isset($this->attributes['maxlength']))
     {
@@ -47,11 +47,11 @@ class PasswordControl extends SimpleControl
       }
     }
 
-    $ret = $this->myPrefix;
+    $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -60,28 +60,28 @@ class PasswordControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value and cleaned (if required).
-    if ($this->myCleaner)
+    if ($this->cleaner)
     {
-      $new_value = $this->myCleaner->clean($theSubmittedValue[$submit_name]);
+      $new_value = $this->cleaner->clean($submittedValue[$submit_name]);
     }
     else
     {
-      $new_value = $theSubmittedValue[$submit_name];
+      $new_value = $submittedValue[$submit_name];
     }
 
-    if ((string)$this->myValue!==(string)$new_value)
+    if ((string)$this->value!==(string)$new_value)
     {
-      $theChangedInputs[$this->myName] = $this;
-      $this->myValue                   = $new_value;
+      $changedInputs[$this->name] = $this;
+      $this->value                = $new_value;
     }
 
     // The user can enter any text in a input:password box. So, any value is white listed.
-    $theWhiteListValue[$this->myName] = $new_value;
+    $whiteListValue[$this->name] = $new_value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

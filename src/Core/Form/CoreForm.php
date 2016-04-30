@@ -24,51 +24,51 @@ class CoreForm extends Form
    *
    * @var int
    */
-  public static $ourMaxTextSize = 80;
+  public static $maxTextSize = 80;
 
   /**
    * FieldSet for all form control elements not of type "hidden".
    *
    * @var CoreFieldSet
    */
-  protected $myVisibleFieldSet;
+  protected $visibleFieldSet;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function __construct($theName = '', $theCsrfCheckFlag = true)
+  public function __construct($name = '', $csrfCheckFlag = true)
   {
-    parent::__construct($theName, $theCsrfCheckFlag);
+    parent::__construct($name, $csrfCheckFlag);
 
     $this->attributes['class']        = 'input_table';
     $this->attributes['autocomplete'] = false;
 
-    $this->myVisibleFieldSet = $this->addFieldSet(new CoreFieldSet(''));
+    $this->visibleFieldSet = $this->addFieldSet(new CoreFieldSet(''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a form control to thi form.
    *
-   * @param Control         $theControl       The from control
-   * @param int|string|null $theWrdId         Depending on the type:
-   *                                          <ul>
-   *                                          <li>int:    The wrd_id of the legend of the form control.
-   *                                          <li>string: The legend of the form control.
-   *                                          <li>null:   The form control has no legend.
-   *                                          </ul>
-   * @param bool            $theMandatoryFlag If true the form control is mandatory.
+   * @param Control         $control   The from control
+   * @param int|string|null $wrdId     Depending on the type:
+   *                                   <ul>
+   *                                   <li>int:    The wrd_id of the legend of the form control.
+   *                                   <li>string: The legend of the form control.
+   *                                   <li>null:   The form control has no legend.
+   *                                   </ul>
+   * @param bool            $mandatory If true the form control is mandatory.
    */
-  public function addFormControl($theControl, $theWrdId = null, $theMandatoryFlag = false)
+  public function addFormControl($control, $wrdId = null, $mandatory = false)
   {
     switch (true)
     {
       // Add hidden, constant, and invisible controls to the fieldset for hidden controls.
-      case ($theControl instanceof HiddenControl):
-      case ($theControl instanceof ConstantControl):
-      case ($theControl instanceof InvisibleControl):
-        $this->myHiddenFieldSet->addFormControl($theControl);
+      case ($control instanceof HiddenControl):
+      case ($control instanceof ConstantControl):
+      case ($control instanceof InvisibleControl):
+        $this->hiddenFieldSet->addFormControl($control);
         break;
 
       // Add all other controls to the visible fieldset.
@@ -76,24 +76,24 @@ class CoreForm extends Form
         switch (true)
         {
           // Set the size of text controls.
-          case ($theControl instanceof TextControl):
-            $max_length = $theControl->getAttribute('maxlength');
-            $size       = (isset($max_length)) ? min($max_length, self::$ourMaxTextSize) : self::$ourMaxTextSize;
-            $theControl->setAttrSize($size);
+          case ($control instanceof TextControl):
+            $max_length = $control->getAttribute('maxlength');
+            $size       = (isset($max_length)) ? min($max_length, self::$maxTextSize) : self::$maxTextSize;
+            $control->setAttrSize($size);
             break;
         }
 
-        $this->myVisibleFieldSet->addFormControl($theControl);
+        $this->visibleFieldSet->addFormControl($control);
 
-        if (isset($theWrdId))
+        if (isset($wrdId))
         {
-          $theControl->setFakeAttribute('_abc_label', (is_int($theWrdId)) ? Babel::getWord($theWrdId) : $theWrdId);
+          $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Babel::getWord($wrdId) : $wrdId);
         }
 
-        if ($theMandatoryFlag)
+        if ($mandatory)
         {
-          $theControl->addValidator(new MandatoryValidator(0));
-          $theControl->setFakeAttribute('_abc_mandatory', true);
+          $control->addValidator(new MandatoryValidator(0));
+          $control->setFakeAttribute('_abc_mandatory', true);
         }
     }
   }
@@ -102,18 +102,18 @@ class CoreForm extends Form
   /**
    * Adds a submit button to this form.
    *
-   * @param int|string $theWrdId  Depending on the type:
+   * @param int|string $wrdId     Depending on the type:
    *                              <ul>
    *                              <li>int:    The ID of the word of the button text.
    *                              <li>string: The text of the button.
    *                              </ul>
-   * @param string     $theMethod The name of method for handling the form submit.
-   * @param string     $theName   The name of the submit button.
+   * @param string     $method    The name of method for handling the form submit.
+   * @param string     $name   The name of the submit button.
    */
-  public function addSubmitButton($theWrdId, $theMethod, $theName = 'submit')
+  public function addSubmitButton($wrdId, $method, $name = 'submit')
   {
-    $control = $this->myVisibleFieldSet->addSubmitButton($theWrdId, $theName);
-    $this->addSubmitHandler($control, $theMethod);
+    $control = $this->visibleFieldSet->addSubmitButton($wrdId, $name);
+    $this->addSubmitHandler($control, $method);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -124,29 +124,29 @@ class CoreForm extends Form
    */
   public function getVisibleFieldSet()
   {
-    return $this->myVisibleFieldSet;
+    return $this->visibleFieldSet;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the title of this form.
    *
-   * @param int $theWrdId The wrd_id of the title.
+   * @param int $wrdId The wrd_id of the title.
    */
-  public function setTitle($theWrdId)
+  public function setTitle($wrdId)
   {
-    $this->myVisibleFieldSet->setTitle(Babel::getWord($theWrdId));
+    $this->visibleFieldSet->setTitle(Babel::getWord($wrdId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the title of this form.
    *
-   * @param string $theTitle The title.
+   * @param string $title The title.
    */
-  public function setTitleText($theTitle)
+  public function setTitleText($title)
   {
-    $this->myVisibleFieldSet->setTitle($theTitle);
+    $this->visibleFieldSet->setTitle($title);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

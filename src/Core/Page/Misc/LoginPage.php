@@ -26,14 +26,14 @@ class LoginPage extends Page
    *
    * @var Form
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * If set the URI to which the user agent must redirected after a successful login.
    *
    * @var string
    */
-  private $myRedirect;
+  private $redirect;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -43,7 +43,7 @@ class LoginPage extends Page
   {
     parent::__construct();
 
-    $this->myRedirect = self::getCgiUrl('redirect');
+    $this->redirect = self::getCgiUrl('redirect');
 
     if (isset($_SERVER['ABC_ENV']) && $_SERVER['ABC_ENV']=='dev')
     {
@@ -55,14 +55,14 @@ class LoginPage extends Page
   /**
    * Returns the relative URL for this page.
    *
-   * @param string|null $theUri A URI to which the user agent must be redirected after a successful login.
+   * @param string|null $uri A URI to which the user agent must be redirected after a successful login.
    *
    * @return string
    */
-  public static function getUrl($theUri = null)
+  public static function getUrl($uri = null)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_MISC_LOGIN, 'pag');
-    $url .= self::putCgiVar('redirect', $theUri);
+    $url .= self::putCgiVar('redirect', $uri);
 
     return $url;
   }
@@ -93,10 +93,10 @@ class LoginPage extends Page
     $this->showPageTrailer();
 
     // Write the HTML code of this page to the file system for (asynchronous) validation.
-    if ($this->myW3cValidate)
+    if ($this->w3cValidate)
     {
       $contents = ob_get_contents();
-      file_put_contents($this->myW3cPathName, $contents);
+      file_put_contents($this->w3cPathName, $contents);
     }
 
     $this->setPageSize(ob_get_length());
@@ -118,40 +118,40 @@ class LoginPage extends Page
   {
     $abc = Abc::getInstance();
 
-    $this->myForm = new CoreForm('', false);
+    $this->form = new CoreForm('', false);
 
     // Input for user name.
     $input = new TextControl('usr_name');
     $input->setAttrMaxLength(C::LEN_USR_NAME);
-    $this->myForm->addFormControl($input, 'Naam', true);
+    $this->form->addFormControl($input, 'Naam', true);
 
     // Input for password.
     $input = new PasswordControl('usr_password');
     $input->setAttrSize(C::LEN_USR_NAME);
     $input->setAttrMaxLength(C::LEN_PASSWORD);
-    $this->myForm->addFormControl($input, 'Wachtwoord', true);
+    $this->form->addFormControl($input, 'Wachtwoord', true);
 
     if ($abc->getDomain())
     {
       // Show domain.
       $input = new SpanControl('dummy');
       $input->setInnerText(strtolower($abc->getDomain()));
-      $this->myForm->addFormControl($input, 'Company');
+      $this->form->addFormControl($input, 'Company');
 
       // Constant for domain.
       $input = new ConstantControl('cmp_abbr');
       $input->setValue($abc->getDomain());
-      $this->myForm->addFormControl($input);
+      $this->form->addFormControl($input);
     }
     else
     {
       // Input for domain.
       $input = new TextControl('cmp_abbr');
       $input->setAttrMaxLength(C::LEN_CMP_ABBR);
-      $this->myForm->addFormControl($input, 'Company', true);
+      $this->form->addFormControl($input, 'Company', true);
     }
 
-    $this->myForm->addSubmitButton(C::WRD_ID_BUTTON_LOGIN, 'handleForm');
+    $this->form->addSubmitButton(C::WRD_ID_BUTTON_LOGIN, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -160,7 +160,7 @@ class LoginPage extends Page
    */
   private function echoForm()
   {
-    echo $this->myForm->generate();
+    echo $this->form->generate();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -169,7 +169,7 @@ class LoginPage extends Page
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -177,7 +177,7 @@ class LoginPage extends Page
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -202,7 +202,7 @@ class LoginPage extends Page
   {
     $abc = Abc::getInstance();
 
-    $values = $this->myForm->getValues();
+    $values = $this->form->getValues();
 
     // Phase 1: Validate the user is allowed to login (except for password validation).
     $response1 = Abc::$DL->sessionLogin1($abc->getSesId(), $values['usr_name'], $values['cmp_abbr']);
@@ -232,7 +232,7 @@ class LoginPage extends Page
       if (Password::passwordNeedsRehash($response1['usr_password_hash']))
       {
         $hash = Password::passwordHash($values['usr_password']);
-        Abc::$DL->userUpdatePasswordHash($this->myCmpId, $this->myUsrId, $hash);
+        Abc::$DL->userUpdatePasswordHash($this->cmpId, $this->usrId, $hash);
       }
 
       $domain_redirect = false;
@@ -253,9 +253,9 @@ class LoginPage extends Page
           setcookie( 'cdr_token1', $tokens['cdr_token1'], false, '/', $parts[1].'.'.$parts[2], true, true );
 
           // Set token to be used in JavaScript.
-          $values    = $this->myForm->getValues();
+          $values    = $this->form->getValues();
           $host_name = mb_strtolower( $values['cmp_abbr'] ).'.'.$parts[1].'.'.$parts[2];
-          $url       = 'https://'.$host_name.DomainRedirectPage::getUrl( $this->myRedirect );
+          $url       = 'https://'.$host_name.DomainRedirectPage::getUrl( $this->redirect );
 
           $this->appendJavaScriptLine( 'PageMiscLogin.ourCdrToken2="'.$tokens['cdr_token2'].'";' ); // xxx escaping
           $this->appendJavaScriptLine( 'PageMiscLogin.ourCdrUrl="'.$url.'";' ); // xxx escaping
@@ -286,7 +286,7 @@ class LoginPage extends Page
                     false);
         }
 
-        HttpHeader::redirectSeeOther(($this->myRedirect) ? $this->myRedirect : '/');
+        HttpHeader::redirectSeeOther(($this->redirect) ? $this->redirect : '/');
       }
 
       return true;
@@ -307,13 +307,13 @@ class LoginPage extends Page
     echo '<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>';
 
     // echo "<title>".SET_Html::txt2Html( Babel::getWord( C::WRD_ID_USER_LOGIN, $this->myLanId ) )."</title>";
-    foreach ($this->myCssSources as $css_source)
+    foreach ($this->cssSources as $css_source)
     {
       echo '<link rel="stylesheet" media="screen" type="text/css" href="', $css_source, '"/>';
     }
-    if ($this->myCss)
+    if ($this->css)
     {
-      echo '<style type="text/css" media="all">', $this->myCss, '</style>';
+      echo '<style type="text/css" media="all">', $this->css, '</style>';
     }
 
     echo '</head><body>';

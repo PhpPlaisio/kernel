@@ -20,21 +20,21 @@ abstract class WordGroupBasePage extends BabelPage
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * The ID of the word group.
    *
    * @var int
    */
-  protected $myWdgId;
+  protected $wdgId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -69,28 +69,28 @@ abstract class WordGroupBasePage extends BabelPage
    */
   private function createForm()
   {
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Show word group ID (update only).
-    if ($this->myWdgId)
+    if ($this->wdgId)
     {
       $input = new SpanControl('wdg_id');
-      $input->setInnerText($this->myWdgId);
-      $this->myForm->addFormControl($input, 'ID');
+      $input->setInnerText($this->wdgId);
+      $this->form->addFormControl($input, 'ID');
     }
 
     // Input for the name of the word group.
     $input = new TextControl('wdg_name');
     $input->setAttrMaxLength(C::LEN_WDG_NAME);
-    $this->myForm->addFormControl($input, 'Name', true);
+    $this->form->addFormControl($input, 'Name', true);
 
     // Input for the label of the word group.
     $input = new TextControl('wdg_label');
     $input->setAttrMaxLength(C::LEN_WRD_LABEL);
-    $this->myForm->addFormControl($input, 'Label');
+    $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ abstract class WordGroupBasePage extends BabelPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -107,7 +107,7 @@ abstract class WordGroupBasePage extends BabelPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -119,7 +119,7 @@ abstract class WordGroupBasePage extends BabelPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
+    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->wdgId, $this->actLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

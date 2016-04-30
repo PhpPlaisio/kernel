@@ -15,7 +15,7 @@ class LinkControl extends Control
   /**
    * @var string The inner HTML code of this hyperlink element.
    */
-  protected $myInnerHtml;
+  protected $innerHtml;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -23,9 +23,9 @@ class LinkControl extends Control
    */
   public function generate()
   {
-    $ret = $this->myPrefix;
-    $ret .= Html::generateElement('a', $this->attributes, $this->myInnerHtml, true);
-    $ret .= $this->myPostfix;
+    $ret = $this->prefix;
+    $ret .= Html::generateElement('a', $this->attributes, $this->innerHtml, true);
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -43,29 +43,29 @@ class LinkControl extends Control
   /**
    * Sets the inner HTML of this hyperlink element.
    *
-   * @param string $theHtmlSnippet The inner HTML. It is the developer's responsibility that it is valid HTML code.
+   * @param string $htmlSnippet The inner HTML. It is the developer's responsibility that it is valid HTML code.
    */
-  public function setInnerHtml($theHtmlSnippet)
+  public function setInnerHtml($htmlSnippet)
   {
-    $this->myInnerHtml = $theHtmlSnippet;
+    $this->innerHtml = $htmlSnippet;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Set the inner HTML of this hyperlink element.
    *
-   * @param string $theText The inner text. Special characters will be converted to HTML entities.
+   * @param string $text The inner text. Special characters will be converted to HTML entities.
    */
-  public function setInnerText($theText)
+  public function setInnerText($text)
   {
-    $this->myInnerHtml = Html::txt2Html($theText);
+    $this->innerHtml = Html::txt2Html($text);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
     // Nothing to do.
   }
@@ -74,11 +74,11 @@ class LinkControl extends Control
   /**
    * Returns always true.
    *
-   * @param array $theInvalidFormControls Not used.
+   * @param array $invalidFormControls Not used.
    *
    * @return bool
    */
-  protected function validateBase(&$theInvalidFormControls)
+  protected function validateBase(&$invalidFormControls)
   {
     return true;
   }

@@ -41,7 +41,7 @@ class DateTimeTableRow
 
     if ($date)
     {
-      // The $theValue is a valid date.
+      // The $value is a valid date.
       $row .= '<td class="date" data-value="';
       $row .= $date->format('Y-m-d');
       $row .= '">';
@@ -50,7 +50,7 @@ class DateTimeTableRow
     }
     else
     {
-      // The $theValue is not a valid datetime.
+      // The $value is not a valid datetime.
       $row .= '<td>';
       $row .= Html::txt2Html($value);
       $row .= '</td>';

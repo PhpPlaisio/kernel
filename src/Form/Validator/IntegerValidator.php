@@ -16,26 +16,26 @@ class IntegerValidator implements Validator
    *
    * @var int|null
    */
-  private $myMaxValue;
+  private $maxValue;
 
   /**
    * The lower bound of the range of valid (integer) values.
    *
    * @var int
    */
-  private $myMinValue;
+  private $minValue;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int|null $theMinValue The minimum required value.
-   * @param int      $theMaxValue The maximum required value.
+   * @param int|null $minValue The minimum required value.
+   * @param int      $maxValue The maximum required value.
    */
-  public function __construct($theMinValue = null, $theMaxValue = PHP_INT_MAX)
+  public function __construct($minValue = null, $maxValue = PHP_INT_MAX)
   {
-    $this->myMinValue = (isset($theMinValue)) ? $theMinValue : -PHP_INT_MAX;
-    $this->myMaxValue = $theMaxValue;
+    $this->minValue = (isset($minValue)) ? $minValue : -PHP_INT_MAX;
+    $this->maxValue = $maxValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -45,16 +45,16 @@ class IntegerValidator implements Validator
    * Note:
    * * Empty values are considered valid.
    *
-   * @param Control $theFormControl The form control.
+   * @param Control $control The form control.
    *
    * @return bool
    */
-  public function validate($theFormControl)
+  public function validate($control)
   {
-    $options = ['options' => ['min_range' => $this->myMinValue,
-                              'max_range' => $this->myMaxValue]];
+    $options = ['options' => ['min_range' => $this->minValue,
+                              'max_range' => $this->maxValue]];
 
-    $value = $theFormControl->getSubmittedValue();
+    $value = $control->getSubmittedValue();
 
     // An empty value is valid.
     if ($value==='' || $value===null || $value===false)

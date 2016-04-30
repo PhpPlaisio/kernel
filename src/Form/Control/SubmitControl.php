@@ -10,24 +10,24 @@ class SubmitControl extends PushMeControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param string $theName
+   * @param string $name
    */
-  public function __construct($theName)
+  public function __construct($name)
   {
-    parent::__construct($theName);
+    parent::__construct($name);
 
-    $this->myButtonType = 'submit';
+    $this->buttonType = 'submit';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [formaction](http://www.w3schools.com/tags/att_input_formaction.asp).
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrFormAction($theValue)
+  public function setAttrFormAction($value)
   {
-    $this->attributes['formaction'] = $theValue;
+    $this->attributes['formaction'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -37,11 +37,11 @@ class SubmitControl extends PushMeControl
    * * multipart/form-data
    * * text/plain
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrFormEncType($theValue)
+  public function setAttrFormEncType($value)
   {
-    $this->attributes['formenctype'] = $theValue;
+    $this->attributes['formenctype'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -50,22 +50,22 @@ class SubmitControl extends PushMeControl
    * * post (default)
    * * get
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrFormMethod($theValue)
+  public function setAttrFormMethod($value)
   {
-    $this->attributes['formmethod'] = $theValue;
+    $this->attributes['formmethod'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [formtarget](http://www.w3schools.com/tags/att_input_formtarget.asp).
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrFormTarget($theValue)
+  public function setAttrFormTarget($value)
   {
-    $this->attributes['formtarget'] = $theValue;
+    $this->attributes['formtarget'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

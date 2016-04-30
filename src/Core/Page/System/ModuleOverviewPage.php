@@ -35,7 +35,7 @@ class ModuleOverviewPage extends CorePage
    */
   protected function echoTabContent()
   {
-    $modules = Abc::$DL->systemModuleGetAll($this->myLanId);
+    $modules = Abc::$DL->systemModuleGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
 

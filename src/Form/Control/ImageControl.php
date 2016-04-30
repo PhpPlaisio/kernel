@@ -20,13 +20,13 @@ class ImageControl extends SimpleControl
   public function generate()
   {
     $this->attributes['type'] = 'image';
-    $this->attributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->submitName;
 
-    $ret = $this->myPrefix;
+    $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -35,22 +35,22 @@ class ImageControl extends SimpleControl
   /**
    * Sets the attribute [alt](http://www.w3schools.com/tags/att_input_alt.asp).
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttr($theValue)
+  public function setAttr($value)
   {
-    $this->attributes['alt'] = $theValue;
+    $this->attributes['alt'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [formaction](http://www.w3schools.com/tags/att_input_formaction.asp).
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrFormAction($theValue)
+  public function setAttrFormAction($value)
   {
-    $this->attributes['formaction'] = $theValue;
+    $this->attributes['formaction'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -60,11 +60,11 @@ class ImageControl extends SimpleControl
    * * multipart/form-data
    * * text/plain
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrFormEncType($theValue)
+  public function setAttrFormEncType($value)
   {
-    $this->attributes['formenctype'] = $theValue;
+    $this->attributes['formenctype'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -73,62 +73,62 @@ class ImageControl extends SimpleControl
    * * post (default)
    * * get
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrFormMethod($theValue)
+  public function setAttrFormMethod($value)
   {
-    $this->attributes['formmethod'] = $theValue;
+    $this->attributes['formmethod'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [formtarget](http://www.w3schools.com/tags/att_input_formtarget.asp).
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrFormTarget($theValue)
+  public function setAttrFormTarget($value)
   {
-    $this->attributes['formtarget'] = $theValue;
+    $this->attributes['formtarget'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [height](http://www.w3schools.com/tags/att_input_height.asp).
    *
-   * @param int $theValue The attribute value.
+   * @param int $value The attribute value.
    */
-  public function setAttrHeight($theValue)
+  public function setAttrHeight($value)
   {
-    $this->attributes['height'] = $theValue;
+    $this->attributes['height'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [src](http://www.w3schools.com/tags/att_input_src.asp).
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrSrc($theValue)
+  public function setAttrSrc($value)
   {
-    $this->attributes['src'] = $theValue;
+    $this->attributes['src'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [width](http://www.w3schools.com/tags/att_input_width.asp).
    *
-   * @param int $theValue The attribute value.
+   * @param int $value The attribute value.
    */
-  public function setAttrWidth($theValue)
+  public function setAttrWidth($value)
   {
-    $this->attributes['width'] = $theValue;
+    $this->attributes['width'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param string|bool $theValue .
+   * @param string|bool $value .
    */
-  public function setValue($theValue)
+  public function setValue($value)
   {
     // Nothing to do.
   }
@@ -137,7 +137,7 @@ class ImageControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
     throw new LogicException('Not implemented.');
   }

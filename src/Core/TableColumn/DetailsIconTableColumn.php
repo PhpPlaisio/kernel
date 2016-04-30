@@ -16,8 +16,8 @@ abstract class DetailsIconTableColumn extends IconTableColumn
   {
     parent::__construct();
 
-    $this->myIconUrl  = ICON_SMALL_DETAILS;
-    $this->myAltValue = 'details';
+    $this->iconUrl  = ICON_SMALL_DETAILS;
+    $this->altValue = 'details';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

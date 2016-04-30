@@ -15,12 +15,12 @@ class TextAreaControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  public function __construct($theName)
+  public function __construct($name)
   {
-    parent::__construct($theName);
+    parent::__construct($name);
 
     // By default whitespace is trimmed from textarea form controls.
-    $this->myCleaner = TrimWhitespaceCleaner::get();
+    $this->cleaner = TrimWhitespaceCleaner::get();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -29,11 +29,11 @@ class TextAreaControl extends SimpleControl
    */
   public function generate()
   {
-    $this->attributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->submitName;
 
-    $html = $this->myPrefix;
-    $html .= Html::generateElement('textarea', $this->attributes, $this->myValue);
-    $html .= $this->myPostfix;
+    $html = $this->prefix;
+    $html .= Html::generateElement('textarea', $this->attributes, $this->value);
+    $html .= $this->postfix;
 
     return $html;
   }
@@ -42,22 +42,22 @@ class TextAreaControl extends SimpleControl
   /**
    * Sets the attribute [cols](http://www.w3schools.com/tags/att_textarea_cols.asp).
    *
-   * @param int $theValue The attribute value.
+   * @param int $value The attribute value.
    */
-  public function setAttrCols($theValue)
+  public function setAttrCols($value)
   {
-    $this->attributes['cols'] = $theValue;
+    $this->attributes['cols'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [rows](http://www.w3schools.com/tags/att_textarea_rows.asp).
    *
-   * @param int $theValue The attribute value.
+   * @param int $value The attribute value.
    */
-  public function setAttrRows($theValue)
+  public function setAttrRows($value)
   {
-    $this->attributes['rows'] = $theValue;
+    $this->attributes['rows'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -66,38 +66,38 @@ class TextAreaControl extends SimpleControl
    * * soft
    * * hard
    *
-   * @param int $theValue The attribute value.
+   * @param int $value The attribute value.
    */
-  public function setAttrWrap($theValue)
+  public function setAttrWrap($value)
   {
-    $this->attributes['wrap'] = $theValue;
+    $this->attributes['wrap'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value and cleaned (if required).
-    if ($this->myCleaner)
+    if ($this->cleaner)
     {
-      $new_value = $this->myCleaner->clean($theSubmittedValue[$submit_name]);
+      $new_value = $this->cleaner->clean($submittedValue[$submit_name]);
     }
     else
     {
-      $new_value = $theSubmittedValue[$submit_name];
+      $new_value = $submittedValue[$submit_name];
     }
 
-    if ((string)$this->myValue!==(string)$new_value)
+    if ((string)$this->value!==(string)$new_value)
     {
-      $theChangedInputs[$this->myName] = $this;
-      $this->myValue                   = $new_value;
+      $changedInputs[$this->name] = $this;
+      $this->value                = $new_value;
     }
 
-    $theWhiteListValue[$this->myName] = $new_value;
+    $whiteListValue[$this->name] = $new_value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

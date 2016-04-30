@@ -15,13 +15,13 @@ class RoleInsertTableAction extends InsertItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $theActCmpId The ID od the target company.
+   * @param int $actCmpId The ID od the target company.
    */
-  public function __construct($theActCmpId)
+  public function __construct($actCmpId)
   {
-    $this->myUrl = RoleInsertPage::getUrl($theActCmpId);
+    $this->url = RoleInsertPage::getUrl($actCmpId);
 
-    $this->myTitle = 'Create role';
+    $this->title = 'Create role';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

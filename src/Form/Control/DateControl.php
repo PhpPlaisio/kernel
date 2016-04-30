@@ -18,22 +18,22 @@ class DateControl extends TextControl
    *
    * @var DateCleaner
    */
-  protected $myCleaner;
+  protected $cleaner;
 
   /**
    * The formatter to format the value (from machine format) to the displayed value.
    *
    * @var DateFormatter
    */
-  protected $myFormatter;
+  protected $formatter;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function __construct($theName)
+  public function __construct($name)
   {
-    parent::__construct($theName);
+    parent::__construct($name);
 
     $this->setAttrSize(10);
     $this->setAttrMaxLength(10);
@@ -49,12 +49,12 @@ class DateControl extends TextControl
    * Sets the open date. An empty submitted value will be replaced with the open date and an open date will be shown as
    * an empty field.
    *
-   * @param string $theOpenDate The open date in YYYY-MM-DD format.
+   * @param string $openDate The open date in YYYY-MM-DD format.
    */
-  public function setOpenDate($theOpenDate)
+  public function setOpenDate($openDate)
   {
-    $this->myCleaner->setOpenDate($theOpenDate);
-    $this->myFormatter->setOpenDate($theOpenDate);
+    $this->cleaner->setOpenDate($openDate);
+    $this->formatter->setOpenDate($openDate);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

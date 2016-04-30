@@ -12,18 +12,18 @@ class Babel
   /**
    * Returns the text of a word.
    *
-   * @param int $theWrdId The ID of the word.
+   * @param int $wrdId The ID of the word.
    *
    * @return string
    */
-  public static function getWord($theWrdId)
+  public static function getWord($wrdId)
   {
     if (!self::$ourLanId)
     {
       self::$ourLanId = Abc::getInstance()->getLanId();
     }
 
-    return Abc::$DL->wordGetWord($theWrdId, self::$ourLanId);
+    return Abc::$DL->wordGetWord($wrdId, self::$ourLanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

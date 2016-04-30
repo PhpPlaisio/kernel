@@ -16,7 +16,7 @@ class BlobDownload
    *
    * @var string
    */
-  protected $myDate;
+  protected $date;
 
   /**
    * The content disposition. One of the following possibilities:
@@ -27,45 +27,45 @@ class BlobDownload
    *
    * @var string
    */
-  protected $myDisposition = 'inline';
+  protected $disposition = 'inline';
 
   /**
    * The filename (as visible to the end user) of the file to be downloaded.
    *
    * @var string
    */
-  protected $myFileName;
+  protected $fileName;
 
   /**
    * The content type of the file to be downloaded.
    *
    * @var string
    */
-  protected $myMimeType;
+  protected $mimeType;
 
   /**
    * If set the file is static and can be cached by the browser of the end user.
    *
    * @var bool
    */
-  protected $myStatic = false;
+  protected $static = false;
 
   /**
    * The length in the bytes of the file to be downloaded.
    *
    * @var int
    */
-  private $myContentLength;
+  private $contentLength;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the last modification date of the file.
    *
-   * @param string $theDate The last modification date.
+   * @param string $date The last modification date.
    */
-  public function setDate($theDate)
+  public function setDate($date)
   {
-    $this->myDate = $theDate;
+    $this->date = $date;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -77,33 +77,33 @@ class BlobDownload
    * </ul>
    * By default the content disposition is 'inline'.
    *
-   * @param string $theDisposition The content disposition.
+   * @param string $disposition The content disposition.
    */
-  public function setDisposition($theDisposition)
+  public function setDisposition($disposition)
   {
-    $this->myDisposition = $theDisposition;
+    $this->disposition = $disposition;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the file name as visible to the end user.
    *
-   * @param string $theFileName The filename.
+   * @param string $filename The filename.
    */
-  public function setFileName($theFileName)
+  public function setFileName($filename)
   {
-    $this->myFileName = $theFileName;
+    $this->fileName = $filename;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the content type of of the file the be downloaded.
    *
-   * @param string $theMimeType The content type.
+   * @param string $mimeType The content type.
    */
-  public function setMimeType($theMimeType)
+  public function setMimeType($mimeType)
   {
-    $this->myMimeType = $theMimeType;
+    $this->mimeType = $mimeType;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -111,39 +111,39 @@ class BlobDownload
    * Sets whether the content is static or not. I.e. subsequents requests yield the same response. If the content is
    * static it can be cached by the user agent. By default he content is regarded none static.
    *
-   * @param mixed $theStaticFlag If evaluates to none empty the content is static.
+   * @param mixed $staticFlag If evaluates to none empty the content is static.
    */
-  public function setStatic($theStaticFlag = true)
+  public function setStatic($staticFlag = true)
   {
-    $this->myStatic = $theStaticFlag;
+    $this->static = $staticFlag;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Streams the content of a file to the user agent.
    *
-   * @param string $theFileName The name of the file with the data.
+   * @param string $filename The name of the file with the data.
    */
-  public function streamFile($theFileName)
+  public function streamFile($filename)
   {
-    $this->setContentLength(filesize($theFileName));
+    $this->setContentLength(filesize($filename));
 
     $this->headers();
 
     ob_clean();
     flush();
-    readfile($theFileName);
+    readfile($filename);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Streams the content of a string to the user agent.
    *
-   * @param string $theString
+   * @param string $string
    */
-  public function streamString($theString)
+  public function streamString($string)
   {
-    $this->setContentLength(strlen($theString));
+    $this->setContentLength(strlen($string));
 
     $this->headers();
 
@@ -151,7 +151,7 @@ class BlobDownload
     flush();
     session_cache_limiter('');
 
-    echo $theString;
+    echo $string;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ class BlobDownload
   {
     header('Content-Transfer-Encoding: binary');
 
-    if ($this->myStatic)
+    if ($this->static)
     {
       header('Expires: 0');
       header('Pragma: cache');
@@ -175,36 +175,36 @@ class BlobDownload
       header('Pragma: no-cache, must-revalidate, post-check=0, pre-check=0');
     }
 
-    if ($this->myContentLength)
+    if ($this->contentLength)
     {
-      header('Content-Length: '.$this->myContentLength);
+      header('Content-Length: '.$this->contentLength);
     }
 
-    if ($this->myMimeType)
+    if ($this->mimeType)
     {
-      header('Content-Type: '.$this->myMimeType);
+      header('Content-Type: '.$this->mimeType);
     }
 
-    if ($this->myDate)
+    if ($this->date)
     {
-      $date = date(DATE_RFC2822, strtotime($this->myDate));
+      $date = date(DATE_RFC2822, strtotime($this->date));
       header('Last-Modified: '.$date);
     }
 
-    switch ($this->myDisposition)
+    switch ($this->disposition)
     {
       case 'inline':
-        if ($this->myFileName) header("Content-Disposition: inline; filename*=UTF-8''".rawurlencode($this->myFileName));
+        if ($this->fileName) header("Content-Disposition: inline; filename*=UTF-8''".rawurlencode($this->fileName));
         else                   header('Content-Disposition: inline');
         break;
 
       case 'attachment':
-        if ($this->myFileName) header("Content-Disposition: attachment; filename*=UTF-8''".rawurlencode($this->myFileName));
+        if ($this->fileName) header("Content-Disposition: attachment; filename*=UTF-8''".rawurlencode($this->fileName));
         else                   header('Content-Disposition: attachment');
         break;
 
       default:
-        throw new FallenException('disposition', $this->myDisposition);
+        throw new FallenException('disposition', $this->disposition);
     }
   }
 
@@ -212,11 +212,11 @@ class BlobDownload
   /**
    * Sets the content length of the file.
    *
-   * @param $theContentLength
+   * @param $contentLength
    */
-  private function setContentLength($theContentLength)
+  private function setContentLength($contentLength)
   {
-    $this->myContentLength = $theContentLength;
+    $this->contentLength = $contentLength;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -26,28 +26,28 @@ abstract class WordBasePage extends BabelPage
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm.
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * The ID of word group of the word (only used for creating a new word).
    *
    * @var int
    */
-  protected $myWdgId;
+  protected $wdgId;
 
   /**
    * The ID of the word.
    *
    * @var int
    */
-  protected $myWrdId;
+  protected $wrdId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -84,42 +84,42 @@ abstract class WordBasePage extends BabelPage
    */
   private function createForm()
   {
-    $ref_language = Abc::$DL->LanguageGetName($this->myRefLanId, $this->myRefLanId);
+    $ref_language = Abc::$DL->LanguageGetName($this->refLanId, $this->refLanId);
 
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Create from control for word group name.
-    $word_groups = Abc::$DL->wordGroupGetAll($this->myRefLanId);
+    $word_groups = Abc::$DL->wordGroupGetAll($this->refLanId);
     $input       = new SelectControl('wdg_id');
     $input->setOptions($word_groups, 'wdg_id', 'wdg_name');
-    $input->setValue($this->myWdgId);
-    $this->myForm->addFormControl($input, 'Word Group', true);
+    $input->setValue($this->wdgId);
+    $this->form->addFormControl($input, 'Word Group', true);
 
     // Create form control for ID.
-    if ($this->myWrdId)
+    if ($this->wrdId)
     {
       $input = new SpanControl('wrd_id');
-      $input->setInnerText($this->myWrdId);
-      $this->myForm->addFormControl($input, 'ID');
+      $input->setInnerText($this->wrdId);
+      $this->form->addFormControl($input, 'ID');
     }
 
     // Create form control for label.
     $input = new TextControl('wrd_label');
     $input->setAttrMaxLength(C::LEN_WRD_LABEL);
-    $this->myForm->addFormControl($input, 'Label');
+    $this->form->addFormControl($input, 'Label');
 
     // Input for the actual word.
     $input = new TextControl('wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $this->myForm->addFormControl($input, Html::txt2Html($ref_language), true);
+    $this->form->addFormControl($input, Html::txt2Html($ref_language), true);
 
     // Create form control for comment.
     $input = new TextControl('wrd_comment');
     $input->setAttrMaxLength(C::LEN_WRD_COMMENT);
-    $this->myForm->addFormControl($input, 'Remark');
+    $this->form->addFormControl($input, 'Remark');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ abstract class WordBasePage extends BabelPage
    */
   private function echoWordGroupInfo()
   {
-    $group = Abc::$DL->wordGroupGetDetails($this->myWdgId);
+    $group = Abc::$DL->wordGroupGetDetails($this->wdgId);
 
     $table = new CoreDetailTable();
 
@@ -147,7 +147,7 @@ abstract class WordBasePage extends BabelPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -155,7 +155,7 @@ abstract class WordBasePage extends BabelPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -167,7 +167,7 @@ abstract class WordBasePage extends BabelPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
+    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->wdgId, $this->actLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

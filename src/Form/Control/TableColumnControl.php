@@ -16,12 +16,12 @@ class TableColumnControl extends Control
   /**
    * @var array
    */
-  protected $myRow;
+  protected $row;
 
   /**
    * @var TableColumn
    */
-  protected $myTableColumn;
+  protected $tableColumn;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -38,7 +38,7 @@ class TableColumnControl extends Control
    */
   public function getHtmlTableCell()
   {
-    return $this->myTableColumn->getHtmlCell($this->myRow);
+    return $this->tableColumn->getHtmlCell($this->row);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -56,40 +56,40 @@ class TableColumnControl extends Control
   /**
    * Sets the table column of this form control.
    *
-   * @param TableColumn $theTableColumn
+   * @param TableColumn $tableColumn
    */
-  public function setTableColumn($theTableColumn)
+  public function setTableColumn($tableColumn)
   {
-    $this->myTableColumn = $theTableColumn;
+    $this->tableColumn = $tableColumn;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the data for to be used by the table column for generating the table cell.
    *
-   * @param array $theRow
+   * @param array $row
    */
-  public function setValue($theRow)
+  public function setValue($row)
   {
-    $this->myRow = $theRow;
+    $this->row = $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
     // Nothing to do.
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param array $theInvalidFormControls
+   * @param array $invalidFormControls
    *
    * @return bool
    */
-  protected function validateBase(&$theInvalidFormControls)
+  protected function validateBase(&$invalidFormControls)
   {
     return true;
   }

@@ -16,56 +16,56 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @var Cleaner
    */
-  protected $myCleaner;
+  protected $cleaner;
 
   /**
    * The child form controls of this form control.
    *
    * @var ComplexControl[]|Control[]
    */
-  protected $myControls = [];
+  protected $controls = [];
 
   /**
    * The child form controls of this form control with invalid submitted values.
    *
    * @var ComplexControl[]|Control[]
    */
-  protected $myInvalidControls;
+  protected $invalidControls;
 
   /**
    * The value of this form control, i.e. a nested array of the values of the child form controls.
    *
    * @var mixed
    */
-  protected $myValue;
+  protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a form control to this complex form control.
    *
-   * @param Control $theControl The from control added.
+   * @param Control $control The from control added.
    *
    * @return Control The added form control.
    */
-  public function addFormControl($theControl)
+  public function addFormControl($control)
   {
-    $this->myControls[] = $theControl;
+    $this->controls[] = $control;
 
-    return $theControl;
+    return $control;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function findFormControlByName($theName)
+  public function findFormControlByName($name)
   {
     // Name must be string. Convert name to the string.
-    $name = (string)$theName;
+    $name = (string)$name;
 
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
-      if ($control->myName===$name) return $control;
+      if ($control->name===$name) return $control;
 
       if ($control instanceof ComplexControl)
       {
@@ -81,27 +81,27 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * {@inheritdoc}
    */
-  public function findFormControlByPath($thePath)
+  public function findFormControlByPath($path)
   {
-    if ($thePath===null || $thePath===false || $thePath==='' || $thePath==='/')
+    if ($path===null || $path===false || $path==='' || $path==='/')
     {
       return null;
     }
 
-    // $thePath must start with a leading slash.
-    if (substr($thePath, 0, 1)!='/')
+    // $path must start with a leading slash.
+    if (substr($path, 0, 1)!='/')
     {
       return null;
     }
 
     // Remove leading slash from the path.
-    $path = substr($thePath, 1);
+    $relative_path = substr($path, 1);
 
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
-      $parts = preg_split('/\/+/', $path);
+      $parts = preg_split('/\/+/', $relative_path);
 
-      if ($control->myName==$parts[0])
+      if ($control->name==$parts[0])
       {
         if (count($parts)==1)
         {
@@ -117,9 +117,9 @@ class ComplexControl extends Control implements CompoundControl
           }
         }
       }
-      elseif ($control->myName==='' && ($control instanceof ComplexControl))
+      elseif ($control->name==='' && ($control instanceof ComplexControl))
       {
-        $tmp = $control->findFormControlByPath($thePath);
+        $tmp = $control->findFormControlByPath($path);
         if ($tmp) return $tmp;
       }
     }
@@ -133,12 +133,12 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function generate()
   {
-    $ret = $this->myPrefix;
-    foreach ($this->myControls as $control)
+    $ret = $this->prefix;
+    foreach ($this->controls as $control)
     {
       $ret .= $control->generate();
     }
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -147,17 +147,17 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Returns an array of all error messages of the child form controls of this complex form controls.
    *
-   * @param bool $theRecursiveFlag If set error messages of complex child controls of this complex form controls are
-   *                               fetched also.
+   * @param bool $recursive If set error messages of complex child controls of this complex form controls are fetched
+   *                        also.
    *
    * @return array|null
    */
-  public function getErrorMessages($theRecursiveFlag = false)
+  public function getErrorMessages($recursive = false)
   {
     $ret = [];
-    if ($theRecursiveFlag)
+    if ($recursive)
     {
-      foreach ($this->myControls as $control)
+      foreach ($this->controls as $control)
       {
         $tmp = $control->getErrorMessages(true);
         if (is_array($tmp))
@@ -167,9 +167,9 @@ class ComplexControl extends Control implements CompoundControl
       }
     }
 
-    if (isset($this->myErrorMessages))
+    if (isset($this->errorMessages))
     {
-      $ret = array_merge($ret, $this->myErrorMessages);
+      $ret = array_merge($ret, $this->errorMessages);
     }
 
     if (empty($ret)) $ret = null;
@@ -181,12 +181,12 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * {@inheritdoc}
    */
-  public function getFormControlByName($theName)
+  public function getFormControlByName($name)
   {
-    $control = $this->findFormControlByName($theName);
+    $control = $this->findFormControlByName($name);
     if ($control===null)
     {
-      throw new LogicException("Form control with name '%s' does not exists.", $theName);
+      throw new LogicException("Form control with name '%s' does not exists.", $name);
     }
 
     return $control;
@@ -196,12 +196,12 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * {@inheritdoc}
    */
-  public function getFormControlByPath($thePath)
+  public function getFormControlByPath($path)
   {
-    $control = $this->findFormControlByPath($thePath);
+    $control = $this->findFormControlByPath($path);
     if ($control===null)
     {
-      throw new LogicException("Form control with path '%s' does not exists.", $thePath);
+      throw new LogicException("Form control with path '%s' does not exists.", $path);
     }
 
     return $control;
@@ -211,19 +211,19 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * {@inheritdoc}
    */
-  public function getSetValuesBase(&$theValues)
+  public function getSetValuesBase(&$values)
   {
-    if ($this->myName==='')
+    if ($this->name==='')
     {
-      $tmp = &$theValues;
+      $tmp = &$values;
     }
     else
     {
-      $theValues[$this->myName] = [];
-      $tmp                      = &$theValues[$this->myName];
+      $values[$this->name] = [];
+      $tmp                 = &$values[$this->name];
     }
 
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
       $control->getSetValuesBase($tmp);
     }
@@ -237,7 +237,7 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function getSubmittedValue()
   {
-    return $this->myValue;
+    return $this->value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -249,44 +249,44 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function isValid()
   {
-    return (empty($this->myInvalidControls) && empty($this->myErrorMessages));
+    return (empty($this->invalidControls) && empty($this->errorMessages));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  public function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if ($this->myName==='')
+    if ($this->name==='')
     {
-      $tmp1 = &$theSubmittedValue;
-      $tmp2 = &$theWhiteListValue;
-      $tmp3 = &$theChangedInputs;
+      $tmp1 = &$submittedValue;
+      $tmp2 = &$whiteListValue;
+      $tmp3 = &$changedInputs;
     }
     else
     {
-      $tmp1 = &$theSubmittedValue[$submit_name];
-      $tmp2 = &$theWhiteListValue[$this->myName];
-      $tmp3 = &$theChangedInputs[$this->myName];
+      $tmp1 = &$submittedValue[$submit_name];
+      $tmp2 = &$whiteListValue[$this->name];
+      $tmp3 = &$changedInputs[$this->name];
     }
 
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
-      if ($this->myCleaner) $tmp1 = $this->myCleaner->clean($tmp1);
+      if ($this->cleaner) $tmp1 = $this->cleaner->clean($tmp1);
       $control->loadSubmittedValuesBase($tmp1, $tmp2, $tmp3);
     }
 
-    if ($this->myName!=='')
+    if ($this->name!=='')
     {
-      if (empty($theWhiteListValue[$this->myName])) unset($theWhiteListValue[$this->myName]);
-      if (empty($theChangedInputs[$this->myName])) unset($theChangedInputs[$this->myName]);
+      if (empty($whiteListValue[$this->name])) unset($whiteListValue[$this->name]);
+      if (empty($changedInputs[$this->name])) unset($changedInputs[$this->name]);
     }
 
     // Set the submitted values.
-    $this->myValue = $tmp2;
+    $this->value = $tmp2;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -294,17 +294,18 @@ class ComplexControl extends Control implements CompoundControl
    * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
    * value is set are not affected.
    *
-   * @param mixed $theValues The values as a nested array.
+   * @param mixed $values The values as a nested array.
    */
-  public function mergeValuesBase($theValues)
+  public function mergeValuesBase($values)
   {
-    if ($this->myName==='')
+    if ($this->name==='')
     {
-      $values = &$theValues;
+      // Nothing to do.
+      ;
     }
-    elseif (isset($theValues[$this->myName]))
+    elseif (isset($values[$this->name]))
     {
-      $values = &$theValues[$this->myName];
+      $values = &$values[$this->name];
     }
     else
     {
@@ -313,7 +314,7 @@ class ComplexControl extends Control implements CompoundControl
 
     if ($values!==null)
     {
-      foreach ($this->myControls as $control)
+      foreach ($this->controls as $control)
       {
         $control->mergeValuesBase($values);
       }
@@ -324,15 +325,15 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Prepares this form complex control for HTML code generation or loading submitted values.
    *
-   * @param string $theParentSubmitName The submit name of the parent control.
+   * @param string $parentSubmitName The submit name of the parent control.
    */
-  public function prepare($theParentSubmitName)
+  public function prepare($parentSubmitName)
   {
-    parent::prepare($theParentSubmitName);
+    parent::prepare($parentSubmitName);
 
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
-      $control->prepare($this->mySubmitName);
+      $control->prepare($this->submitName);
     }
   }
 
@@ -340,11 +341,11 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Sets the cleaner for this form control.
    *
-   * @param Cleaner $theCleaner The cleaner.
+   * @param Cleaner $cleaner The cleaner.
    */
-  public function setCleaner($theCleaner)
+  public function setCleaner($cleaner)
   {
-    $this->myCleaner = $theCleaner;
+    $this->cleaner = $cleaner;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -352,13 +353,13 @@ class ComplexControl extends Control implements CompoundControl
    * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
    * value is set are set to null.
    *
-   * @param mixed $theValues The values as a nested array.
+   * @param mixed $values The values as a nested array.
    */
-  public function setValue($theValues)
+  public function setValue($values)
   {
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
-      $control->setValuesBase($theValues);
+      $control->setValuesBase($values);
     }
   }
 
@@ -367,24 +368,25 @@ class ComplexControl extends Control implements CompoundControl
    * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
    * value is set are set to null.
    *
-   * @param mixed $theValues The values as a nested array.
+   * @param mixed $values The values as a nested array.
    */
-  public function setValuesBase($theValues)
+  public function setValuesBase($values)
   {
-    if ($this->myName==='')
+    if ($this->name==='')
     {
-      $values = &$theValues;
+      // Nothing to do.
+      ;
     }
-    elseif (isset($theValues[$this->myName]))
+    elseif (isset($values[$this->name]))
     {
-      $values = &$theValues[$this->myName];
+      $values = &$values[$this->name];
     }
     else
     {
       $values = null;
     }
 
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
       $control->setValuesBase($values);
     }
@@ -395,33 +397,33 @@ class ComplexControl extends Control implements CompoundControl
    * Executes a validators on the child form controls of this form complex control. If  and only if all child form
    * controls are valid the validators of this complex control are executed.
    *
-   * @param array $theInvalidFormControls A nested array of invalid form controls.
+   * @param array $invalidFormControls A nested array of invalid form controls.
    *
    * @return bool True if and only if all form controls are valid.
    */
-  public function validateBase(&$theInvalidFormControls)
+  public function validateBase(&$invalidFormControls)
   {
     $valid = true;
 
     // First, validate all child form controls.
-    foreach ($this->myControls as $control)
+    foreach ($this->controls as $control)
     {
-      if (!$control->validateBase($theInvalidFormControls))
+      if (!$control->validateBase($invalidFormControls))
       {
-        $this->myInvalidControls[] = $control;
-        $valid                     = false;
+        $this->invalidControls[] = $control;
+        $valid                   = false;
       }
     }
 
     if ($valid)
     {
       // All the child form controls are valid. Validate this complex form control.
-      foreach ($this->myValidators as $validator)
+      foreach ($this->validators as $validator)
       {
         $valid = $validator->validate($this);
         if ($valid!==true)
         {
-          $theInvalidFormControls[] = $this;
+          $invalidFormControls[] = $this;
           break;
         }
       }

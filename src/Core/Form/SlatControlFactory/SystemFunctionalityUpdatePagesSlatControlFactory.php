@@ -25,7 +25,7 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
    *
    * @var Obfuscator
    */
-  private $myPagIdObfuscator;
+  private $pagIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -45,30 +45,30 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('pag_enabled', $table_column);
 
-    $this->myPagIdObfuscator = Abc::getObfuscator('pag');
+    $this->pagIdObfuscator = Abc::getObfuscator('pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function createRow($theLouverControl, $theData)
+  public function createRow($louverControl, $data)
   {
     /** @var SlatControl $row */
-    $row = $theLouverControl->addFormControl(new SlatControl($theData['pag_id']));
-    $row->setObfuscator($this->myPagIdObfuscator);
+    $row = $louverControl->addFormControl(new SlatControl($data['pag_id']));
+    $row->setObfuscator($this->pagIdObfuscator);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'pag_id');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'pag_class');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'pag_enabled');
-    $control->setValue($theData['pag_enabled']);
+    $control->setValue($data['pag_enabled']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

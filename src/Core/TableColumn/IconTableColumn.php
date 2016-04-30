@@ -17,28 +17,28 @@ abstract class IconTableColumn extends TableColumn
    *
    * @var
    */
-  protected $myAltValue;
+  protected $altValue;
 
   /**
    * If set the will be prompted with an confirm message before the link is followed.
    *
    * @var string
    */
-  protected $myConfirmMessage;
+  protected $confirmMessage;
 
   /**
    * The URL of the icon.
    *
    * @var string
    */
-  protected $myIconUrl;
+  protected $iconUrl;
 
   /**
    * If set to true the icon is a download link (e.g. a PDF file).
    *
    * @var bool
    */
-  protected $myIsDownloadLink = false;
+  protected $isDownloadLink = false;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -66,19 +66,19 @@ abstract class IconTableColumn extends TableColumn
       $ret .= '<a';
       $ret .= Html::generateAttribute('href', $url);
       $ret .= ' class="icon_action"';
-      if ($this->myIsDownloadLink) $ret .= ' target="_blank"';
+      if ($this->isDownloadLink) $ret .= ' target="_blank"';
       $ret .= '>';
     }
 
     $ret .= '<img';
-    $ret .= Html::generateAttribute('src', $this->myIconUrl);
+    $ret .= Html::generateAttribute('src', $this->iconUrl);
     $ret .= ' width="12"';
     $ret .= ' height="12"';
     $ret .= ' class="icon"';
 
-    if ($this->myConfirmMessage) $ret .= Html::generateAttribute('data-confirm-message', $this->myConfirmMessage);
+    if ($this->confirmMessage) $ret .= Html::generateAttribute('data-confirm-message', $this->confirmMessage);
 
-    $ret .= Html::generateAttribute('alt', $this->myAltValue);
+    $ret .= Html::generateAttribute('alt', $this->altValue);
     $ret .= '/>';
 
     if ($url) $ret .= '</a>';
@@ -92,11 +92,11 @@ abstract class IconTableColumn extends TableColumn
   /**
    * Returns the URL of the link of the icon for the row.
    *
-   * @param array $theRow The data row.
+   * @param array $row The data row.
    *
    * @return string
    */
-  abstract public function getUrl($theRow);
+  abstract public function getUrl($row);
 
   //--------------------------------------------------------------------------------------------------------------------
 }

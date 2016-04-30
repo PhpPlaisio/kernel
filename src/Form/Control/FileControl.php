@@ -19,13 +19,13 @@ class FileControl extends SimpleControl
   public function generate()
   {
     $this->attributes['type'] = 'file';
-    $this->attributes['name'] = $this->mySubmitName;
+    $this->attributes['name'] = $this->submitName;
 
-    $ret = $this->myPrefix;
+    $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
     $ret .= $this->generatePostfixLabel();
-    $ret .= $this->myPostfix;
+    $ret .= $this->postfix;
 
     return $ret;
   }
@@ -34,20 +34,20 @@ class FileControl extends SimpleControl
   /**
    * Sets the attribute [accept](http://www.w3schools.com/tags/att_input_accept.asp).
    *
-   * @param string $theValue The attribute value.
+   * @param string $value The attribute value.
    */
-  public function setAttrForm($theValue)
+  public function setAttrForm($value)
   {
-    $this->attributes['accept'] = $theValue;
+    $this->attributes['accept'] = $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Does nothing. It is not possible the set the value of a file form control.
    *
-   * @param string $theValue Not used.
+   * @param string $value Not used.
    */
-  public function setValue($theValue)
+  public function setValue($value)
   {
     // Nothing to do.
   }
@@ -56,20 +56,20 @@ class FileControl extends SimpleControl
   /**
    * {@inheritdoc}
    */
-  protected function loadSubmittedValuesBase(&$theSubmittedValue, &$theWhiteListValue, &$theChangedInputs)
+  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->myObfuscator) ? $this->myObfuscator->encode($this->myName) : $this->myName;
+    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if ($_FILES[$submit_name]['error']===0)
     {
-      $theChangedInputs[$this->myName]  = $this;
-      $theWhiteListValue[$this->myName] = $_FILES[$submit_name];
-      $this->myValue                    = $_FILES[$submit_name];
+      $changedInputs[$this->name]  = $this;
+      $whiteListValue[$this->name] = $_FILES[$submit_name];
+      $this->value                 = $_FILES[$submit_name];
     }
     else
     {
-      $this->myValue                    = null;
-      $theWhiteListValue[$this->myName] = null;
+      $this->value                 = null;
+      $whiteListValue[$this->name] = null;
     }
   }
 

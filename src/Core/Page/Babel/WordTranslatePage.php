@@ -22,28 +22,28 @@ class WordTranslatePage extends BabelPage
    *
    * @var array
    */
-  protected $myDetails;
+  protected $details;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * The ID of the word to be translated.
    *
    * @var int
    */
-  protected $myWrdId;
+  protected $wrdId;
 
   /**
    * The URL to return after the word has been translated.
    *
    * @var string
    */
-  private $myRedirectUrl;
+  private $redirect;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -53,15 +53,15 @@ class WordTranslatePage extends BabelPage
   {
     parent::__construct();
 
-    $this->myWrdId = self::getCgiId('wrd', 'wrd');
+    $this->wrdId = self::getCgiId('wrd', 'wrd');
 
-    $this->myRedirectUrl = self::getCgiUrl('redirect');
+    $this->redirect = self::getCgiUrl('redirect');
 
-    $this->myDetails = Abc::$DL->WordGetDetails($this->myWrdId, $this->myActLanId);
+    $this->details = Abc::$DL->WordGetDetails($this->wrdId, $this->actLanId);
 
-    if (!isset($this->myRedirectUrl))
+    if (!isset($this->redirect))
     {
-      $this->myRedirectUrl = WordGroupDetailsPage::getUrl($this->myDetails['wdg_id'], $this->myActLanId);
+      $this->redirect = WordGroupDetailsPage::getUrl($this->details['wdg_id'], $this->actLanId);
     }
   }
 
@@ -69,18 +69,18 @@ class WordTranslatePage extends BabelPage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int         $theWrdId       The ID of the word to be translated.
-   * @param int         $theLanId       The ID of the target language.
-   * @param string|null $theRedirectUrl If set the URL to redirect the user agent after the word has been translated.
+   * @param int         $wrdId       The ID of the word to be translated.
+   * @param int         $lanId       The ID of the target language.
+   * @param string|null $redirectUrl If set the URL to redirect the user agent after the word has been translated.
    *
    * @return string
    */
-  public static function getUrl($theWrdId, $theLanId, $theRedirectUrl = null)
+  public static function getUrl($wrdId, $lanId, $redirectUrl = null)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
-    $url .= self::putCgiVar('wrd', $theWrdId, 'wrd');
-    $url .= self::putCgiVar('act_lan', $theLanId, 'lan');
-    $url .= self::putCgiVar('redirect', $theRedirectUrl);
+    $url .= self::putCgiVar('wrd', $wrdId, 'wrd');
+    $url .= self::putCgiVar('act_lan', $lanId, 'lan');
+    $url .= self::putCgiVar('redirect', $redirectUrl);
 
     return $url;
   }
@@ -101,47 +101,47 @@ class WordTranslatePage extends BabelPage
    */
   private function createForm()
   {
-    $ref_language = Abc::$DL->LanguageGetName($this->myRefLanId, $this->myRefLanId);
-    $act_language = Abc::$DL->LanguageGetName($this->myActLanId, $this->myRefLanId);
+    $ref_language = Abc::$DL->LanguageGetName($this->refLanId, $this->refLanId);
+    $act_language = Abc::$DL->LanguageGetName($this->actLanId, $this->refLanId);
 
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Show word group name.
     $input = new SpanControl('word_group');
-    $input->setInnerText($this->myDetails['wdg_name']);
-    $this->myForm->addFormControl($input, 'Word Group');
+    $input->setInnerText($this->details['wdg_name']);
+    $this->form->addFormControl($input, 'Word Group');
 
     // Show word group ID
     $input = new SpanControl('wrd_id');
-    $input->setInnerText($this->myDetails['wdg_id']);
-    $this->myForm->addFormControl($input, 'ID Group');
+    $input->setInnerText($this->details['wdg_id']);
+    $this->form->addFormControl($input, 'ID Group');
 
     // Show label
     $input = new SpanControl('label');
-    $input->setInnerText($this->myDetails['wrd_label']);
-    $this->myForm->addFormControl($input, 'Label');
+    $input->setInnerText($this->details['wrd_label']);
+    $this->form->addFormControl($input, 'Label');
 
     // Show comment.
     $input = new SpanControl('comment');
-    $input->setInnerText($this->myDetails['wrd_comment']);
-    $this->myForm->addFormControl($input, 'Comment');
+    $input->setInnerText($this->details['wrd_comment']);
+    $this->form->addFormControl($input, 'Comment');
 
     // Show data
     // @todo Show data.
 
     // Show word in reference language.
     $input = new SpanControl('ref_language');
-    $input->setInnerText(Babel::getWord($this->myWrdId /*, $this->myRefLanId*/)); // @todo show word in ref lan.
-    $this->myForm->addFormControl($input, $ref_language);
+    $input->setInnerText(Babel::getWord($this->wrdId /*, $this->myRefLanId*/)); // @todo show word in ref lan.
+    $this->form->addFormControl($input, $ref_language);
 
     // Create form control for the actual word.
     $input = new TextControl('wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $input->setValue($this->myDetails['wdt_text']);
-    $this->myForm->addFormControl($input, $act_language, true);
+    $input->setValue($this->details['wdt_text']);
+    $this->form->addFormControl($input, $act_language, true);
 
     // Create a submit button.
-    $this->myForm->addSubmitButton(C::WRD_ID_BUTTON_TRANSLATE, 'handleForm');
+    $this->form->addSubmitButton(C::WRD_ID_BUTTON_TRANSLATE, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -150,13 +150,13 @@ class WordTranslatePage extends BabelPage
    */
   private function dataBaseAction()
   {
-    $values  = $this->myForm->getValues();
-    $changes = $this->myForm->getChangedControls();
+    $values  = $this->form->getValues();
+    $changes = $this->form->getChangedControls();
 
     // Return immediately when no form controls are changed.
     if (empty($changes)) return;
 
-    Abc::$DL->wordTranslateWord($this->myUsrId, $this->myWrdId, $this->myActLanId, $values['wdt_text']);
+    Abc::$DL->wordTranslateWord($this->usrId, $this->wrdId, $this->actLanId, $values['wdt_text']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ class WordTranslatePage extends BabelPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -173,7 +173,7 @@ class WordTranslatePage extends BabelPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -185,7 +185,7 @@ class WordTranslatePage extends BabelPage
   {
     $this->dataBaseAction();
 
-    HttpHeader::redirectSeeOther($this->myRedirectUrl);
+    HttpHeader::redirectSeeOther($this->redirect);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

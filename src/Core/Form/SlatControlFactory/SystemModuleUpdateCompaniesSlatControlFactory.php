@@ -25,7 +25,7 @@ class SystemModuleUpdateCompaniesSlatControlFactory extends SlatControlFactory
    *
    * @var Obfuscator
    */
-  private $myCmpIdObfuscator;
+  private $cmpIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -46,30 +46,30 @@ class SystemModuleUpdateCompaniesSlatControlFactory extends SlatControlFactory
     $table_column = new CheckboxSlatJoint('Grant');
     $this->addSlatJoint('mdl_granted', $table_column);
 
-    $this->myCmpIdObfuscator = Abc::getObfuscator('cmp');
+    $this->cmpIdObfuscator = Abc::getObfuscator('cmp');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function createRow($theLouverControl, $theData)
+  public function createRow($louverControl, $data)
   {
     /** @var SlatControl $row */
-    $row = $theLouverControl->addFormControl(new SlatControl($theData['cmp_id']));
-    $row->setObfuscator($this->myCmpIdObfuscator);
+    $row = $louverControl->addFormControl(new SlatControl($data['cmp_id']));
+    $row->setObfuscator($this->cmpIdObfuscator);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_id');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_abbr');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'mdl_granted');
-    $control->setValue($theData['mdl_granted']);
+    $control->setValue($data['mdl_granted']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -29,14 +29,14 @@ class FunctionalityUpdatePagesPage extends CorePage
    *
    * @var CoreForm
    */
-  private $myForm;
+  private $form;
 
   /**
    * The ID of the functionality of which the pages that belong to it will be modified.
    *
    * @var int
    */
-  private $myFunId;
+  private $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -46,21 +46,21 @@ class FunctionalityUpdatePagesPage extends CorePage
   {
     parent::__construct();
 
-    $this->myFunId = self::getCgiId('fun', 'fun');
+    $this->funId = self::getCgiId('fun', 'fun');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $theFunId The ID of the functionality.
+   * @param int $funId The ID of the functionality.
    *
    * @return string
    */
-  public static function getUrl($theFunId)
+  public static function getUrl($funId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_PAGES, 'pag');
-    $url .= self::putCgiVar('fun', $theFunId, 'fun');
+    $url .= self::putCgiVar('fun', $funId, 'fun');
 
     return $url;
   }
@@ -84,14 +84,14 @@ class FunctionalityUpdatePagesPage extends CorePage
   private function createForm()
   {
     // Get all available pages.
-    $pages = Abc::$DL->systemFunctionalityGetAvailablePages($this->myFunId);
+    $pages = Abc::$DL->systemFunctionalityGetAvailablePages($this->funId);
 
     // Create form.
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Add field set.
     $field_set = new FieldSet('');
-    $this->myForm->addFieldSet($field_set);
+    $this->form->addFieldSet($field_set);
 
     // Create factory.
     $factory = new SystemFunctionalityUpdatePagesSlatControlFactory();
@@ -102,7 +102,7 @@ class FunctionalityUpdatePagesPage extends CorePage
     $submit = new SubmitControl('submit');
     $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
-    $this->myForm->addSubmitHandler($button, 'handleForm');
+    $this->form->addSubmitHandler($button, 'handleForm');
 
     // Put everything together in a LouverControl.
     $louver = new LouverControl('data');
@@ -122,8 +122,8 @@ class FunctionalityUpdatePagesPage extends CorePage
    */
   private function databaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
@@ -132,11 +132,11 @@ class FunctionalityUpdatePagesPage extends CorePage
     {
       if ($values['data'][$pag_id]['pag_enabled'])
       {
-        Abc::$DL->systemFunctionalityInsertPage($this->myFunId, $pag_id);
+        Abc::$DL->systemFunctionalityInsertPage($this->funId, $pag_id);
       }
       else
       {
-        Abc::$DL->systemFunctionalityDeletePage($this->myFunId, $pag_id);
+        Abc::$DL->systemFunctionalityDeletePage($this->funId, $pag_id);
       }
     }
 
@@ -150,7 +150,7 @@ class FunctionalityUpdatePagesPage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -158,7 +158,7 @@ class FunctionalityUpdatePagesPage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -170,7 +170,7 @@ class FunctionalityUpdatePagesPage extends CorePage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(FunctionalityDetailsPage::getUrl($this->myFunId));
+    HttpHeader::redirectSeeOther(FunctionalityDetailsPage::getUrl($this->funId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -179,7 +179,7 @@ class FunctionalityUpdatePagesPage extends CorePage
    */
   private function showFunctionality()
   {
-    $details = Abc::$DL->systemFunctionalityGetDetails($this->myFunId, $this->myLanId);
+    $details = Abc::$DL->systemFunctionalityGetDetails($this->funId, $this->lanId);
 
     $table = new CoreDetailTable();
 

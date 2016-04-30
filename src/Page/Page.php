@@ -21,33 +21,33 @@ abstract class Page
    *
    * @var Page
    */
-  private static $ourPage;
+  private static $page;
 
   /**
    * The Company id (cmp_id) of the page requester.
    *
    * @var int
    */
-  protected $myCmpId;
+  protected $cmpId;
 
   /**
    * CSS code to be included in the head of this page.
    */
-  protected $myCss;
+  protected $css;
 
   /**
    * List with CSS sources to be included on this page.
    *
    * @var array[]
    */
-  protected $myCssSources = [];
+  protected $cssSources = [];
 
   /**
    * JavaScript code to be included in the head of this page.
    *
    * @var string
    */
-  protected $myJavaScript;
+  protected $javaScript;
 
   /**
    * The attributes of the script element in the page trailer (i.e. near the end html tag). Example:
@@ -57,56 +57,56 @@ abstract class Page
    *
    * @var array
    */
-  protected $myJsTrailerAttributes;
+  protected $jsTrailerAttributes;
 
   /**
    * The keywords to be included in a meta tag for this page.
    *
    * var string[]
    */
-  protected $myKeywords = [];
+  protected $keywords = [];
 
   /**
    * The preferred language (lan_id) of the page requester.
    *
    * @var int
    */
-  protected $myLanId;
+  protected $lanId;
 
   /**
    * The profile ID (pro_id) of the page requestor.
    *
    * @var int
    */
-  protected $myProId;
+  protected $proId;
 
   /**
    * The user ID (usr_id) of the page requestor.
    *
    * @var int
    */
-  protected $myUsrId;
+  protected $usrId;
 
   /**
    * The path where the HTML code of this page is stored for the W3C validator.
    *
    * @var string
    */
-  protected $myW3cPathName;
+  protected $w3cPathName;
 
   /**
    * If set to true (typically on DEV environment) the HTML code of this page will be validated by the W3C validator.
    *
    * @var bool
    */
-  protected $myW3cValidate = false;
+  protected $w3cValidate = false;
 
   /**
    * The size (in bytes) of the HTML code of this page.
    *
    * @var int
    */
-  private $myPageSize = 0;
+  private $pageSize = 0;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -116,12 +116,12 @@ abstract class Page
   {
     $abc = Abc::getInstance();
 
-    $this->myCmpId = $abc->getCmpId();
-    $this->myProId = $abc->getProId();
-    $this->myUsrId = $abc->getUsrId();
-    $this->myLanId = $abc->getLanId();
+    $this->cmpId = $abc->getCmpId();
+    $this->proId = $abc->getProId();
+    $this->usrId = $abc->getUsrId();
+    $this->lanId = $abc->getLanId();
 
-    self::$ourPage = $this;
+    self::$page = $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -130,10 +130,10 @@ abstract class Page
    *
    * This method is a static wrapper around method {@link cssAppendPageSpecificSource}.
    *
-   * @param string      $theClassName The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
+   * @param string      $className    The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
    *                                  slashes to construct the filename relative to the resource root of the CSS
    *                                  source.
-   * @param string|null $theDevice    The device for which the CSS source is optimized for.
+   * @param string|null $device       The device for which the CSS source is optimized for.
    *                                  * null       Suitable for all devices. null is preferred over 'all'.
    *                                  * aural      Speech synthesizers
    *                                  * braille    Braille feedback devices
@@ -144,9 +144,9 @@ abstract class Page
    *                                  * tty        Teletypes and similar media using a fixed-pitch character grid
    *                                  * tv         Television type devices (low resolution, limited scroll ability)
    */
-  public static function cssStaticAppendClassSource($theClassName, $theDevice = null)
+  public static function cssStaticAppendClassSource($className, $device = null)
   {
-    self::$ourPage->cssAppendPageSpecificSource($theClassName, $theDevice);
+    self::$page->cssAppendPageSpecificSource($className, $device);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -155,8 +155,8 @@ abstract class Page
    *
    * This method is a static wrapper around method {@link cssAppendSource}.
    *
-   * @param string      $theSource The filename relative to the resource root of the CSS source.
-   * @param string|null $theDevice The device for which the CSS source is optimized for. Possible values:
+   * @param string      $source    The filename relative to the resource root of the CSS source.
+   * @param string|null $device    The device for which the CSS source is optimized for. Possible values:
    *                               * null       Suitable for all devices. null is preferred over 'all'.
    *                               * aural      Speech synthesizers
    *                               * braille    Braille feedback devices
@@ -167,9 +167,9 @@ abstract class Page
    *                               * tty        Teletypes and similar media using a fixed-pitch character grid
    *                               * tv         Television type devices (low resolution, limited scroll ability)
    */
-  public static function cssStaticAppendSource($theSource, $theDevice = null)
+  public static function cssStaticAppendSource($source, $device = null)
   {
-    self::$ourPage->cssAppendSource($theSource, $theDevice);
+    self::$page->cssAppendSource($source, $device);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -178,8 +178,8 @@ abstract class Page
    *
    * Do not use this method directly. Use {@link cssAppendPageSpecificSource} instead.
    *
-   * @param string      $theSource The filename relative to the resource root of the CSS source.
-   * @param string|null $theDevice The device for which the CSS source is optimized for. Possible values:
+   * @param string      $source    The filename relative to the resource root of the CSS source.
+   * @param string|null $device    The device for which the CSS source is optimized for. Possible values:
    *                               * null       Suitable for all devices. null is preferred over 'all'.
    *                               * aural      Speech synthesizers
    *                               * braille    Braille feedback devices
@@ -190,12 +190,12 @@ abstract class Page
    *                               * tty        Teletypes and similar media using a fixed-pitch character grid
    *                               * tv         Television type devices (low resolution, limited scroll ability)
    */
-  public static function cssStaticOptimizedAppendSource($theSource, $theDevice = null)
+  public static function cssStaticOptimizedAppendSource($source, $device = null)
   {
-    self::$ourPage->myCssSources[] = ['href'  => $theSource,
-                                      'media' => $theDevice,
-                                      'rel'   => 'stylesheet',
-                                      'type'  => 'text/css'];
+    self::$page->cssSources[] = ['href'  => $source,
+                                 'media' => $device,
+                                 'rel'   => 'stylesheet',
+                                 'type'  => 'text/css'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -214,37 +214,37 @@ abstract class Page
    * <li>null if the CGI variable not set.
    * <ul>
    *
-   * @param string $theVarName     The name of the CGI variable.
-   * @param bool   $theTrinaryFlag If true trinary (a.k.a  three-valued) logic will be applied. Otherwise, bivalent
-   *                               logic will be applied.
+   * @param string $name    The name of the CGI variable.
+   * @param bool   $trinary If true trinary (a.k.a  three-valued) logic will be applied. Otherwise, bivalent logic will
+   *                        be applied.
    *
    * @return bool|null
    */
-  public static function getCgiBool($theVarName, $theTrinaryFlag = false)
+  public static function getCgiBool($name, $trinary = false)
   {
-    if (isset($_GET[$theVarName]))
+    if (isset($_GET[$name]))
     {
-      return !empty($_GET[$theVarName]);
+      return !empty($_GET[$name]);
     }
 
-    return ($theTrinaryFlag) ? null : false;
+    return ($trinary) ? null : false;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the value of an obfuscated database ID.
    *
-   * @param string $theVarName The name of the CGI variable.
-   * @param string $theLabel   An alias for the column holding database ID and must corresponds with label that was
+   * @param string $name       The name of the CGI variable.
+   * @param string $label      An alias for the column holding database ID and must corresponds with label that was
    *                           used to obfuscate the database ID.
    *
    * @return int|null
    */
-  public static function getCgiId($theVarName, $theLabel)
+  public static function getCgiId($name, $label)
   {
-    if (isset($_GET[$theVarName]))
+    if (isset($_GET[$name]))
     {
-      return Abc::deObfuscate($_GET[$theVarName], $theLabel);
+      return Abc::deObfuscate($_GET[$name], $label);
     }
 
     return null;
@@ -257,22 +257,22 @@ abstract class Page
    * This method will protect against unvalidated redirects, see
    * <https://www.owasp.org/index.php/Unvalidated_Redirects_and_Forwards_Cheat_Sheet>.
    *
-   * @param string $theVarName           The name of the CGI variable.
-   * @param bool   $theForceRelativeFlag If set the URL must be a relative URL. If the URL is not a relative URL an
-   *                                     exception will be thrown.
+   * @param string $name          The name of the CGI variable.
+   * @param bool   $forceRelative If set the URL must be a relative URL. If the URL is not a relative URL an exception
+   *                              will be thrown.
    *
    * @return string|null
    *
    * @throws InvalidUrlException
    */
-  public static function getCgiUrl($theVarName, $theForceRelativeFlag = true)
+  public static function getCgiUrl($name, $forceRelative = true)
   {
-    if (isset($_GET[$theVarName]))
+    if (isset($_GET[$name]))
     {
-      $url = urldecode($_GET[$theVarName]);
-      if ($theForceRelativeFlag && !Url::isRelative($url))
+      $url = urldecode($_GET[$name]);
+      if ($forceRelative && !Url::isRelative($url))
       {
-        throw new InvalidUrlException("Value '%s' of CGI variable '%s' is not a relative URL.", $url, $theVarName);
+        throw new InvalidUrlException("Value '%s' of CGI variable '%s' is not a relative URL.", $url, $name);
       }
 
       return $url;
@@ -287,15 +287,15 @@ abstract class Page
    *
    * For retrieving a CGI variable with a relative URL use {@link getCgiUrl}.
    *
-   * @param string $theVarName The name of the CGI variable.
+   * @param string $name The name of the CGI variable.
    *
    * @return string|null
    */
-  public static function getCgiVar($theVarName)
+  public static function getCgiVar($name)
   {
-    if (isset($_GET[$theVarName]))
+    if (isset($_GET[$name]))
     {
-      return urlencode($_GET[$theVarName]);
+      return urlencode($_GET[$name]);
     }
 
     return null;
@@ -311,14 +311,14 @@ abstract class Page
    *
    * This method is a static wrapper around method {@link jsAdmPageSpecificFunctionCall}.
    *
-   * @param string $theClassName      The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
+   * @param string $className         The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
    *                                  slashes to construct the namespace.
-   * @param string $theJsFunctionName The function name inside the namespace.
+   * @param string $jsFunctionName    The function name inside the namespace.
    * @param array  $args              The optional arguments for the function.
    */
-  public static function jsAdmStaticClassSpecificFunctionCall($theClassName, $theJsFunctionName, $args = [])
+  public static function jsAdmStaticClassSpecificFunctionCall($className, $jsFunctionName, $args = [])
   {
-    self::$ourPage->jsAdmPageSpecificFunctionCall($theClassName, $theJsFunctionName, $args);
+    self::$page->jsAdmPageSpecificFunctionCall($className, $jsFunctionName, $args);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -327,32 +327,32 @@ abstract class Page
    *
    * This method is a static wrapper around method {@link jsAdmFunctionCall}.
    *
-   * @param string $theNamespace      The namespace as in RequireJS.
-   * @param string $theJsFunctionName The function name inside the namespace.
-   * @param array  $args              The optional arguments for the function.
+   * @param string $namespace      The namespace as in RequireJS.
+   * @param string $jsFunctionName The function name inside the namespace.
+   * @param array  $args           The optional arguments for the function.
    */
-  public static function jsAdmStaticFunctionCall($theNamespace, $theJsFunctionName, $args = [])
+  public static function jsAdmStaticFunctionCall($namespace, $jsFunctionName, $args = [])
   {
-    self::$ourPage->jsAdmFunctionCall($theNamespace, $theJsFunctionName, $args);
+    self::$page->jsAdmFunctionCall($namespace, $jsFunctionName, $args);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Do not use this function, use {@link jsAdmFunctionCall} instead.
    *
-   * @param string $theNamespace      The namespace as in RequireJS.
-   * @param string $theJsFunctionName The function name inside the namespace.
-   * @param array  $args              The optional arguments for the function.
+   * @param string $namespace      The namespace as in RequireJS.
+   * @param string $jsFunctionName The function name inside the namespace.
+   * @param array  $args           The optional arguments for the function.
    */
-  public static function jsAdmStaticOptimizedFunctionCall($theNamespace, $theJsFunctionName, $args = [])
+  public static function jsAdmStaticOptimizedFunctionCall($namespace, $jsFunctionName, $args = [])
   {
-    self::$ourPage->myJavaScript .= 'require(["';
-    self::$ourPage->myJavaScript .= $theNamespace;
-    self::$ourPage->myJavaScript .= '"],function(page){\'use strict\';page.';
-    self::$ourPage->myJavaScript .= $theJsFunctionName;
-    self::$ourPage->myJavaScript .= '(';
-    self::$ourPage->myJavaScript .= implode(',', array_map('json_encode', $args));
-    self::$ourPage->myJavaScript .= ');});';
+    self::$page->javaScript .= 'require(["';
+    self::$page->javaScript .= $namespace;
+    self::$page->javaScript .= '"],function(page){\'use strict\';page.';
+    self::$page->javaScript .= $jsFunctionName;
+    self::$page->javaScript .= '(';
+    self::$page->javaScript .= implode(',', array_map('json_encode', $args));
+    self::$page->javaScript .= ');});';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -371,23 +371,23 @@ abstract class Page
    * <li>an empty string otherwise.
    * <ul>
    *
-   * @param string $theVarName     The name of the boolean CGI variable.
-   * @param mixed  $theValue       The value of the CGI variable. Only and only a nonempty value evaluates to true.
-   * @param bool   $theTrinaryFlag If true trinary (a.k.a  three-valued) logic will be applied. Otherwise, bivalent
-   *                               logic will be applied.
+   * @param string $name    The name of the boolean CGI variable.
+   * @param mixed  $value   The value of the CGI variable. Only and only a nonempty value evaluates to true.
+   * @param bool   $trinary If true trinary (a.k.a  three-valued) logic will be applied. Otherwise, bivalent logic will
+   *                        be applied.
    *
    * @return string
    */
-  public static function putCgiBool($theVarName, $theValue, $theTrinaryFlag = false)
+  public static function putCgiBool($name, $value, $trinary = false)
   {
-    if (!empty($theValue))
+    if (!empty($value))
     {
-      return '/'.$theVarName.'/1';
+      return '/'.$name.'/1';
     }
 
-    if ($theTrinaryFlag && isset($theValue))
+    if ($trinary && isset($value))
     {
-      return '/'.$theVarName.'/0';
+      return '/'.$name.'/0';
     }
 
     return '';
@@ -397,23 +397,23 @@ abstract class Page
   /**
    * Returns a string with holding a CGI variable that can be used as a part of a URL.
    *
-   * @param string      $theVarName The name of the CGI variable.
-   * @param mixed       $theValue   The value (must be a scalar) of the CGI variable.
-   * @param string|null $theLabel   Must only be used if the CGI variable is a database ID. An alias for the column
+   * @param string      $name       The name of the CGI variable.
+   * @param mixed       $value      The value (must be a scalar) of the CGI variable.
+   * @param string|null $label      Must only be used if the CGI variable is a database ID. An alias for the column
    *                                holding database ID.
    *
    * @return string
    */
-  public static function putCgiVar($theVarName, $theValue, $theLabel = null)
+  public static function putCgiVar($name, $value, $label = null)
   {
-    if (isset($theValue))
+    if (isset($value))
     {
-      if (isset($theLabel))
+      if (isset($label))
       {
-        return '/'.$theVarName.'/'.Abc::obfuscate($theValue, $theLabel);
+        return '/'.$name.'/'.Abc::obfuscate($value, $label);
       }
 
-      return '/'.$theVarName.'/'.urlencode($theValue);
+      return '/'.$name.'/'.urlencode($value);
     }
 
     return '';
@@ -446,7 +446,7 @@ abstract class Page
    */
   public function getPageSize()
   {
-    return $this->myPageSize;
+    return $this->pageSize;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -474,43 +474,43 @@ abstract class Page
   /**
    * Adds a word to the key words to be included in a meta tag for this page.
    *
-   * @param string $theKeyword The keyword.
+   * @param string $keyword The keyword.
    */
-  protected function addKeyword($theKeyword)
+  protected function addKeyword($keyword)
   {
-    $this->myKeywords[] = $theKeyword;
+    $this->keywords[] = $keyword;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds words to the key words to be included in a meta tag for this page.
    *
-   * @param string[] $theKeywords The keywords.
+   * @param string[] $keywords The keywords.
    */
-  protected function addKeywords($theKeywords)
+  protected function addKeywords($keywords)
   {
-    $this->myKeywords = array_merge($this->myKeywords, $theKeywords);
+    $this->keywords = array_merge($this->keywords, $keywords);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Appends with a separator a string to the page title
    *
-   * @param string $thePageTitleAddendum The text to append to the page title.
+   * @param string $pageTitleAddendum The text to append to the page title.
    */
-  protected function appendPageTitle($thePageTitleAddendum)
+  protected function appendPageTitle($pageTitleAddendum)
   {
-    Abc::getInstance()->appendPageTitle($thePageTitleAddendum);
+    Abc::getInstance()->appendPageTitle($pageTitleAddendum);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a page specific CCS file to the header of this page.
    *
-   * @param string      $theClassName The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
+   * @param string      $className    The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
    *                                  slashes to construct the filename relative to the resource root of the CSS
    *                                  source.
-   * @param string|null $theDevice    The device for which the CSS source is optimized for.
+   * @param string|null $device       The device for which the CSS source is optimized for.
    *                                  * null       Suitable for all devices. null is preferred over 'all'.
    *                                  * aural      Speech synthesizers
    *                                  * braille    Braille feedback devices
@@ -521,22 +521,22 @@ abstract class Page
    *                                  * tty        Teletypes and similar media using a fixed-pitch character grid
    *                                  * tv         Television type devices (low resolution, limited scroll ability)
    */
-  protected function cssAppendPageSpecificSource($theClassName, $theDevice = null)
+  protected function cssAppendPageSpecificSource($className, $device = null)
   {
     // Construct the filename of the CSS file.
-    $filename = '/css/'.str_replace('\\', '/', $theClassName);
-    if (isset($theDevice)) $filename .= '.'.$theDevice;
+    $filename = '/css/'.str_replace('\\', '/', $className);
+    if (isset($device)) $filename .= '.'.$device;
     $filename .= '.css';
 
-    $this->cssAppendSource($filename, $theDevice);
+    $this->cssAppendSource($filename, $device);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a CCS file to the header of this page.
    *
-   * @param string      $theSource The filename relative to the resource root of the CSS source.
-   * @param string|null $theDevice The device for which the CSS source is optimized for. Possible values:
+   * @param string      $source    The filename relative to the resource root of the CSS source.
+   * @param string|null $device    The device for which the CSS source is optimized for. Possible values:
    *                               * null       Suitable for all devices. null is preferred over 'all'.
    *                               * aural      Speech synthesizers
    *                               * braille    Braille feedback devices
@@ -547,15 +547,15 @@ abstract class Page
    *                               * tty        Teletypes and similar media using a fixed-pitch character grid
    *                               * tv         Television type devices (low resolution, limited scroll ability)
    */
-  protected function cssAppendSource($theSource, $theDevice = null)
+  protected function cssAppendSource($source, $device = null)
   {
-    $path = HOME.'/www'.$theSource;
+    $path = HOME.'/www'.$source;
     if (!file_exists($path))
     {
-      throw new LogicException("CSS file '%s' does not exists.", $theSource);
+      throw new LogicException("CSS file '%s' does not exists.", $source);
     }
 
-    $this->cssOptimizedAppendSource($theSource, $theDevice);
+    $this->cssOptimizedAppendSource($source, $device);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -564,8 +564,8 @@ abstract class Page
    *
    * Do not use this method directly. Use {@link cssAppendPageSpecificSource} instead.
    *
-   * @param string      $theSource The filename relative to the resource root of the CSS source.
-   * @param string|null $theDevice The device for which the CSS source is optimized for. Possible values:
+   * @param string      $source    The filename relative to the resource root of the CSS source.
+   * @param string|null $device    The device for which the CSS source is optimized for. Possible values:
    *                               * null       Suitable for all devices. null is preferred over 'all'.
    *                               * aural      Speech synthesizers
    *                               * braille    Braille feedback devices
@@ -576,12 +576,12 @@ abstract class Page
    *                               * tty        Teletypes and similar media using a fixed-pitch character grid
    *                               * tv         Television type devices (low resolution, limited scroll ability)
    */
-  protected function cssOptimizedAppendSource($theSource, $theDevice = null)
+  protected function cssOptimizedAppendSource($source, $device = null)
   {
-    $this->myCssSources[] = ['href'  => $theSource,
-                             'media' => $theDevice,
-                             'rel'   => 'stylesheet',
-                             'type'  => 'text/css'];
+    $this->cssSources[] = ['href'  => $source,
+                           'media' => $device,
+                           'rel'   => 'stylesheet',
+                           'type'  => 'text/css'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -591,15 +591,15 @@ abstract class Page
   protected function echoCascadingStyleSheets()
   {
     // Echo links to external style sheets.
-    foreach ($this->myCssSources as $css_source)
+    foreach ($this->cssSources as $css_source)
     {
       echo Html::generateVoidElement('link', $css_source);
     }
 
     // Echo the internal style sheet.
-    if ($this->myCss)
+    if ($this->css)
     {
-      echo '<style type="text/css" media="all">', $this->myCss, '</style>';
+      echo '<style type="text/css" media="all">', $this->css, '</style>';
     }
   }
 
@@ -609,9 +609,9 @@ abstract class Page
    */
   protected function echoMetaTagKeywords()
   {
-    if (!empty($this->myKeywords))
+    if (!empty($this->keywords))
     {
-      echo '<meta name="keywords"', Html::generateAttribute('content', implode(',', $this->myKeywords)), '/>';
+      echo '<meta name="keywords"', Html::generateAttribute('content', implode(',', $this->keywords)), '/>';
     }
   }
 
@@ -659,14 +659,14 @@ abstract class Page
    */
   protected function echoPageTrailer()
   {
-    if ($this->myJavaScript)
+    if ($this->javaScript)
     {
-      $js = 'require([],function(){'.$this->myJavaScript.'});';
+      $js = 'require([],function(){'.$this->javaScript.'});';
       echo '<script type="text/javascript">/*<![CDATA[*/set_based_abc_inline_js='.json_encode($js).'/*]]>*/</script>';
     }
-    if (!empty($this->myJsTrailerAttributes))
+    if (!empty($this->jsTrailerAttributes))
     {
-      echo Html::generateElement('script', $this->myJsTrailerAttributes);
+      echo Html::generateElement('script', $this->jsTrailerAttributes);
     }
 
     echo '</body></html>';
@@ -678,11 +678,11 @@ abstract class Page
    */
   protected function enableW3cValidator()
   {
-    $prefix              = 'w3c_validator_'.Abc::obfuscate($this->myUsrId, 'usr').'_';
-    $w3c_file            = uniqid($prefix).'.xhtml';
-    $this->myW3cValidate = true;
-    $this->myW3cPathName = DIR_TMP.'/'.$w3c_file;
-    $url                 = W3cValidatePage::getUrl($w3c_file);
+    $prefix            = 'w3c_validator_'.Abc::obfuscate($this->usrId, 'usr').'_';
+    $w3c_file          = uniqid($prefix).'.xhtml';
+    $this->w3cValidate = true;
+    $this->w3cPathName = DIR_TMP.'/'.$w3c_file;
+    $url               = W3cValidatePage::getUrl($w3c_file);
     $this->jsAdmPageSpecificFunctionCall(__CLASS__, 'w3cValidate', [$url]);
   }
 
@@ -713,14 +713,14 @@ abstract class Page
   /**
    * Using RequiresJS calls a function in a namespace.
    *
-   * @param string $theNamespace      The namespace as in RequireJS.
-   * @param string $theJsFunctionName The function name inside the namespace.
-   * @param array  $args              The optional arguments for the function.
+   * @param string $namespace      The namespace as in RequireJS.
+   * @param string $jsFunctionName The function name inside the namespace.
+   * @param array  $args           The optional arguments for the function.
    */
-  protected function jsAdmFunctionCall($theNamespace, $theJsFunctionName, $args = [])
+  protected function jsAdmFunctionCall($namespace, $jsFunctionName, $args = [])
   {
     // Construct the filename of the JS file.
-    $filename = '/js/'.$theNamespace.'.js';
+    $filename = '/js/'.$namespace.'.js';
 
     // Test JS file actually exists.
     $path = HOME.'/www'.$filename;
@@ -729,26 +729,26 @@ abstract class Page
       throw new LogicException("JavaScript file '%s' does not exists.", $filename);
     }
 
-    $this->jsAdmOptimizedFunctionCall($theNamespace, $theJsFunctionName, $args);
+    $this->jsAdmOptimizedFunctionCall($namespace, $jsFunctionName, $args);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Do not use this function, use {@link jsAdmFunctionCall} instead.
    *
-   * @param string $theNamespace      The namespace as in RequireJS.
-   * @param string $theJsFunctionName The function name inside the namespace.
-   * @param array  $args              The optional arguments for the function.
+   * @param string $namespace      The namespace as in RequireJS.
+   * @param string $jsFunctionName The function name inside the namespace.
+   * @param array  $args           The optional arguments for the function.
    */
-  protected function jsAdmOptimizedFunctionCall($theNamespace, $theJsFunctionName, $args = [])
+  protected function jsAdmOptimizedFunctionCall($namespace, $jsFunctionName, $args = [])
   {
-    $this->myJavaScript .= 'require(["';
-    $this->myJavaScript .= $theNamespace;
-    $this->myJavaScript .= '"],function(page){\'use strict\';page.';
-    $this->myJavaScript .= $theJsFunctionName;
-    $this->myJavaScript .= '(';
-    $this->myJavaScript .= implode(',', array_map('json_encode', $args));
-    $this->myJavaScript .= ');});';
+    $this->javaScript .= 'require(["';
+    $this->javaScript .= $namespace;
+    $this->javaScript .= '"],function(page){\'use strict\';page.';
+    $this->javaScript .= $jsFunctionName;
+    $this->javaScript .= '(';
+    $this->javaScript .= implode(',', array_map('json_encode', $args));
+    $this->javaScript .= ');});';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -758,11 +758,11 @@ abstract class Page
    * $this->jsAdmSetPageSpecificMain(__CLASS__);
    * ```
    *
-   * @param string $theMainJsScript The main script for RequireJS.
+   * @param string $mainJsScript The main script for RequireJS.
    */
-  protected function jsAdmOptimizedSetPageSpecificMain($theMainJsScript)
+  protected function jsAdmOptimizedSetPageSpecificMain($mainJsScript)
   {
-    $this->myJsTrailerAttributes = ['src' => $theMainJsScript];
+    $this->jsTrailerAttributes = ['src' => $mainJsScript];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -773,17 +773,17 @@ abstract class Page
    * $this->jsAdmPageSpecificFunctionCall(__CLASS__, 'init');
    * ```
    *
-   * @param string $theClassName      The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
+   * @param string $className         The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
    *                                  slashes to construct the namespace.
-   * @param string $theJsFunctionName The function name inside the namespace.
+   * @param string $jsFunctionName    The function name inside the namespace.
    * @param array  $args              The optional arguments for the function.
    */
-  protected function jsAdmPageSpecificFunctionCall($theClassName, $theJsFunctionName, $args = [])
+  protected function jsAdmPageSpecificFunctionCall($className, $jsFunctionName, $args = [])
   {
     // Convert PHP class name to RequireJS namespace name.
-    $namespace = str_replace('\\', '/', $theClassName);
+    $namespace = str_replace('\\', '/', $className);
 
-    $this->jsAdmFunctionCall($namespace, $theJsFunctionName, $args);
+    $this->jsAdmFunctionCall($namespace, $jsFunctionName, $args);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -793,13 +793,13 @@ abstract class Page
    * $this->jsAdmSetPageSpecificMain(__CLASS__);
    * ```
    *
-   * @param string $theClassName The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
+   * @param string $className    The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
    *                             slashes to construct the namespace.
    */
-  protected function jsAdmSetPageSpecificMain($theClassName)
+  protected function jsAdmSetPageSpecificMain($className)
   {
     // Convert PHP class name to RequireJS namespace name.
-    $namespace = str_replace('\\', '/', $theClassName);
+    $namespace = str_replace('\\', '/', $className);
 
     // Construct the filename of the JS file.
     $filename = '/js/'.$namespace.'.main.js';
@@ -811,24 +811,24 @@ abstract class Page
       throw new \LogicException(sprintf("JavaScript file '%s' does not exists.", $filename));
     }
 
-    $this->myJsTrailerAttributes = ['src' => '/js/require.js', 'data-main' => $filename];
+    $this->jsTrailerAttributes = ['src' => '/js/require.js', 'data-main' => $filename];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  protected function setPageSize($theSize)
+  protected function setPageSize($size)
   {
-    $this->myPageSize = $theSize;
+    $this->pageSize = $size;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the title for current page.
    *
-   * @param string $thePageTitle The new title of the page.
+   * @param string $pageTitle The new title of the page.
    */
-  protected function setPageTitle($thePageTitle)
+  protected function setPageTitle($pageTitle)
   {
-    Abc::getInstance()->setPageTitle($thePageTitle);
+    Abc::getInstance()->setPageTitle($pageTitle);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ class DetailTable extends HtmlElement
    *
    * @var string
    */
-  protected $myRows;
+  protected $row;
   
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,7 +27,7 @@ class DetailTable extends HtmlElement
    */
   public function addRow($row)
   {
-    $this->myRows .= $row;
+    $this->row .= $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ class DetailTable extends HtmlElement
 
     // Generate HTML code for the table body.
     $ret .= '<tbody>';
-    $ret .= $this->myRows;
+    $ret .= $this->row;
     $ret .= '</tbody>';
 
     $ret .= '</table>';

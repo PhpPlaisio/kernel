@@ -17,9 +17,9 @@ class MenuInsertTableAction extends InsertItemTableAction
    */
   public function __construct()
   {
-    $this->myUrl = MenuInsertPage::getUrl();
+    $this->url = MenuInsertPage::getUrl();
 
-    $this->myTitle = 'Create menu entry';
+    $this->title = 'Create menu entry';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

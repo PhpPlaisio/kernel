@@ -26,7 +26,7 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
    *
    * @var Obfuscator
    */
-  private $myRolIdObfuscator;
+  private $rolIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -57,42 +57,42 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
     $slat_joint = new CheckboxSlatJoint('Grant');
     $this->addSlatJoint('rol_enabled', $slat_joint);
 
-    $this->myRolIdObfuscator = Abc::getObfuscator('rol');
+    $this->rolIdObfuscator = Abc::getObfuscator('rol');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function createRow($theLouverControl, $theData)
+  public function createRow($louverControl, $data)
   {
     /** @var SlatControl $row */
-    $row = $theLouverControl->addFormControl(new SlatControl($theData['rol_id']));
-    $row->setObfuscator($this->myRolIdObfuscator);
+    $row = $louverControl->addFormControl(new SlatControl($data['rol_id']));
+    $row->setObfuscator($this->rolIdObfuscator);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_id');
-    $control->setValue($theData['cmp_id']);
+    $control->setValue($data['cmp_id']);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_id_column');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_abbr');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'rol_id');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'rol_name');
-    $control->setValue($theData);
+    $control->setValue($data);
 
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'rol_enabled');
-    $control->setValue($theData['rol_enabled']);
+    $control->setValue($data['rol_enabled']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -15,13 +15,13 @@ class ModuleUpdateTableAction extends UpdateItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $theMdlId The ID of the module.
+   * @param int $mdlId The ID of the module.
    */
-  public function __construct($theMdlId)
+  public function __construct($mdlId)
   {
-    $this->myUrl = ModuleUpdatePage::getUrl($theMdlId);
+    $this->url = ModuleUpdatePage::getUrl($mdlId);
 
-    $this->myTitle = 'Modify module';
+    $this->title = 'Modify module';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -22,14 +22,14 @@ abstract class FunctionalityBasePage extends CorePage
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -64,30 +64,30 @@ abstract class FunctionalityBasePage extends CorePage
    */
   private function createForm()
   {
-    $modules = Abc::$DL->systemModuleGetAll($this->myLanId);
-    $words   = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->myLanId);
+    $modules = Abc::$DL->systemModuleGetAll($this->lanId);
+    $words   = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->lanId);
 
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Input for module.
     $input = new SelectControl('mdl_id');
     $input->setOptions($modules, 'mdl_id', 'mdl_name');
     $input->setEmptyOption();
-    $this->myForm->addFormControl($input, 'Module', true);
+    $this->form->addFormControl($input, 'Module', true);
 
     // Input for functionality name.
     // @todo Make control for reusing a word or create a new word. 
     $input = new SelectControl('wrd_id');
     $input->setOptions($words, 'wrd_id', 'wrd_text');
     $input->setEmptyOption();
-    $this->myForm->addFormControl($input, 'Name');
+    $this->form->addFormControl($input, 'Name');
 
     $input = new TextControl('fun_name');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $this->myForm->addFormControl($input, 'Name');
+    $this->form->addFormControl($input, 'Name');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ abstract class FunctionalityBasePage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -104,7 +104,7 @@ abstract class FunctionalityBasePage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 

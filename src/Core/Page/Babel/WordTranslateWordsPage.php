@@ -25,21 +25,21 @@ class WordTranslateWordsPage extends BabelPage
    *
    * @var array
    */
-  protected $myDetails;
+  protected $details;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * The ID of the word group.
    *
    * @var int
    */
-  protected $myWdgId;
+  protected $wdgId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -49,23 +49,23 @@ class WordTranslateWordsPage extends BabelPage
   {
     parent::__construct();
 
-    $this->myWdgId = self::getCgiId('wdg', 'wdg');
+    $this->wdgId = self::getCgiId('wdg', 'wdg');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $theWdgId The ID of the word group.
-   * @param int $theLanId The target language.
+   * @param int $wdgId The ID of the word group.
+   * @param int $lanId The target language.
    *
    * @return string
    */
-  public static function getUrl($theWdgId, $theLanId)
+  public static function getUrl($wdgId, $lanId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_TRANSLATE_WORDS, 'pag');
-    $url .= self::putCgiVar('wdg', $theWdgId, 'wdg');
-    $url .= self::putCgiVar('act_lan', $theLanId, 'lan');
+    $url .= self::putCgiVar('wdg', $wdgId, 'wdg');
+    $url .= self::putCgiVar('act_lan', $lanId, 'lan');
 
     return $url;
   }
@@ -86,16 +86,16 @@ class WordTranslateWordsPage extends BabelPage
    */
   private function createForm()
   {
-    $words = Abc::$DL->wordGroupGetAllWordsTranslator($this->myWdgId, $this->myActLanId);
+    $words = Abc::$DL->wordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     // Add field set.
     $field_set = new FieldSet('');
-    $this->myForm->addFieldSet($field_set);
+    $this->form->addFieldSet($field_set);
 
     // Create factory.
-    $factory = new BabelWordTranslateSlatControlFactory($this->myRefLanId, $this->myActLanId);
+    $factory = new BabelWordTranslateSlatControlFactory($this->refLanId, $this->actLanId);
     $factory->enableFilter();
 
     // Add submit button.
@@ -103,7 +103,7 @@ class WordTranslateWordsPage extends BabelPage
     $submit = new SubmitControl('submit');
     $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_TRANSLATE));
     $button->addFormControl($submit);
-    $this->myForm->addSubmitHandler($button, 'handleForm');
+    $this->form->addSubmitHandler($button, 'handleForm');
 
     // Put everything together in a LoverControl.
     $louver = new LouverControl('data');
@@ -123,12 +123,12 @@ class WordTranslateWordsPage extends BabelPage
    */
   private function databaseAction()
   {
-    $values  = $this->myForm->getValues();
-    $changes = $this->myForm->getChangedControls();
+    $values  = $this->form->getValues();
+    $changes = $this->form->getChangedControls();
 
     foreach ($changes['data'] as $wrd_id => $changed)
     {
-      Abc::$DL->wordTranslateWord($this->myUsrId, $wrd_id, $this->myActLanId, $values['data'][$wrd_id]['act_wdt_text']);
+      Abc::$DL->wordTranslateWord($this->usrId, $wrd_id, $this->actLanId, $values['data'][$wrd_id]['act_wdt_text']);
     }
   }
 
@@ -138,7 +138,7 @@ class WordTranslateWordsPage extends BabelPage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case 'handleForm':
@@ -146,7 +146,7 @@ class WordTranslateWordsPage extends BabelPage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -158,7 +158,7 @@ class WordTranslateWordsPage extends BabelPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->myWdgId, $this->myActLanId));
+    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->wdgId, $this->actLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

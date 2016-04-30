@@ -15,13 +15,13 @@ class CompanyUpdateTableAction extends UpdateItemTableAction
   /**
    * Object constructor.
    *
-   * @param int $theCmpId The ID of the target company.
+   * @param int $cmpId The ID of the target company.
    */
-  public function __construct($theCmpId)
+  public function __construct($cmpId)
   {
-    $this->myUrl = CompanyUpdatePage::getUrl($theCmpId);
+    $this->url = CompanyUpdatePage::getUrl($cmpId);
 
-    $this->myTitle = 'Modify Company';
+    $this->title = 'Modify Company';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

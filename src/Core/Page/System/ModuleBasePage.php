@@ -23,19 +23,19 @@ abstract class ModuleBasePage extends CorePage
    *
    * @var int
    */
-  protected $myButtonWrdId;
+  protected $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $myForm;
+  protected $form;
 
   /**
    * @var int The ID of de module to be updated or inserted.
    */
-  protected $myMdlId;
+  protected $mdlId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -70,9 +70,9 @@ abstract class ModuleBasePage extends CorePage
    */
   private function createForm()
   {
-    $words = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_MODULE, $this->myLanId);
+    $words = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
 
-    $this->myForm = new CoreForm();
+    $this->form = new CoreForm();
 
     if ($words)
     {
@@ -81,18 +81,18 @@ abstract class ModuleBasePage extends CorePage
       $input = new SelectControl('wrd_id');
       $input->setOptions($words, 'wrd_id', 'wrd_text');
       $input->setEmptyOption();
-      $this->myForm->addFormControl($input, 'Module Name');
+      $this->form->addFormControl($input, 'Module Name');
     }
 
     // Create a text box for (new) module name.
     $input = new TextControl('mdl_name');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $this->myForm->addFormControl($input, 'Module Name');
+    $this->form->addFormControl($input, 'Module Name');
 
     // Create a submit button.
-    $this->myForm->addSubmitButton($this->myButtonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
 
-    $this->myForm->addValidator(new SystemModuleInsertCompoundValidator());
+    $this->form->addValidator(new SystemModuleInsertCompoundValidator());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ abstract class ModuleBasePage extends CorePage
    */
   private function executeForm()
   {
-    $method = $this->myForm->execute();
+    $method = $this->form->execute();
     switch ($method)
     {
       case  'handleForm':
@@ -109,7 +109,7 @@ abstract class ModuleBasePage extends CorePage
         break;
 
       default:
-        $this->myForm->defaultHandler($method);
+        $this->form->defaultHandler($method);
     };
   }
 
@@ -121,7 +121,7 @@ abstract class ModuleBasePage extends CorePage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(ModuleDetailsPage::getUrl($this->myMdlId));
+    HttpHeader::redirectSeeOther(ModuleDetailsPage::getUrl($this->mdlId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -19,7 +19,7 @@ class FunctionalityInsertPage extends FunctionalityBasePage
   {
     parent::__construct();
 
-    $this->myButtonWrdId = C::WRD_ID_BUTTON_INSERT;
+    $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -38,15 +38,15 @@ class FunctionalityInsertPage extends FunctionalityBasePage
    */
   protected function dataBaseAction()
   {
-    $changes = $this->myForm->getChangedControls();
-    $values  = $this->myForm->getValues();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
     if ($values['fun_name'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->myUsrId, C::WDG_ID_FUNCTIONALITIES, false, false, $values['fun_name']);
+      $wrd_id = Abc::$DL->wordInsertWord($this->usrId, C::WDG_ID_FUNCTIONALITIES, false, false, $values['fun_name']);
     }
     else
     {
