@@ -5,5 +5,4 @@ bin/stratum
 build/
 composer.lock
 doc/
-src/C.php
 vendor/
