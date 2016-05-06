@@ -459,7 +459,7 @@ abstract class Abc
         $this->page->echoPage();
 
         // Flush the page content.
-        ob_flush();
+        if (ob_get_level()) ob_flush();
 
         $this->pageSize = $this->page->getPageSize();
       }
@@ -693,7 +693,7 @@ abstract class Abc
   private function logException($exception)
   {
     list($usec, $sec) = explode(' ', microtime());
-    $file_name = C::DIR_ERROR.'/error-'.($sec + $usec).'.log';
+    $file_name = DIR_ERROR.'/error-'.($sec + $usec).'.log';
     $fp        = fopen($file_name, 'a');
 
     $message = '';
