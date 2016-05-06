@@ -693,7 +693,7 @@ abstract class Abc
   private function logException($exception)
   {
     list($usec, $sec) = explode(' ', microtime());
-    $file_name = C::DIR_ERROR.'/error-'.($sec + $usec).'.log';
+    $file_name = DIR_ERROR.'/error-'.($sec + $usec).'.log';
     $fp        = fopen($file_name, 'a');
 
     $message = '';
