@@ -459,7 +459,7 @@ abstract class Abc
         $this->page->echoPage();
 
         // Flush the page content.
-        ob_flush();
+        if (ob_get_level()) ob_flush();
 
         $this->pageSize = $this->page->getPageSize();
       }
