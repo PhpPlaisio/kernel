@@ -102,7 +102,7 @@ begin
       inner join AUT_USER     usr  on  usr.cmp_id = cmp.cmp_id
       inner join AUT_PROFILE  pro  on  pro.pro_id = usr.pro_id
       inner join BBL_LANGUAGE lan  on  lan.lan_id = usr.lan_id
-      where cmp.cmp_abbr      = @CMP_ID_SYSTEM@
+      where cmp.cmp_id        = @CMP_ID_SYSTEM@
       and   usr.usr_anonymous = 1
       ;
     end if;
