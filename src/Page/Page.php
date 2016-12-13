@@ -434,7 +434,7 @@ abstract class Page
   /**
    * Must be implemented in child classes to echo the actual page content, i.e. the inner HTML of the body tag.
    *
-   * @return null
+   * @return void
    */
   abstract public function echoPage();
 
