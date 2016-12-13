@@ -1,5 +1,5 @@
 /**
- * Grants a role to a user.
+ * Grants a role to a user. If the role is already granted the granted interval will be updated.
  *
  * @param p_cmp_id         The ID of the company.
  * @param p_usr_id         The ID of the user.
