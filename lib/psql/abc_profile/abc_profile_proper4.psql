@@ -41,7 +41,9 @@ begin
     ,      2           src
     from       TMP_PROFILE2       tmp
     inner join AUT_USER           usr  on  usr.usr_id = tmp.usr_id
-    inner join AUT_USR_ROL        aur  on  aur.usr_id = tmp.usr_id
+    inner join AUT_USR_ROL        aur  on  aur.usr_id = tmp.usr_id and
+                                           curdate() between aur.aur_date_start
+                                                     and     aur.aur_date_stop
     inner join AUT_ROL_FUN        arf  on  arf.rol_id = aur.rol_id
     inner join AUT_FUNCTIONALITY  fun  on  fun.fun_id = arf.fun_id
     inner join AUT_PAG_FUN        apf  on  apf.fun_id = fun.fun_id
