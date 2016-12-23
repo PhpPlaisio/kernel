@@ -140,26 +140,18 @@ abstract class Page
    *
    * This method is a static wrapper around method {@link cssAppendPageSpecificSource}.
    *
-   * @param string      $className    The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                                  slashes to construct the filename relative to the resource root of the CSS
-   *                                  source.
-   * @param string|null $device       The device for which the CSS source is optimized for.
-   *                                  * null       Suitable for all devices. null is preferred over 'all'.
-   *                                  * aural      Speech synthesizers
-   *                                  * braille    Braille feedback devices
-   *                                  * handheld   Handheld devices (small screen, limited bandwidth)
-   *                                  * projection Projectors
-   *                                  * print      Print preview mode/printed pages
-   *                                  * screen     Computer screens
-   *                                  * tty        Teletypes and similar media using a fixed-pitch character grid
-   *                                  * tv         Television type devices (low resolution, limited scroll ability)
+   * @param string      $className The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
+   *                               slashes to construct the filename relative to the resource root of the CSS
+   *                               source.
+   * @param string|null $media     The media for which the CSS source is optimized for. Note: use null for 'all'
+   *                               devices; null is preferred over 'all'.
    *
    * @api
    * @since 1.0.0
    */
-  public static function cssStaticAppendClassSource($className, $device = null)
+  public static function cssStaticAppendClassSource($className, $media = null)
   {
-    self::$page->cssAppendPageSpecificSource($className, $device);
+    self::$page->cssAppendPageSpecificSource($className, $media);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -168,24 +160,16 @@ abstract class Page
    *
    * This method is a static wrapper around method {@link cssAppendSource}.
    *
-   * @param string      $source    The filename relative to the resource root of the CSS source.
-   * @param string|null $device    The device for which the CSS source is optimized for. Possible values:
-   *                               * null       Suitable for all devices. null is preferred over 'all'.
-   *                               * aural      Speech synthesizers
-   *                               * braille    Braille feedback devices
-   *                               * handheld   Handheld devices (small screen, limited bandwidth)
-   *                               * projection Projectors
-   *                               * print      Print preview mode/printed pages
-   *                               * screen     Computer screens
-   *                               * tty        Teletypes and similar media using a fixed-pitch character grid
-   *                               * tv         Television type devices (low resolution, limited scroll ability)
+   * @param string      $source The filename relative to the resource root of the CSS source.
+   * @param string|null $media  The media for which the CSS source is optimized for. Note: use null for 'all' devices;
+   *                            null is preferred over 'all'.
    *
    * @api
    * @since 1.0.0
    */
-  public static function cssStaticAppendSource($source, $device = null)
+  public static function cssStaticAppendSource($source, $media = null)
   {
-    self::$page->cssAppendSource($source, $device);
+    self::$page->cssAppendSource($source, $media);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -194,25 +178,17 @@ abstract class Page
    *
    * Do not use this method directly. Use {@link cssAppendPageSpecificSource} instead.
    *
-   * @param string      $source    The filename relative to the resource root of the CSS source.
-   * @param string|null $device    The device for which the CSS source is optimized for. Possible values:
-   *                               * null       Suitable for all devices. null is preferred over 'all'.
-   *                               * aural      Speech synthesizers
-   *                               * braille    Braille feedback devices
-   *                               * handheld   Handheld devices (small screen, limited bandwidth)
-   *                               * projection Projectors
-   *                               * print      Print preview mode/printed pages
-   *                               * screen     Computer screens
-   *                               * tty        Teletypes and similar media using a fixed-pitch character grid
-   *                               * tv         Television type devices (low resolution, limited scroll ability)
+   * @param string      $source The filename relative to the resource root of the CSS source.
+   * @param string|null $media  The media for which the CSS source is optimized for. Note: use null for 'all' devices;
+   *                            null is preferred over 'all'.
    *
    * @api
    * @since 1.0.0
    */
-  public static function cssStaticOptimizedAppendSource($source, $device = null)
+  public static function cssStaticOptimizedAppendSource($source, $media = null)
   {
     self::$page->cssSources[] = ['href'  => $source,
-                                 'media' => $device,
+                                 'media' => $media,
                                  'rel'   => 'stylesheet',
                                  'type'  => 'text/css'];
   }
@@ -223,15 +199,15 @@ abstract class Page
    *
    * If bivalent is applied returns:
    * <ul>
-   * <li>true if the CGI variable is set and is not empty
-   * <li>false otherwise.
-   * <ul>
+   *   <li>true if the CGI variable is set and is not empty
+   *   <li>false otherwise.
+   * </ul>
    * If trinary logic is applied returns:
    * <ul>
-   * <li>true if the CGI variable is set and is not empty
-   * <li>false if the CGI variable is set and is empty
-   * <li>null if the CGI variable not set.
-   * <ul>
+   *   <li>true if the CGI variable is set and is not empty
+   *   <li>false if the CGI variable is set and is empty
+   *   <li>null if the CGI variable not set.
+   * </ul>
    *
    * @param string $name    The name of the CGI variable.
    * @param bool   $trinary If true trinary (a.k.a  three-valued) logic will be applied. Otherwise, bivalent logic will
@@ -256,9 +232,9 @@ abstract class Page
   /**
    * Returns the value of an obfuscated database ID.
    *
-   * @param string $name       The name of the CGI variable.
-   * @param string $label      An alias for the column holding database ID and must corresponds with label that was
-   *                           used to obfuscate the database ID.
+   * @param string $name  The name of the CGI variable.
+   * @param string $label An alias for the column holding database ID and must corresponds with label that was used to
+   *                      obfuscate the database ID.
    *
    * @return int|null
    *
@@ -342,10 +318,10 @@ abstract class Page
    *
    * This method is a static wrapper around method {@link jsAdmPageSpecificFunctionCall}.
    *
-   * @param string $className         The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                                  slashes to construct the namespace.
-   * @param string $jsFunctionName    The function name inside the namespace.
-   * @param array  $args              The optional arguments for the function.
+   * @param string $className      The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
+   *                               slashes to construct the namespace.
+   * @param string $jsFunctionName The function name inside the namespace.
+   * @param array  $args           The optional arguments for the function.
    *
    * @api
    * @since 1.0.0
@@ -437,10 +413,10 @@ abstract class Page
   /**
    * Returns a string with holding a CGI variable that can be used as a part of a URL.
    *
-   * @param string      $name       The name of the CGI variable.
-   * @param mixed       $value      The value (must be a scalar) of the CGI variable.
-   * @param string|null $label      Must only be used if the CGI variable is a database ID. An alias for the column
-   *                                holding database ID.
+   * @param string      $name  The name of the CGI variable.
+   * @param mixed       $value The value (must be a scalar) of the CGI variable.
+   * @param string|null $label Must only be used if the CGI variable is a database ID. An alias for the column holding
+   *                           database ID.
    *
    * @return string
    *
@@ -524,6 +500,48 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Adds a meta element to this page.
+   *
+   * @param array[] $attributes The attributes of the meta element.
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function metaAddElement($attributes)
+  {
+    $this->metaAttributes[] = $attributes;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a word to the key words to be included in the keyword meta element of this page.
+   *
+   * @param string $keyword The keyword.
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function metaAddKeyword($keyword)
+  {
+    $this->keywords[] = $keyword;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a word to the key words to be included in the keyword meta element of this page.
+   *
+   * @param string[] $keywords The keywords.
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function metaAddKeywords($keywords)
+  {
+    $this->keywords = array_merge($this->keywords, $keywords);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Appends with a separator a string to the page title
    *
    * @param string $pageTitleAddendum The text to append to the page title.
@@ -540,53 +558,36 @@ abstract class Page
   /**
    * Adds a page specific CCS file to the header of this page.
    *
-   * @param string      $className    The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                                  slashes to construct the filename relative to the resource root of the CSS
-   *                                  source.
-   * @param string|null $device       The device for which the CSS source is optimized for.
-   *                                  * null       Suitable for all devices. null is preferred over 'all'.
-   *                                  * aural      Speech synthesizers
-   *                                  * braille    Braille feedback devices
-   *                                  * handheld   Handheld devices (small screen, limited bandwidth)
-   *                                  * projection Projectors
-   *                                  * print      Print preview mode/printed pages
-   *                                  * screen     Computer screens
-   *                                  * tty        Teletypes and similar media using a fixed-pitch character grid
-   *                                  * tv         Television type devices (low resolution, limited scroll ability)
+   * @param string      $className The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
+   *                               slashes to construct the filename relative to the resource root of the CSS source.
+   * @param string|null $media     The media for which the CSS source is optimized for. Note: use null for 'all'
+   *                               devices; null is preferred over 'all'.
    *
    * @api
    * @since 1.0.0
    */
-  protected function cssAppendPageSpecificSource($className, $device = null)
+  protected function cssAppendPageSpecificSource($className, $media = null)
   {
     // Construct the filename of the CSS file.
     $filename = '/css/'.str_replace('\\', '/', $className);
-    if (isset($device)) $filename .= '.'.$device;
+    if (isset($media)) $filename .= '.'.$media;
     $filename .= '.css';
 
-    $this->cssAppendSource($filename, $device);
+    $this->cssAppendSource($filename, $media);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a CCS file to the header of this page.
    *
-   * @param string      $source    The filename relative to the resource root of the CSS source.
-   * @param string|null $device    The device for which the CSS source is optimized for. Possible values:
-   *                               * null       Suitable for all devices. null is preferred over 'all'.
-   *                               * aural      Speech synthesizers
-   *                               * braille    Braille feedback devices
-   *                               * handheld   Handheld devices (small screen, limited bandwidth)
-   *                               * projection Projectors
-   *                               * print      Print preview mode/printed pages
-   *                               * screen     Computer screens
-   *                               * tty        Teletypes and similar media using a fixed-pitch character grid
-   *                               * tv         Television type devices (low resolution, limited scroll ability)
+   * @param string      $source The filename relative to the resource root of the CSS source.
+   * @param string|null $media  The media for which the CSS source is optimized for. Note: use null for 'all' devices;
+   *                            null is preferred over 'all'.
    *
    * @api
    * @since 1.0.0
    */
-  protected function cssAppendSource($source, $device = null)
+  protected function cssAppendSource($source, $media = null)
   {
     $path = HOME.'/www'.$source;
     if (!file_exists($path))
@@ -594,7 +595,7 @@ abstract class Page
       throw new LogicException("CSS file '%s' does not exists.", $source);
     }
 
-    $this->cssOptimizedAppendSource($source, $device);
+    $this->cssOptimizedAppendSource($source, $media);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -603,22 +604,14 @@ abstract class Page
    *
    * Do not use this method directly. Use {@link cssAppendPageSpecificSource} instead.
    *
-   * @param string      $source    The filename relative to the resource root of the CSS source.
-   * @param string|null $device    The device for which the CSS source is optimized for. Possible values:
-   *                               * null       Suitable for all devices. null is preferred over 'all'.
-   *                               * aural      Speech synthesizers
-   *                               * braille    Braille feedback devices
-   *                               * handheld   Handheld devices (small screen, limited bandwidth)
-   *                               * projection Projectors
-   *                               * print      Print preview mode/printed pages
-   *                               * screen     Computer screens
-   *                               * tty        Teletypes and similar media using a fixed-pitch character grid
-   *                               * tv         Television type devices (low resolution, limited scroll ability)
+   * @param string      $source The filename relative to the resource root of the CSS source.
+   * @param string|null $media  The media for which the CSS source is optimized for. Note: use null for 'all' devices;
+   *                            null is preferred over 'all'.
    */
-  protected function cssOptimizedAppendSource($source, $device = null)
+  protected function cssOptimizedAppendSource($source, $media = null)
   {
     $this->cssSources[] = ['href'  => $source,
-                           'media' => $device,
+                           'media' => $media,
                            'rel'   => 'stylesheet',
                            'type'  => 'text/css'];
   }
@@ -809,10 +802,10 @@ abstract class Page
    * $this->jsAdmPageSpecificFunctionCall(__CLASS__, 'init');
    * ```
    *
-   * @param string $className         The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                                  slashes to construct the namespace.
-   * @param string $jsFunctionName    The function name inside the namespace.
-   * @param array  $args              The optional arguments for the function.
+   * @param string $className      The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward slashes
+   *                               to construct the namespace.
+   * @param string $jsFunctionName The function name inside the namespace.
+   * @param array  $args           The optional arguments for the function.
    *
    * @api
    * @since 1.0.0
@@ -832,8 +825,8 @@ abstract class Page
    * $this->jsAdmSetPageSpecificMain(__CLASS__);
    * ```
    *
-   * @param string $className    The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                             slashes to construct the namespace.
+   * @param string $className The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward slashes to
+   *                          construct the namespace.
    *
    * @api
    * @since 1.0.0
@@ -854,48 +847,6 @@ abstract class Page
     }
 
     $this->jsTrailerAttributes = ['src' => '/js/require.js', 'data-main' => $filename];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a meta element to this page.
-   *
-   * @param array[] $attributes The attributes of the meta element.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  public function metaAddElement($attributes)
-  {
-    $this->metaAttributes[] = $attributes;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a word to the key words to be included in the keyword meta element of this page.
-   *
-   * @param string $keyword The keyword.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  public function metaAddKeyword($keyword)
-  {
-    $this->keywords[] = $keyword;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a word to the key words to be included in the keyword meta element of this page.
-   *
-   * @param string[] $keywords The keywords.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  public function metaAddKeywords($keywords)
-  {
-    $this->keywords = array_merge($this->keywords, $keywords);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
