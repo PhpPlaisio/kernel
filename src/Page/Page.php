@@ -118,6 +118,9 @@ abstract class Page
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
+   *
+   * @api
+   * @since 1.0.0
    */
   public function __construct()
   {
@@ -150,6 +153,9 @@ abstract class Page
    *                                  * screen     Computer screens
    *                                  * tty        Teletypes and similar media using a fixed-pitch character grid
    *                                  * tv         Television type devices (low resolution, limited scroll ability)
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function cssStaticAppendClassSource($className, $device = null)
   {
@@ -173,6 +179,9 @@ abstract class Page
    *                               * screen     Computer screens
    *                               * tty        Teletypes and similar media using a fixed-pitch character grid
    *                               * tv         Television type devices (low resolution, limited scroll ability)
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function cssStaticAppendSource($source, $device = null)
   {
@@ -196,6 +205,9 @@ abstract class Page
    *                               * screen     Computer screens
    *                               * tty        Teletypes and similar media using a fixed-pitch character grid
    *                               * tv         Television type devices (low resolution, limited scroll ability)
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function cssStaticOptimizedAppendSource($source, $device = null)
   {
@@ -226,6 +238,9 @@ abstract class Page
    *                        be applied.
    *
    * @return bool|null
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function getCgiBool($name, $trinary = false)
   {
@@ -246,6 +261,9 @@ abstract class Page
    *                           used to obfuscate the database ID.
    *
    * @return int|null
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function getCgiId($name, $label)
   {
@@ -271,6 +289,9 @@ abstract class Page
    * @return string|null
    *
    * @throws InvalidUrlException
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function getCgiUrl($name, $forceRelative = true)
   {
@@ -297,6 +318,9 @@ abstract class Page
    * @param string $name The name of the CGI variable.
    *
    * @return string|null
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function getCgiVar($name)
   {
@@ -322,6 +346,9 @@ abstract class Page
    *                                  slashes to construct the namespace.
    * @param string $jsFunctionName    The function name inside the namespace.
    * @param array  $args              The optional arguments for the function.
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function jsAdmStaticClassSpecificFunctionCall($className, $jsFunctionName, $args = [])
   {
@@ -337,6 +364,9 @@ abstract class Page
    * @param string $namespace      The namespace as in RequireJS.
    * @param string $jsFunctionName The function name inside the namespace.
    * @param array  $args           The optional arguments for the function.
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function jsAdmStaticFunctionCall($namespace, $jsFunctionName, $args = [])
   {
@@ -384,6 +414,9 @@ abstract class Page
    *                        be applied.
    *
    * @return string
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function putCgiBool($name, $value, $trinary = false)
   {
@@ -410,6 +443,9 @@ abstract class Page
    *                                holding database ID.
    *
    * @return string
+   *
+   * @api
+   * @since 1.0.0
    */
   public static function putCgiVar($name, $value, $label = null)
   {
@@ -431,6 +467,9 @@ abstract class Page
    * If a page needs additional and page specific authorization and/or security checks this method must be overridden.
    *
    * When a HTTP request must be denied a NotAuthorizedException must be raised.
+   *
+   * @api
+   * @since 1.0.0
    */
   public function checkAuthorization()
   {
@@ -442,6 +481,9 @@ abstract class Page
    * Must be implemented in child classes to echo the actual page content, i.e. the inner HTML of the body tag.
    *
    * @return void
+   *
+   * @api
+   * @since 1.0.0
    */
   abstract public function echoPage();
 
@@ -471,6 +513,9 @@ abstract class Page
    * preferred URI with HTTP status code 301 (Moved Permanently).
    *
    * @return string|null The preferred URI of this page.
+   *
+   * @api
+   * @since 1.0.0
    */
   public function getPreferredUri()
   {
@@ -482,6 +527,9 @@ abstract class Page
    * Appends with a separator a string to the page title
    *
    * @param string $pageTitleAddendum The text to append to the page title.
+   *
+   * @api
+   * @since 1.0.0
    */
   protected function appendPageTitle($pageTitleAddendum)
   {
@@ -505,6 +553,9 @@ abstract class Page
    *                                  * screen     Computer screens
    *                                  * tty        Teletypes and similar media using a fixed-pitch character grid
    *                                  * tv         Television type devices (low resolution, limited scroll ability)
+   *
+   * @api
+   * @since 1.0.0
    */
   protected function cssAppendPageSpecificSource($className, $device = null)
   {
@@ -531,6 +582,9 @@ abstract class Page
    *                               * screen     Computer screens
    *                               * tty        Teletypes and similar media using a fixed-pitch character grid
    *                               * tv         Television type devices (low resolution, limited scroll ability)
+   *
+   * @api
+   * @since 1.0.0
    */
   protected function cssAppendSource($source, $device = null)
   {
@@ -695,6 +749,9 @@ abstract class Page
    * @param string $namespace      The namespace as in RequireJS.
    * @param string $jsFunctionName The function name inside the namespace.
    * @param array  $args           The optional arguments for the function.
+   *
+   * @api
+   * @since 1.0.0
    */
   protected function jsAdmFunctionCall($namespace, $jsFunctionName, $args = [])
   {
@@ -756,6 +813,9 @@ abstract class Page
    *                                  slashes to construct the namespace.
    * @param string $jsFunctionName    The function name inside the namespace.
    * @param array  $args              The optional arguments for the function.
+   *
+   * @api
+   * @since 1.0.0
    */
   protected function jsAdmPageSpecificFunctionCall($className, $jsFunctionName, $args = [])
   {
@@ -774,6 +834,9 @@ abstract class Page
    *
    * @param string $className    The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
    *                             slashes to construct the namespace.
+   *
+   * @api
+   * @since 1.0.0
    */
   protected function jsAdmSetPageSpecificMain($className)
   {
@@ -798,6 +861,9 @@ abstract class Page
    * Adds a meta element to this page.
    *
    * @param array[] $attributes The attributes of the meta element.
+   *
+   * @api
+   * @since 1.0.0
    */
   public function metaAddElement($attributes)
   {
@@ -809,6 +875,9 @@ abstract class Page
    * Adds a word to the key words to be included in the keyword meta element of this page.
    *
    * @param string $keyword The keyword.
+   *
+   * @api
+   * @since 1.0.0
    */
   public function metaAddKeyword($keyword)
   {
@@ -820,6 +889,9 @@ abstract class Page
    * Adds a word to the key words to be included in the keyword meta element of this page.
    *
    * @param string[] $keywords The keywords.
+   *
+   * @api
+   * @since 1.0.0
    */
   public function metaAddKeywords($keywords)
   {
