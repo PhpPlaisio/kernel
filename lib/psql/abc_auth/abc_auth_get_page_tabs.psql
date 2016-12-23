@@ -21,7 +21,9 @@ begin
                                         app.pro_id = p_pro_id
   inner join AUT_PAG_FUN       apf  on  apf.pag_id = pag.pag_id
   inner join AUT_ROL_FUN       arl  on  arl.fun_id = apf.fun_id
-  inner join AUT_USR_ROL       aur  on  aur.rol_id = arl.rol_id
+  inner join AUT_USR_ROL       aur  on  aur.rol_id = arl.rol_id and
+                                        curdate() between aur.aur_date_start
+                                                  and     aur.aur_date_stop
   inner join BBL_WORD_TEXT     wd1  on  wd1.wrd_id = pag.wrd_id and
                                         wd1.lan_id = p_lan_id
   where pag.ptb_id = p_ptb_id
