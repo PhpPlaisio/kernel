@@ -74,6 +74,13 @@ abstract class Page
   protected $lanId;
 
   /**
+   * The attributes of the meta elements of this page.
+   *
+   * @var array[]
+   */
+  protected $metaAttributes = [];
+
+  /**
    * The profile ID (pro_id) of the page requestor.
    *
    * @var int
@@ -472,28 +479,6 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adds a word to the key words to be included in a meta tag for this page.
-   *
-   * @param string $keyword The keyword.
-   */
-  protected function addKeyword($keyword)
-  {
-    $this->keywords[] = $keyword;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds words to the key words to be included in a meta tag for this page.
-   *
-   * @param string[] $keywords The keywords.
-   */
-  protected function addKeywords($keywords)
-  {
-    $this->keywords = array_merge($this->keywords, $keywords);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Appends with a separator a string to the page title
    *
    * @param string $pageTitleAddendum The text to append to the page title.
@@ -605,27 +590,21 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Only and only if there are keywords for this page echos the keywords meta tag.
-   */
-  protected function echoMetaTagKeywords()
-  {
-    if (!empty($this->keywords))
-    {
-      echo '<meta name="keywords"', Html::generateAttribute('content', implode(',', $this->keywords)), '/>';
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Echos the meta tags within the HTML document.
    */
   protected function echoMetaTags()
   {
-    // Echo meta tag that specifies the character encoding.
-    echo '<meta', Html::generateAttribute('charset', Html::$encoding), '/>';
+    if (!empty($this->keywords))
+    {
+      $this->metaAttributes[] = ['name' => 'keywords', 'content' => implode(',', $this->keywords)];
+    }
 
-    // Echo meta tag for keywords (if any).
-    $this->echoMetaTagKeywords();
+    $this->metaAttributes[] = ['charset' => Html::$encoding];
+
+    foreach ($this->metaAttributes as $metaAttribute)
+    {
+      echo Html::generateVoidElement('meta', $metaAttribute);
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -812,6 +791,39 @@ abstract class Page
     }
 
     $this->jsTrailerAttributes = ['src' => '/js/require.js', 'data-main' => $filename];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a meta element to this page.
+   *
+   * @param array[] $attributes The attributes of the meta element.
+   */
+  public function metaAddElement($attributes)
+  {
+    $this->metaAttributes[] = $attributes;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a word to the key words to be included in the keyword meta element of this page.
+   *
+   * @param string $keyword The keyword.
+   */
+  public function metaAddKeyword($keyword)
+  {
+    $this->keywords[] = $keyword;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a word to the key words to be included in the keyword meta element of this page.
+   *
+   * @param string[] $keywords The keywords.
+   */
+  public function metaAddKeywords($keywords)
+  {
+    $this->keywords = array_merge($this->keywords, $keywords);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
