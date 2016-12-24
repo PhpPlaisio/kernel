@@ -24,7 +24,7 @@ abstract class Page
   private static $page;
 
   /**
-   * The Company id (cmp_id) of the page requester.
+   * The ID of the company of the page requester.
    *
    * @var int
    */
@@ -289,7 +289,7 @@ abstract class Page
   /**
    * Returns the value of a CGI variable.
    *
-   * For retrieving a CGI variable with a relative URL use {@link getCgiUrl}.
+   * For retrieving a CGI variable with a relative URI use {@link getCgiUrl}.
    *
    * @param string $name The name of the CGI variable.
    *
@@ -476,7 +476,7 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * If this page can be requested via multiple URL and one URL is preferred this method must be overridden to return
+   * If this page can be requested via multiple URI's and one URI is preferred this method must be overridden to return
    * the preferred URI of this page.
    *
    * Typically this method will be used when the URL contains some ID and an additional title.
@@ -514,7 +514,7 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adds a word to the key words to be included in the keyword meta element of this page.
+   * Adds a keyword to the keywords to be included in the keyword meta element of this page.
    *
    * @param string $keyword The keyword.
    *
@@ -528,7 +528,7 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adds a word to the key words to be included in the keyword meta element of this page.
+   * Adds keywords to the keywords to be included in the keyword meta element of this page.
    *
    * @param string[] $keywords The keywords.
    *
