@@ -24,7 +24,7 @@ begin
   ,                        aur_date_start
   ,                        aur_date_stop )
   values( p_cmp_id
-  ,       p_rel_id
+  ,       p_usr_id
   ,       p_rol_id
   ,       p_aur_date_start
   ,       p_aur_date_stop )
