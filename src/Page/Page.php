@@ -502,7 +502,7 @@ abstract class Page
   /**
    * Adds a meta element to this page.
    *
-   * @param array[] $attributes The attributes of the meta element.
+   * @param array $attributes The attributes of the meta element.
    *
    * @api
    * @since 1.0.0
