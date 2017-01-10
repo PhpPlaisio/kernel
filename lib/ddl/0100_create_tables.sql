@@ -2,10 +2,10 @@
 /* DDL SCRIPT                                                                     */
 /*================================================================================*/
 /*  Title    : ABC Framework                                                      */
-/*  FileName : framework.ecm                                                      */
+/*  FileName : abc.ecm                                                            */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : zondag 10 april 2016                                               */
+/*  Date     : dinsdag 10 januari 2017                                            */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -17,79 +17,6 @@ CREATE TABLE `AUT_COMPANY` (
   `cmp_label` VARCHAR(20) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`cmp_id`)
 );
-
-CREATE TABLE `ABC_BLOB_DATA` (
-  `bdt_id` INTEGER UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `bdt_inserted` DATETIME NOT NULL,
-  `bdt_crc32` INT UNSIGNED NOT NULL,
-  `bdt_mime_type` VARCHAR(48) NOT NULL,
-  `bdt_size` INTEGER UNSIGNED NOT NULL,
-  `bdt_data` LONGBLOB NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`bdt_id`)
-);
-
-/*
-COMMENT ON COLUMN `ABC_BLOB_DATA`.`bdt_inserted`
-The timestamp when this BLOB was created.
-*/
-
-/*
-COMMENT ON COLUMN `ABC_BLOB_DATA`.`bdt_crc32`
-The CRC32 checksum of the BLOB.
-*/
-
-/*
-COMMENT ON COLUMN `ABC_BLOB_DATA`.`bdt_mime_type`
-The MIME type of the BLOB.
-*/
-
-/*
-COMMENT ON COLUMN `ABC_BLOB_DATA`.`bdt_size`
-The size in bytes of the BLOB.
-*/
-
-/*
-COMMENT ON COLUMN `ABC_BLOB_DATA`.`bdt_data`
-The actual BLOB.
-*/
-
-CREATE TABLE `ABC_BLOB` (
-  `blb_id` INTEGER UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `bdt_id` INTEGER UNSIGNED NOT NULL,
-  `blb_date` DATETIME NOT NULL,
-  `blb_crc32` INT UNSIGNED NOT NULL,
-  `blb_file_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `blb_mime_type` VARCHAR(48) NOT NULL,
-  `blb_size` INTEGER UNSIGNED NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`blb_id`)
-);
-
-/*
-COMMENT ON COLUMN `ABC_BLOB`.`blb_date`
-The timestamp when the BLOB was inserted or when known the last modification time of the BLOB.
-*/
-
-/*
-COMMENT ON COLUMN `ABC_BLOB`.`blb_crc32`
-The CRC32 checksum of the BLOB.
-*/
-
-/*
-COMMENT ON COLUMN `ABC_BLOB`.`blb_file_name`
-The name of the BLOB.
-*/
-
-/*
-COMMENT ON COLUMN `ABC_BLOB`.`blb_mime_type`
-The MIME type of the BLOB.
-*/
-
-/*
-COMMENT ON COLUMN `ABC_BLOB`.`blb_size`
-The size in bytes of the BLOB.
-*/
 
 CREATE TABLE `AUT_CONFIG_CLASS` (
   `ccl_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -519,22 +446,6 @@ CREATE TABLE `LOG_REQUEST_QUERY` (
 /* CREATE INDEXES                                                                 */
 /*================================================================================*/
 
-CREATE INDEX `bdt_crc32` ON `ABC_BLOB_DATA` (`bdt_crc32`);
-
-CREATE INDEX `bdt_inserted` ON `ABC_BLOB_DATA` (`bdt_inserted`);
-
-CREATE INDEX `bdt_mime_type` ON `ABC_BLOB_DATA` (`bdt_mime_type`);
-
-CREATE INDEX `bdt_size` ON `ABC_BLOB_DATA` (`bdt_size`);
-
-CREATE INDEX `cmp_id` ON `ABC_BLOB_DATA` (`cmp_id`);
-
-CREATE INDEX `bdt_id` ON `ABC_BLOB` (`bdt_id`);
-
-CREATE INDEX `cmp_id` ON `ABC_BLOB` (`cmp_id`);
-
-CREATE INDEX `IX_ABC_BLOB1` ON `ABC_BLOB` (`blb_crc32`);
-
 CREATE INDEX `IX_AUT_CONFIG1` ON `AUT_CONFIG` (`cmp_id`);
 
 CREATE INDEX `IX_AUT_CONFIG2` ON `AUT_CONFIG` (`ccl_id`);
@@ -648,24 +559,6 @@ CREATE INDEX `rql_id` ON `LOG_REQUEST_QUERY` (`rql_id`);
 /*================================================================================*/
 /* CREATE FOREIGN KEYS                                                            */
 /*================================================================================*/
-
-ALTER TABLE `ABC_BLOB_DATA`
-  ADD CONSTRAINT `FK_ABC_BLOB_DATA_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `ABC_BLOB`
-  ADD CONSTRAINT `FK_ABC_BLOB_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `ABC_BLOB`
-  ADD CONSTRAINT `FK_ABC_BLOB_ABC_BLOB_DATA`
-  FOREIGN KEY (`bdt_id`) REFERENCES `ABC_BLOB_DATA` (`bdt_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
 
 ALTER TABLE `AUT_CONFIG`
   ADD CONSTRAINT `FK_AUT_CONFIG_AUT_COMPANY`
