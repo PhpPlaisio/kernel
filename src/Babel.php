@@ -23,7 +23,7 @@ class Babel
       self::$ourLanId = Abc::getInstance()->getLanId();
     }
 
-    return Abc::$DL->wordGetWord($wrdId, self::$ourLanId);
+    return Abc::$DL->bblWordGetWord($wrdId, self::$ourLanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

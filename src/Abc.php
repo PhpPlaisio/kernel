@@ -347,7 +347,7 @@ abstract class Abc
    */
   public function getPathAuth($pagId)
   {
-    return self::$DL->authGetPageAuth($this->sessionInfo['cmp_id'], $this->sessionInfo['pro_id'], $pagId);
+    return self::$DL->abcAuthGetPageAuth($this->sessionInfo['cmp_id'], $this->sessionInfo['pro_id'], $pagId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -621,11 +621,11 @@ abstract class Abc
       $pag_alias = null;
     }
 
-    $this->pageInfo = self::$DL->authGetPageInfo($this->sessionInfo['cmp_id'],
-                                                 $pag_id,
-                                                 $this->sessionInfo['pro_id'],
-                                                 $this->sessionInfo['lan_id'],
-                                                 $pag_alias);
+    $this->pageInfo = self::$DL->abcAuthGetPageInfo($this->sessionInfo['cmp_id'],
+                                                    $pag_id,
+                                                    $this->sessionInfo['pro_id'],
+                                                    $this->sessionInfo['lan_id'],
+                                                    $pag_alias);
     if (!$this->pageInfo)
     {
       if (isset($pag_id))
@@ -651,7 +651,7 @@ abstract class Abc
   private function getSession()
   {
     $cookie            = isset($_COOKIE['ses_session_token']) ? $_COOKIE['ses_session_token'] : null;
-    $this->sessionInfo = self::$DL->sessionGetSession($this->domain, $cookie);
+    $this->sessionInfo = self::$DL->abcSessionGetSession($this->domain, $cookie);
 
     if (isset($_SERVER['HTTPS']))
     {
@@ -756,7 +756,7 @@ abstract class Abc
    */
   private function requestLog()
   {
-    $this->rqlId = self::$DL->requestLogInsertRequest(
+    $this->rqlId = self::$DL->abcRequestLogInsertRequest(
       $this->sessionInfo['ses_id'],
       $this->sessionInfo['cmp_id'],
       $this->sessionInfo['usr_id'],
@@ -803,7 +803,7 @@ abstract class Abc
         }
         else
         {
-          self::$DL->RequestLogInsertCookie($this->rqlId, $var, $value);
+          self::$DL->abcRequestLogInsertCookie($this->rqlId, $var, $value);
         }
       }
     }
@@ -833,7 +833,7 @@ abstract class Abc
         }
         else
         {
-          self::$DL->RequestLogInsertPost($this->rqlId, $var, $value);
+          self::$DL->abcRequestLogInsertPost($this->rqlId, $var, $value);
         }
       }
     }
@@ -849,7 +849,7 @@ abstract class Abc
 
     foreach ($queries as $query)
     {
-      self::$DL->requestLogInsertQuery($this->rqlId, $query['query'], $query['time']);
+      self::$DL->abcRequestLogInsertQuery($this->rqlId, $query['query'], $query['time']);
     }
   }
 
@@ -912,7 +912,7 @@ abstract class Abc
    */
   private function updateSession()
   {
-    self::$DL->sessionUpdate($this->getSesId());
+    self::$DL->abcSessionUpdate($this->getSesId());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
