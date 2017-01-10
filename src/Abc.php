@@ -2,6 +2,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc;
 
+use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\Helper\HttpHeader;
@@ -13,9 +14,7 @@ use SetBased\Stratum\MySql\StaticDataLayer;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * The main helper class for the ABC Abc.
- *
- * @todo Use composition for exception and request logging.
+ * The main helper class for the ABC Framework.
  */
 abstract class Abc
 {
@@ -42,7 +41,9 @@ abstract class Abc
   protected static $obfuscatorFactory;
 
   /**
-   * @var Abc A reference to the singleton instance of this class.
+   * A reference to the singleton instance of this class.
+   *
+   * @var Abc
    */
   private static $instance;
 
@@ -192,6 +193,14 @@ abstract class Abc
 
     return false;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the BLOB Store object.
+   *
+   * @return BlobStore
+   */
+  abstract public function getBlobStore();
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
