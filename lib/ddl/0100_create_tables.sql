@@ -5,7 +5,7 @@
 /*  FileName : abc.ecm                                                            */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : dinsdag 10 januari 2017                                            */
+/*  Date     : donderdag 19 januari 2017                                          */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -354,17 +354,6 @@ CREATE TABLE `BBL_WORD_TRANSLATE_HISTORY` (
   `wth_text` TINYTEXT NOT NULL
 )
 engine=innodb;
-
-CREATE TABLE `ELM_ATTRIBUTE` (
-  `mat_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `mat_label` VARCHAR(30) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`mat_id`)
-);
-
-CREATE TABLE `ELM_AUTHORIZED_DOMAIN` (
-  `atd_domain_name` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`atd_domain_name`)
-);
 
 CREATE TABLE `LOG_EVENT_TYPE` (
   `let_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
