@@ -6,6 +6,7 @@ use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
 use SetBased\Abc\Page\Page;
@@ -193,6 +194,14 @@ abstract class Abc
 
     return false;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Creates an empty mail message.
+   *
+   * @return MailMessage
+   */
+  abstract public function createMailMessage();
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

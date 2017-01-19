@@ -20,6 +20,7 @@
     "setbased/exception": "1.*",
     "setbased/abc-html": "1.*",
     "setbased/abc-http-header": "1.*",
+    "setbased/abc-mail-message": "dev-master",
     "setbased/abc-obfuscator-interface": "1.*",
     "setbased/abc-url": "1.*",
     "setbased/php-affirm": "*",
