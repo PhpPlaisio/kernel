@@ -467,7 +467,7 @@ abstract class Page
   {
     if ($label!==null)
     {
-      trigger_error("Parameter $label is depreciated. use method putCgiId.", E_USER_NOTICE);
+      trigger_error('Parameter $label is depreciated. Use method putCgiId.', E_USER_NOTICE);
 
       return self::putCgiId($name, $value, $label);
     }
