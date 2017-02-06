@@ -258,10 +258,10 @@ abstract class Page
    * This method will protect against unvalidated redirects, see
    * <https://www.owasp.org/index.php/Unvalidated_Redirects_and_Forwards_Cheat_Sheet>.
    *
-   * @param string   $name          The name of the CGI variable.
-   * @param int|null $default       The URL to be used when the CGI variable is not set.
-   * @param bool     $forceRelative If set the URL must be a relative URL. If the URL is not a relative URL an exception
-   *                                will be thrown.
+   * @param string      $name          The name of the CGI variable.
+   * @param string|null $default       The URL to be used when the CGI variable is not set.
+   * @param bool        $forceRelative If set the URL must be a relative URL. If the URL is not a relative URL an
+   *                                   exception will be thrown.
    *
    * @return string|null
    *
