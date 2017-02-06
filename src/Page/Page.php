@@ -232,23 +232,23 @@ abstract class Page
   /**
    * Returns the value of an obfuscated database ID.
    *
-   * @param string $name  The name of the CGI variable.
-   * @param string $label An alias for the column holding database ID and must corresponds with label that was used to
-   *                      obfuscate the database ID.
+   * @param string   $name    The name of the CGI variable.
+   * @param string   $label   An alias for the column holding database ID and must corresponds with label that was used
+   *                          to obfuscate the database ID.
+   * @param int|null $default The value to be used when the CGI variable is not set.
    *
    * @return int|null
-   *
    * @api
    * @since 1.0.0
    */
-  public static function getCgiId($name, $label)
+  public static function getCgiId($name, $label, $default = null)
   {
     if (isset($_GET[$name]))
     {
       return Abc::deObfuscate($_GET[$name], $label);
     }
 
-    return null;
+    return $default;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -258,9 +258,10 @@ abstract class Page
    * This method will protect against unvalidated redirects, see
    * <https://www.owasp.org/index.php/Unvalidated_Redirects_and_Forwards_Cheat_Sheet>.
    *
-   * @param string $name          The name of the CGI variable.
-   * @param bool   $forceRelative If set the URL must be a relative URL. If the URL is not a relative URL an exception
-   *                              will be thrown.
+   * @param string   $name          The name of the CGI variable.
+   * @param int|null $default       The URL to be used when the CGI variable is not set.
+   * @param bool     $forceRelative If set the URL must be a relative URL. If the URL is not a relative URL an exception
+   *                                will be thrown.
    *
    * @return string|null
    *
@@ -269,20 +270,16 @@ abstract class Page
    * @api
    * @since 1.0.0
    */
-  public static function getCgiUrl($name, $forceRelative = true)
+  public static function getCgiUrl($name, $default = null, $forceRelative = true)
   {
-    if (isset($_GET[$name]))
-    {
-      $url = urldecode($_GET[$name]);
-      if ($forceRelative && !Url::isRelative($url))
-      {
-        throw new InvalidUrlException("Value '%s' of CGI variable '%s' is not a relative URL.", $url, $name);
-      }
+    $url = (isset($_GET[$name])) ? urldecode($_GET[$name]) : $default;
 
-      return $url;
+    if ($forceRelative && $url!==null && !Url::isRelative($url))
+    {
+      throw new InvalidUrlException("Value '%s' of CGI variable '%s' is not a relative URL", $url, $name);
     }
 
-    return null;
+    return $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -291,21 +288,22 @@ abstract class Page
    *
    * For retrieving a CGI variable with a relative URI use {@link getCgiUrl}.
    *
-   * @param string $name The name of the CGI variable.
+   * @param string      $name    The name of the CGI variable.
+   * @param string|null $default The value to be used when the CGI variable is not set.
    *
    * @return string|null
    *
    * @api
    * @since 1.0.0
    */
-  public static function getCgiVar($name)
+  public static function getCgiVar($name, $default = null)
   {
     if (isset($_GET[$name]))
     {
-      return urlencode($_GET[$name]);
+      return urldecode($_GET[$name]);
     }
 
-    return null;
+    return $default;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -401,12 +399,54 @@ abstract class Page
       return '/'.$name.'/1';
     }
 
-    if ($trinary && isset($value))
+    if ($trinary && $value!==null)
     {
       return '/'.$name.'/0';
     }
 
     return '';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a string with holding a CGI variable that can be used as a part of a URL.
+   *
+   * @param string      $name  The name of the CGI variable.
+   * @param mixed       $value The value (must be a scalar) of the CGI variable.
+   * @param string|null $label The alias for the column holding database ID.
+   *
+   * @return string
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public static function putCgiId($name, $value, $label)
+  {
+    if ($value!==null)
+    {
+      return '/'.$name.'/'.Abc::obfuscate($value, $label);
+    }
+
+    return '';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a string with holding a CGI variable with an URL as value that can be used as a part of a URL.
+   *
+   * Note: This method is an alias of {@link putCgiVar}.
+   *
+   * @param string $name  The name of the CGI variable.
+   * @param string $value The value of the CGI variable.
+   *
+   * @return string
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public static function putCgiUrl($name, $value)
+  {
+    return self::putCgiVar($name, $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -425,13 +465,15 @@ abstract class Page
    */
   public static function putCgiVar($name, $value, $label = null)
   {
-    if (isset($value))
+    if ($label!==null)
     {
-      if (isset($label))
-      {
-        return '/'.$name.'/'.Abc::obfuscate($value, $label);
-      }
+      trigger_error("Parameter $label is depreciated. use method putCgiId.", E_USER_NOTICE);
 
+      return self::putCgiId($name, $value, $label);
+    }
+
+    if ($value!==null)
+    {
       return '/'.$name.'/'.urlencode($value);
     }
 
@@ -570,7 +612,7 @@ abstract class Page
   {
     // Construct the filename of the CSS file.
     $filename = '/css/'.str_replace('\\', '/', $className);
-    if (isset($media)) $filename .= '.'.$media;
+    if ($media!==null) $filename .= '.'.$media;
     $filename .= '.css';
 
     $this->cssAppendSource($filename, $media);
