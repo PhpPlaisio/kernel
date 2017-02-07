@@ -436,8 +436,8 @@ abstract class Page
    *
    * Note: This method is an alias of {@link putCgiVar}.
    *
-   * @param string $name  The name of the CGI variable.
-   * @param string $value The value of the CGI variable.
+   * @param string      $name  The name of the CGI variable.
+   * @param string|null $value The value of the CGI variable.
    *
    * @return string
    *
