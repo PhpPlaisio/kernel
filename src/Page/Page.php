@@ -432,6 +432,22 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns (virtual) filename based on the slug of a string that can be safely used in an URL.
+   *
+   * @param string $string    The string.
+   * @param string $extension The extension of the (virtual) filename.
+   *
+   * @return string
+   */
+  public static function putCgiSlugName($string, $extension = '.html')
+  {
+    $slug = Html::txt2Slug($string);
+
+    return ($slug==='') ? '' : '/'.$slug.$extension;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns a string with holding a CGI variable with an URL as value that can be used as a part of a URL.
    *
    * Note: This method is an alias of {@link putCgiVar}.
@@ -453,31 +469,17 @@ abstract class Page
   /**
    * Returns a string with holding a CGI variable that can be used as a part of a URL.
    *
-   * @param string      $name  The name of the CGI variable.
-   * @param mixed       $value The value (must be a scalar) of the CGI variable.
-   * @param string|null $label Must only be used if the CGI variable is a database ID. An alias for the column holding
-   *                           database ID.
+   * @param string $name  The name of the CGI variable.
+   * @param mixed  $value The value (must be a scalar) of the CGI variable.
    *
    * @return string
    *
    * @api
    * @since 1.0.0
    */
-  public static function putCgiVar($name, $value, $label = null)
+  public static function putCgiVar($name, $value)
   {
-    if ($label!==null)
-    {
-      trigger_error('Parameter $label is depreciated. Use method putCgiId.', E_USER_NOTICE);
-
-      return self::putCgiId($name, $value, $label);
-    }
-
-    if ($value!==null)
-    {
-      return '/'.$name.'/'.urlencode($value);
-    }
-
-    return '';
+    return ($value!==null) ? '/'.$name.'/'.urlencode($value) : '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

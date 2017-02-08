@@ -90,76 +90,13 @@ class PageText extends PHPUnit_Framework_TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test cases for getCgiVar.
-   */
-  public function testGetCgiVar()
-  {
-    // Test for null.
-    $_GET['foo'] = null;
-    $value = Page::getCgiVar('foo');
-    $this->assertEquals('', $value, 'null 1');
-
-    unset($_GET['foo']);
-    $value = Page::getCgiVar('foo');
-    $this->assertEquals('', $value, 'null 2');
-
-    // Test for null with default.
-    $_GET['foo'] = null;
-    $value = Page::getCgiVar('foo', 'bar');
-    $this->assertEquals('bar', $value, 'null with default 1');
-
-    unset($_GET['foo']);
-    $value = Page::getCgiVar('foo', 'bar');
-    $this->assertEquals('bar', $value, 'null with default 2');
-
-    // Test for empty string.
-    $_GET['foo'] = '';
-    $value = Page::getCgiVar('foo');
-    $this->assertEquals('', $value, 'empty');
-
-    // Test for empty string with default.
-    $_GET['foo'] = '';
-    $value = Page::getCgiVar('foo', 'bar');
-    $this->assertEquals('', $value, 'empty with default');
-
-    // Test for normal string.
-    $_GET['foo'] = 'bar';
-    $value = Page::getCgiVar('foo');
-    $this->assertEquals('bar', $value, 'normal');
-
-    // Test for normal string with default.
-    $_GET['foo'] = 'bar';
-    $value = Page::getCgiVar('foo', 'eggs');
-    $this->assertEquals('bar', $value, 'normal with default');
-
-    // Test for special characters.
-    $_GET['foo'] = '%2F';
-    $value = Page::getCgiVar('foo');
-    $this->assertEquals('/', $value, 'special characters 1');
-
-    $_GET['foo'] = 'https%3A%2F%2Fwww.setbased.nl%2F';
-    $value = Page::getCgiVar('foo');
-    $this->assertEquals('https://www.setbased.nl/', $value, 'special characters 2');
-
-    // Test for special characters with default.
-    $_GET['foo'] = '%2F';
-    $value = Page::getCgiVar('foo', 'spam');
-    $this->assertEquals('/', $value, 'special characters with default 1');
-
-    $_GET['foo'] = 'https%3A%2F%2Fwww.setbased.nl%2F';
-    $value = Page::getCgiVar('foo', 'spam');
-    $this->assertEquals('https://www.setbased.nl/', $value, 'special characters with default 2');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Test cases for getCgiUrl.
    */
   public function testGetCgiUrl()
   {
     // Test for null.
     $_GET['foo'] = null;
-    $value = Page::getCgiUrl('foo');
+    $value       = Page::getCgiUrl('foo');
     $this->assertEquals('', $value, 'null 1');
 
     unset($_GET['foo']);
@@ -168,7 +105,7 @@ class PageText extends PHPUnit_Framework_TestCase
 
     // Test for null with default.
     $_GET['foo'] = null;
-    $value = Page::getCgiUrl('foo', '/bar');
+    $value       = Page::getCgiUrl('foo', '/bar');
     $this->assertEquals('/bar', $value, 'null with default 1');
 
     unset($_GET['foo']);
@@ -177,20 +114,83 @@ class PageText extends PHPUnit_Framework_TestCase
 
     // Test for special characters.
     $_GET['foo'] = '%2F';
-    $value = Page::getCgiUrl('foo');
+    $value       = Page::getCgiUrl('foo');
     $this->assertEquals('/', $value, 'special characters 1');
 
     $_GET['foo'] = 'https%3A%2F%2Fwww.setbased.nl%2F';
-    $value = Page::getCgiUrl('foo', null, false);
+    $value       = Page::getCgiUrl('foo', null, false);
     $this->assertEquals('https://www.setbased.nl/', $value, 'special characters 2');
 
     // Test for special characters with default.
     $_GET['foo'] = '%2F';
-    $value = Page::getCgiUrl('foo', 'spam');
+    $value       = Page::getCgiUrl('foo', 'spam');
     $this->assertEquals('/', $value, 'special characters with default 1');
 
     $_GET['foo'] = 'https%3A%2F%2Fwww.setbased.nl%2F';
-    $value = Page::getCgiUrl('foo', 'spam', false);
+    $value       = Page::getCgiUrl('foo', 'spam', false);
+    $this->assertEquals('https://www.setbased.nl/', $value, 'special characters with default 2');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for getCgiVar.
+   */
+  public function testGetCgiVar()
+  {
+    // Test for null.
+    $_GET['foo'] = null;
+    $value       = Page::getCgiVar('foo');
+    $this->assertEquals('', $value, 'null 1');
+
+    unset($_GET['foo']);
+    $value = Page::getCgiVar('foo');
+    $this->assertEquals('', $value, 'null 2');
+
+    // Test for null with default.
+    $_GET['foo'] = null;
+    $value       = Page::getCgiVar('foo', 'bar');
+    $this->assertEquals('bar', $value, 'null with default 1');
+
+    unset($_GET['foo']);
+    $value = Page::getCgiVar('foo', 'bar');
+    $this->assertEquals('bar', $value, 'null with default 2');
+
+    // Test for empty string.
+    $_GET['foo'] = '';
+    $value       = Page::getCgiVar('foo');
+    $this->assertEquals('', $value, 'empty');
+
+    // Test for empty string with default.
+    $_GET['foo'] = '';
+    $value       = Page::getCgiVar('foo', 'bar');
+    $this->assertEquals('', $value, 'empty with default');
+
+    // Test for normal string.
+    $_GET['foo'] = 'bar';
+    $value       = Page::getCgiVar('foo');
+    $this->assertEquals('bar', $value, 'normal');
+
+    // Test for normal string with default.
+    $_GET['foo'] = 'bar';
+    $value       = Page::getCgiVar('foo', 'eggs');
+    $this->assertEquals('bar', $value, 'normal with default');
+
+    // Test for special characters.
+    $_GET['foo'] = '%2F';
+    $value       = Page::getCgiVar('foo');
+    $this->assertEquals('/', $value, 'special characters 1');
+
+    $_GET['foo'] = 'https%3A%2F%2Fwww.setbased.nl%2F';
+    $value       = Page::getCgiVar('foo');
+    $this->assertEquals('https://www.setbased.nl/', $value, 'special characters 2');
+
+    // Test for special characters with default.
+    $_GET['foo'] = '%2F';
+    $value       = Page::getCgiVar('foo', 'spam');
+    $this->assertEquals('/', $value, 'special characters with default 1');
+
+    $_GET['foo'] = 'https%3A%2F%2Fwww.setbased.nl%2F';
+    $value       = Page::getCgiVar('foo', 'spam');
     $this->assertEquals('https://www.setbased.nl/', $value, 'special characters with default 2');
   }
 
@@ -253,6 +253,17 @@ class PageText extends PHPUnit_Framework_TestCase
     // Tests for null.
     $part = Page::putCgiBool('foo', null, true);
     $this->assertSame('', $part);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for putCgiSlugName.
+   */
+  public function testPutCgiSlugName()
+  {
+    // Test for null.
+    $part = Page::putCgiSlugName('Perché l\'erba è verde?');
+    $this->assertEquals('/perche-l-erba-e-verde.html', $part);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
