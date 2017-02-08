@@ -9,8 +9,8 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require-dev": {
-    "phing/phing": "*",
-    "phpunit/phpunit": ">=4.0.0"
+    "phing/phing": "2.*",
+    "phpunit/phpunit": "4.*"
   },
   "require": {
     "php": ">=5.4.0",
@@ -18,7 +18,7 @@
     "ircmaxell/password-compat": ">=1.0.3",
     "setbased/abc-blob-store": "1.*",
     "setbased/exception": "1.*",
-    "setbased/abc-html": "1.*",
+    "setbased/abc-html": ">=1.1.0",
     "setbased/abc-http-header": "1.*",
     "setbased/abc-mail-message": "dev-master",
     "setbased/abc-obfuscator-interface": "1.*",
