@@ -70,6 +70,13 @@ abstract class Abc
   protected $logRequestDetails;
 
   /**
+   * Information about the requested page.
+   *
+   * @var array
+   */
+  protected $pageInfo;
+
+  /**
    * Information about the session.
    *
    * @var array
@@ -82,13 +89,6 @@ abstract class Abc
    * @var Page
    */
   private $page;
-
-  /**
-   * Information about the requested page.
-   *
-   * @var array
-   */
-  private $pageInfo;
 
   /**
    * The size of the generated page.
@@ -644,9 +644,9 @@ abstract class Abc
                                                     $this->sessionInfo['pro_id'],
                                                     $this->sessionInfo['lan_id'],
                                                     $pag_alias);
-    if (!$this->pageInfo)
+    if ($this->pageInfo===null)
     {
-      if (isset($pag_id))
+      if ($pag_id!==null)
       {
         throw new NotAuthorizedException('User %d is not authorized for page ID=%d.',
                                          $this->sessionInfo['usr_id'],
