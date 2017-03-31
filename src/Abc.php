@@ -31,7 +31,7 @@ abstract class Abc
   /**
    * The helper object for web assets.
    *
-   * @var \SetBased\Abc\Helper\WebAssets
+   * @var WebAssets
    */
   public static $assets;
 

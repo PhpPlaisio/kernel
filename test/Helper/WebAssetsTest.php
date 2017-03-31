@@ -14,14 +14,14 @@ class WebAssetsTest extends \PHPUnit_Framework_TestCase
   public static function setUpBeforeClass()
   {
     WebAssets::$assetDir           = __DIR__;
-    \SetBased\Abc\Helper\WebAssets::$cssRootRelativeUrl = '/WebAssetsTest/css/';
-    \SetBased\Abc\Helper\WebAssets::$jsRootRelativeUrl  = '/WebAssetsTest/js/';
+    WebAssets::$cssRootRelativeUrl = '/WebAssetsTest/css/';
+    WebAssets::$jsRootRelativeUrl  = '/WebAssetsTest/js/';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   public function testCssAppendClassSpecificSource1()
   {
-    $webAssets = new \SetBased\Abc\Helper\WebAssets();
+    $webAssets = new WebAssets();
 
     $webAssets->cssAppendClassSpecificSource('SetBased\\Foo\\Bar');
     $webAssets->echoCascadingStyleSheets();
@@ -32,7 +32,7 @@ class WebAssetsTest extends \PHPUnit_Framework_TestCase
   //--------------------------------------------------------------------------------------------------------------------
   public function testCssAppendClassSpecificSource2()
   {
-    $webAssets = new \SetBased\Abc\Helper\WebAssets();
+    $webAssets = new WebAssets();
 
     $webAssets->cssAppendClassSpecificSource('SetBased\\Foo\\Bar', 'printer');
     $webAssets->echoCascadingStyleSheets();
@@ -43,7 +43,7 @@ class WebAssetsTest extends \PHPUnit_Framework_TestCase
   //--------------------------------------------------------------------------------------------------------------------
   public function testCssAppendSource1()
   {
-    $webAssets = new \SetBased\Abc\Helper\WebAssets();
+    $webAssets = new WebAssets();
 
     $webAssets->cssAppendSource('foo.css');
     $webAssets->echoCascadingStyleSheets();
@@ -54,7 +54,7 @@ class WebAssetsTest extends \PHPUnit_Framework_TestCase
   //--------------------------------------------------------------------------------------------------------------------
   public function testCssAppendSource2()
   {
-    $webAssets = new \SetBased\Abc\Helper\WebAssets();
+    $webAssets = new WebAssets();
 
     $webAssets->cssAppendSource('foo.css', 'printer');
     $webAssets->echoCascadingStyleSheets();
@@ -87,7 +87,7 @@ class WebAssetsTest extends \PHPUnit_Framework_TestCase
   //--------------------------------------------------------------------------------------------------------------------
   public function testJsAdmFunctionCall1()
   {
-    $webAssets = new \SetBased\Abc\Helper\WebAssets();
+    $webAssets = new WebAssets();
 
     $webAssets->jsAdmFunctionCall('SetBased/Foo', 'main');
     $webAssets->echoJavaScript();
