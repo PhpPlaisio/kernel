@@ -7,7 +7,6 @@ use SetBased\Abc\Core\Page\Misc\W3cValidatePage;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\Url;
-use SetBased\Exception\LogicException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -17,47 +16,11 @@ abstract class Page
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The last created instance this class.
-   *
-   * @var Page
-   */
-  private static $page;
-
-  /**
    * The ID of the company of the page requester.
    *
    * @var int
    */
   protected $cmpId;
-
-  /**
-   * CSS code to be included in the head of this page.
-   */
-  protected $css;
-
-  /**
-   * List with CSS sources to be included on this page.
-   *
-   * @var array[]
-   */
-  protected $cssSources = [];
-
-  /**
-   * JavaScript code to be included in the head of this page.
-   *
-   * @var string
-   */
-  protected $javaScript;
-
-  /**
-   * The attributes of the script element in the page trailer (i.e. near the end html tag). Example:
-   * ```
-   * [ 'src' => '/js/requirejs.js', 'data-main' => '/js/main.js' ]
-   * ```
-   *
-   * @var array
-   */
-  protected $jsTrailerAttributes;
 
   /**
    * The keywords to be included in a meta tag for this page.
@@ -130,67 +93,6 @@ abstract class Page
     $this->proId = $abc->getProId();
     $this->usrId = $abc->getUsrId();
     $this->lanId = $abc->getLanId();
-
-    self::$page = $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a class specific CCS file to the last created page.
-   *
-   * This method is a static wrapper around method {@link cssAppendPageSpecificSource}.
-   *
-   * @param string      $className The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                               slashes to construct the filename relative to the resource root of the CSS
-   *                               source.
-   * @param string|null $media     The media for which the CSS source is optimized for. Note: use null for 'all'
-   *                               devices; null is preferred over 'all'.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  public static function cssStaticAppendClassSource($className, $media = null)
-  {
-    self::$page->cssAppendPageSpecificSource($className, $media);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a CCS file to the header to the last created page.
-   *
-   * This method is a static wrapper around method {@link cssAppendSource}.
-   *
-   * @param string      $source The filename relative to the resource root of the CSS source.
-   * @param string|null $media  The media for which the CSS source is optimized for. Note: use null for 'all' devices;
-   *                            null is preferred over 'all'.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  public static function cssStaticAppendSource($source, $media = null)
-  {
-    self::$page->cssAppendSource($source, $media);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds an optimized CCS file to the header of last created page.
-   *
-   * Do not use this method directly. Use {@link cssAppendPageSpecificSource} instead.
-   *
-   * @param string      $source The filename relative to the resource root of the CSS source.
-   * @param string|null $media  The media for which the CSS source is optimized for. Note: use null for 'all' devices;
-   *                            null is preferred over 'all'.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  public static function cssStaticOptimizedAppendSource($source, $media = null)
-  {
-    self::$page->cssSources[] = ['href'  => $source,
-                                 'media' => $media,
-                                 'rel'   => 'stylesheet',
-                                 'type'  => 'text/css'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -304,66 +206,6 @@ abstract class Page
     }
 
     return $default;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Using RequiresJS calls a function in the same namespace as the PHP class (where backslashes will be translated to
-   * forward slashes). Example:
-   * ```
-   * $this->jsAdmPageSpecificFunctionCall(__CLASS__, 'init');
-   * ```
-   *
-   * This method is a static wrapper around method {@link jsAdmPageSpecificFunctionCall}.
-   *
-   * @param string $className      The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                               slashes to construct the namespace.
-   * @param string $jsFunctionName The function name inside the namespace.
-   * @param array  $args           The optional arguments for the function.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  public static function jsAdmStaticClassSpecificFunctionCall($className, $jsFunctionName, $args = [])
-  {
-    self::$page->jsAdmPageSpecificFunctionCall($className, $jsFunctionName, $args);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Using RequiresJS calls a function in a namespace.
-   *
-   * This method is a static wrapper around method {@link jsAdmFunctionCall}.
-   *
-   * @param string $namespace      The namespace as in RequireJS.
-   * @param string $jsFunctionName The function name inside the namespace.
-   * @param array  $args           The optional arguments for the function.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  public static function jsAdmStaticFunctionCall($namespace, $jsFunctionName, $args = [])
-  {
-    self::$page->jsAdmFunctionCall($namespace, $jsFunctionName, $args);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Do not use this function, use {@link jsAdmFunctionCall} instead.
-   *
-   * @param string $namespace      The namespace as in RequireJS.
-   * @param string $jsFunctionName The function name inside the namespace.
-   * @param array  $args           The optional arguments for the function.
-   */
-  public static function jsAdmStaticOptimizedFunctionCall($namespace, $jsFunctionName, $args = [])
-  {
-    self::$page->javaScript .= 'require(["';
-    self::$page->javaScript .= $namespace;
-    self::$page->javaScript .= '"],function(page){\'use strict\';page.';
-    self::$page->javaScript .= $jsFunctionName;
-    self::$page->javaScript .= '(';
-    self::$page->javaScript .= implode(',', array_map('json_encode', $args));
-    self::$page->javaScript .= ');});';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -600,87 +442,6 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adds a page specific CCS file to the header of this page.
-   *
-   * @param string      $className The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                               slashes to construct the filename relative to the resource root of the CSS source.
-   * @param string|null $media     The media for which the CSS source is optimized for. Note: use null for 'all'
-   *                               devices; null is preferred over 'all'.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  protected function cssAppendPageSpecificSource($className, $media = null)
-  {
-    // Construct the filename of the CSS file.
-    $filename = '/css/'.str_replace('\\', '/', $className);
-    if ($media!==null) $filename .= '.'.$media;
-    $filename .= '.css';
-
-    $this->cssAppendSource($filename, $media);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a CCS file to the header of this page.
-   *
-   * @param string      $source The filename relative to the resource root of the CSS source.
-   * @param string|null $media  The media for which the CSS source is optimized for. Note: use null for 'all' devices;
-   *                            null is preferred over 'all'.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  protected function cssAppendSource($source, $media = null)
-  {
-    $path = HOME.'/www'.$source;
-    if (!file_exists($path))
-    {
-      throw new LogicException("CSS file '%s' does not exists.", $source);
-    }
-
-    $this->cssOptimizedAppendSource($source, $media);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds an optimized CCS file to the header of this page.
-   *
-   * Do not use this method directly. Use {@link cssAppendPageSpecificSource} instead.
-   *
-   * @param string      $source The filename relative to the resource root of the CSS source.
-   * @param string|null $media  The media for which the CSS source is optimized for. Note: use null for 'all' devices;
-   *                            null is preferred over 'all'.
-   */
-  protected function cssOptimizedAppendSource($source, $media = null)
-  {
-    $this->cssSources[] = ['href'  => $source,
-                           'media' => $media,
-                           'rel'   => 'stylesheet',
-                           'type'  => 'text/css'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Echos the links to external style sheets and internal style sheet.
-   */
-  protected function echoCascadingStyleSheets()
-  {
-    // Echo links to external style sheets.
-    foreach ($this->cssSources as $css_source)
-    {
-      echo Html::generateVoidElement('link', $css_source);
-    }
-
-    // Echo the internal style sheet.
-    if ($this->css)
-    {
-      echo '<style type="text/css" media="all">', $this->css, '</style>';
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Echos the meta tags within the HTML document.
    */
   protected function echoMetaTags()
@@ -717,7 +478,7 @@ abstract class Page
     echo '<title>', Html::txt2Html(Abc::getInstance()->getPageTitle()), '</title>';
 
     // Echo style sheets (if any).
-    $this->echoCascadingStyleSheets();
+    Abc::$assets->echoCascadingStyleSheets();
 
     echo '</head><body>';
   }
@@ -729,15 +490,7 @@ abstract class Page
    */
   protected function echoPageTrailer()
   {
-    if ($this->javaScript)
-    {
-      $js = 'require([],function(){'.$this->javaScript.'});';
-      echo '<script type="text/javascript">/*<![CDATA[*/set_based_abc_inline_js='.json_encode($js).'/*]]>*/</script>';
-    }
-    if (!empty($this->jsTrailerAttributes))
-    {
-      echo Html::generateElement('script', $this->jsTrailerAttributes);
-    }
+    Abc::$assets->echoJavaScript();
 
     echo '</body></html>';
   }
@@ -753,7 +506,7 @@ abstract class Page
     $this->w3cValidate = true;
     $this->w3cPathName = DIR_TMP.'/'.$w3c_file;
     $url               = W3cValidatePage::getUrl($w3c_file);
-    $this->jsAdmPageSpecificFunctionCall(__CLASS__, 'w3cValidate', [$url]);
+    Abc::$assets->jsAdmClassSpecificFunctionCall(__CLASS__, 'w3cValidate', [$url]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -777,120 +530,6 @@ abstract class Page
   protected function getPtbId()
   {
     return Abc::getInstance()->getPtbId();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Using RequiresJS calls a function in a namespace.
-   *
-   * @param string $namespace      The namespace as in RequireJS.
-   * @param string $jsFunctionName The function name inside the namespace.
-   * @param array  $args           The optional arguments for the function.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  protected function jsAdmFunctionCall($namespace, $jsFunctionName, $args = [])
-  {
-    // Construct the filename of the JS file.
-    $filename = '/js/'.$namespace.'.js';
-
-    // Test JS file actually exists.
-    $path = HOME.'/www'.$filename;
-    if (!file_exists($path))
-    {
-      throw new LogicException("JavaScript file '%s' does not exists.", $filename);
-    }
-
-    $this->jsAdmOptimizedFunctionCall($namespace, $jsFunctionName, $args);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Do not use this function, use {@link jsAdmFunctionCall} instead.
-   *
-   * @param string $namespace      The namespace as in RequireJS.
-   * @param string $jsFunctionName The function name inside the namespace.
-   * @param array  $args           The optional arguments for the function.
-   */
-  protected function jsAdmOptimizedFunctionCall($namespace, $jsFunctionName, $args = [])
-  {
-    $this->javaScript .= 'require(["';
-    $this->javaScript .= $namespace;
-    $this->javaScript .= '"],function(page){\'use strict\';page.';
-    $this->javaScript .= $jsFunctionName;
-    $this->javaScript .= '(';
-    $this->javaScript .= implode(',', array_map('json_encode', $args));
-    $this->javaScript .= ');});';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Do not use this function, use {@link jsAdmFunctionCall} instead.
-   * ```
-   * $this->jsAdmSetPageSpecificMain(__CLASS__);
-   * ```
-   *
-   * @param string $mainJsScript The main script for RequireJS.
-   */
-  protected function jsAdmOptimizedSetPageSpecificMain($mainJsScript)
-  {
-    $this->jsTrailerAttributes = ['src' => $mainJsScript];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Using RequiresJS calls a function in the same namespace as the PHP class (where backslashes will be translated to
-   * forward slashes). Example:
-   * ```
-   * $this->jsAdmPageSpecificFunctionCall(__CLASS__, 'init');
-   * ```
-   *
-   * @param string $className      The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward slashes
-   *                               to construct the namespace.
-   * @param string $jsFunctionName The function name inside the namespace.
-   * @param array  $args           The optional arguments for the function.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  protected function jsAdmPageSpecificFunctionCall($className, $jsFunctionName, $args = [])
-  {
-    // Convert PHP class name to RequireJS namespace name.
-    $namespace = str_replace('\\', '/', $className);
-
-    $this->jsAdmFunctionCall($namespace, $jsFunctionName, $args);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets a page specific main for RequireJS. Example:
-   * ```
-   * $this->jsAdmSetPageSpecificMain(__CLASS__);
-   * ```
-   *
-   * @param string $className The PHP cass name, i.e. __CLASS__. Backslashes will be translated to forward slashes to
-   *                          construct the namespace.
-   *
-   * @api
-   * @since 1.0.0
-   */
-  protected function jsAdmSetPageSpecificMain($className)
-  {
-    // Convert PHP class name to RequireJS namespace name.
-    $namespace = str_replace('\\', '/', $className);
-
-    // Construct the filename of the JS file.
-    $filename = '/js/'.$namespace.'.main.js';
-
-    // Test JS file actually exists.
-    $path = HOME.'/www'.$filename;
-    if (!file_exists($path))
-    {
-      throw new \LogicException(sprintf("JavaScript file '%s' does not exists.", $filename));
-    }
-
-    $this->jsTrailerAttributes = ['src' => '/js/require.js', 'data-main' => $filename];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

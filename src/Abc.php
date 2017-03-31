@@ -6,6 +6,7 @@ use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Helper\WebAssets;
 use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
@@ -26,6 +27,13 @@ abstract class Abc
    * @var Object
    */
   public static $DL;
+
+  /**
+   * The helper object for web assets.
+   *
+   * @var \SetBased\Abc\Helper\WebAssets
+   */
+  public static $assets;
 
   /**
    * The start time of serving the page request.
