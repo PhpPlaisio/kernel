@@ -35,8 +35,10 @@ class WebAssets
 
   /**
    * CSS code to be included on the page.
+   *
+   * @var string[]
    */
-  protected $css = '';
+  protected $css = [];
 
   /**
    * List with CSS sources to be included on the page.
@@ -81,6 +83,20 @@ class WebAssets
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Adds a line with a CSS snippet to the internal CSS.
+   *
+   * @param string $cssLine The line with CSS snippet.
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function cssAppendLine($cssLine)
+  {
+    $this->css[] = $cssLine;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Adds a CCS file to the header to the page.
    *
    * @param string      $url   The URL to the CSS source.
@@ -108,6 +124,26 @@ class WebAssets
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the relative URL for a class specfic CSS file.
+   *
+   * @param string      $className The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
+   *                               slashes to construct the filename relative to the resource root of the CSS source.
+   * @param string|null $media     The media for which the CSS source is optimized for. Note: use null for 'all'
+   *                               devices; null is preferred over 'all'.
+   *
+   * @return string
+   */
+  public function cssClassNameToRootRelativeUrl($className, $media = null)
+  {
+    $url = self::$cssRootRelativeUrl.$this->jsClassNameToNamespace($className);
+    if ($media!==null) $url .= '.'.$media;
+    $url .= '.css';
+
+    return $url;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Adds an optimized CCS file to the page.
    *
    * Do not use this method directly. Use {@link cssAppendPageSpecificSource} instead.
@@ -126,23 +162,23 @@ class WebAssets
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos the links to external style sheets and internal style sheets.
+   * Echos the links to external and internal CSS.
    *
    * @api
    * @since 1.0.0
    */
   public function echoCascadingStyleSheets()
   {
-    // Echo links to external style sheets.
+    // Echo links to external CSS.
     foreach ($this->cssSources as $css_source)
     {
       echo Html::generateVoidElement('link', $css_source);
     }
 
-    // Echo the internal style sheet.
-    if ($this->css!=='')
+    // Echos internal CSS.
+    if (!empty($this->css))
     {
-      echo '<style type="text/css" media="all">', $this->css, '</style>';
+      echo '<style type="text/css" media="all">', implode('', $this->css), '</style>';
     }
   }
 
@@ -269,26 +305,6 @@ class WebAssets
     }
 
     $this->jsTrailerAttributes = ['src' => $this->jsNamespaceToRootRelativeUrl('require'), 'data-main' => $url];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the relative URL for a class specfic CSS file.
-   *
-   * @param string      $className The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
-   *                               slashes to construct the filename relative to the resource root of the CSS source.
-   * @param string|null $media     The media for which the CSS source is optimized for. Note: use null for 'all'
-   *                               devices; null is preferred over 'all'.
-   *
-   * @return string
-   */
-  protected function cssClassNameToRootRelativeUrl($className, $media = null)
-  {
-    $url = self::$cssRootRelativeUrl.$this->jsClassNameToNamespace($className);
-    if ($media!==null) $url .= '.'.$media;
-    $url .= '.css';
-
-    return $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
