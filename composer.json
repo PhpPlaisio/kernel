@@ -15,17 +15,16 @@
   },
   "require": {
     "php": ">=5.4.0",
-    "gajus/dindent": "2.*",
-    "ircmaxell/password-compat": ">=1.0.3",
-    "setbased/abc-blob-store": "1.*",
-    "setbased/exception": "1.*",
-    "setbased/abc-html": ">=1.1.0",
-    "setbased/abc-http-header": "1.*",
-    "setbased/abc-mail-message": "dev-master",
-    "setbased/abc-obfuscator-interface": "1.*",
-    "setbased/abc-url": "1.*",
-    "setbased/php-affirm": "*",
-    "setbased/php-stratum": "*"
+    "gajus/dindent": "^2.0.0",
+    "ircmaxell/password-compat": "^1.0.3",
+    "setbased/abc-blob-store": "^1.0.0",
+    "setbased/exception": "^1.0.0",
+    "setbased/abc-html": "^1.1.0",
+    "setbased/abc-http-header": "^1.0.0",
+    "setbased/abc-mail-message": "^0.9.0",
+    "setbased/abc-obfuscator-interface": "^1.0.0",
+    "setbased/abc-url": "^1.0.0",
+    "setbased/php-stratum": "^0.9.45"
   },
   "autoload": {
     "psr-4": {
