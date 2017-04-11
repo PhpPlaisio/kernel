@@ -4,7 +4,7 @@
  * @param p_wrd_id The ID of the word to be be deleted.
  */
 create procedure bbl_word_delete_word( in p_wrd_id @bbl_word.wrd_id%type@ )
-reads sql data
+modifies sql data
 -- type: none
 begin
   delete from BBL_WORD_TRANSLATE_HISTORY

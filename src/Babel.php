@@ -6,7 +6,37 @@ namespace SetBased\Abc;
 class Babel
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected static $ourLanId;
+  /**
+   * The ID of the (default) language.
+   * @var int
+   */
+  protected static $lanId;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the value of a text.
+   *
+   * @param int        $txtId The ID of the text.
+   * @param array|null $args  The arguments when the text is a format string.
+   *
+   * @return string
+   */
+  public static function getText($txtId, $args = null)
+  {
+    if (!self::$lanId)
+    {
+      self::$lanId = Abc::getInstance()->getLanId();
+    }
+
+    $text = Abc::$DL->bblTextGetText($txtId, self::$lanId);
+
+    if (empty($args))
+    {
+      return $text['ttt_text'];
+    }
+
+    return vsprintf($text['ttt_text'], $args);
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -18,12 +48,12 @@ class Babel
    */
   public static function getWord($wrdId)
   {
-    if (!self::$ourLanId)
+    if (!self::$lanId)
     {
-      self::$ourLanId = Abc::getInstance()->getLanId();
+      self::$lanId = Abc::getInstance()->getLanId();
     }
 
-    return Abc::$DL->bblWordGetWord($wrdId, self::$ourLanId);
+    return Abc::$DL->bblWordGetWord($wrdId, self::$lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

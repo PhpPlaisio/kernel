@@ -5,7 +5,7 @@
 /*  FileName : abc.ecm                                                            */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : donderdag 19 januari 2017                                          */
+/*  Date     : zondag 9 april 2017                                                */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -338,6 +338,39 @@ CREATE TABLE `AUT_USR_ROL` (
   CONSTRAINT `SECONDAY` UNIQUE (`rol_id`, `usr_id`)
 );
 
+CREATE TABLE `BBL_TEXT_GROUP` (
+  `ttg_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `ttg_name` VARCHAR(64) NOT NULL,
+  `ttg_label` VARCHAR(30) CHARACTER SET ascii COLLATE ascii_general_ci,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`ttg_id`)
+);
+
+CREATE TABLE `BBL_TEXT` (
+  `txt_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `ttg_id` TINYINT UNSIGNED NOT NULL,
+  `txt_format` ENUM('HTML','TXT') DEFAULT 'HTML' NOT NULL,
+  `txt_modified` DATETIME DEFAULT '1900-01-01 00:00:00' NOT NULL,
+  `txt_comment` TINYTEXT,
+  `txt_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`txt_id`)
+);
+
+CREATE TABLE `BBL_TEXT_TEXT` (
+  `txt_id` SMALLINT UNSIGNED NOT NULL,
+  `lan_id` TINYINT UNSIGNED NOT NULL,
+  `ttt_text` MEDIUMTEXT NOT NULL,
+  `ttt_modified` DATETIME DEFAULT '1900-01-01 00:00:00' NOT NULL,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`txt_id`, `lan_id`)
+);
+
+CREATE TABLE `BBL_TEXT_TRANSLATE_HISTORY` (
+  `txt_id` SMALLINT UNSIGNED NOT NULL,
+  `usr_id` INT UNSIGNED NOT NULL,
+  `lan_id` TINYINT UNSIGNED NOT NULL,
+  `tth_datetime` DATETIME NOT NULL,
+  `tth_text` MEDIUMTEXT NOT NULL
+);
+
 CREATE TABLE `BBL_WORD_TEXT` (
   `wrd_id` SMALLINT UNSIGNED NOT NULL,
   `lan_id` TINYINT UNSIGNED NOT NULL,
@@ -500,6 +533,18 @@ CREATE UNIQUE INDEX `IX_AUT_ROL_FLG1` ON `AUT_ROL_FLG` (`rol_id`, `rfl_id`);
 CREATE INDEX `IX_AUT_ROL_FUN3` ON `AUT_ROL_FUN` (`cmp_id`);
 
 CREATE INDEX `cmp_id` ON `AUT_USR_ROL` (`cmp_id`);
+
+CREATE INDEX `ttg_id` ON `BBL_TEXT` (`ttg_id`);
+
+CREATE INDEX `IX_FK_BBL_TEXT_TEXT` ON `BBL_TEXT_TEXT` (`lan_id`);
+
+CREATE INDEX `lan_id` ON `BBL_TEXT_TEXT` (`lan_id`);
+
+CREATE INDEX `txt_id` ON `BBL_TEXT_TEXT` (`txt_id`);
+
+CREATE INDEX `IX_FK_BBL_TEXT_TRANSLATE_HISTORY` ON `BBL_TEXT_TRANSLATE_HISTORY` (`txt_id`, `lan_id`);
+
+CREATE INDEX `IX_FK_BBL_TEXT_TRANSLATE_HISTORY1` ON `BBL_TEXT_TRANSLATE_HISTORY` (`usr_id`);
 
 CREATE INDEX `lan_id` ON `BBL_WORD_TEXT` (`lan_id`);
 
@@ -739,6 +784,32 @@ ALTER TABLE `AUT_USR_ROL`
   FOREIGN KEY (`usr_id`) REFERENCES `AUT_USER` (`usr_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
+
+ALTER TABLE `BBL_TEXT`
+  ADD CONSTRAINT `0_190`
+  FOREIGN KEY (`ttg_id`) REFERENCES `BBL_TEXT_GROUP` (`ttg_id`)
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION;
+
+ALTER TABLE `BBL_TEXT_TEXT`
+  ADD CONSTRAINT `0_196`
+  FOREIGN KEY (`txt_id`) REFERENCES `BBL_TEXT` (`txt_id`)
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION;
+
+ALTER TABLE `BBL_TEXT_TEXT`
+  ADD CONSTRAINT `FK_BBL_TEXT_TEXT_BBL_LANGUAGE`
+  FOREIGN KEY (`lan_id`) REFERENCES `BBL_LANGUAGE` (`lan_id`);
+
+ALTER TABLE `BBL_TEXT_TRANSLATE_HISTORY`
+  ADD CONSTRAINT `BBL_TEXT_TRANSLATE_HISTORY_ibfk_7`
+  FOREIGN KEY (`txt_id`, `lan_id`) REFERENCES `BBL_TEXT_TEXT` (`txt_id`, `lan_id`)
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION;
+
+ALTER TABLE `BBL_TEXT_TRANSLATE_HISTORY`
+  ADD CONSTRAINT `FK_BBL_TEXT_TRANSLATE_HISTORY_AUT_USER`
+  FOREIGN KEY (`usr_id`) REFERENCES `AUT_USER` (`usr_id`);
 
 ALTER TABLE `BBL_WORD_TEXT`
   ADD CONSTRAINT `BBL_WORD_TEXT_ibfk_2`
