@@ -14,9 +14,8 @@
     "setbased/phing-extensions": "2.*"
   },
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=7.0.0",
     "gajus/dindent": "^2.0.0",
-    "ircmaxell/password-compat": "^1.0.3",
     "setbased/abc-blob-store": "^1.0.0",
     "setbased/exception": "^1.0.0",
     "setbased/abc-html": "^1.1.0",
