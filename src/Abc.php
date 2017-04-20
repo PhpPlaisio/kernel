@@ -11,6 +11,7 @@ use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
 use SetBased\Abc\Page\Page;
+use SetBased\Abc\RequestLogger\RequestLogger;
 use SetBased\Stratum\Exception\ResultException;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -33,6 +34,13 @@ abstract class Abc
    * @var WebAssets
    */
   public static $assets;
+
+  /**
+   * The helper object for logging HTTP page requests.
+   *
+   * @var RequestLogger
+   */
+  public static $requestLogger;
 
   /**
    * The start time of serving the page request.
@@ -96,20 +104,6 @@ abstract class Abc
    * @var Page
    */
   private $page;
-
-  /**
-   * The size of the generated page.
-   *
-   * @var int
-   */
-  private $pageSize;
-
-  /**
-   * The request log ID (rql_id).
-   *
-   * @var int
-   */
-  private $rqlId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -478,8 +472,6 @@ abstract class Abc
 
         // Flush the page content.
         if (ob_get_level()) ob_flush();
-
-        $this->pageSize = $this->page->getPageSize();
       }
     }
     catch (NotAuthorizedException $e)
@@ -499,7 +491,10 @@ abstract class Abc
     }
 
     $this->updateSession();
-    $this->requestLog();
+    if (self::$requestLogger!==null)
+    {
+      self::$requestLogger->logRequest(HttpHeader::$status);
+    }
 
     self::$DL->commit();
   }
@@ -766,109 +761,6 @@ abstract class Abc
 
     fwrite($fp, $message);
     fclose($fp);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Logs the page request in to the DB.
-   */
-  private function requestLog()
-  {
-    $this->rqlId = self::$DL->abcRequestLogInsertRequest(
-      $this->sessionInfo['ses_id'],
-      $this->sessionInfo['cmp_id'],
-      $this->sessionInfo['usr_id'],
-      $this->pageInfo['pag_id'],
-      mb_substr($_SERVER['REQUEST_URI'], 0, C::LEN_RQL_REQUEST),
-      mb_substr($_SERVER['REQUEST_METHOD'], 0, C::LEN_RQL_METHOD),
-      (isset($_SERVER['HTTP_REFERER'])) ? mb_substr($_SERVER['HTTP_REFERER'], 0, C::LEN_RQL_REFERER) : null,
-      $_SERVER['REMOTE_ADDR'],
-      (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) ? mb_substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, C::LEN_RQL_LANGUAGE) : null,
-      (isset($_SERVER['HTTP_USER_AGENT'])) ? mb_substr($_SERVER['HTTP_USER_AGENT'], 0, C::LEN_RQL_USER_AGENT) : null,
-      0, // XXX query count
-      microtime(true) - self::$time0,
-      $this->pageSize);
-
-    if ($this->logRequestDetails==true)
-    {
-      $this->requestLogQuery();
-      $this->requestLogPost($_POST);
-      $this->requestLogCookie($_COOKIE);
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Logs the (by the client) sent cookies in to the database.
-   *
-   * Usage on this method on production environments is disguised.
-   *
-   * @param array       $cookies  must be $_COOKIES
-   * @param string|null $variable must not be used, intended for use by recursive calls only.
-   */
-  private function requestLogCookie($cookies, $variable = null)
-  {
-    if (is_array($cookies))
-    {
-      foreach ($cookies as $index => $value)
-      {
-        if (isset($variable)) $var = $variable.'['.$index.']';
-        else                     $var = $index;
-
-        if (is_array($value))
-        {
-          $this->requestLogCookie($value, $var);
-        }
-        else
-        {
-          self::$DL->abcRequestLogInsertCookie($this->rqlId, $var, $value);
-        }
-      }
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Logs the post variables in to the database.
-   *
-   * Usage on this method on production environments is not recommended.
-   *
-   * @param array       $post     Must be $_POST (except for recursive calls).
-   * @param string|null $variable Must not be used (except for recursive calls).
-   */
-  private function requestLogPost($post, $variable = null)
-  {
-    if (is_array($post))
-    {
-      foreach ($post as $index => $value)
-      {
-        if (isset($variable)) $var = $variable.'['.$index.']';
-        else                     $var = $index;
-
-        if (is_array($value))
-        {
-          $this->requestLogPost($value, $var);
-        }
-        else
-        {
-          self::$DL->abcRequestLogInsertPost($this->rqlId, $var, $value);
-        }
-      }
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Logs the executed executed database queries.
-   */
-  private function requestLogQuery()
-  {
-    $queries = self::$DL->getQueryLog();
-
-    foreach ($queries as $query)
-    {
-      self::$DL->abcRequestLogInsertQuery($this->rqlId, $query['query'], $query['time']);
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
