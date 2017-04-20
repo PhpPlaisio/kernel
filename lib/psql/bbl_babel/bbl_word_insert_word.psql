@@ -1,14 +1,12 @@
 /**
  * Inserts a word.
  *
- * @param p_usr_id      The ID of the user that is inserting the new word.
  * @param p_wdg_id      The ID of the word group of the new word.
  * @param p_wrd_label   The label of the new word.
  * @param p_wrd_comment The comment on the new word.
  * @param p_wdt_text    The value of the new word.
  */
-create procedure bbl_word_insert_word( in p_usr_id      @aut_user.usr_id%type@,
-                                       in p_wdg_id      @bbl_word_group.wdg_id%type@,
+create procedure bbl_word_insert_word( in p_wdg_id      @bbl_word_group.wdg_id%type@,
                                        in p_wrd_label   @bbl_word.wrd_label%type@,
                                        in p_wrd_comment @bbl_word.wrd_comment%type@,
                                        in p_wdt_text    @bbl_word_text.wdt_text%type@ )

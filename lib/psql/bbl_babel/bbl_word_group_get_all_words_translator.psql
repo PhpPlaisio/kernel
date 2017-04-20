@@ -9,14 +9,15 @@ create procedure bbl_word_group_get_all_words_translator( in p_wgd_id     @BBL_W
 reads sql data
 -- type: rows
 begin
-  select wrd.wrd_id                                             wrd_id
-  ,      wrd.wdg_id                                             wdg_id
-  ,      wrd.wrd_label                                          wrd_label
-  ,      wrd.wrd_comment                                        wrd_comment
+  select wrd.wrd_id
+  ,      wrd.wdg_id
+  ,      wrd.wrd_label
+  ,      wrd.wrd_comment
   ,      wrd.wrd_modified                                       ref_date
+  ,      ref.wdt_text                                           ref_wdt_text
+
   ,      act.wdt_text                                           act_wdt_text
   ,      act.wdt_modified                                       act_date
-  ,      ref.wdt_text                                           ref_wdt_text
   from       BBL_WORD      wrd
   inner join BBL_WORD_TEXT act  on  act.wrd_id = wrd.wrd_id and
                                     act.lan_id = p_lan_id_act

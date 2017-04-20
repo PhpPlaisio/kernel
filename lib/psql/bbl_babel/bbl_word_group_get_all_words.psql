@@ -2,15 +2,15 @@
  * Selects all words in a word group in alphabetical order.
  *
  * @param p_wgd_id The ID of the word group.
- * @param p_lan_id The ID of the language for linguistic entities.
+ * @param p_lan_id The ID of the target language.
  */
-create procedure bbl_word_group_get_all_words( in p_wgd_id @BBL_WORD_GROUP.wdg_id%type@
-,                                              in p_lan_id @BBL_LANGUAGE.lan_id%type@ )
+create procedure bbl_word_group_get_all_words( in p_wgd_id @bbl_word_group.wdg_id%type@
+,                                              in p_lan_id @bbl_language.lan_id%type@ )
 reads sql data
 -- type: rows
 begin
-  select wrd.wrd_id     wrd_id
-  ,      wd1.wdt_text   wrd_text
+  select wrd.wrd_id
+  ,      wd1.wdt_text
   from       BBL_WORD      wrd
   inner join BBL_WORD_TEXT wd1  on  wd1.wrd_id = wrd.wrd_id and
                                     wd1.lan_id = p_lan_id

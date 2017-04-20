@@ -12,7 +12,7 @@ create procedure bbl_word_update_details( in p_wrd_id      @bbl_word.wrd_id%type
                                           in p_wrd_label   @bbl_word.wrd_label%type@,
                                           in p_wrd_comment @bbl_word.wrd_comment%type@,
                                           in p_wdt_text    @bbl_word_text.wdt_text%type@ )
-reads sql data
+modifies sql data
 -- type: none
 begin
   update BBL_WORD

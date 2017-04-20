@@ -8,7 +8,7 @@
  */
 create procedure bbl_word_translate_word( in p_usr_id   @aut_user.usr_id%type@
 ,                                         in p_wrd_id   @bbl_word.wrd_id%type@
-     ,                                    in p_lan_id   @bbl_language.lan_id%type@
+,                                         in p_lan_id   @bbl_language.lan_id%type@
 ,                                         in p_wdt_text @bbl_word_text.wdt_text%type@ )
 modifies sql data
 -- type: none
