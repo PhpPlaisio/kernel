@@ -2,13 +2,14 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Test\Helper;
 
+use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Helper\WebAssets;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Test cases for class WebAssets.
  */
-class WebAssetsTest extends \PHPUnit_Framework_TestCase
+class WebAssetsTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public static function setUpBeforeClass()
