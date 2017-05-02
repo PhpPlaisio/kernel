@@ -8,9 +8,26 @@ class Babel
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The ID of the (default) language.
+   *
    * @var int
    */
   protected static $lanId;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the ID of the language.
+   *
+   * @return int
+   */
+  public static function getLanId()
+  {
+    if (!self::$lanId)
+    {
+      self::$lanId = Abc::getInstance()->getLanId();
+    }
+
+    return self::$lanId;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -54,6 +71,17 @@ class Babel
     }
 
     return Abc::$DL->bblWordGetWord($wrdId, self::$lanId);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the language.
+   *
+   * @param int $lanId The ID of the language.
+   */
+  public static function setLanId($lanId)
+  {
+    self::$lanId = $lanId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
