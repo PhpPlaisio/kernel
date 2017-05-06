@@ -78,13 +78,6 @@ abstract class Abc
   protected $domain;
 
   /**
-   * If set details must be logged together with the request log.
-   *
-   * @var true|null
-   */
-  protected $logRequestDetails;
-
-  /**
    * Information about the requested page.
    *
    * @var array
