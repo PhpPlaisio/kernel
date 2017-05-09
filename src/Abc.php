@@ -3,6 +3,7 @@
 namespace SetBased\Abc;
 
 use SetBased\Abc\BlobStore\BlobStore;
+use SetBased\Abc\DomainResolver\DomainResolver;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\Helper\HttpHeader;
@@ -34,6 +35,13 @@ abstract class Abc
    * @var WebAssets
    */
   public static $assets;
+
+  /**
+   * The helper object for deriving the domain (a.k.a. company name).
+   *
+   * @var DomainResolver
+   */
+  public static $domainResolver;
 
   /**
    * The helper object for logging HTTP page requests.
@@ -69,13 +77,6 @@ abstract class Abc
    * @var string
    */
   protected $canonicalServerName;
-
-  /**
-   * The domain (a.k.a. company abbreviation).
-   *
-   * @var string
-   */
-  protected $domain;
 
   /**
    * Information about the requested page.
@@ -207,6 +208,8 @@ abstract class Abc
    */
   public function getCanonicalServerName()
   {
+    if ($this->canonicalServerName===null) $this->setCanonicalServerName();
+
     return $this->canonicalServerName;
   }
 
@@ -230,17 +233,6 @@ abstract class Abc
   public function getCsrfToken()
   {
     return $this->sessionInfo['ses_csrf_token'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the domain of the page request.
-   *
-   * @return string
-   */
-  public function getDomain()
-  {
-    return $this->domain;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -424,9 +416,6 @@ abstract class Abc
     {
       // Derive the canonical server name aka fully qualified server name.
       $this->setCanonicalServerName();
-
-      // Derive the domain (a.k.a. company abbreviation).
-      $this->setDomain();
 
       // Get the CGI variables from a clean URL.
       $this->uncleanUrl();
@@ -657,7 +646,7 @@ abstract class Abc
   private function getSession()
   {
     $cookie            = isset($_COOKIE['ses_session_token']) ? $_COOKIE['ses_session_token'] : null;
-    $this->sessionInfo = self::$DL->abcSessionGetSession($this->domain, $cookie);
+    $this->sessionInfo = self::$DL->abcSessionGetSession(self::$domainResolver->getDomain(), $cookie);
 
     if (isset($_SERVER['HTTPS']))
     {
@@ -789,24 +778,6 @@ abstract class Abc
     if ($p!==false) $hostname = substr($hostname, 0, $p);
 
     $this->canonicalServerName = strtolower(trim($hostname));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the domain (or Company abbreviation) based on the third level domain (TLD) name of the canonical host name.
-   */
-  private function setDomain()
-  {
-    // If possible derive domain from the canonical server name.
-    $parts = explode('.', $this->canonicalServerName);
-    if (count($parts)==3 && $parts[0]!='www')
-    {
-      $this->domain = strtoupper($parts[0]);
-    }
-    else
-    {
-      $this->domain = 'SYS';
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
