@@ -22,7 +22,8 @@
     "setbased/abc-obfuscator-interface": "^1.0.0",
     "setbased/abc-request-logger": "^1.0.0",
     "setbased/abc-url": "^1.1.0",
-    "setbased/exception": "^1.0.0"
+    "setbased/exception": "^1.0.0",
+    "setbased/php-stratum": "^0.9.45"
   },
   "autoload": {
     "psr-4": {
