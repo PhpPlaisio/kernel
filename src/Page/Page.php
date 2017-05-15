@@ -71,13 +71,6 @@ abstract class Page
    */
   protected $w3cValidate = false;
 
-  /**
-   * The size (in bytes) of the HTML code of this page.
-   *
-   * @var int
-   */
-  private $pageSize = 0;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
@@ -351,17 +344,6 @@ abstract class Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the size (in byes) of the HTML code of this page.
-   *
-   * @return int
-   */
-  public function getPageSize()
-  {
-    return $this->pageSize;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * If this page can be requested via multiple URI's and one URI is preferred this method must be overridden to return
    * the preferred URI of this page.
    *
@@ -530,12 +512,6 @@ abstract class Page
   protected function getPtbId()
   {
     return Abc::getInstance()->getPtbId();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  protected function setPageSize($size)
-  {
-    $this->pageSize = $size;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
