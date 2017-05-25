@@ -3,6 +3,7 @@
 namespace SetBased\Abc;
 
 use SetBased\Abc\BlobStore\BlobStore;
+use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
 use SetBased\Abc\DomainResolver\DomainResolver;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Error\NotAuthorizedException;
@@ -35,6 +36,13 @@ abstract class Abc
    * @var WebAssets
    */
   public static $assets;
+
+  /**
+   * The helper object for deriving the canonical hostname.
+   *
+   * @var CanonicalHostnameResolver
+   */
+  public static $canonicalHostnameResolver;
 
   /**
    * The helper object for deriving the domain (a.k.a. company name).
@@ -70,13 +78,6 @@ abstract class Abc
    * @var Abc
    */
   private static $instance;
-
-  /**
-   * The canonical host name of the (virtual) web server.
-   *
-   * @var string
-   */
-  protected $canonicalServerName;
 
   /**
    * Information about the requested page.
@@ -198,20 +199,6 @@ abstract class Abc
    * @return BlobStore
    */
   abstract public function getBlobStore();
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the canonical server name of the (virtual) web server. This method is preferred over $_SERVER['HTTP_HOST']
-   * and $_SERVER['SERVER_NAME'].
-   *
-   * @return string
-   */
-  public function getCanonicalServerName()
-  {
-    if ($this->canonicalServerName===null) $this->setCanonicalServerName();
-
-    return $this->canonicalServerName;
-  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -414,9 +401,6 @@ abstract class Abc
 
     try
     {
-      // Derive the canonical server name aka fully qualified server name.
-      $this->setCanonicalServerName();
-
       // Get the CGI variables from a clean URL.
       $this->uncleanUrl();
 
@@ -743,41 +727,6 @@ abstract class Abc
 
     fwrite($fp, $message);
     fclose($fp);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the canonical server name (a.k.a. hostname). This canonical server name is derived from $_SERVER.
-   */
-  private function setCanonicalServerName()
-  {
-    if (!empty($_SERVER['HTTP_X_FORWARDED_HOST']))
-    {
-      $list     = explode(',', $_SERVER['HTTP_X_FORWARDED_HOST']);
-      $hostname = (end($list));
-    }
-    elseif (!empty($_SERVER['HTTP_HOST']))
-    {
-      $hostname = $_SERVER['HTTP_HOST'];
-    }
-    elseif (!empty($_SERVER['SERVER_NAME']))
-    {
-      $hostname = $_SERVER['SERVER_NAME'];
-    }
-    elseif (!empty($_SERVER['SERVER_ADDR']))
-    {
-      $hostname = $_SERVER['SERVER_ADDR'];
-    }
-    else
-    {
-      $hostname = '';
-    }
-
-    // Remove port number, if any.
-    $p = strpos($hostname, ':');
-    if ($p!==false) $hostname = substr($hostname, 0, $p);
-
-    $this->canonicalServerName = strtolower(trim($hostname));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
