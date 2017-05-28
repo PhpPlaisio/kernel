@@ -14,6 +14,7 @@ use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
 use SetBased\Abc\Page\Page;
 use SetBased\Abc\RequestLogger\RequestLogger;
+use SetBased\Abc\RequestParameterResolver\RequestParameterResolver;
 use SetBased\Stratum\Exception\ResultException;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -57,6 +58,13 @@ abstract class Abc
    * @var RequestLogger
    */
   public static $requestLogger;
+
+  /**
+   * The helper object for resolving the CGI parameters from a clean URL.
+   *
+   * @var RequestParameterResolver
+   */
+  public static $requestParameterResolver;
 
   /**
    * The start time of serving the page request.
@@ -402,7 +410,7 @@ abstract class Abc
     try
     {
       // Get the CGI variables from a clean URL.
-      $this->uncleanUrl();
+      self::$requestParameterResolver->resolveRequestParameters();
 
       // Retrieve the session or create an new session.
       $this->getSession();
@@ -557,28 +565,6 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Gets the CGI variables from the clean URL and enhances $_GET.
-   */
-  protected function uncleanUrl()
-  {
-    $uri = (isset($_SERVER['REQUEST_URI'])) ? substr($_SERVER['REQUEST_URI'], 1) : '';
-    $i   = strpos($uri, '?');
-    if ($i!==false) $uri = substr($uri, 0, $i);
-
-    $urlParts = explode('/', $uri);
-
-    $urlPartsCount = count($urlParts);
-    if ($urlPartsCount % 2!=0) $urlPartsCount++;
-    for ($i = 0; $i<$urlPartsCount; $i += 2)
-    {
-      $key        = $urlParts[$i];
-      $value      = (isset($urlParts[$i + 1])) ? $urlParts[$i + 1] : null;
-      $_GET[$key] = urldecode($value);
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Retrieves information about the requested page and checks if the user has the correct authorization for the
    * requested page.
    */
@@ -586,38 +572,38 @@ abstract class Abc
   {
     if (isset($_GET['pag']))
     {
-      $pag_id    = self::deObfuscate($_GET['pag'], 'pag');
-      $pag_alias = null;
+      $pagId    = self::deObfuscate($_GET['pag'], 'pag');
+      $pagAlias = null;
     }
-    else if (isset($_GET['page']))
+    else if (isset($_GET['pag_alias']))
     {
-      $pag_id    = null;
-      $pag_alias = $_GET['page'];
+      $pagId    = null;
+      $pagAlias = $_GET['pag_alias'];
     }
     else
     {
-      $pag_id    = C::PAG_ID_MISC_INDEX;
-      $pag_alias = null;
+      $pagId    = C::PAG_ID_MISC_INDEX;
+      $pagAlias = null;
     }
 
     $this->pageInfo = self::$DL->abcAuthGetPageInfo($this->sessionInfo['cmp_id'],
-                                                    $pag_id,
+                                                    $pagId,
                                                     $this->sessionInfo['pro_id'],
                                                     $this->sessionInfo['lan_id'],
-                                                    $pag_alias);
+                                                    $pagAlias);
     if ($this->pageInfo===null)
     {
-      if ($pag_id!==null)
+      if ($pagId!==null)
       {
         throw new NotAuthorizedException('User %d is not authorized for page ID=%d.',
                                          $this->sessionInfo['usr_id'],
-                                         $pag_id);
+                                         $pagId);
       }
       else
       {
         throw new NotAuthorizedException("User %d is not authorized for page alias='%s'.",
                                          $this->sessionInfo['usr_id'],
-                                         $pag_alias);
+                                         $pagAlias);
       }
     }
   }
