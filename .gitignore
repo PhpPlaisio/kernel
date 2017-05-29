@@ -2,7 +2,6 @@
 /bin/phing
 /bin/phpunit
 /bin/stratum
-/build/
 /composer.lock
 /doc/
 /vendor/

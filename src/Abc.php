@@ -101,13 +101,6 @@ abstract class Abc
    */
   protected $sessionInfo;
 
-  /**
-   * The page for handling the HTTP request.
-   *
-   * @var Page
-   */
-  private $page;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
@@ -287,17 +280,6 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the class for handling the page request.
-   *
-   * @return string
-   */
-  public function getPageClass()
-  {
-    return $this->pageInfo['pag_class'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns page group title.
    *
    * @return string
@@ -421,7 +403,8 @@ abstract class Abc
       $page_class = $this->pageInfo['pag_class'];
       try
       {
-        $this->page = new $page_class();
+        /** @var Page $page */
+        $page = new $page_class();
       }
       catch (ResultException $e)
       {
@@ -430,9 +413,9 @@ abstract class Abc
       }
 
       // Perform addition authorization and security checks.
-      $this->page->checkAuthorization();
+      $page->checkAuthorization();
 
-      $uri = $this->page->getPreferredUri();
+      $uri = $page->getPreferredUri();
       if (isset($uri) && $uri!=$_SERVER['REQUEST_URI'])
       {
         // The preferred URI differs from the requested URI. Redirect the user agent to the preferred URL.
@@ -442,7 +425,7 @@ abstract class Abc
       else
       {
         // Echo the page content.
-        $this->page->echoPage();
+        $page->echoPage();
 
         // Flush the page content.
         if (ob_get_level()) ob_flush();
