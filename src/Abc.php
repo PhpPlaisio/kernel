@@ -2,6 +2,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc;
 
+use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
 use SetBased\Abc\DomainResolver\DomainResolver;
@@ -17,7 +18,6 @@ use SetBased\Abc\RequestLogger\RequestLogger;
 use SetBased\Abc\RequestParameterResolver\RequestParameterResolver;
 use SetBased\Stratum\Exception\ResultException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * The main helper class for the ABC Framework.
  */
@@ -37,6 +37,13 @@ abstract class Abc
    * @var WebAssets
    */
   public static $assets;
+
+  /**
+   * The Babel object for retrieving linguistic entities.
+   *
+   * @var Babel
+   */
+  public static $babel;
 
   /**
    * The helper object for deriving the canonical hostname.
