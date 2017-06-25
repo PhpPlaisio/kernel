@@ -8,6 +8,7 @@ use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
 use SetBased\Abc\DomainResolver\DomainResolver;
 use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Error\NotAuthorizedException;
+use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\WebAssets;
 use SetBased\Abc\Mail\MailMessage;
@@ -232,6 +233,14 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the error logger.
+   *
+   * @return ErrorLogger
+   */
+  abstract public function getErrorLogger();
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the code of the preferred language of the requestor.
    *
    * @return string
@@ -448,7 +457,7 @@ abstract class Abc
       // The URL is invalid.
       $this->handleInvalidUrlException($e);
     }
-    catch (\Exception $e)
+    catch (\Throwable $e)
     {
       // Some other exception has occurred.
       $this->handleException($e);
@@ -499,15 +508,17 @@ abstract class Abc
   /**
    * Handles any other caught exception.
    *
-   * @param \Exception $exception The caught exception.
+   * @param \Throwable $throwable The caught \Throwable.
    */
-  protected function handleException($exception)
+  protected function handleException($throwable)
   {
-    $this->logException($exception);
     self::$DL->rollback();
 
     // Set the HTTP status to 500 (Internal Server Error).
     HttpHeader::serverErrorInternalServerError();
+
+    $logger = $this->getErrorLogger();
+    $logger->logError($throwable);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -518,7 +529,6 @@ abstract class Abc
    */
   protected function handleInvalidUrlException($exception)
   {
-    $this->logException($exception);
     self::$DL->rollback();
 
     // Set the HTTP status to 404 (Not Found).
@@ -545,7 +555,6 @@ abstract class Abc
     else
     {
       // The user is logged on and the user has requested an URL for which the user has no authorization.
-      $this->logException($exception);
       self::$DL->rollback();
 
       // Set the HTTP status to 404 (Not Found).
@@ -626,83 +635,6 @@ abstract class Abc
                 true,
                 false);
     }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Writes a exception message to a log file.
-   *
-   * To the log file are written:
-   * * The exception message.
-   * * The stack trace.
-   * * The server variables $_SERVER.
-   * * The post variables $_POST.
-   * * The cgi parameters $_GET.
-   * * The environment variables $_ENV.
-   * * The file variables $_FILE.
-   * * The session info $sssionInfo.
-   * * The page info $pageInfo.
-   *
-   * @param \Exception $exception
-   */
-  private function logException($exception)
-  {
-    list($usec, $sec) = explode(' ', microtime());
-    $file_name = DIR_ERROR.'/error-'.($sec + $usec).'.log';
-    $fp        = fopen($file_name, 'a');
-
-    $message = '';
-    $e       = $exception;
-    while ($e)
-    {
-      $message .= $e->getMessage();
-      $message .= "\n\n";
-
-      $message .= $e->getTraceAsString();
-      $message .= "\n\n";
-
-      $e = $e->getPrevious();
-      if ($e)
-      {
-        $message .= 'This exception has been caused by the following exception:';
-        $message .= "\n";
-      }
-    }
-
-    $message .= "Server variables\n";
-    $message .= print_r($_SERVER, true);
-    $message .= "\n\n";
-
-    $message .= "Post variables\n";
-    $message .= print_r($_POST, true);
-    $message .= "\n\n";
-
-    $message .= "Get variables\n";
-    $message .= print_r($_GET, true);
-    $message .= "\n\n";
-
-    $message .= "Cookie variables\n";
-    $message .= print_r($_COOKIE, true);
-    $message .= "\n\n";
-
-    $message .= "Environment variables\n";
-    $message .= print_r($_ENV, true);
-    $message .= "\n\n";
-
-    $message .= "File variables\n";
-    $message .= print_r($_FILES, true);
-    $message .= "\n\n";
-
-    $message .= "Session info\n";
-    $message .= print_r($this->sessionInfo, true);
-    $message .= "\n\n";
-
-    $message .= "System info\n";
-    $message .= print_r($this->pageInfo, true);
-    $message .= "\n\n";
-
-    fwrite($fp, $message);
-    fclose($fp);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
