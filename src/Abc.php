@@ -174,6 +174,8 @@ abstract class Abc
   /**
    * Appends with a separator a string to the page title
    *
+   * {@deprecated}
+   *
    * @param string $pageTitleAddendum The string to eb append to the page title.
    */
   public function appendPageTitle($pageTitleAddendum)
@@ -185,6 +187,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Check exist info for current page. If exist return true, otherwise false.
+   *
+   * {@deprecated}
    */
   public function checkPageInfo()
   {
@@ -213,6 +217,8 @@ abstract class Abc
   /**
    * Returns the ID of the domain (a.k.a. company) of the requestor.
    *
+   * {@deprecated}
+   *
    * @return int
    */
   public function getCmpId()
@@ -223,6 +229,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns stateful double submit token to prevent CSRF attacks.
+   *
+   * {@deprecated}
    *
    * @return string
    */
@@ -243,6 +251,8 @@ abstract class Abc
   /**
    * Returns the code of the preferred language of the requestor.
    *
+   * {@deprecated}
+   *
    * @return string
    */
   public function getLanCode()
@@ -253,6 +263,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the ID of the preferred language of the requestor.
+   *
+   * {@deprecated}
    *
    * @return int
    */
@@ -265,6 +277,8 @@ abstract class Abc
   /**
    * Returns ID of the menu item associated with the requested page.
    *
+   * {@deprecated}
+   *
    * @return int
    */
   public function getMnuId()
@@ -275,6 +289,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the ID of the requested page.
+   *
+   * {@deprecated}
    *
    * @return int
    */
@@ -287,6 +303,8 @@ abstract class Abc
   /**
    * Returns the ID of the "original" page.
    *
+   * {@deprecated}
+   *
    * @return int
    */
   public function getPagIdOrg()
@@ -297,6 +315,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns page group title.
+   *
+   * {@deprecated}
    *
    * @return string
    */
@@ -309,6 +329,8 @@ abstract class Abc
   /**
    * Returns info of the requested page.
    *
+   * {@deprecated}
+   *
    * @return array
    */
   public function getPageInfo()
@@ -320,6 +342,8 @@ abstract class Abc
   /**
    * Returns the page title.
    *
+   * {@deprecated}
+   *
    * @return string
    */
   public function getPageTitle()
@@ -330,6 +354,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns true if the current user is authorized the request a page.
+   *
+   * {@deprecated}
    *
    * @param int $pagId The ID of the page.
    *
@@ -344,6 +370,8 @@ abstract class Abc
   /**
    * Returns the profile ID of the requestor.
    *
+   * {@deprecated}
+   *
    * @return int
    */
   public function getProId()
@@ -354,6 +382,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns page group title.
+   *
+   * {@deprecated}
    *
    * @return string
    */
@@ -366,6 +396,8 @@ abstract class Abc
   /**
    * Returns the ID of the session.
    *
+   * {@deprecated}
+   *
    * @return int
    */
   public function getSesId()
@@ -377,6 +409,8 @@ abstract class Abc
   /**
    * Returns the session info.
    *
+   * {@deprecated}
+   *
    * @return array
    */
   public function getSessionInfo()
@@ -387,6 +421,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the user ID of the requestor.
+   *
+   * {@deprecated}
    *
    * @return int
    */
@@ -476,6 +512,8 @@ abstract class Abc
   /**
    * Returns true if the requestor is anonymous. Returns false otherwise.
    *
+   * {@deprecated}
+   *
    * @return bool
    */
   public function isAnonymous()
@@ -486,6 +524,8 @@ abstract class Abc
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets title for current page.
+   *
+   * {@deprecated}
    *
    * @param string $pageTitle The new title of the page.
    */
