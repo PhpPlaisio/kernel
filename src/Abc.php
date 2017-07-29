@@ -420,7 +420,7 @@ abstract class Abc
       // Test the user is authorized for the requested page.
       $this->checkAuthorization();
 
-      Abc::$assets->setPageTitle($this->pageInfo['pag_title']);
+      self::$assets->setPageTitle($this->pageInfo['pag_title']);
 
       $page_class = $this->pageInfo['pag_class'];
       try
