@@ -15,6 +15,7 @@ use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
 use SetBased\Abc\Page\Page;
+use SetBased\Abc\RequestHandler\RequestHandler;
 use SetBased\Abc\RequestLogger\RequestLogger;
 use SetBased\Abc\RequestParameterResolver\RequestParameterResolver;
 use SetBased\Stratum\Exception\ResultException;
@@ -61,6 +62,13 @@ abstract class Abc
   public static $domainResolver;
 
   /**
+   * The helper object for handling the HTTP page request.
+   *
+   * @var RequestHandler
+   */
+  public static $requestHandler;
+
+  /**
    * The helper object for logging HTTP page requests.
    *
    * @var RequestLogger
@@ -100,14 +108,14 @@ abstract class Abc
    *
    * @var array
    */
-  protected $pageInfo;
+  public $pageInfo;
 
   /**
    * Information about the session.
    *
    * @var array
    */
-  protected $sessionInfo;
+  public $sessionInfo;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -542,7 +550,7 @@ abstract class Abc
    *
    * @return string
    */
-  abstract protected function getLoginUrl($url);
+  abstract public function getLoginUrl($url);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -607,7 +615,7 @@ abstract class Abc
    * Retrieves information about the requested page and checks if the user has the correct authorization for the
    * requested page.
    */
-  private function checkAuthorization()
+  public function checkAuthorization()
   {
     if (isset($_GET['pag']))
     {
@@ -652,7 +660,7 @@ abstract class Abc
    * Retrieves the session from the database based on the session cookie (ses_session_token) and sets the cookies
    * ses_session_token and ses_csrf_token.
    */
-  private function getSession()
+  public function getSession()
   {
     $cookie            = isset($_COOKIE['ses_session_token']) ? $_COOKIE['ses_session_token'] : null;
     $this->sessionInfo = self::$DL->abcSessionGetSession(self::$domainResolver->getDomain(), $cookie);
@@ -681,7 +689,7 @@ abstract class Abc
   /**
    * Updates the session in the DB.
    */
-  private function updateSession()
+  public function updateSession()
   {
     self::$DL->abcSessionUpdate($this->getSesId());
   }

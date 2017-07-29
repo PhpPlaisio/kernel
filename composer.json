@@ -22,6 +22,7 @@
     "setbased/abc-mail-message": "^0.9.0",
     "setbased/abc-obfuscator": "^1.0.0",
     "setbased/abc-page": "^0.9.0",
+    "setbased/abc-request-handler": "^0.9.0",
     "setbased/abc-request-logger": "^1.0.0",
     "setbased/abc-request-parameter-resolver": "^0.9.0",
     "setbased/abc-url": "^1.1.0",
