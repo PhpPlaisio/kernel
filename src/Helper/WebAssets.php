@@ -4,7 +4,6 @@ namespace SetBased\Abc\Helper;
 
 use SetBased\Exception\LogicException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Helper class for setting web assets (things like CSS, JavaScript and image files) and generating HTML code for
  * including web assets.
@@ -63,6 +62,52 @@ class WebAssets
    * @var array
    */
   protected $jsTrailerAttributes;
+
+  /**
+   * The keywords to be included in a meta tag for this page.
+   *
+   * var string[]
+   */
+  protected $keywords = [];
+
+  /**
+   * The attributes of the meta elements of the page.
+   *
+   * @var array[]
+   */
+  protected $metaAttributes = [];
+
+  /**
+   * The title of the page.
+   *
+   * @var string
+   */
+  protected $pageTitle = '';
+
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Appends with a separator a string to the page title.
+   *
+   * @param string|null $pageTitleAddendum The string to eb append to the page title.
+   *
+   * @see   echoPageTitle()
+   * @see   getPageTitle()
+   * @see   setPageTitle()
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function appendPageTitle($pageTitleAddendum)
+  {
+    // Return immediately if the addendum is empty.
+    if ((string)$pageTitleAddendum==='') return;
+
+    // Append separator if the page title is not empty only.
+    if ($this->pageTitle!=='') $this->pageTitle .= ' - ';
+
+    $this->pageTitle .= $pageTitleAddendum;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -124,7 +169,7 @@ class WebAssets
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the relative URL for a class specfic CSS file.
+   * Returns the relative URL for a class specific CSS file.
    *
    * @param string      $className The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
    *                               slashes to construct the filename relative to the resource root of the CSS source.
@@ -200,6 +245,64 @@ class WebAssets
     {
       echo Html::generateElement('script', $this->jsTrailerAttributes);
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Echos the meta tags within the HTML document.
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function echoMetaTags()
+  {
+    if (!empty($this->keywords))
+    {
+      $this->metaAttributes[] = ['name' => 'keywords', 'content' => implode(',', $this->keywords)];
+    }
+
+    $this->metaAttributes[] = ['charset' => Html::$encoding];
+
+    foreach ($this->metaAttributes as $metaAttribute)
+    {
+      echo Html::generateVoidElement('meta', $metaAttribute);
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Echos the HTML element for the page title.
+   *
+   * @see   appendPageTitle()
+   * @see   getPageTitle()
+   * @see   setPageTitle()
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function echoPageTitle()
+  {
+    if ($this->pageTitle==='') return;
+
+    echo '<title>', Html::txt2Html($this->pageTitle), '</title>';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the page title.
+   *
+   * @return string
+   *
+   * @see   appendPageTitle()
+   * @see   echoPageTitle()
+   * @see   setPageTitle()
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function getPageTitle()
+  {
+    return $this->pageTitle;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -309,7 +412,67 @@ class WebAssets
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the relative URL for a class specfic main JS file.
+   * Adds a meta element to this page.
+   *
+   * @param array $attributes The attributes of the meta element.
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function metaAddElement($attributes)
+  {
+    $this->metaAttributes[] = $attributes;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a keyword to the keywords to be included in the keyword meta element of this page.
+   *
+   * @param string $keyword The keyword.
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function metaAddKeyword($keyword)
+  {
+    $this->keywords[] = $keyword;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds keywords to the keywords to be included in the keyword meta element of the page.
+   *
+   * @param string[] $keywords The keywords.
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function metaAddKeywords($keywords)
+  {
+    $this->keywords = array_merge($this->keywords, $keywords);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets title of the page.
+   *
+   * @param string|null $pageTitle The new title of the page.
+   *
+   * @see   appendPageTitle()
+   * @see   echoPageTitle()
+   * @see   getPageTitle()
+   *
+   * @api
+   * @since 1.0.0
+   */
+  public function setPageTitle($pageTitle)
+  {
+    $this->pageTitle = (string)$pageTitle;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the relative URL for a class specific main JS file.
    *
    * @param string $className The PHP class name, i.e. __CLASS__. Backslashes will be translated to forward
    *                          slashes to construct the relative URL to the JS source.

@@ -180,20 +180,6 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Appends with a separator a string to the page title
-   *
-   * {@deprecated}
-   *
-   * @param string $pageTitleAddendum The string to eb append to the page title.
-   */
-  public function appendPageTitle($pageTitleAddendum)
-  {
-    $this->pageInfo['pag_title'] .= ' - ';
-    $this->pageInfo['pag_title'] .= $pageTitleAddendum;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Check exist info for current page. If exist return true, otherwise false.
    *
    * {@deprecated}
@@ -335,32 +321,6 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns info of the requested page.
-   *
-   * {@deprecated}
-   *
-   * @return array
-   */
-  public function getPageInfo()
-  {
-    return $this->pageInfo;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the page title.
-   *
-   * {@deprecated}
-   *
-   * @return string
-   */
-  public function getPageTitle()
-  {
-    return $this->pageInfo['pag_title'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns true if the current user is authorized the request a page.
    *
    * {@deprecated}
@@ -460,6 +420,8 @@ abstract class Abc
       // Test the user is authorized for the requested page.
       $this->checkAuthorization();
 
+      Abc::$assets->setPageTitle($this->pageInfo['pag_title']);
+
       $page_class = $this->pageInfo['pag_class'];
       try
       {
@@ -527,19 +489,6 @@ abstract class Abc
   public function isAnonymous()
   {
     return (!empty($this->sessionInfo['usr_anonymous']));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets title for current page.
-   *
-   * {@deprecated}
-   *
-   * @param string $pageTitle The new title of the page.
-   */
-  public function setPageTitle($pageTitle)
-  {
-    $this->pageInfo['pag_title'] = $pageTitle;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
