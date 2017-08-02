@@ -11,6 +11,7 @@ use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\WebAssets;
+use SetBased\Abc\LanguageResolver\LanguageResolver;
 use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
@@ -60,6 +61,13 @@ abstract class Abc
    * @var DomainResolver
    */
   public static $domainResolver;
+
+  /**
+   * The helper object for resolving the code of the language in which the response must be drafted.
+   *
+   * @var LanguageResolver
+   */
+  public static $languageResolver;
 
   /**
    * The helper object for handling the HTTP page request.
@@ -180,6 +188,51 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Retrieves information about the requested page and checks if the user has the correct authorization for the
+   * requested page.
+   */
+  public function checkAuthorization()
+  {
+    if (isset($_GET['pag']))
+    {
+      $pagId    = self::deObfuscate($_GET['pag'], 'pag');
+      $pagAlias = null;
+    }
+    else if (isset($_GET['pag_alias']))
+    {
+      $pagId    = null;
+      $pagAlias = $_GET['pag_alias'];
+    }
+    else
+    {
+      $pagId    = C::PAG_ID_MISC_INDEX;
+      $pagAlias = null;
+    }
+
+    $this->pageInfo = self::$DL->abcAuthGetPageInfo($this->sessionInfo['cmp_id'],
+                                                    $pagId,
+                                                    $this->sessionInfo['pro_id'],
+                                                    $this->sessionInfo['lan_id'],
+                                                    $pagAlias);
+    if ($this->pageInfo===null)
+    {
+      if ($pagId!==null)
+      {
+        throw new NotAuthorizedException('User %d is not authorized for page ID=%d.',
+                                         $this->sessionInfo['usr_id'],
+                                         $pagId);
+      }
+      else
+      {
+        throw new NotAuthorizedException("User %d is not authorized for page alias='%s'.",
+                                         $this->sessionInfo['usr_id'],
+                                         $pagAlias);
+      }
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Check exist info for current page. If exist return true, otherwise false.
    *
    * {@deprecated}
@@ -266,6 +319,16 @@ abstract class Abc
   {
     return $this->sessionInfo['lan_id'];
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the URL of the login page.
+   *
+   * @param string|null $url The requested URL. After a successful login the user agent must be redirected to this URL.
+   *
+   * @return string
+   */
+  abstract public function getLoginUrl($url);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -371,6 +434,36 @@ abstract class Abc
   public function getSesId()
   {
     return $this->sessionInfo['ses_id'];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Retrieves the session from the database based on the session cookie (ses_session_token) and sets the cookies
+   * ses_session_token and ses_csrf_token.
+   */
+  public function getSession()
+  {
+    $cookie            = isset($_COOKIE['ses_session_token']) ? $_COOKIE['ses_session_token'] : null;
+    $this->sessionInfo = self::$DL->abcSessionGetSession(self::$domainResolver->getDomain(), $cookie);
+
+    if (isset($_SERVER['HTTPS']))
+    {
+      // Set session and CSRF cookies.
+      setcookie('ses_session_token',
+                $this->sessionInfo['ses_session_token'],
+                false,
+                '/',
+                $_SERVER['HTTP_HOST'],
+                true,
+                true);
+      setcookie('ses_csrf_token',
+                $this->sessionInfo['ses_csrf_token'],
+                false,
+                '/',
+                $_SERVER['HTTP_HOST'],
+                true,
+                false);
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -493,13 +586,12 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the URL of the login page.
-   *
-   * @param string|null $url The requested URL. After a successful login the user agent must be redirected to this URL.
-   *
-   * @return string
+   * Updates the session in the DB.
    */
-  abstract public function getLoginUrl($url);
+  public function updateSession()
+  {
+    self::$DL->abcSessionUpdate($this->getSesId());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -557,90 +649,6 @@ abstract class Abc
       // Set the HTTP status to 404 (Not Found).
       HttpHeader::clientErrorNotFound();
     }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Retrieves information about the requested page and checks if the user has the correct authorization for the
-   * requested page.
-   */
-  public function checkAuthorization()
-  {
-    if (isset($_GET['pag']))
-    {
-      $pagId    = self::deObfuscate($_GET['pag'], 'pag');
-      $pagAlias = null;
-    }
-    else if (isset($_GET['pag_alias']))
-    {
-      $pagId    = null;
-      $pagAlias = $_GET['pag_alias'];
-    }
-    else
-    {
-      $pagId    = C::PAG_ID_MISC_INDEX;
-      $pagAlias = null;
-    }
-
-    $this->pageInfo = self::$DL->abcAuthGetPageInfo($this->sessionInfo['cmp_id'],
-                                                    $pagId,
-                                                    $this->sessionInfo['pro_id'],
-                                                    $this->sessionInfo['lan_id'],
-                                                    $pagAlias);
-    if ($this->pageInfo===null)
-    {
-      if ($pagId!==null)
-      {
-        throw new NotAuthorizedException('User %d is not authorized for page ID=%d.',
-                                         $this->sessionInfo['usr_id'],
-                                         $pagId);
-      }
-      else
-      {
-        throw new NotAuthorizedException("User %d is not authorized for page alias='%s'.",
-                                         $this->sessionInfo['usr_id'],
-                                         $pagAlias);
-      }
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Retrieves the session from the database based on the session cookie (ses_session_token) and sets the cookies
-   * ses_session_token and ses_csrf_token.
-   */
-  public function getSession()
-  {
-    $cookie            = isset($_COOKIE['ses_session_token']) ? $_COOKIE['ses_session_token'] : null;
-    $this->sessionInfo = self::$DL->abcSessionGetSession(self::$domainResolver->getDomain(), $cookie);
-
-    if (isset($_SERVER['HTTPS']))
-    {
-      // Set session and CSRF cookies.
-      setcookie('ses_session_token',
-                $this->sessionInfo['ses_session_token'],
-                false,
-                '/',
-                $_SERVER['HTTP_HOST'],
-                true,
-                true);
-      setcookie('ses_csrf_token',
-                $this->sessionInfo['ses_csrf_token'],
-                false,
-                '/',
-                $_SERVER['HTTP_HOST'],
-                true,
-                false);
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Updates the session in the DB.
-   */
-  public function updateSession()
-  {
-    self::$DL->abcSessionUpdate($this->getSesId());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
