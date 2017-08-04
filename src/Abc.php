@@ -6,20 +6,17 @@ use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
 use SetBased\Abc\DomainResolver\DomainResolver;
-use SetBased\Abc\Error\InvalidUrlException;
 use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
-use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\WebAssets;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
 use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
-use SetBased\Abc\Page\Page;
 use SetBased\Abc\RequestHandler\RequestHandler;
 use SetBased\Abc\RequestLogger\RequestLogger;
 use SetBased\Abc\RequestParameterResolver\RequestParameterResolver;
-use SetBased\Stratum\Exception\ResultException;
+use SetBased\Abc\Session\Session;
 
 /**
  * The main helper class for the ABC Framework.
@@ -91,6 +88,13 @@ abstract class Abc
   public static $requestParameterResolver;
 
   /**
+   * The helper object for session management.
+   *
+   * @var Session
+   */
+  public static $session;
+
+  /**
    * The start time of serving the page request.
    *
    * @var float
@@ -117,13 +121,6 @@ abstract class Abc
    * @var array
    */
   public $pageInfo;
-
-  /**
-   * Information about the session.
-   *
-   * @var array
-   */
-  public $sessionInfo;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -209,23 +206,23 @@ abstract class Abc
       $pagAlias = null;
     }
 
-    $this->pageInfo = self::$DL->abcAuthGetPageInfo($this->sessionInfo['cmp_id'],
+    $this->pageInfo = self::$DL->abcAuthGetPageInfo(self::$session->getCmpId(),
                                                     $pagId,
-                                                    $this->sessionInfo['pro_id'],
-                                                    $this->sessionInfo['lan_id'],
+                                                    self::$session->getProId(),
+                                                    self::$session->getLanId(),
                                                     $pagAlias);
     if ($this->pageInfo===null)
     {
       if ($pagId!==null)
       {
         throw new NotAuthorizedException('User %d is not authorized for page ID=%d.',
-                                         $this->sessionInfo['usr_id'],
+                                         self::$session->getUsrId(),
                                          $pagId);
       }
       else
       {
         throw new NotAuthorizedException("User %d is not authorized for page alias='%s'.",
-                                         $this->sessionInfo['usr_id'],
+                                         self::$session->getUsrId(),
                                          $pagAlias);
       }
     }
@@ -262,63 +259,11 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the ID of the domain (a.k.a. company) of the requestor.
-   *
-   * {@deprecated}
-   *
-   * @return int
-   */
-  public function getCmpId()
-  {
-    return $this->sessionInfo['cmp_id'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns stateful double submit token to prevent CSRF attacks.
-   *
-   * {@deprecated}
-   *
-   * @return string
-   */
-  public function getCsrfToken()
-  {
-    return $this->sessionInfo['ses_csrf_token'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the error logger.
    *
    * @return ErrorLogger
    */
   abstract public function getErrorLogger();
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the code of the preferred language of the requestor.
-   *
-   * {@deprecated}
-   *
-   * @return string
-   */
-  public function getLanCode()
-  {
-    return $this->sessionInfo['lan_code'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the ID of the preferred language of the requestor.
-   *
-   * {@deprecated}
-   *
-   * @return int
-   */
-  public function getLanId()
-  {
-    return $this->sessionInfo['lan_id'];
-  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -394,20 +339,7 @@ abstract class Abc
    */
   public function getPathAuth($pagId)
   {
-    return self::$DL->abcAuthGetPageAuth($this->sessionInfo['cmp_id'], $this->sessionInfo['pro_id'], $pagId);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the profile ID of the requestor.
-   *
-   * {@deprecated}
-   *
-   * @return int
-   */
-  public function getProId()
-  {
-    return $this->sessionInfo['pro_id'];
+    return self::$DL->abcAuthGetPageAuth(self::$session->getCmpId(), self::$session->getProId(), $pagId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -425,230 +357,12 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the ID of the session.
-   *
-   * {@deprecated}
-   *
-   * @return int
-   */
-  public function getSesId()
-  {
-    return $this->sessionInfo['ses_id'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Retrieves the session from the database based on the session cookie (ses_session_token) and sets the cookies
-   * ses_session_token and ses_csrf_token.
-   */
-  public function getSession()
-  {
-    $cookie            = isset($_COOKIE['ses_session_token']) ? $_COOKIE['ses_session_token'] : null;
-    $this->sessionInfo = self::$DL->abcSessionGetSession(self::$domainResolver->getDomain(), $cookie);
-
-    if (isset($_SERVER['HTTPS']))
-    {
-      // Set session and CSRF cookies.
-      setcookie('ses_session_token',
-                $this->sessionInfo['ses_session_token'],
-                false,
-                '/',
-                $_SERVER['HTTP_HOST'],
-                true,
-                true);
-      setcookie('ses_csrf_token',
-                $this->sessionInfo['ses_csrf_token'],
-                false,
-                '/',
-                $_SERVER['HTTP_HOST'],
-                true,
-                false);
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the session info.
-   *
-   * {@deprecated}
-   *
-   * @return array
-   */
-  public function getSessionInfo()
-  {
-    return $this->sessionInfo;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the user ID of the requestor.
-   *
-   * {@deprecated}
-   *
-   * @return int
-   */
-  public function getUsrId()
-  {
-    return $this->sessionInfo['usr_id'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Handles the actual page request including authorization and security checking, transaction handling,
    * request logging, and exception handling.
    */
   public function handlePageRequest()
   {
-    // Start output buffering.
-    ob_start();
-
-    try
-    {
-      // Get the CGI variables from a clean URL.
-      self::$requestParameterResolver->resolveRequestParameters();
-
-      // Retrieve the session or create an new session.
-      $this->getSession();
-
-      // Test the user is authorized for the requested page.
-      $this->checkAuthorization();
-
-      self::$assets->setPageTitle($this->pageInfo['pag_title']);
-
-      $page_class = $this->pageInfo['pag_class'];
-      try
-      {
-        /** @var Page $page */
-        $page = new $page_class();
-      }
-      catch (ResultException $e)
-      {
-        // A ResultException during the construction of a page object is (almost) always caused by an invalid URL.
-        throw new InvalidUrlException('No data found', $e);
-      }
-
-      // Perform addition authorization and security checks.
-      $page->checkAuthorization();
-
-      $uri = $page->getPreferredUri();
-      if (isset($uri) && $uri!=$_SERVER['REQUEST_URI'])
-      {
-        // The preferred URI differs from the requested URI. Redirect the user agent to the preferred URL.
-        self::$DL->rollback();
-        HttpHeader::redirectMovedPermanently($uri);
-      }
-      else
-      {
-        // Echo the page content.
-        $page->echoPage();
-
-        // Flush the page content.
-        if (ob_get_level()) ob_flush();
-      }
-    }
-    catch (NotAuthorizedException $e)
-    {
-      // The user has no authorization for the requested URL.
-      $this->handleNotAuthorizedException($e);
-    }
-    catch (InvalidUrlException $e)
-    {
-      // The URL is invalid.
-      $this->handleInvalidUrlException($e);
-    }
-    catch (\Throwable $e)
-    {
-      // Some other exception has occurred.
-      $this->handleException($e);
-    }
-
-    $this->updateSession();
-    if (self::$requestLogger!==null)
-    {
-      self::$requestLogger->logRequest(HttpHeader::$status);
-    }
-
-    self::$DL->commit();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns true if the requestor is anonymous. Returns false otherwise.
-   *
-   * {@deprecated}
-   *
-   * @return bool
-   */
-  public function isAnonymous()
-  {
-    return (!empty($this->sessionInfo['usr_anonymous']));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Updates the session in the DB.
-   */
-  public function updateSession()
-  {
-    self::$DL->abcSessionUpdate($this->getSesId());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Handles any other caught exception.
-   *
-   * @param \Throwable $throwable The caught \Throwable.
-   */
-  protected function handleException($throwable)
-  {
-    self::$DL->rollback();
-
-    // Set the HTTP status to 500 (Internal Server Error).
-    HttpHeader::serverErrorInternalServerError();
-
-    $logger = $this->getErrorLogger();
-    $logger->logError($throwable);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Handles a caught InvalidUrlException.
-   *
-   * @param InvalidUrlException $exception The caught exception.
-   */
-  protected function handleInvalidUrlException($exception)
-  {
-    self::$DL->rollback();
-
-    // Set the HTTP status to 404 (Not Found).
-    HttpHeader::clientErrorNotFound();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Handles a caught NotAuthorizedException.
-   *
-   * @param NotAuthorizedException $exception The caught exception.
-   */
-  protected function handleNotAuthorizedException($exception)
-  {
-    if ($this->isAnonymous())
-    {
-      // The user is not logged on and most likely the user has requested a page for which the user must be logged on.
-      self::$DL->rollback();
-      // Redirect the user agent to the login page. After the user has successfully logged on the user agent will be
-      // redirected to currently requested URL.
-
-      HttpHeader::redirectSeeOther($this->getLoginUrl($_SERVER['REQUEST_URI']));
-    }
-    else
-    {
-      // The user is logged on and the user has requested an URL for which the user has no authorization.
-      self::$DL->rollback();
-
-      // Set the HTTP status to 404 (Not Found).
-      HttpHeader::clientErrorNotFound();
-    }
+    self::$requestHandler->handleRequest();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
