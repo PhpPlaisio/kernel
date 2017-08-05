@@ -1,8 +1,8 @@
 {
   "name": "setbased/abc",
-  "description": "ABC Framework",
+  "description": "ABC-Framework",
   "keywords": [
-    "Framework"
+    "ABC-Framework"
   ],
   "type": "library",
   "license": "MIT",

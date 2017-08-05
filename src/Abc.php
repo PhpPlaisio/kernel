@@ -18,7 +18,7 @@ use SetBased\Abc\RequestParameterResolver\RequestParameterResolver;
 use SetBased\Abc\Session\Session;
 
 /**
- * The main helper class for the ABC Framework.
+ * The main helper class for the ABC-Framework.
  */
 abstract class Abc
 {
