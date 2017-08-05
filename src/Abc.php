@@ -6,7 +6,6 @@ use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
 use SetBased\Abc\DomainResolver\DomainResolver;
-use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\Helper\WebAssets;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
@@ -181,51 +180,6 @@ abstract class Abc
   public static function obfuscate($id, $alias)
   {
     return self::$obfuscatorFactory->encode($id, $alias);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Retrieves information about the requested page and checks if the user has the correct authorization for the
-   * requested page.
-   */
-  public function checkAuthorization()
-  {
-    if (isset($_GET['pag']))
-    {
-      $pagId    = self::deObfuscate($_GET['pag'], 'pag');
-      $pagAlias = null;
-    }
-    else if (isset($_GET['pag_alias']))
-    {
-      $pagId    = null;
-      $pagAlias = $_GET['pag_alias'];
-    }
-    else
-    {
-      $pagId    = C::PAG_ID_MISC_INDEX;
-      $pagAlias = null;
-    }
-
-    $this->pageInfo = self::$DL->abcAuthGetPageInfo(self::$session->getCmpId(),
-                                                    $pagId,
-                                                    self::$session->getProId(),
-                                                    self::$session->getLanId(),
-                                                    $pagAlias);
-    if ($this->pageInfo===null)
-    {
-      if ($pagId!==null)
-      {
-        throw new NotAuthorizedException('User %d is not authorized for page ID=%d.',
-                                         self::$session->getUsrId(),
-                                         $pagId);
-      }
-      else
-      {
-        throw new NotAuthorizedException("User %d is not authorized for page alias='%s'.",
-                                         self::$session->getUsrId(),
-                                         $pagAlias);
-      }
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
