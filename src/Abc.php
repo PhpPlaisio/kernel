@@ -5,7 +5,7 @@ namespace SetBased\Abc;
 use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
-use SetBased\Abc\DomainResolver\DomainResolver;
+use SetBased\Abc\CompanyResolver\CompanyResolver;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\Helper\WebAssets;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
@@ -52,11 +52,11 @@ abstract class Abc
   public static $canonicalHostnameResolver;
 
   /**
-   * The helper object for deriving the domain (a.k.a. company name).
+   * The helper object for deriving the company.
    *
-   * @var DomainResolver
+   * @var CompanyResolver
    */
-  public static $domainResolver;
+  public static $companyResolver;
 
   /**
    * The helper object for resolving the code of the language in which the response must be drafted.
