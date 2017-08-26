@@ -12,6 +12,7 @@ use SetBased\Abc\LanguageResolver\LanguageResolver;
 use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
+use SetBased\Abc\Request\Request;
 use SetBased\Abc\RequestHandler\RequestHandler;
 use SetBased\Abc\RequestLogger\RequestLogger;
 use SetBased\Abc\RequestParameterResolver\RequestParameterResolver;
@@ -64,6 +65,13 @@ abstract class Abc
    * @var LanguageResolver
    */
   public static $languageResolver;
+
+  /**
+   * The helper object for providing information about the HTTP request.
+   *
+   * @var Request
+   */
+  public static $request;
 
   /**
    * The helper object for handling the HTTP page request.
