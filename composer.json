@@ -21,6 +21,7 @@
     "setbased/abc-http-header": "^1.1.0",
     "setbased/abc-mail-message": "^0.9.0",
     "setbased/abc-language-resolver": "^0.9.1",
+    "setbased/abc-lock-named": "^0.9.1",
     "setbased/abc-obfuscator": "^1.0.0",
     "setbased/abc-page": "^0.9.0",
     "setbased/abc-request": "^0.9.0",

@@ -9,6 +9,7 @@ use SetBased\Abc\CompanyResolver\CompanyResolver;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\Helper\WebAssets;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
+use SetBased\Abc\Lock\NamedLock;
 use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
@@ -210,6 +211,14 @@ abstract class Abc
    * @return MailMessage
    */
   abstract public function createMailMessage();
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns an object for acquiring a named lock.
+   *
+   * @return NamedLock
+   */
+  abstract public function createNamedLock();
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
