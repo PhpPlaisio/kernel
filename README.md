@@ -133,6 +133,14 @@
     <td></td>
   </tr>
   <tr>
+    <td>abc-error-logger</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-error-logger"><img src="https://poser.pugx.org/setbased/abc-error-logger/v/stable" alt="Latest Stable Version"/></a></td>
+    <td>
+    </td>
+    <td>
+    </td>
+  </tr>
+  <tr>
     <td>abc-error-logger-core</td>
     <td><a href="https://packagist.org/packages/setbased/abc-error-logger-core"><img src="https://poser.pugx.org/setbased/abc-error-logger-core/v/stable" alt="Latest Stable Version"/></a></td>
     <td>
@@ -199,6 +207,14 @@
     </td>
   </tr>
   <tr>
+    <td>abc-language-resolver</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-language-resolver"><img src="https://poser.pugx.org/setbased/abc-language-resolver/v/stable" alt="Latest Stable Version"/></a></td>
+    <td>
+    </td>
+    <td>
+    </td>
+  </tr>
+  <tr>
     <td>abc-language-resolver-core</td>
     <td><a href="https://packagist.org/packages/setbased/abc-language-resolver-core"><img src="https://poser.pugx.org/setbased/abc-language-resolver-core/v/stable" alt="Latest Stable Version"/></a></td>
     <td>
@@ -224,6 +240,23 @@
     <td>
       <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-lock-named-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-lock-named-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
     </td>
+  </tr>
+  <tr>
+    <td>abc-mail-back</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-mail-back"><img src="https://poser.pugx.org/setbased/abc-mail-back/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td><a href="https://scrutinizer-ci.com/g/SetBased/php-abc-mail-back/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-mail-back/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a></td>
+  </tr>
+    <td>abc-mail-front</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-mail-front"><img src="https://poser.pugx.org/setbased/abc-mail-front/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td><a href="https://scrutinizer-ci.com/g/SetBased/php-abc-mail-front/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-mail-front/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a></td>
+  </tr>
+  <tr>
+    <td>abc-mail-message</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-mail-message"><img src="https://poser.pugx.org/setbased/abc-mail-back/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>abc-obfuscator</td>
@@ -272,6 +305,18 @@
     <td></td>
   </tr>
   <tr>
+    <td>abc-request-handler</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-request-handler"><img src="https://poser.pugx.org/setbased/abc-request-handler/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>abc-request-handler-core</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-request-handler-core"><img src="https://poser.pugx.org/setbased/abc-request-handler-core/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td><a href="https://scrutinizer-ci.com/g/SetBased/php-abc-request-handler-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-request-handler-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a></td>
+  </tr>
+  <tr>
     <td>abc-request-logger</td>
     <td><a href="https://packagist.org/packages/setbased/abc-request-logger"><img src="https://poser.pugx.org/setbased/abc-request-logger/v/stable" alt="Latest Stable Version"/></a></td>
     <td></td>
@@ -301,6 +346,18 @@
     </td>
   </tr>
   <tr>
+    <td>abc-session</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-session"><img src="https://poser.pugx.org/setbased/abc-session/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>abc-session-core</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-session-core"><img src="https://poser.pugx.org/setbased/abc-session-core/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td><a href="https://scrutinizer-ci.com/g/SetBased/php-abc-session-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-session-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a></td>
+  </tr>
+  <tr>
     <td>abc-table-detail</td>
     <td><a href="https://packagist.org/packages/setbased/abc-table-detail"><img src="https://poser.pugx.org/setbased/abc-table-detail/v/stable" alt="Latest Stable Version"/></a></td>
     <td>
@@ -321,6 +378,32 @@
     <td>
       <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-table-overview/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-table-overview/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
     </td>
+  </tr>
+  <tr>
+    <td>abc-url</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-url"><img src="https://poser.pugx.org/setbased/abc-url/v/stable" alt="Latest Stable Version"/></a></td>
+    <td>
+      <a href="https://travis-ci.org/SetBased/php-abc-url"><img src="https://travis-ci.org/SetBased/php-abc-url.svg?branch=master" alt="Build Status"/></a><br/>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-url/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-url/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+    </td>
+    <td>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-url/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-url/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
+    </td>
+  </tr>
+  <tr>
+    <td>abc-var-dumper</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-var-dumper"><img src="https://poser.pugx.org/setbased/abc-var-dumper/v/stable" alt="Latest Stable Version"/></a></td>
+    <td>
+    </td>
+    <td>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-var-dumper/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-var-dumper/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
+    </td>
+  </tr>
+  <tr>
+    <td>abc-var-dumper-writer</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-var-dumper-writer"><img src="https://poser.pugx.org/setbased/abc-var-dumper-writer/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td></td>
   </tr>
   </tbody>
 </table>
