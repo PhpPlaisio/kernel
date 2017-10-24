@@ -37,13 +37,13 @@
   <thead>
   <tbody>
   <tr>
-    <td>abc-babel</td>
+    <td><a href="https://github.com/SetBased/php-abc-babel" target="_blank">abc-babel</a></td>
     <td><a href="https://packagist.org/packages/setbased/abc-babel"><img src="https://poser.pugx.org/setbased/abc-babel/v/stable" alt="Latest Stable Version"/></a></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>abc-babel-core</td>
+    <td><a href="https://github.com/SetBased/php-abc-babel">abc-babel-core</a></td>
     <td><a href="https://packagist.org/packages/setbased/abc-babel-core"><img src="https://poser.pugx.org/setbased/abc-babel-core/v/stable" alt="Latest Stable Version"/></a></td>
     <td>
       <a href="https://travis-ci.org/SetBased/php-abc-babel-core"><img src="https://travis-ci.org/SetBased/php-abc-babel-core.svg?branch=master" alt="Build Status"/></a><br/>
