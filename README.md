@@ -226,6 +226,12 @@
     </td>
   </tr>
   <tr>
+    <td>abc-lock-entity</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-lock-entity"><img src="https://poser.pugx.org/setbased/abc-lock-entity/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>abc-lock-named</td>
     <td><a href="https://packagist.org/packages/setbased/abc-lock-named"><img src="https://poser.pugx.org/setbased/abc-lock-named/v/stable" alt="Latest Stable Version"/></a></td>
     <td></td>
