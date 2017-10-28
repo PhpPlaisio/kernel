@@ -15,7 +15,7 @@
     "setbased/abc-babel": "^0.10.0",
     "setbased/abc-blob-store": "^1.1.0",
     "setbased/abc-canonical-hostname-resolver": "^1.0.0",
-    "setbased/abc-company-resolver": "^0.10.1",
+    "setbased/abc-company-resolver": "^1.0.0",
     "setbased/abc-error-logger": "^0.9.0",
     "setbased/abc-html": "^1.2.0",
     "setbased/abc-http-header": "^1.1.0",
