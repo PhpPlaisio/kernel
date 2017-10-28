@@ -152,6 +152,12 @@
     </td>
   </tr>
   <tr>
+    <td>abc-exception</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-abc-exception"><img src="https://poser.pugx.org/setbased/abc-abc-exception/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>abc-form</td>
     <td><a href="https://packagist.org/packages/setbased/abc-form"><img src="https://poser.pugx.org/setbased/abc-form/v/stable" alt="Latest Stable Version"/></a></td>
     <td></td>
@@ -188,12 +194,6 @@
     <td>
       <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-html/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-html/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
     </td>
-  </tr>
-  <tr>
-    <td>abc-http-error</td>
-    <td><a href="https://packagist.org/packages/setbased/abc-http-error"><img src="https://poser.pugx.org/setbased/abc-http-error/v/stable" alt="Latest Stable Version"/></a></td>
-    <td></td>
-    <td></td>
   </tr>
   <tr>
     <td>abc-http-header</td>
