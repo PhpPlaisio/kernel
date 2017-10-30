@@ -210,7 +210,10 @@ abstract class Abc
    *
    * @return MailMessage
    */
-  abstract public function createMailMessage();
+  public function createMailMessage()
+  {
+    throw new \LogicException('Not implemented');
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -218,7 +221,10 @@ abstract class Abc
    *
    * @return NamedLock
    */
-  abstract public function createNamedLock();
+  public function createNamedLock()
+  {
+    throw new \LogicException('Not implemented');
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -226,7 +232,10 @@ abstract class Abc
    *
    * @return BlobStore
    */
-  abstract public function getBlobStore();
+  public function getBlobStore()
+  {
+    throw new \LogicException('Not implemented');
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -234,17 +243,23 @@ abstract class Abc
    *
    * @return ErrorLogger
    */
-  abstract public function getErrorLogger();
+  public function getErrorLogger()
+  {
+    throw new \LogicException('Not implemented');
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL of the login page.
    *
-   * @param string|null $url The requested URL. After a successful login the user agent must be redirected to this URL.
+   * @param string|null $redirect After a successful login the user agent must be redirected to this URL.
    *
    * @return string
    */
-  abstract public function getLoginUrl($url);
+  public function getLoginUrl($redirect=null)
+  {
+    throw new \LogicException('Not implemented');
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
