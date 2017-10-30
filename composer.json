@@ -20,7 +20,7 @@
     "setbased/abc-html": "^1.2.0",
     "setbased/abc-http-header": "^1.1.0",
     "setbased/abc-mail-message": "^0.9.0",
-    "setbased/abc-language-resolver": "^0.9.1",
+    "setbased/abc-language-resolver": "^1.0.0",
     "setbased/abc-lock-named": "^1.0.0",
     "setbased/abc-obfuscator": "^1.0.0",
     "setbased/abc-page": "^0.9.0",
