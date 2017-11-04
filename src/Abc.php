@@ -131,6 +131,7 @@ abstract class Abc
   public $pageInfo;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -250,13 +251,24 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the ID of the index page.
+   *
+   * @return int
+   */
+  public function getIndexPagId()
+  {
+    throw new \LogicException('Not implemented');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the URL of the login page.
    *
    * @param string|null $redirect After a successful login the user agent must be redirected to this URL.
    *
    * @return string
    */
-  public function getLoginUrl($redirect=null)
+  public function getLoginUrl($redirect = null)
   {
     throw new \LogicException('Not implemented');
   }
