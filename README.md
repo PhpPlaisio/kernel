@@ -153,7 +153,7 @@
   </tr>
   <tr>
     <td>abc-exception</td>
-    <td><a href="https://packagist.org/packages/setbased/abc-abc-exception"><img src="https://poser.pugx.org/setbased/abc-abc-exception/v/stable" alt="Latest Stable Version"/></a></td>
+    <td><a href="https://packagist.org/packages/setbased/abc-exception"><img src="https://poser.pugx.org/setbased/abc-exception/v/stable" alt="Latest Stable Version"/></a></td>
     <td></td>
     <td></td>
   </tr>
@@ -185,6 +185,16 @@
     </td>
   </tr>
   <tr>
+    <td>abc-helper-password</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-helper-password"><img src="https://poser.pugx.org/setbased/abc-helper-password/v/stable" alt="Latest Stable Version"/></a></td>
+    <td>
+      <a href="https://travis-ci.org/SetBased/php-abc-helper-password"><img src="https://travis-ci.org/SetBased/php-abc-helper-password.svg?branch=master" alt="Build Status"/></a><br/>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-password/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-password/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+    </td>
+    <td>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-password/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-password/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
+    </td>
+  </tr>
     <td>abc-html</td>
     <td><a href="https://packagist.org/packages/setbased/abc-html"><img src="https://poser.pugx.org/setbased/abc-html/v/stable" alt="Latest Stable Version"/></a></td>
     <td>
