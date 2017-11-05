@@ -33,6 +33,13 @@ abstract class Abc
   public static $DL;
 
   /**
+   * A reference to the singleton instance of this class.
+   *
+   * @var Abc
+   */
+  public static $abc;
+
+  /**
    * The helper object for web assets.
    *
    * @var WebAssets
@@ -117,13 +124,6 @@ abstract class Abc
   protected static $obfuscatorFactory;
 
   /**
-   * A reference to the singleton instance of this class.
-   *
-   * @var Abc
-   */
-  private static $instance;
-
-  /**
    * Information about the requested page.
    *
    * @var array
@@ -131,13 +131,12 @@ abstract class Abc
   public $pageInfo;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */
   protected function __construct()
   {
-    self::$instance = $this;
+    self::$abc = $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -158,11 +157,13 @@ abstract class Abc
   /**
    * Returns the singleton instance of this class.
    *
+   * {@deprecated}
+   *
    * @return Abc The singleton instance.
    */
   public static function getInstance()
   {
-    return self::$instance;
+    return self::$abc;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
