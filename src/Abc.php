@@ -271,6 +271,8 @@ abstract class Abc
    */
   public function getLoginUrl($redirect = null)
   {
+    unset($redirect);
+
     throw new \LogicException('Not implemented');
   }
 
