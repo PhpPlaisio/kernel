@@ -195,6 +195,17 @@
       <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-password/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-password/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
     </td>
   </tr>
+  <tr>
+    <td>abc-helper-blob-download</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-helper-blob-download"><img src="https://poser.pugx.org/setbased/abc-helper-blob-download/v/stable" alt="Latest Stable Version"/></a></td>
+    <td>
+      <a href="https://travis-ci.org/SetBased/php-abc-helper-blob-download"><img src="https://travis-ci.org/SetBased/php-abc-helper-blob-download.svg?branch=master" alt="Build Status"/></a><br/>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-blob-download/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-blob-download/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+    </td>
+    <td>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-blob-download/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-blob-download/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
+    </td>
+  </tr>
     <td>abc-html</td>
     <td><a href="https://packagist.org/packages/setbased/abc-html"><img src="https://poser.pugx.org/setbased/abc-html/v/stable" alt="Latest Stable Version"/></a></td>
     <td>
