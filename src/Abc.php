@@ -126,6 +126,8 @@ abstract class Abc
   /**
    * Information about the requested page.
    *
+   * {@deprecated}
+   *
    * @var array
    */
   public $pageInfo;
@@ -151,19 +153,6 @@ abstract class Abc
   public static function deObfuscate($code, $alias)
   {
     return self::$obfuscatorFactory->decode($code, $alias);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the singleton instance of this class.
-   *
-   * {@deprecated}
-   *
-   * @return Abc The singleton instance.
-   */
-  public static function getInstance()
-  {
-    return self::$abc;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
