@@ -6,7 +6,6 @@
 <th>Social</th>
 <th>Legal</th>
 <th>Release</th>
-<th>Tests</th>
 <th>Code</th>
 </tr>
 </thead>
@@ -20,9 +19,6 @@
 </td>
 <td>
 <a href="https://packagist.org/packages/setbased/abc"><img src="https://poser.pugx.org/setbased/abc/v/stable" alt="Latest Stable Version"/></a>
-</td>
-<td><a href="https://travis-ci.org/SetBased/php-abc"><img src="https://travis-ci.org/SetBased/php-abc.svg?branch=master" alt="Build Status"/></a><br/>
-<a href="https://scrutinizer-ci.com/g/SetBased/php-abc/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc/badges/coverage.png?b=master" alt="Code Coverage"/></a><br/>
 </td>
 <td>
 <a href="https://scrutinizer-ci.com/g/SetBased/php-abc/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
@@ -431,6 +427,21 @@
     <td><a href="https://packagist.org/packages/setbased/abc-var-dumper-writer"><img src="https://poser.pugx.org/setbased/abc-var-dumper-writer/v/stable" alt="Latest Stable Version"/></a></td>
     <td></td>
     <td></td>
+  </tr>
+  <tr>
+    <td>abc-web-assets</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-web-assets"><img src="https://poser.pugx.org/setbased/abc-web-assets/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>abc-web-assets-core</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-web-assets-core"><img src="https://poser.pugx.org/setbased/abc-web-assets-core/v/stable" alt="Latest Stable Version"/></a></td>
+    <td>
+    </td>
+    <td>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-web-assets-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-web-assets-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
+    </td>
   </tr>
   </tbody>
 </table>

@@ -7,7 +7,6 @@ use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
 use SetBased\Abc\CompanyResolver\CompanyResolver;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
-use SetBased\Abc\Helper\WebAssets;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
 use SetBased\Abc\Lock\NamedLock;
 use SetBased\Abc\Mail\MailMessage;
@@ -18,9 +17,10 @@ use SetBased\Abc\RequestHandler\RequestHandler;
 use SetBased\Abc\RequestLogger\RequestLogger;
 use SetBased\Abc\RequestParameterResolver\RequestParameterResolver;
 use SetBased\Abc\Session\Session;
+use SetBased\Abc\WebAssets\WebAssets;
 
 /**
- * The main helper class for the ABC-Framework.
+ * The main class for the ABC-Framework.
  */
 abstract class Abc
 {
