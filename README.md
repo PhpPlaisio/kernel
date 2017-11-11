@@ -315,6 +315,16 @@
       <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-page-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-page-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
     </td>
   </tr>
+    <td>abc-phing</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-phing"><img src="https://poser.pugx.org/setbased/abc-phing/v/stable" alt="Latest Stable Version"/></a></td>
+    <td>
+      <a href="https://travis-ci.org/SetBased/php-abc-phing"><img src="https://travis-ci.org/SetBased/php-abc-phing.svg?branch=master" alt="Build Status"/></a><br/>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-phing/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-phing/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+    </td>
+    <td>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-phing/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-phing/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
+    </td>
+  </tr>
   <tr>
     <td>abc-request</td>
     <td><a href="https://packagist.org/packages/setbased/abc-request"><img src="https://poser.pugx.org/setbased/abc-request/v/stable" alt="Latest Stable Version"/></a></td>
