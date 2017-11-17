@@ -329,7 +329,7 @@ abstract class Abc
    */
   public function getPathAuth($pagId)
   {
-    return self::$DL->abcAuthGetPageAuth(self::$session->getCmpId(), self::$session->getProId(), $pagId);
+    return self::$DL->abcAuthGetPageAuth(self::$companyResolver->getCmpId(), self::$session->getProId(), $pagId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
