@@ -9,7 +9,7 @@
   "require": {
     "php": ">=7.0.0",
     "setbased/abc-babel": "^0.10.4",
-    "setbased/abc-blob-store": "^1.1.0",
+    "setbased/abc-blob-store": "^2.0.0",
     "setbased/abc-canonical-hostname-resolver": "^1.0.0",
     "setbased/abc-company-resolver": "^1.0.0",
     "setbased/abc-error-logger": "^1.0.0",
