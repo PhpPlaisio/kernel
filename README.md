@@ -265,6 +265,12 @@
     </td>
   </tr>
   <tr>
+    <td>abc-login-handler</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-login-handler"><img src="https://poser.pugx.org/setbased/abc-login-handler/v/stable" alt="Latest Stable Version"/></a></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>abc-login-requirement</td>
     <td><a href="https://packagist.org/packages/setbased/abc-login-requirement"><img src="https://poser.pugx.org/setbased/abc-login-requirement/v/stable" alt="Latest Stable Version"/></a></td>
     <td></td>
