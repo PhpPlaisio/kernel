@@ -8,6 +8,7 @@ use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
 use SetBased\Abc\CompanyResolver\CompanyResolver;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
+use SetBased\Abc\Lock\EntityLock;
 use SetBased\Abc\Lock\NamedLock;
 use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
@@ -193,6 +194,17 @@ abstract class Abc
     if (!empty($this->pageInfo)) return true;
 
     return false;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns an object for acquiring an entity lock.
+   *
+   * @return EntityLock
+   */
+  public function createEntityLock()
+  {
+    throw new \LogicException('Not implemented');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
