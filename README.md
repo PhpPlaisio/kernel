@@ -249,6 +249,16 @@
     <td></td>
   </tr>
   <tr>
+    <td>abc-lock-entity-core</td>
+    <td><a href="https://packagist.org/packages/setbased/abc-lock-entity-core"><img src="https://poser.pugx.org/setbased/abc-lock-entity-core/v/stable" alt="Latest Stable Version"/></a></td>
+    <td><a href="https://travis-ci.org/SetBased/php-abc-lock-entity-core"><img src="https://travis-ci.org/SetBased/php-abc-lock-entity-core.svg?branch=master" alt="Build Status"/></a><br/>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-lock-entity-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-lock-entity-core/badges/coverage.png?b=master" alt="Code Coverage"/></a><br/>
+    </td>
+    <td>
+      <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-lock-entity-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-lock-entity-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
+    </td>
+  </tr>
+  <tr>
     <td>abc-lock-named</td>
     <td><a href="https://packagist.org/packages/setbased/abc-lock-named"><img src="https://poser.pugx.org/setbased/abc-lock-named/v/stable" alt="Latest Stable Version"/></a></td>
     <td></td>
