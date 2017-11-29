@@ -198,12 +198,18 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns an object for acquiring an entity lock.
+   * Creates an entity lock object and acquires a lock on a database entity.
+   *
+   * @param int $nameId   The ID of the name of the entity lock.
+   * @param int $entityId The ID of the entity.
    *
    * @return EntityLock
    */
-  public function createEntityLock()
+  public function createEntityLock($nameId, $entityId)
   {
+    unset($nameId);
+    unset($entityId);
+
     throw new \LogicException('Not implemented');
   }
 
