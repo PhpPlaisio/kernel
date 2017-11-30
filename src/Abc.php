@@ -198,7 +198,7 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Creates an entity lock object and acquires a lock on a database entity.
+   * Acquires a lock on a database entity and returns the object holding the lock.
    *
    * @param int $nameId   The ID of the name of the entity lock.
    * @param int $entityId The ID of the entity.
@@ -226,12 +226,16 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns an object for acquiring a named lock.
+   * Acquires a named lock and returns the object holding the lock.
+   *
+   * @param int $id The ID of the named lock.
    *
    * @return NamedLock
    */
-  public function createNamedLock()
+  public function createNamedLock($id)
   {
+    unset($id);
+
     throw new \LogicException('Not implemented');
   }
 
