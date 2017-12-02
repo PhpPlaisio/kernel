@@ -409,7 +409,10 @@
   <tr>
     <td>abc-session-core</td>
     <td><a href="https://packagist.org/packages/setbased/abc-session-core"><img src="https://poser.pugx.org/setbased/abc-session-core/v/stable" alt="Latest Stable Version"/></a></td>
-    <td></td>
+    <td>
+    <a href="https://travis-ci.org/SetBased/php-abc-session-core"><img src="https://travis-ci.org/SetBased/php-abc-session-core.svg?branch=master" alt="Build Status"/></a><br/>
+          <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-session-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-session-core/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+    </td>
     <td><a href="https://scrutinizer-ci.com/g/SetBased/php-abc-session-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-session-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a></td>
   </tr>
   <tr>
