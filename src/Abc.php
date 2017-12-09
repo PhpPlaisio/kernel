@@ -10,6 +10,7 @@ use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
 use SetBased\Abc\Lock\EntityLock;
 use SetBased\Abc\Lock\NamedLock;
+use SetBased\Abc\Login\LoginHandler;
 use SetBased\Abc\Mail\MailMessage;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Obfuscator\ObfuscatorFactory;
@@ -134,6 +135,7 @@ abstract class Abc
   public $pageInfo;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -210,6 +212,17 @@ abstract class Abc
     unset($nameId);
     unset($entityId);
 
+    throw new \LogicException('Not implemented');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a login handler for logging in a user agent.
+   *
+   * @return LoginHandler
+   */
+  public function createLoginHandler()
+  {
     throw new \LogicException('Not implemented');
   }
 
