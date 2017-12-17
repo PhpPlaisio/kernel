@@ -2,6 +2,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc;
 
+use SetBased\Abc\Authority\Authority;
 use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
@@ -47,6 +48,13 @@ abstract class Abc
    * @var WebAssets
    */
   public static $assets;
+
+  /**
+   * The helper object for authorization.
+   *
+   * @var Authority
+   */
+  public static $authority;
 
   /**
    * The Babel object for retrieving linguistic entities.
@@ -135,7 +143,6 @@ abstract class Abc
   public $pageInfo;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */
@@ -350,21 +357,6 @@ abstract class Abc
   public function getPageGroupTitle()
   {
     return $this->pageInfo['ptb_title'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns true if the current user is authorized the request a page.
-   *
-   * {@deprecated}
-   *
-   * @param int $pagId The ID of the page.
-   *
-   * @return bool
-   */
-  public function getPathAuth($pagId)
-  {
-    return self::$DL->abcAuthGetPageAuth(self::$companyResolver->getCmpId(), self::$session->getProId(), $pagId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
