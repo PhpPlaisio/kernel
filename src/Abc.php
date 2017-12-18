@@ -194,19 +194,6 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Check exist info for current page. If exist return true, otherwise false.
-   *
-   * {@deprecated}
-   */
-  public function checkPageInfo()
-  {
-    if (!empty($this->pageInfo)) return true;
-
-    return false;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Acquires a lock on a database entity and returns the object holding the lock.
    *
    * @param int $nameId   The ID of the name of the entity lock.
