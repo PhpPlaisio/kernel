@@ -7,6 +7,7 @@ use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
 use SetBased\Abc\CompanyResolver\CompanyResolver;
+use SetBased\Abc\ConfigVault\ConfigVault;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
 use SetBased\Abc\Lock\EntityLock;
@@ -253,6 +254,17 @@ abstract class Abc
    * @return BlobStore
    */
   public function getBlobStore()
+  {
+    throw new \LogicException('Not implemented');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the configuration vault for storing and retrieving sensitive configuration data safely.
+   *
+   * @return ConfigVault
+   */
+  public function getConfigVault()
   {
     throw new \LogicException('Not implemented');
   }
