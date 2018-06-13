@@ -156,12 +156,12 @@ abstract class Abc
   /**
    * De-obfuscates an obfuscated database ID.
    *
-   * @param string $code  The obfuscated database ID.
-   * @param string $alias An alias for the column holding the IDs.
+   * @param string|null $code  The obfuscated database ID.
+   * @param string      $alias An alias for the column holding the IDs.
    *
-   * @return int
+   * @return int|null
    */
-  public static function deObfuscate($code, $alias)
+  public static function deObfuscate(?string $code, string $alias): ?int
   {
     return self::$obfuscatorFactory->decode($code, $alias);
   }
@@ -174,7 +174,7 @@ abstract class Abc
    *
    * @return Obfuscator
    */
-  public static function getObfuscator($alias)
+  public static function getObfuscator(string $alias): Obfuscator
   {
     return self::$obfuscatorFactory->getObfuscator($alias);
   }
@@ -183,12 +183,12 @@ abstract class Abc
   /**
    * Obfuscates a database ID.
    *
-   * @param int    $id    The database ID.
-   * @param string $alias An alias for the column holding the IDs.
+   * @param int|null $id    The database ID.
+   * @param string   $alias An alias for the column holding the IDs.
    *
    * @return string
    */
-  public static function obfuscate($id, $alias)
+  public static function obfuscate(?int $id, string $alias): ?string
   {
     return self::$obfuscatorFactory->encode($id, $alias);
   }
@@ -202,7 +202,7 @@ abstract class Abc
    *
    * @return EntityLock
    */
-  public function createEntityLock($nameId, $entityId)
+  public function createEntityLock(int $nameId, int $entityId): EntityLock
   {
     unset($nameId);
     unset($entityId);
@@ -216,7 +216,7 @@ abstract class Abc
    *
    * @return LoginHandler
    */
-  public function createLoginHandler()
+  public function createLoginHandler(): LoginHandler
   {
     throw new \LogicException('Not implemented');
   }
@@ -227,7 +227,7 @@ abstract class Abc
    *
    * @return MailMessage
    */
-  public function createMailMessage()
+  public function createMailMessage(): MailMessage
   {
     throw new \LogicException('Not implemented');
   }
@@ -240,7 +240,7 @@ abstract class Abc
    *
    * @return NamedLock
    */
-  public function createNamedLock($id)
+  public function createNamedLock(int $id): NamedLock
   {
     unset($id);
 
@@ -253,7 +253,7 @@ abstract class Abc
    *
    * @return BlobStore
    */
-  public function getBlobStore()
+  public function getBlobStore(): BlobStore
   {
     throw new \LogicException('Not implemented');
   }
@@ -264,7 +264,7 @@ abstract class Abc
    *
    * @return ConfigVault
    */
-  public function getConfigVault()
+  public function getConfigVault(): ConfigVault
   {
     throw new \LogicException('Not implemented');
   }
@@ -275,7 +275,7 @@ abstract class Abc
    *
    * @return ErrorLogger
    */
-  public function getErrorLogger()
+  public function getErrorLogger(): ErrorLogger
   {
     throw new \LogicException('Not implemented');
   }
@@ -286,7 +286,7 @@ abstract class Abc
    *
    * @return int
    */
-  public function getIndexPagId()
+  public function getIndexPagId(): int
   {
     throw new \LogicException('Not implemented');
   }
@@ -299,7 +299,7 @@ abstract class Abc
    *
    * @return string
    */
-  public function getLoginUrl($redirect = null)
+  public function getLoginUrl(?string $redirect = null): string
   {
     unset($redirect);
 
@@ -376,7 +376,7 @@ abstract class Abc
    * Handles the actual page request including authorization and security checking, transaction handling,
    * request logging, and exception handling.
    */
-  public function handlePageRequest()
+  public function handlePageRequest(): void
   {
     self::$requestHandler->handleRequest();
   }
