@@ -20,7 +20,7 @@
     "setbased/abc-language-resolver": "^1.0.0",
     "setbased/abc-lock-entity": "^2.0.0",
     "setbased/abc-lock-named": "^2.0.0",
-    "setbased/abc-login-handler": "^1.0.0",
+    "setbased/abc-login-handler": "^2.0.0",
     "setbased/abc-obfuscator": "^2.0.0",
     "setbased/abc-request": "^0.9.0",
     "setbased/abc-request-handler": "^1.0.0",
