@@ -26,7 +26,7 @@
     "setbased/abc-request-logger": "^2.0.0",
     "setbased/abc-request-parameter-resolver": "^1.0.0",
     "setbased/abc-session": "^0.9.5",
-    "setbased/abc-web-assets": "^1.0.0"
+    "setbased/abc-web-assets": "^2.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0"
