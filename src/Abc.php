@@ -329,19 +329,6 @@ abstract class Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the ID of the requested page.
-   *
-   * {@deprecated}
-   *
-   * @return int
-   */
-  public function getPagId()
-  {
-    return $this->pageInfo['pag_id'];
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the ID of the "original" page.
    *
    * {@deprecated}
