@@ -6,6 +6,7 @@ use SetBased\Abc\Authority\Authority;
 use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\BlobStore\BlobStore;
 use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
+use SetBased\Abc\Cgi\Cgi;
 use SetBased\Abc\CompanyResolver\CompanyResolver;
 use SetBased\Abc\ConfigVault\ConfigVault;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
@@ -70,6 +71,13 @@ abstract class Abc
    * @var CanonicalHostnameResolver
    */
   public static $canonicalHostnameResolver;
+
+  /**
+   * The helper object for get Cgi variables.
+   *
+   * @var Cgi
+   */
+  public static $cgi;
 
   /**
    * The helper object for deriving the company.
