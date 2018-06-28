@@ -23,7 +23,7 @@
     "setbased/abc-login-handler": ">=1.0.0",
     "setbased/abc-obfuscator": ">=1.0.0",
     "setbased/abc-request": "*",
-    "setbased/abc-request-handler": ">=1.0.0",
+    "setbased/abc-request-handler": "*",
     "setbased/abc-request-logger": ">=1.0.0",
     "setbased/abc-request-parameter-resolver": ">=1.0.0",
     "setbased/abc-session": "*",
