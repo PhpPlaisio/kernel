@@ -320,9 +320,9 @@ abstract class Abc
    *
    * {@deprecated}
    *
-   * @return int
+   * @return int|null
    */
-  public function getMnuId()
+  public function getMnuId(): ?int
   {
     return $this->pageInfo['mnu_id'];
   }
@@ -333,9 +333,9 @@ abstract class Abc
    *
    * {@deprecated}
    *
-   * @return int
+   * @return int|null
    */
-  public function getPagIdOrg()
+  public function getPagIdOrg(): ?int
   {
     return $this->pageInfo['pag_id_org'];
   }
@@ -346,9 +346,9 @@ abstract class Abc
    *
    * {@deprecated}
    *
-   * @return string
+   * @return string|null
    */
-  public function getPageGroupTitle()
+  public function getPageGroupTitle(): ?string
   {
     return $this->pageInfo['ptb_title'];
   }
@@ -359,9 +359,9 @@ abstract class Abc
    *
    * {@deprecated}
    *
-   * @return string
+   * @return int|null
    */
-  public function getPtbId()
+  public function getPtbId(): ?int
   {
     return $this->pageInfo['ptb_id'];
   }
