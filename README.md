@@ -328,9 +328,7 @@
         <a href="https://packagist.org/packages/setbased/abc-exception"><img src="https://poser.pugx.org/setbased/abc-exception/v/stable" alt="Latest Stable Version"></a>
       </td>
       <td></td>
-      <td>
-        <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-exception/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-exception/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
-      </td>
+      <td></td>
     </tr>
     <tr>
       <td>
