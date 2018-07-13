@@ -10,7 +10,7 @@ use SetBased\Abc\Cgi\Cgi;
 use SetBased\Abc\CompanyResolver\CompanyResolver;
 use SetBased\Abc\ConfigVault\ConfigVault;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
-use SetBased\Abc\Event\Dispatcher;
+use SetBased\Abc\Event\EventDispatcher;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
 use SetBased\Abc\Lock\EntityLock;
 use SetBased\Abc\Lock\NamedLock;
@@ -293,9 +293,9 @@ abstract class Abc
   /**
    * Returns the event dispatcher.
    *
-   * @return Dispatcher
+   * @return EventDispatcher
    */
-  public function getEventDispatcher(): Dispatcher
+  public function getEventDispatcher(): EventDispatcher
   {
     throw new \LogicException('Not implemented');
   }
