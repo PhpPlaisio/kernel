@@ -322,6 +322,31 @@
     </tr>
     <tr>
       <td>
+        <a href="https://github.com/SetBased/php-abc-event">abc-event</a>
+      </td>
+      <td>
+        <a href="https://packagist.org/packages/setbased/abc-event"><img src="https://poser.pugx.org/setbased/abc-event/v/stable" alt="Latest Stable Version"></a>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/SetBased/php-abc-event-core">abc-event-core</a>
+      </td>
+      <td>
+        <a href="https://packagist.org/packages/setbased/abc-event-core"><img src="https://poser.pugx.org/setbased/abc-event-core/v/stable" alt="Latest Stable Version"></a>
+      </td>
+      <td>
+        <a href="https://travis-ci.org/SetBased/php-abc-event-core"><img src="https://travis-ci.org/SetBased/php-abc-event-core.svg?branch=master" alt="Build Status"></a><br>
+        <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-event-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-event-core/badges/coverage.png?b=master" alt="Code Coverage"></a>
+      </td>
+      <td>
+        <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-event-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-event-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <a href="https://github.com/SetBased/php-abc-exception">abc-exception</a>
       </td>
       <td>
@@ -711,16 +736,6 @@
       <td>
         <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-request-logger-light/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-request-logger-light/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
       </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/SetBased/php-abc-request-parameter-core">abc-request-parameter-core</a>
-      </td>
-      <td>
-        <a href="https://packagist.org/packages/setbased/abc-request-parameter-core"><img src="https://poser.pugx.org/setbased/abc-request-parameter-core/v/stable" alt="Latest Stable Version"></a>
-      </td>
-      <td></td>
-      <td></td>
     </tr>
     <tr>
       <td>
