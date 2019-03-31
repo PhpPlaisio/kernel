@@ -11,6 +11,7 @@ use SetBased\Abc\CompanyResolver\CompanyResolver;
 use SetBased\Abc\ConfigVault\ConfigVault;
 use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Abc\Event\EventDispatcher;
+use SetBased\Abc\ExceptionHandler\ExceptionHandler;
 use SetBased\Abc\LanguageResolver\LanguageResolver;
 use SetBased\Abc\Lock\EntityLock;
 use SetBased\Abc\Lock\NamedLock;
@@ -296,6 +297,17 @@ abstract class Abc
    * @return EventDispatcher
    */
   public function getEventDispatcher(): EventDispatcher
+  {
+    throw new \LogicException('Not implemented');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the exception handler.
+   *
+   * @return ExceptionHandler
+   */
+  public function getExceptionHandler(): ExceptionHandler
   {
     throw new \LogicException('Not implemented');
   }

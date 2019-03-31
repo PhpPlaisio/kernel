@@ -17,6 +17,7 @@
     "setbased/abc-config-vault": ">=1.0.0",
     "setbased/abc-error-logger": ">=1.0.0",
     "setbased/abc-event": "*",
+    "setbased/abc-exception-handler": ">=1.0.0",
     "setbased/abc-language-resolver": ">=1.0.0",
     "setbased/abc-lock-entity": ">=1.0.0",
     "setbased/abc-lock-named": ">=1.0.0",
