@@ -357,6 +357,31 @@
     </tr>
     <tr>
       <td>
+        <a href="https://github.com/SetBased/php-abc-exception-handler">abc-exception-handler</a>
+      </td>
+      <td>
+        <a href="https://packagist.org/packages/setbased/abc-exception-handler"><img src="https://poser.pugx.org/setbased/abc-exception-handler/v/stable" alt="Latest Stable Version"></a>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/SetBased/php-abc-exception-handler-core">abc-exception-handler-core</a>
+      </td>
+      <td>
+        <a href="https://packagist.org/packages/setbased/abc-exception-handler-core"><img src="https://poser.pugx.org/setbased/abc-exception-handler-core/v/stable" alt="Latest Stable Version"></a>
+      </td>
+      <td>
+        <a href="https://travis-ci.org/SetBased/php-abc-exception-handler-core"><img src="https://travis-ci.org/SetBased/php-abc-exception-handler-core.svg?branch=master" alt="Build Status"></a><br>
+        <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-exception-handler-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-exception-handler-core/badges/coverage.png?b=master" alt="Code Coverage"></a>
+      </td>
+      <td>
+        <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-exception-handler-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-exception-handler-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <a href="https://github.com/SetBased/php-abc-form">abc-form</a>
       </td>
       <td>
@@ -395,6 +420,21 @@
       </td>
       <td>
         <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-blob-download/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-blob-download/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/SetBased/php-abc-helper-css">abc-helper-css</a>
+      </td>
+      <td>
+        <a href="https://packagist.org/packages/setbased/abc-helper-css"><img src="https://poser.pugx.org/setbased/abc-helper-css/v/stable" alt="Latest Stable Version"></a>
+      </td>
+      <td>
+        <a href="https://travis-ci.org/SetBased/php-abc-helper-css"><img src="https://travis-ci.org/SetBased/php-abc-helper-css.svg?branch=master" alt="Build Status"></a><br>
+        <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-css/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-css/badges/coverage.png?b=master" alt="Code Coverage"></a>
+      </td>
+      <td>
+        <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-css/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-helper-css/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
       </td>
     </tr>
     <tr>
