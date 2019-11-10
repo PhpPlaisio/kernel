@@ -21,7 +21,7 @@
     "setbased/abc-lock-entity": ">=1.0.0",
     "setbased/abc-lock-named": ">=1.0.0",
     "setbased/abc-login-handler": ">=1.0.0",
-    "setbased/abc-mail-message": "*",
+    "setbased/abc-mail-message": ">=1.0.0",
     "setbased/abc-obfuscator": ">=1.0.0",
     "setbased/abc-request": "*",
     "setbased/abc-request-handler": "*",
