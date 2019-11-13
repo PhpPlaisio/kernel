@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc;
 
+use Plaisio\Dirs\Dirs;
 use SetBased\Abc\Authority\Authority;
 use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\BlobStore\BlobStore;
@@ -88,6 +89,13 @@ abstract class Abc
    * @var CompanyResolver
    */
   public static $companyResolver;
+
+  /**
+   * Helper object for getting directory names.
+   *
+   * @var Dirs
+   */
+  public static $dirs;
 
   /**
    * The helper object for resolving the code of the language in which the response must be drafted.
