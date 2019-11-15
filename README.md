@@ -1,4 +1,4 @@
-# PhpPlaisio
+# PhpPlaisio: Kernel
 
 <table>
 <thead>
@@ -15,13 +15,13 @@
 <a href="https://gitter.im/PhpPlaisio/PhpPlaisio"><img src="https://badges.gitter.im/PhpPlaisio/PhpPlaisio.svg" alt="Gitter"/></a>
 </td>
 <td>
-<a href="https://packagist.org/packages/plaisio/plaisio"><img src="https://poser.pugx.org/plaisio/plaisio/license" alt="License"/></a>
+<a href="https://packagist.org/packages/plaisio/kernel"><img src="https://poser.pugx.org/plaisio/kernel/license" alt="License"/></a>
 </td>
 <td>
-<a href="https://packagist.org/packages/plaisio/plaisio"><img src="https://poser.pugx.org/plaisio/plaisio/v/stable" alt="Latest Stable Version"/></a>
+<a href="https://packagist.org/packages/plaisio/kernel"><img src="https://poser.pugx.org/plaisio/kernel/v/stable" alt="Latest Stable Version"/></a>
 </td>
 <td>
-<a href="https://scrutinizer-ci.com/g/PhpPlaisio/plaisio/?branch=master"><img src="https://scrutinizer-ci.com/g/PhpPlaisio/plaisio/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
+<a href="https://scrutinizer-ci.com/g/PhpPlaisio/kernel/?branch=master"><img src="https://scrutinizer-ci.com/g/PhpPlaisio/kernel/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
 </td>
 </tr>
 </tbody>
