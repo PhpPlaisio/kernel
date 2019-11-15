@@ -1,37 +1,40 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc;
+namespace Plaisio;
 
 use Plaisio\Dirs\Dirs;
-use SetBased\Abc\Authority\Authority;
-use SetBased\Abc\Babel\Babel;
-use SetBased\Abc\BlobStore\BlobStore;
-use SetBased\Abc\CanonicalHostnameResolver\CanonicalHostnameResolver;
-use SetBased\Abc\Cgi\Cgi;
-use SetBased\Abc\CompanyResolver\CompanyResolver;
-use SetBased\Abc\ConfigVault\ConfigVault;
-use SetBased\Abc\ErrorLogger\ErrorLogger;
-use SetBased\Abc\Event\EventDispatcher;
-use SetBased\Abc\ExceptionHandler\ExceptionHandler;
-use SetBased\Abc\LanguageResolver\LanguageResolver;
-use SetBased\Abc\Lock\EntityLock;
-use SetBased\Abc\Lock\NamedLock;
-use SetBased\Abc\Login\LoginHandler;
-use SetBased\Abc\Mail\MailMessage;
-use SetBased\Abc\Obfuscator\Obfuscator;
-use SetBased\Abc\Obfuscator\ObfuscatorFactory;
-use SetBased\Abc\Request\Request;
-use SetBased\Abc\RequestHandler\RequestHandler;
-use SetBased\Abc\RequestLogger\RequestLogger;
-use SetBased\Abc\RequestParameterResolver\RequestParameterResolver;
-use SetBased\Abc\Session\Session;
-use SetBased\Abc\WebAssets\WebAssets;
+use Plaisio\Authority\Authority;
+use Plaisio\Babel\Babel;
+use Plaisio\BlobStore\BlobStore;
+use Plaisio\CanonicalHostnameResolver\CanonicalHostnameResolver;
+use Plaisio\Cgi\Cgi;
+use Plaisio\CompanyResolver\CompanyResolver;
+use Plaisio\ConfigVault\ConfigVault;
+use Plaisio\ErrorLogger\ErrorLogger;
+use Plaisio\Event\EventDispatcher;
+use Plaisio\ExceptionHandler\ExceptionHandler;
+use Plaisio\LanguageResolver\LanguageResolver;
+use Plaisio\Lock\EntityLock;
+use Plaisio\Lock\NamedLock;
+use Plaisio\Login\LoginHandler;
+use Plaisio\Mail\MailMessage;
+use Plaisio\Obfuscator\Obfuscator;
+use Plaisio\Obfuscator\ObfuscatorFactory;
+use Plaisio\Request\Request;
+use Plaisio\RequestHandler\RequestHandler;
+use Plaisio\RequestLogger\RequestLogger;
+use Plaisio\RequestParameterResolver\RequestParameterResolver;
+use Plaisio\Session\Session;
+use Plaisio\WebAssets\WebAssets;
 
 /**
- * The main class for the ABC-Framework.
+ * The heart of the PhpPlaisio system.
+ *
+ * Nub:
+ * noun. (ˈnʌb) The choicest or most essential or most vital part of some idea or experience.
  */
-abstract class Abc
+abstract class Nub
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -44,9 +47,9 @@ abstract class Abc
   /**
    * A reference to the singleton instance of this class.
    *
-   * @var Abc
+   * @var Nub
    */
-  public static $abc;
+  public static $nub;
 
   /**
    * The helper object for web assets.
@@ -168,7 +171,7 @@ abstract class Abc
    */
   protected function __construct()
   {
-    self::$abc = $this;
+    self::$nub = $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
