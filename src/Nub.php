@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio;
+namespace Plaisio\Kernel;
 
 use Plaisio\Dirs\Dirs;
 use Plaisio\Authority\Authority;

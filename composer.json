@@ -37,7 +37,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Plaisio\\": "src/"
+      "Plaisio\\Kernel\\": "src/"
     }
   },
   "config": {
