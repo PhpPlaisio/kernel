@@ -42,7 +42,7 @@ abstract class Nub
    *
    * @var Object
    */
-  public static $DL;
+  public static $dl;
 
   /**
    * A reference to the singleton instance of this class.
