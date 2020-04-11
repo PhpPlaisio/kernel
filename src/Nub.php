@@ -29,7 +29,7 @@ use Plaisio\Session\Session;
 use Plaisio\WebAssets\WebAssets;
 
 /**
- * The heart of the PhpPlaisio system.
+ * The heart of the PhpPlaisio system and parent class for all kernels.
  *
  * Nub:
  * noun. (ˈnʌb) The choicest or most essential or most vital part of some idea or experience.
