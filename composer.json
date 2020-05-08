@@ -33,11 +33,17 @@
     "plaisio/web-assets": ">=1.0.0"
   },
   "require-dev": {
-    "phing/phing": "^2.0"
+    "phing/phing": "^2.0",
+    "phpunit/phpunit": "^9.0"
   },
   "autoload": {
     "psr-4": {
       "Plaisio\\Kernel\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Plaisio\\Kernel\\Test\\": "test/"
     }
   },
   "config": {
