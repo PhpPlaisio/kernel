@@ -42,7 +42,7 @@ use Plaisio\WebAssets\WebAssets;
  * @property-read CanonicalHostnameResolver $canonicalHostnameResolver The helper object for deriving the
  *                canonical hostname.
  * @property-read Cgi                       $cgi                       The helper object for Cgi variables.
- * @property-read CompanyResolver           $companyResolver           The helper object for deriving the company.
+ * @property      CompanyResolver           $companyResolver           The helper object for deriving the company.
  * @property-read ConfigVault               $configVault               The configuration vault for storing and
  *                retrieving sensitive configuration data safely.
  * @property-read Dirs                      $dirs                      Helper object for getting directory names.
@@ -54,6 +54,7 @@ use Plaisio\WebAssets\WebAssets;
  *                the language in which the response must be drafted.
  * @property-read LoginHandler              $loginHandler              The login handler for logging in a user agent.
  * @property-read ObfuscatorFactory         $obfuscatorFactory         The factory for creating Obfuscators.
+ * @property-read int                       $pagIdIndex                The ID of the home page.
  * @property-read Request                   $request                   The helper object for providing information
  *                about the HTTP request.
  * @property-read RequestHandler            $requestHandler            The helper object for handling the HTTP page
@@ -72,6 +73,13 @@ abstract class Nub
    * @var Nub
    */
   public static $nub;
+
+  /**
+   * @deprecated
+   *
+   * @var array|null
+   */
+  public $pageInfo;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
