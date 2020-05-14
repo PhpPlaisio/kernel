@@ -1,32 +1,30 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio\Test;
-
-use Plaisio\PlaisioKernel;
+namespace Plaisio;
 
 /**
- * PlaisioKernel for testing purposes.
+ * Parent class for all classes that are operating under PhpPlaisio.
  */
-class TestKernel extends PlaisioKernel
+class PlaisioObject
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The number of times method getDl(0 has been called.
+   * The kernel of PhpPlaisio.
    *
-   * @var int
+   * @var PlaisioKernel
    */
-  public $dlCount = 0;
+  protected $nub;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritDoc
+   * Object constructor.
+   *
+   * @param PlaisioObject $object The parent PhpPlaisio object.
    */
-  public function getDl(): Object
+  public function __construct(PlaisioObject $object)
   {
-    $this->dlCount++;
-
-    return new \stdClass();
+    $this->nub = $object->nub;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

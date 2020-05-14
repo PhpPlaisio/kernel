@@ -7,30 +7,7 @@
   ],
   "license": "MIT",
   "require": {
-    "php": ">=7.3",
-    "plaisio/authority": ">=1.0.0",
-    "plaisio/babel": ">=1.0.0",
-    "plaisio/blob-store": ">=1.0.0",
-    "plaisio/canonical-hostname-resolver": ">=1.0.0",
-    "plaisio/cgi": ">=1.0.0",
-    "plaisio/company-resolver": ">=1.0.0",
-    "plaisio/config-vault": ">=1.0.0",
-    "plaisio/dirs": ">=1.0.0",
-    "plaisio/error-logger": ">=1.0.0",
-    "plaisio/event": ">=1.0.0",
-    "plaisio/exception-handler": ">=1.0.0",
-    "plaisio/language-resolver": ">=1.0.0",
-    "plaisio/lock-entity": ">=1.0.0",
-    "plaisio/lock-named": ">=1.0.0",
-    "plaisio/login-handler": ">=1.0.0",
-    "plaisio/mail-message": ">=1.0.0",
-    "plaisio/obfuscator": ">=1.0.0",
-    "plaisio/request": "^0.10.0",
-    "plaisio/request-handler": ">=1.0.0",
-    "plaisio/request-logger": ">=1.0.0",
-    "plaisio/request-parameter-resolver": ">=1.0.0",
-    "plaisio/session": ">=1.0.0",
-    "plaisio/web-assets": ">=1.0.0"
+    "php": ">=7.3"
   },
   "require-dev": {
     "phing/phing": "^2.0",
@@ -38,12 +15,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Plaisio\\Kernel\\": "src/"
+      "Plaisio\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Plaisio\\Kernel\\Test\\": "test/"
+      "Plaisio\\Test\\": "test/"
     }
   },
   "config": {
