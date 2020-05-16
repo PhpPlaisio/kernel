@@ -6,7 +6,7 @@ namespace Plaisio;
 /**
  * The heart of the PhpPlaisio system and parent class for all kernels.
  */
-abstract class PlaisioKernel extends PlaisioObject
+abstract class PlaisioKernel implements PlaisioInterface
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -15,8 +15,6 @@ abstract class PlaisioKernel extends PlaisioObject
   public function __construct()
   {
     $this->nub = $this;
-
-    parent::__construct($this);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

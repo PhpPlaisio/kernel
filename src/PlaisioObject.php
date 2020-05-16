@@ -4,25 +4,17 @@ declare(strict_types=1);
 namespace Plaisio;
 
 /**
- * Parent class for all classes that are operating under PhpPlaisio.
+ * Parent class for classes that are operating under PhpPlaisio.
  */
-class PlaisioObject
+class PlaisioObject implements PlaisioInterface
 {
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * The kernel of PhpPlaisio.
-   *
-   * @var PlaisioKernel
-   */
-  protected $nub;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param PlaisioObject $object The parent PhpPlaisio object.
+   * @param PlaisioInterface $object The parent PhpPlaisio object.
    */
-  public function __construct(PlaisioObject $object)
+  public function __construct(PlaisioInterface $object)
   {
     $this->nub = $object->nub;
   }
