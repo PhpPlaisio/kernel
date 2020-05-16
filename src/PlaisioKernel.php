@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio;
 
+use Plaisio\Kernel\Nub;
+
 /**
  * The heart of the PhpPlaisio system and parent class for all kernels.
  */
@@ -15,6 +17,7 @@ abstract class PlaisioKernel implements PlaisioInterface
   public function __construct()
   {
     $this->nub = $this;
+    Nub::$nub  = $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
