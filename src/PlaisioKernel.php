@@ -12,6 +12,21 @@ abstract class PlaisioKernel implements PlaisioInterface
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * @deprecated
+   *
+   * @var int
+   */
+  public $pagIdIndex;
+
+  /**
+   * @deprecated
+   *
+   * @var array|null
+   */
+  public $pageInfo;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * PlaisioKernel constructor.
    */
   public function __construct()
@@ -42,6 +57,22 @@ abstract class PlaisioKernel implements PlaisioInterface
     }
 
     throw new \LogicException(sprintf('Unknown property %s::%s', __CLASS__, $property));
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the URL of the login page.
+   *
+   * @param string|null $redirect After a successful login the user agent must be redirected to this URL.
+   *
+   * @return string
+   * @deprecated
+   */
+  public function getLoginUrl(?string $redirect = null): string
+  {
+    unset($redirect);
+
+    throw new \LogicException('Not implemented');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
