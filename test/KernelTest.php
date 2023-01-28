@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Plaisio\PlaisioKernel;
 
 /**
- * Test cases for PhpPlaisio's kernel.
+ * Test cases for Plaisio's kernel.
  */
 class KernelTest extends TestCase
 {
@@ -15,9 +15,9 @@ class KernelTest extends TestCase
   /**
    * The test kernel.
    *
-   * @var PlaisioKernel
+   * @var TestKernel
    */
-  private $kernel;
+  private TestKernel $kernel;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -16,7 +16,7 @@ class TestKernel extends PlaisioKernel
    *
    * @var int
    */
-  public $dlCount = 0;
+  public int $dlCount = 0;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

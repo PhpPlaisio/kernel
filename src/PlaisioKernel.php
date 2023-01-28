@@ -6,7 +6,7 @@ namespace Plaisio;
 use Plaisio\Kernel\Nub;
 
 /**
- * The heart of the PhpPlaisio system and parent class for all kernels.
+ * The heart of the Plaisio system and parent class for all kernels.
  */
 abstract class PlaisioKernel implements PlaisioInterface
 {
@@ -16,14 +16,14 @@ abstract class PlaisioKernel implements PlaisioInterface
    *
    * @var int
    */
-  public $pagIdIndex;
+  public int $pagIdIndex;
 
   /**
    * @deprecated
    *
    * @var array|null
    */
-  public $pageInfo;
+  public ?array $pageInfo = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

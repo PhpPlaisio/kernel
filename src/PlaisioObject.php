@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio;
 
 /**
- * Parent class for classes that are operating under PhpPlaisio.
+ * Parent class for classes that are operating under Plaisio.
  */
 class PlaisioObject implements PlaisioInterface
 {
@@ -12,11 +12,11 @@ class PlaisioObject implements PlaisioInterface
   /**
    * Object constructor.
    *
-   * @param PlaisioInterface $object The parent PhpPlaisio object.
+   * @param PlaisioInterface $nub The parent Plaisio object.
    */
-  public function __construct(PlaisioInterface $object)
+  public function __construct(PlaisioInterface $nub)
   {
-    $this->nub = $object->nub;
+    $this->nub = $nub->nub;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
