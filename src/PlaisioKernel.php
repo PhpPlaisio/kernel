@@ -8,6 +8,7 @@ use Plaisio\Kernel\Nub;
 /**
  * The heart of the Plaisio system and parent class for all kernels.
  */
+#[\AllowDynamicProperties]
 abstract class PlaisioKernel implements PlaisioInterface
 {
   //--------------------------------------------------------------------------------------------------------------------
