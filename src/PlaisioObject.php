@@ -6,6 +6,7 @@ namespace Plaisio;
 /**
  * Parent class for classes that are operating under Plaisio.
  */
+#[\AllowDynamicProperties]
 class PlaisioObject implements PlaisioInterface
 {
   //--------------------------------------------------------------------------------------------------------------------
